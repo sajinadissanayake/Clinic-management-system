@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function ReportsView() {
   const [reports, setReports] = useState([]);
@@ -32,7 +33,9 @@ function ReportsView() {
               <td>
                 <a href={`http://localhost:3001/reports/${report.patientReport}`} target="_blank" rel="noopener noreferrer">
                   View Report
+                  
                 </a>
+                <Link to={`/updateReport/${report._id}`} >Update</Link>
               </td>
             </tr>
           ))}

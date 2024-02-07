@@ -34,7 +34,7 @@ import { useNavigate } from 'react-router-dom';
   return (
     <div>
 
-<div>
+    <div>
             <form onSubmit={Submit} encType="multipart/form-data">
                 <h2> Add Reports</h2>
                 <div>

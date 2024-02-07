@@ -10,6 +10,7 @@ import OnePatient from './OnePatient'
 import AddReports from './AddReports'
 import ReportsView from './ReportsView'
 import Home from './Home'
+import ReportsUpdate from './ReportsUpdate'
 
 
 
@@ -31,6 +32,7 @@ function App() {
         <Route path='/patient/:id' element={<OnePatient />}></Route>
         <Route path='/addreports' element={<AddReports />}></Route>
         <Route path='/ReportsView' element={<ReportsView />}></Route>
+        <Route path='/updatereport/:id' element={<ReportsUpdate />}></Route>
         
         
        

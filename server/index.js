@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
         .then(users => res.json(users))
         .catch(err => res.json(err));
 });
-
+// pa
 
 
 app.get('/getPatient/:id', (req, res) => {
@@ -128,7 +128,33 @@ app.get('/getReports', (req, res) => {
   
   // Serve reports files
   app.use('/reports', express.static('reports'));
-  
+
+//get reports to update page
+
+
+app.get('/getReports/:id', (req, res) => {
+    const id = req.params.id;
+    reportsModel.findById({ _id: id })
+        .then(report => res.json(report))
+        .catch(err => res.json(err));
+});
+app.put('/updateReport/:id', Rupload.single('patientReport'), (req, res) => {
+    const id = req.params.id;
+    const { nic } = req.body;
+    const patientReport = req.file.filename;
+
+    reportsModel.findByIdAndUpdate(id, { nic, patientReport })
+        .then(report => res.json(report))
+        .catch(err => res.json(err));
+});
+
+app.delete('/deleteReport/:id', (req, res) => {
+    const id = req.params.id;
+    reportsModel.findByIdAndDelete(id)
+        .then(result => res.json(result))
+        .catch(err => res.json(err));
+});
+
 
 
 
