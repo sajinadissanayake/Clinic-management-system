@@ -22,10 +22,30 @@ function OnePatient() {
       <h1>Patient Profile</h1>
       <div>
         <p>Name: {patient.name}</p>
+        <p>NIC: {patient.nic}</p>
         <p>Email: {patient.email}</p>
         <p>Age: {patient.age}</p>
         <p>Date of Birth: {patient.dob}</p>
-        {/* Add other patient details as needed */}
+        <p>Gender: {patient.gender}</p>
+        <p>Address: {patient.address}</p>
+        <p>Marital Status: {patient.maritial}</p>
+        <p>Phone Number: {patient.pnumber}</p>
+        <p>MOH: {patient.moh}</p>
+        <p>PHM: {patient.phm}</p>
+        <p>PHI: {patient.phi}</p>
+        <p>GND: {patient.gnd}</p>
+        <p>DSD: {patient.dsd}</p>
+        <p>Neighbour: {patient.neighbour}</p>
+        <p>Education: {patient.education}</p>
+        <p>Physical Condition: {patient.physical}</p>
+        <p>Tobacco Use: {patient.tobacco}</p>
+        <p>Tobacco Chewing: {patient.tobaccochew}</p>
+        <p>Alcohol Consumption: {patient.alcohol}</p>
+        <p>Other Details: {patient.other}</p>
+        <p>Snacks: {patient.snacks}</p>
+        <p>Diseases: {patient.diseases}</p>
+        <p>Allergies: {patient.allergies}</p>
+        <p>Registration Date: {patient.registrationDate}</p>
       </div>
     </div>
   );
