@@ -88,7 +88,7 @@ function UpdatePatient() {
         phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol,other,snacks,diseases,allergies})
             .then(result => {
                 console.log(result);
-                navigate('/');
+                navigate('/plist');
             })
             .catch(err => console.log(err));
     };

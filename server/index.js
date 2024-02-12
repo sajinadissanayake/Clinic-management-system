@@ -38,6 +38,7 @@ app.put('/updatePatient/:id', (req, res) => {
 
     patientModel.findByIdAndUpdate({ _id: id }, {
         name: req.body.name,
+        nic:req.body.nic,
         email: req.body.email,
         age: req.body.age,
         dob: formattedDate,
@@ -154,7 +155,6 @@ app.delete('/deleteReport/:id', (req, res) => {
         .then(result => res.json(result))
         .catch(err => res.json(err));
 });
-
 
 
 

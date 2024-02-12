@@ -11,6 +11,7 @@ import AddReports from './AddReports'
 import ReportsView from './ReportsView'
 import Home from './Home'
 import ReportsUpdate from './ReportsUpdate'
+import HealthChart from './charts/HealthChart'
 
 
 
@@ -33,6 +34,8 @@ function App() {
         <Route path='/addreports' element={<AddReports />}></Route>
         <Route path='/ReportsView' element={<ReportsView />}></Route>
         <Route path='/updatereport/:id' element={<ReportsUpdate />}></Route>
+        <Route path='/HealthChart' element={<HealthChart />}></Route>
+        
         
         
        
