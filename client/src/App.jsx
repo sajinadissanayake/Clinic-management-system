@@ -12,6 +12,12 @@ import ReportsView from './ReportsView'
 import Home from './Home'
 import ReportsUpdate from './ReportsUpdate'
 import HealthChart from './charts/HealthChart'
+import Sidebar from '../components/sidebar'
+import Feed from '../components/feed'
+import Rightbar from '../components/rightbar'
+import { Box, Stack } from '@mui/material'
+import Navbar from '../components/navbar'
+
 
 
 
@@ -22,8 +28,33 @@ function App() {
 
   return (
     <div>
+
+
+      <Box>
+        <Navbar/>
+        <Stack direction="row" spacing={2} justifyContent="space-between">
+          <Sidebar/>
+          <Feed/>
+          <Rightbar/>
+
+
+        </Stack>
+        
+      </Box>
+      
+
+     
+
+
+
+
+
+
+{/*  
+
       <BrowserRouter>
       <Routes>
+        
         <Route path='/' element={<Home />}></Route>
         <Route path='/patientspg' element={<PatientsPg />}></Route>
 
@@ -35,14 +66,9 @@ function App() {
         <Route path='/ReportsView' element={<ReportsView />}></Route>
         <Route path='/updatereport/:id' element={<ReportsUpdate />}></Route>
         <Route path='/HealthChart' element={<HealthChart />}></Route>
-        
-        
-        
-       
-        
-
       </Routes>
       </BrowserRouter>
+      */}
     </div>
   )
 }
