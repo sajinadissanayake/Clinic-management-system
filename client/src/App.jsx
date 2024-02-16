@@ -12,11 +12,12 @@ import ReportsView from './ReportsView'
 import Home from './Home'
 import ReportsUpdate from './ReportsUpdate'
 import HealthChart from './charts/HealthChart'
-import Sidebar from '../components/sidebar'
+
 import Feed from '../components/feed'
-import Rightbar from '../components/rightbar'
+
 import { Box, Stack } from '@mui/material'
 import Navbar from '../components/navbar'
+import Rightbar from '../components/Rightbar'
 
 
 
@@ -36,6 +37,7 @@ function App() {
           <Sidebar/>
           <Feed/>
           <Rightbar/>
+         
 
 
         </Stack>
@@ -50,7 +52,7 @@ function App() {
 
 
 
-{/*  
+
 
       <BrowserRouter>
       <Routes>
@@ -68,7 +70,7 @@ function App() {
         <Route path='/HealthChart' element={<HealthChart />}></Route>
       </Routes>
       </BrowserRouter>
-      */}
+      
     </div>
   )
 }

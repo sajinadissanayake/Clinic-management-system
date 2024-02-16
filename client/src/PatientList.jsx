@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button } from '@mui/material';
 import { useParams, useNavigate } from "react-router-dom";
 
 function PatientList() {
   const [users, setUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     axios.get('http://localhost:3001')
@@ -14,7 +15,7 @@ function PatientList() {
   }, []);
 
   const handleDelete = (id) => {
-    axios.delete('http://localhost:3001/deleteUser/' + id)
+    axios.delete(`http://localhost:3001/deleteUser/${id}`)
       .then(res => {
         console.log(res);
         window.location.reload();
@@ -22,35 +23,49 @@ function PatientList() {
       .catch(err => console.log(err));
   };
 
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredUsers = users.filter(user =>
+    user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div>
       <div>
-        <Link to="/add">Add +</Link>
-        <table>
-        <thead>
-                    <tr>
-                        <th>Name</th>
-                       
-                        <th>Action</th>
-                    </tr>
-                </thead>
+       
+        <TextField
+          label="Search"
+          variant="outlined"
+          value={searchTerm}
+          onChange={handleSearch}
+          
+        />
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Action</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {filteredUsers.map((user) => (
+              <TableRow key={user._id}>
+                <TableCell>{user.name}</TableCell>
+                <TableCell>
 
-                <tbody>
-                     {
-                        users.map((user) => (
-                        <tr key={user._id}>
-                            <td>{user.name}</td>
-                           
-                            <td>
-                                 <Link to={`/patient/${user._id}`} >view</Link>
-                                <Link to={`/updatepatient/${user._id}`} >Update</Link>
-                                <button onClick={(e) => handleDelete(user._id)}>Delete</button>
-                            </td>
-                        </tr>
-                    ))
-                }
-                </tbody>
-        </table>
+                <Button variant='outlined' style={{ marginLeft: '10px' }}><Link style={{ textDecoration: 'none' }} to={`/patient/${user._id}`}>View</Link></Button>
+                <Button variant='outlined' style={{ marginLeft: '10px' }}><Link style={{ textDecoration: 'none' }} to={`/updatepatient/${user._id}`}>Update</Link></Button>
+
+                 
+                  
+                  <Button variant='outlined' color='error' style={{ marginLeft: '10px' }} onClick={() => handleDelete(user._id)}>Delete</Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

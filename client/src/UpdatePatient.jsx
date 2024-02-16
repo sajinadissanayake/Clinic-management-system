@@ -1,45 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { TextField, Button, RadioGroup, Radio, FormControlLabel, FormLabel, Grid, FormControl } from '@mui/material';
 
-//update dob is not working
 function UpdatePatient() {
-
     const { id } = useParams();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [age, setAge] = useState('');
-
     const [dob, setdob] = useState('');
     const [gender, setGender] = useState('');
-    const [nic, setNic] = useState()
-
+    const [nic, setNic] = useState('');
     const [address, setAddress] = useState('');
     const [maritial, setMaritial] = useState('');
     const [pnumber, setPnumber] = useState('');
-
     const [moh, setMoh] = useState('');
     const [phm, setPhm] = useState('');
     const [phi, setPhi] = useState('');
     const [gnd, setGnd] = useState('');
-
     const [dsd, setDsd] = useState('');
     const [neighbour, setNeighbour] = useState('');
     const [education, setEducation] = useState('');
-    
-    // characteristics..............................
-
-    const [physical, setPhysical] = useState('')
-    const [tobacco, setTobacco] = useState('') 
-    const [tobaccochew, setTobaccochew] = useState('') 
-    const [alcohol, setAlcohol] = useState('') 
-    const [other, setOther] = useState('') 
-    const [snacks, setSnacks] = useState('') 
-    const [diseases, setDiseases] = useState('') 
-    const [allergies, setAllergies] = useState('') 
-
-
-
+    const [physical, setPhysical] = useState('');
+    const [tobacco, setTobacco] = useState(''); 
+    const [tobaccochew, setTobaccochew] = useState(''); 
+    const [alcohol, setAlcohol] = useState(''); 
+    const [other, setOther] = useState(''); 
+    const [snacks, setSnacks] = useState(''); 
+    const [diseases, setDiseases] = useState(''); 
+    const [allergies, setAllergies] = useState(''); 
 
     const navigate = useNavigate();
 
@@ -53,7 +42,6 @@ function UpdatePatient() {
                 setdob(result.data.dob);
                 setGender(result.data.gender);
                 setNic(result.data.nic);
-                
                 setAddress(result.data.address);
                 setMaritial(result.data.maritial);
                 setPnumber(result.data.pnumber); 
@@ -64,8 +52,6 @@ function UpdatePatient() {
                 setDsd(result.data.dsd);
                 setNeighbour(result.data.neighbour);
                 setEducation(result.data.education);
-
-                //charatcteristics 
                 setPhysical(result.data.physical);
                 setTobacco(result.data.tobacco);
                 setTobaccochew(result.data.tobaccochew);
@@ -74,434 +60,157 @@ function UpdatePatient() {
                 setSnacks(result.data.snacks);
                 setDiseases(result.data.diseases);
                 setAllergies(result.data.allergies);
-
-
-              
-                
             })
             .catch(err => console.log(err));
     }, []);
 
     const patientUpdate = (e) => {
         e.preventDefault();
-        axios.put("http://localhost:3001/UpdatePatient/" + id, {name, nic,email, age, dob, gender, address, maritial, pnumber, moh,
-        phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol,other,snacks,diseases,allergies})
-            .then(result => {
-                console.log(result);
-                navigate('/plist');
-            })
-            .catch(err => console.log(err));
+        axios.put("http://localhost:3001/UpdatePatient/" + id, {
+            name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies
+        })
+        .then(result => {
+            console.log(result);
+            navigate('/patientslist');
+        })
+        .catch(err => console.log(err));
     };
     
-
     return (
-        <div>
+       
+            <div>
             <form onSubmit={patientUpdate}>
-                <h2>Update User</h2>
-                <div>
-                    <label htmlFor="name">Name</label>
-                    <input type="text" placeholder="Enter Name" value={name} onChange={(e) => setName(e.target.value)} /><br />
-                </div>
-                <div>
-                    <label htmlFor="">nic</label>
-                    <input type="text" placeholder="Enter "value={nic} onChange={(e) => setNic(e.target.value)}/><br/>
-                </div>
-                <div>
-                    <label htmlFor="email">Email</label>
-                    <input type="email" placeholder="Enter Email" value={email} onChange={(e) => setEmail(e.target.value)} /><br />
-                </div>
-                <div>
-                    <label htmlFor="age">Age</label>
-                    <input type="text" placeholder="Enter Age" value={age} onChange={(e) => setAge(e.target.value)} /><br />
-                </div>
-                <div>
-                <input
-                    type="date"
-                    placeholder="Enter dob"
-                    value={dob ? dob.split('T')[0] : ''}  // Extracting the date part
-                    onChange={(e) => setdob(e.target.value)}
-                />
-                </div>
-              
+                <h2>Update patient</h2>
                 
-                
-                <div>
-                <label htmlFor="">Gender</label>
-                <div>
-                    <input
-                        type="radio"
-                        id="male"
-                        name="gender"
-                        value="male"
-                        checked={gender === "male"}
-                        onChange={() => setGender("male")}
-                    />
-                    <label htmlFor="male">Male</label>
-                </div>
-                <div>
-                    <input
-                        type="radio"
-                        id="female"
-                        name="gender"
-                        value="female"
-                        checked={gender === "female"}
-                        onChange={() => setGender("female")}
-                    />
-                    <label htmlFor="female">Female</label>
-                </div>
-            </div>
-                
-                 <div>
-                    <label htmlFor="address">address</label>
-                   
-                    <input type="text" name="address" value={address} onChange={(e) => setAddress(e.target.value)}/><br/>
-                </div>
-
-                <div>
-                <label htmlFor="">Maritial status</label>
-                <div>
-                    <input
-                        type="radio"
-                        id="married"
-                        name="maritial"
-                        value="married"
-                        checked={maritial === "married"}
-                        onChange={() => setMaritial("married")}
-                    />
-                    <label htmlFor="married">married</label>
-                </div>
-                <div>
-                    <input
-                        type="radio"
-                        id="unmarried"
-                        name="maritial"
-                        value="unmarried"
-                        checked={maritial === "unmarried"}
-                        onChange={() => setMaritial("unmarried")}
-                    />
-                    <label htmlFor="unmarried">unmarried</label>
-                </div>
-            </div>
-              
-                <div>
-                    <div>
-                    <label htmlFor="pnumber">pnumber</label>
-                   
-                    <input type="text" name="pnumber" value={pnumber} onChange={(e) => setPnumber(e.target.value)}/><br/>
-                </div>
-                </div>
-                
-                    <div>
-                    <label htmlFor="moh">MOH</label>
-                   
-                    <input type="text" name="moh" value={moh} onChange={(e) => setMoh(e.target.value)}/><br/>
-                    </div>
-                    <div>
-                        <label htmlFor="phm">PHM</label>
-                   
-                        <input type="text" name="phm" value={phm} onChange={(e) => setPhm(e.target.value)}/><br/>
-                    </div>
-                    <div>
-                        <label htmlFor="phi">PHI</label>
-                   
-                        <input type="text" name="phi" value={phi} onChange={(e) => setPhi(e.target.value)}/><br/>
-                    </div>
-
-                    <div>
-                        <label htmlFor="gnd">GND</label>
-                   
-                        <input type="text" name="gnd" value={gnd} onChange={(e) => setGnd(e.target.value)}/><br/>
-                    </div>
-                    <div>
-                        <label htmlFor="dsd">DSD</label>
-                   
-                        <input type="text" name="dsd" value={dsd} onChange={(e) => setDsd(e.target.value)}/><br/>
-                    </div>
-                    <div>
-                        <label htmlFor="dsd">Neighbour</label>
-                   
-                        <input type="text" name="neighbour" value={neighbour} onChange={(e) => setNeighbour(e.target.value)}/><br/>
-                    </div>
-
-                    
-            <div>
-                <label htmlFor="">Education</label>
-                <div>
-                    <input
-                        type="radio"
-                        id="primary"
-                        name="education"
-                        value="primary"
-                        checked={education === "primary"}
-                        onChange={() => setEducation("primary")}
-                    />
-                    <label htmlFor="">primary</label>
-                </div>
-                <div>
-                    <input
-                        type="radio"
-                        id="secondary"
-                        name="education"
-                        value="secondary"
-                        checked={education === "secondary"}
-                        onChange={() => setEducation("secondary")}
-                    />
-                    <label htmlFor="">secondary</label>
-                </div>
-                <div>
-                    <input
-                        type="radio"
-                        id="olevel"
-                        name="education"
-                        value="olevel"
-                        checked={education === "olevel"}
-                        onChange={() => setEducation("olevel")}
-                    />
-                    <label htmlFor="">olevel</label>
-                </div>
-                <div>
-                    <input
-                        type="radio"
-                        id="alevel"
-                        name="education"
-                        value="alevel"
-                        checked={education === "alevel"}
-                        onChange={() => setEducation("alevel")}
-                    />
-                    <label htmlFor="">alevel</label>
-                </div>
-                <div>
-                    <input
-                        type="radio"
-                        id="degree"
-                        name="education"
-                        value="degree"
-                        checked={education === "degree"}
-                        onChange={() => setEducation("degree")}
-                    />
-                    <label htmlFor="">degree</label>
-                </div>
-            </div>
-
-
-            <h2>characteristics of the patient</h2>
-                <h2>..............................</h2>
-
-                
-            <div>
-                <h3>Phisical activity</h3>
-                <div>
-                    <input
-                        type="radio"
-                        id="vigorous_intensity"
-                        name="physical"
-                        value="vigorous_intensity"
-                        checked={physical === "vigorous_intensity"}
-                        onChange={() => setPhysical("vigorous_intensity")}
-                    />
-                    <label htmlFor="">vigorous_intensity</label>
-                </div>
-                <div>
-                    <input
-                        type="radio"
-                        id="moderate_intensity"
-                        name="physical"
-                        value="moderate_intensity"
-                        checked={physical === "moderate_intensity"}
-                        onChange={() => setPhysical("moderate_intensity")}
-                    />
-                    <label htmlFor="">moderate_intensity</label>
-                </div>
-                <div>
-                    <input
-                        type="radio"
-                        id="sendantary"
-                        name="physical"
-                        value="sendantary"
-                        checked={physical === "sendantary"}
-                        onChange={() => setPhysical("sendantary")}
-                    />
-                    <label htmlFor="">sendantary</label>
-                </div>
-               
-            </div>
-
-            <h2>..............................</h2>
-
-            <div>
-                <h3>Tobacco smoking</h3>
-                <div>
-                    <input
-                        type="radio"
-                        id="user"
-                        name="tobacco"
-                        value="user"
-                        checked={tobacco === "user"}
-                        onChange={() => setTobacco("user")}
-                    />
-                    <label htmlFor="">user</label>
-                </div>
-                <div>
-                    <input
-                        type="radio"
-                        id="nonuser"
-                        name="tobacco"
-                        value="nonuser"
-                        checked={tobacco === "nonuser"}
-                        onChange={() => setTobacco("nonuser")}
-                    />
-                    <label htmlFor="">nonuser</label>
-                </div>
-            </div>
-
-
-            <h2>..............................</h2>
-
-            <div>
-                <h3>Tobacco chewing</h3>
-                <div>
-                    <input
-                        type="radio"
-                        id="user"
-                        name="tobaccochew"
-                        value="user"
-                        checked={tobaccochew === "user"}
-                        onChange={() => setTobaccochew("user")}
-                    />
-                    <label htmlFor="">user</label>
-                </div>
-                <div>
-                    <input
-                        type="radio"
-                        id="nonuser"
-                        name="tobaccochew"
-                        value="nonuser"
-                        checked={tobaccochew === "nonuser"}
-                        onChange={() => setTobaccochew("nonuser")}
-                    />
-                    <label htmlFor="">nonuser</label>
-                </div>
-            </div>
-
-            <h2>..............................</h2>
-            <div>
-                <h3>Alcohol</h3>
-                <div>
-                    <input
-                        type="radio"
-                        id="user"
-                        name="alcohol"
-                        value="user"
-                        checked={alcohol === "user"}
-                        onChange={() => setAlcohol("user")}
-                    />
-                    <label htmlFor="">user</label>
-                </div>
-                <div>
-                    <input
-                        type="radio"
-                        id="nonuser"
-                        name="alcohol"
-                        value="nonuser"
-                        checked={alcohol === "nonuser"}
-                        onChange={() => setAlcohol("nonuser")}
-                    />
-                    <label htmlFor="">nonuser</label>
-                </div>
-            </div>
-
-
-            <h2>..............................</h2>
-            <div>
-                <h3>other drugs</h3>
-                <div>
-                    <input
-                        type="radio"
-                        id="user"
-                        name="other"
-                        value="user"
-                        checked={other === "user"}
-                        onChange={() => setOther("user")}
-                    />
-                    <label htmlFor="">user</label>
-                </div>
-                <div>
-                    <input
-                        type="radio"
-                        id="nonuser"
-                        name="other"
-                        value="nonuser"
-                        checked={other === "nonuser"}
-                        onChange={() => setOther("nonuser")}
-                    />
-                    <label htmlFor="">nonuser</label>
-                </div>
-            </div>
-
-
+                    <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} sx={{ width: '100%' }} /><br/><br/>
             
-            <h2>..............................</h2>
-            <div>
-                <h3>Snacks</h3>
-                <div>
-                    <input
-                        type="radio"
-                        id="normaluser"
-                        name="snacks"
-                        value="normaluser"
-                        checked={snacks=== "normaluser"}
-                        onChange={() => setSnacks("normaluser")}
-                    />
-                    <label htmlFor="">normaluser</label>
-                </div>
-                <div>
-                    <input
-                        type="radio"
-                        id="nonuser"
-                        name="snacks"
-                        value="nonuser"
-                        checked={snacks === "nonuser"}
-                        onChange={() => setSnacks("nonuser")}
-                    />
-                    <label htmlFor="">nonuser</label>
-                </div>
-                <div>
-                    <input
-                        type="radio"
-                        id="heavyuser"
-                        name="snacks"
-                        value="heavyuser"
-                        checked={snacks === "heavyuser"}
-                        onChange={() => setSnacks("heavyuser")}
-                    />
-                    <label htmlFor="">heavyuser</label>
-                </div>
-            </div>
-            <h2>..............................</h2>
+               
+                    <TextField label="NIC" value={nic} onChange={(e) => setNic(e.target.value)} sx={{ width: '100%' }} /><br/><br/>
+               
+                    <TextField label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} sx={{ width: '100%' }} /><br/><br/>
+                
+                    <TextField label="Age" type="number" value={age} onChange={(e) => setAge(e.target.value)} sx={{ width: '100%' }} /><br/><br/>
+                
+                    <TextField
+                        
+                        type="date"
+                        value={dob ? dob.split('T')[0] : ''}
+                        onChange={(e) => setdob(e.target.value)}
+                        sx={{ width: '100%' }}
+                    /><br/><br/>
 
-            <div>
-                    <label htmlFor=""> Diseases(other special diseases)</label>
-                    <input type="text"  name="diseases" value={diseases}
-                    onChange={(e) => setDiseases(e.target.value)}/><br/>
-            </div>
+                   
+                    <FormLabel component="legend">Gender</FormLabel>
+                    <RadioGroup row aria-label="gender" name="gender" value={gender} onChange={(e) => setGender(e.target.value)}>
+                        <FormControlLabel value="male" control={<Radio />} label="Male" />
+                        <FormControlLabel value="female" control={<Radio />} label="Female" />
+                    </RadioGroup><br/><br/>
+                
+                    <TextField label="Address" value={address} onChange={(e) => setAddress(e.target.value)} sx={{ width: '100%' }} /><br/><br/>
 
-            <h2>..............................</h2>
+                    <FormLabel component="legend">Maritial Status</FormLabel>
+               
+                    <RadioGroup row aria-label="maritial" name="maritial" value={maritial} onChange={(e) => setMaritial(e.target.value)}>
+                        <FormControlLabel value="married" control={<Radio />} label="Married" />
+                        <FormControlLabel value="unmarried" control={<Radio />} label="Unmarried" />
+                    </RadioGroup><br/><br/>
+               
+                    <TextField label="Phone Number" value={pnumber} onChange={(e) => setPnumber(e.target.value)} sx={{ width: '100%' }} /><br/><br/>
+              
+                    <TextField label="MOH" value={moh} onChange={(e) => setMoh(e.target.value)} sx={{ width: '100%' }} /><br/><br/>
+                
+                    <TextField label="PHM" value={phm} onChange={(e) => setPhm(e.target.value)} sx={{ width: '100%' }} /><br/><br/>
+                
+                    <TextField label="PHI" value={phi} onChange={(e) => setPhi(e.target.value)} sx={{ width: '100%' }} /><br/><br/>
+                
+                    <TextField label="GND" value={gnd} onChange={(e) => setGnd(e.target.value)} sx={{ width: '100%' }} /><br/><br/>
+                
+                    <TextField label="DSD" value={dsd} onChange={(e) => setDsd(e.target.value)} sx={{ width: '100%' }} /><br/><br/>
+              
+                    <TextField label="Neighbour" value={neighbour} onChange={(e) => setNeighbour(e.target.value)} sx={{ width: '100%' }} /><br/><br/>
+               
+                    <RadioGroup row aria-label="education" name="education" value={education} onChange={(e) => setEducation(e.target.value)}>
+                    <FormLabel component="legend">Education</FormLabel>
+                        <FormControlLabel value="primary" control={<Radio />} label="Primary" />
+                        <FormControlLabel value="secondary" control={<Radio />} label="Secondary" />
+                        <FormControlLabel value="olevel" control={<Radio />} label="O-Level" />
+                        <FormControlLabel value="alevel" control={<Radio />} label="A-Level" />
+                        <FormControlLabel value="degree" control={<Radio />} label="Degree" />
+                    </RadioGroup>
 
-            <div>
-                    <label htmlFor=""> allergies</label>
-                    <input type="text"  name="allergies" value={allergies}
-                    onChange={(e) => setAllergies(e.target.value)}/><br/>
-            </div>
+                    <Grid >
+                    <FormControl component="fieldset">
+                        <FormLabel component="legend">Physical Activity</FormLabel>
+                        <RadioGroup row aria-label="physical" name="physical" value={physical} onChange={(e) => setPhysical(e.target.value)}>
+                            <FormControlLabel value="vigorous_intensity" control={<Radio />} label="Vigorous Intensity" />
+                            <FormControlLabel value="moderate_intensity" control={<Radio />} label="Moderate Intensity" />
+                            <FormControlLabel value="sedentary" control={<Radio />} label="Sedentary" />
+                        </RadioGroup>
+                    </FormControl>
 
+            </Grid>
+            <Grid >
+                <FormControl component="fieldset">
+                    <FormLabel component="legend">Tobacco Smoking</FormLabel>
+                    <RadioGroup row aria-label="tobacco" name="tobacco" value={tobacco} onChange={(e) => setTobacco(e.target.value)}>
+                        <FormControlLabel value="user" control={<Radio />} label="User" />
+                        <FormControlLabel value="nonuser" control={<Radio />} label="Non-User" />
+                    </RadioGroup>
+                </FormControl>
+            </Grid>
 
+            <Grid >
+                <FormControl component="fieldset">
+                    <FormLabel component="legend">Tobacco Chewing</FormLabel>
+                    <RadioGroup row aria-label="tobaccochew" name="tobaccochew" value={tobaccochew} onChange={(e) => setTobaccochew(e.target.value)}>
+                        <FormControlLabel value="user" control={<Radio />} label="User" />
+                        <FormControlLabel value="nonuser" control={<Radio />} label="Non-User" />
+                    </RadioGroup>
+                    
+                </FormControl>
+            </Grid>
 
-
-
-
-
-                <button>Update</button>
+            <Grid>
+                <FormControl component="fieldset">
+                    <FormLabel component="legend">Alcohol</FormLabel>
+                    <RadioGroup row aria-label="alcohol" name="alcohol" value={alcohol} onChange={(e) => setAlcohol(e.target.value)}>
+                        <FormControlLabel value="user" control={<Radio />} label="User" />
+                        <FormControlLabel value="nonuser" control={<Radio />} label="Non-User" />
+                    </RadioGroup>
+                </FormControl>
+            </Grid>
+            <Grid >
+                <FormControl component="fieldset">
+                    <FormLabel component="legend">Other Drugs</FormLabel>
+                    <RadioGroup row aria-label="other" name="other" value={other} onChange={(e) => setOther(e.target.value)}>
+                        <FormControlLabel value="user" control={<Radio />} label="User" />
+                        <FormControlLabel value="nonuser" control={<Radio />} label="Non-User" />
+                    </RadioGroup>
+                </FormControl>
+            </Grid>
+            <Grid>
+                <FormControl component="fieldset">
+                    <FormLabel component="legend">Snacks</FormLabel>
+                    <RadioGroup row aria-label="snacks" name="snacks" value={snacks} onChange={(e) => setSnacks(e.target.value)}>
+                        <FormControlLabel value="normaluser" control={<Radio />} label="Normal User" />
+                        <FormControlLabel value="nonuser" control={<Radio />} label="Non-User" />
+                        <FormControlLabel value="heavyuser" control={<Radio />} label="Heavy User" />
+                    </RadioGroup>
+                </FormControl>
+            </Grid><br/><br/>
+               
+                            
+                    <TextField label="Diseases" value={diseases} onChange={(e) => setDiseases(e.target.value)} sx={{ width: '100%' }} /><br/><br/>
+               
+               
+                    <TextField label="Allergies" value={allergies} onChange={(e) => setAllergies(e.target.value)} sx={{ width: '100%' }} /><br/><br/>
+               
+                
+                <Button type="submit" variant="contained" sx={{ width: '100%' }}>Update</Button>
             </form>
         </div>
+       
+        
     );
 }
 

@@ -32,7 +32,7 @@ const Sidebar = () => {
           </ListItem>
 
           <ListItem disablePadding>
-            <ListItemButton component="a"  href='#home'>
+            <ListItemButton component="a"  href='/add'>
               <ListItemIcon>
               <PersonAddAlt1Icon />
               </ListItemIcon>
@@ -41,7 +41,7 @@ const Sidebar = () => {
           </ListItem>
 
           <ListItem disablePadding>
-            <ListItemButton component="a"  href='#home'>
+            <ListItemButton component="a"  href='/patientslist'>
               <ListItemIcon>
               <PeopleIcon />
               </ListItemIcon>
@@ -50,11 +50,20 @@ const Sidebar = () => {
           </ListItem>
 
           <ListItem disablePadding>
-            <ListItemButton component="a"  href='#home'>
+            <ListItemButton component="a"  href='/addreports'>
               <ListItemIcon>
               <PostAddIcon />
               </ListItemIcon>
               <ListItemText primary="Add Report" />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem disablePadding>
+            <ListItemButton component="a"  href='/uploadreport'>
+              <ListItemIcon>
+              <PostAddIcon />
+              </ListItemIcon>
+              <ListItemText primary="upload Report" />
             </ListItemButton>
           </ListItem>
 

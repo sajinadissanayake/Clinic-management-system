@@ -46,7 +46,7 @@ function Navbar() {
 
   return (
     <div>
-      {/* AppBar component */}
+      {/*  AppBar component */}
       <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
@@ -56,7 +56,7 @@ function Navbar() {
               variant="h6"
               noWrap
               component="a"
-              href="#app-bar-with-responsive-menu"
+              href="#hospital"
               sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },

@@ -8,8 +8,7 @@ import { Link } from "react-router-dom";
 
     <h1>CMS HOME</h1>
 
-      <Link to="/ReportsView">Patient Reports  </Link><br></br>
-      <Link to="/plist">Patients  </Link>
+     
     </div>
   )
 }
