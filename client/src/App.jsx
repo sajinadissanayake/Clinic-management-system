@@ -13,11 +13,9 @@ import Home from './Home'
 import ReportsUpdate from './ReportsUpdate'
 import HealthChart from './charts/HealthChart'
 
-import Feed from '../components/feed'
 
-import { Box, Stack } from '@mui/material'
-import Navbar from '../components/navbar'
-import Rightbar from '../components/Rightbar'
+
+
 
 
 
@@ -31,22 +29,10 @@ function App() {
     <div>
 
 
-      <Box>
-        <Navbar/>
-        <Stack direction="row" spacing={2} justifyContent="space-between">
-          <Sidebar/>
-          <Feed/>
-          <Rightbar/>
-         
-
-
-        </Stack>
-        
-      </Box>
+    
       
 
      
-
 
 
 
