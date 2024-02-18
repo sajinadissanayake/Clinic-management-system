@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
@@ -16,8 +16,13 @@ import PageBody from "../components/PageBody";
 import Rightbar from "../components/Rightbar";
 
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
 
-function AddPatient() {
+
+function AddP() {
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [age, setAge] = useState('');
@@ -56,14 +61,25 @@ function AddPatient() {
     }
 
 
-    
 
-    return (
-        <div>
-            <Navbar/>
-            <Stack direction="row" spacing={2} justifyContent="space-between">
-            <Sidebar/>
-            <PageBody>
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+
+   
+
+  return (
+
+    
+    <div>
+          <div>
+           
             <form onSubmit={handleSubmit}>
                 <h2>Add patient</h2>
                 <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} fullWidth/><br/><br/>
@@ -157,17 +173,16 @@ function AddPatient() {
                 </Grid>
             </form>
 
-            </PageBody>
-            <Rightbar/>
-            </Stack>
-
+           
 
 
 
 
           
         </div>
-    );
+      
+    </div>
+  )
 }
 
-export default AddPatient;
+export default AddP

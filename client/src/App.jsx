@@ -28,10 +28,8 @@ function App() {
     <Sidebar/>
       
       
-      <feed>
+      <feed/>
 
-
-      </feed>
 
 
 

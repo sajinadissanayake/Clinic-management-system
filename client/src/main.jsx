@@ -7,11 +7,16 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import AddPatient from './AddPatient.jsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App/>,
+  },
+  {
+    path: "/addpatient",
+    element: <AddPatient/>,
   },
 ]);
 
