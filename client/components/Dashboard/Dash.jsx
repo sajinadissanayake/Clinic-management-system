@@ -43,10 +43,10 @@ function Dash() {
           
 
                
-                </Card>  </CardActionArea>
+        </Card>  </CardActionArea>
 
 
-                <CardActionArea>
+        <CardActionArea>
                 <Card sx={{ minWidth: 345 }}>
                 
                 <CardContent>
@@ -58,10 +58,53 @@ function Dash() {
                     </Typography>
                 </CardContent>
                
-                </Card></CardActionArea>
+        </Card></CardActionArea>
+
 
                 </Stack>
         </Grid>
+      </Grid>
+
+      {/* 2nd row */}
+      <Grid container spacing={2} paddingTop={3}>
+        <Grid item xs={8}>
+        <Stack spacing={2} direction={'row'}>
+        <CardActionArea>
+        <Card sx={{ minWidth: 345 }}>
+          
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Staff members
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                    00
+                    </Typography>
+                </CardContent>
+          
+
+               
+        </Card>  </CardActionArea>
+
+
+        <CardActionArea>
+                <Card sx={{ minWidth: 345 }}>
+                
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Doctors
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                    000
+                    </Typography>
+                </CardContent>
+               
+        </Card></CardActionArea>
+
+
+                </Stack>
+        </Grid>
+        
+
 
       </Grid>
 

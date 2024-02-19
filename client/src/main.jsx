@@ -8,6 +8,9 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import AddPatient from './AddPatient.jsx'
+import PatientList from './PatientList.jsx'
+import ReportsView from './ReportsView.jsx'
+import AddReports from './AddReports.jsx'
 
 const router = createBrowserRouter([
   {
@@ -17,6 +20,18 @@ const router = createBrowserRouter([
   {
     path: "/addpatient",
     element: <AddPatient/>,
+  },
+  {
+    path: "/patientslist",
+    element: <PatientList/>,
+  },
+  {
+    path: "/reports",
+    element: <ReportsView/>,
+  },
+  {
+    path: "/addreports",
+    element: <AddReports/>,
   },
 ]);
 

@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, TextField, InputAdornment, Stack, } from '@mui/material';
+import { Search, Description as DescriptionIcon, Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material';
+import Sidebar from '../components/Sidebar';
+import PageBody from '../components/PageBody';
+import Navbar from '../components/Navbar';
+import Rightbar from '../components/Rightbar';
 
 function ReportsView() {
   const [reports, setReports] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     // Fetch reports data from the server
@@ -17,50 +24,85 @@ function ReportsView() {
   }, []);
 
   const handleDelete = (id) => {
-    axios.delete('http://localhost:3001/deleteReport/'+id)
-    .then(res => {console.log(res)
-   window.location.reload()})
-    .catch(err => console.log(err))
-}
+    axios.delete(`http://localhost:3001/deleteReport/${id}`)
+      .then(res => {
+        console.log(res);
+        window.location.reload();
+      })
+      .catch(err => console.log(err));
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredReports = reports.filter(report =>
+    report.nic.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div>
-      <h2>Reports View</h2>
-      <Link to="/addreports">Add Reports </Link><br></br>
-      <table>
-        <thead>
-          <tr>
-            <th>NIC</th>
-            <th>Patient Report</th>
-            <th>Date</th>
-            
-            <th>update</th>
-            
-            <th>Delete</th>
-
-          </tr>
-        </thead>
-        <tbody>
-          {reports.map(report => (
-            <tr key={report._id}>
-              <td>{report.nic}</td>
-              
-
-              <td>
-                <a href={`http://localhost:3001/reports/${report.patientReport}`} target="_blank" rel="noopener noreferrer">
-                  View Report
-                  
-                </a>
-                
-              </td>
-              <td>{report.uploadDate}</td>
-              <td><Link to={`/updateReport/${report._id}`} >Update</Link></td>
-              <td> <button onClick={(e) => handleDelete(report._id)}>Delete</button></td>
-
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Navbar/>
+       <Stack direction="row" spacing={2} justifyContent="space-between">
+            <Sidebar/>
+            <PageBody>
+            <h3>Reports View</h3>
+     
+      <TextField
+        label="Search by NIC"
+        variant="outlined"
+        value={searchTerm}
+        onChange={handleSearchChange}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <Search />
+            </InputAdornment>
+          ),
+        }}
+        fullWidth
+        margin="normal"
+      />
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>NIC</TableCell>
+              <TableCell>Patient Report</TableCell>
+              <TableCell>Date</TableCell>
+              <TableCell>Update</TableCell>
+              <TableCell>Delete</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {filteredReports.map(report => (
+              <TableRow key={report._id}>
+                <TableCell>{report.nic}</TableCell>
+                <TableCell>
+                  <IconButton href={`http://localhost:3001/reports/${report.patientReport}`} target="_blank" rel="noopener noreferrer">
+                    <DescriptionIcon />
+                  </IconButton>
+                </TableCell>
+                <TableCell>{new Date(report.uploadDate).toLocaleDateString()}</TableCell>
+                <TableCell>
+                  <IconButton component={Link} to={`/updateReport/${report._id}`}>
+                    <EditIcon />
+                  </IconButton>
+                </TableCell>
+                <TableCell>
+                  <IconButton onClick={() => handleDelete(report._id)} color="secondary">
+                    <DeleteIcon />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      </PageBody>
+            <Rightbar/>
+            </Stack>
+     
     </div>
   );
 }
