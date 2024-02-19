@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { TextField, Button, CircularProgress, Typography, Stack } from '@mui/material';
+import Rightbar from "../components/Rightbar";
+import Sidebar from "../components/Sidebar";
+import PageBody from "../components/PageBody";
+import Navbar from "../components/Navbar";
 
 function ReportsUpdate() {
     const { id } = useParams(); // Get the report ID from the URL params
     const [reportData, setReportData] = useState({});
     const [nic, setNic] = useState(""); // Ensure it's initialized with an empty string
     const [patientReport, setPatientReport] = useState(null); // New state for patient image
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -15,6 +21,7 @@ function ReportsUpdate() {
             .then(response => {
                 setReportData(response.data);
                 setNic(response.data.nic || ""); // Ensure nic is initialized or set it to an empty string
+                setLoading(false);
             })
             .catch(error => {
                 console.error('Error fetching report:', error);
@@ -36,25 +43,41 @@ function ReportsUpdate() {
             .catch(err => console.log(err));
     };
 
-    if (!reportData.nic) {
-        return <div>Loading...</div>; // Handle case when report data is still being fetched
+    if (loading) {
+        return <CircularProgress />; // Handle case when report data is still being fetched
     }
 
     return (
         <div>
-            <h2>Update Reports</h2>
+
+
+
+
+<Navbar/>
+            <Stack direction="row" spacing={2} justifyContent="space-between">
+            <Sidebar/>
+            <PageBody>
+            <Typography variant="h3">Update Reports</Typography>
             <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <div>
-                    <label htmlFor="">Nic</label>
-                    <input type="text" placeholder="Enter Nic" value={nic} onChange={(e) => setNic(e.target.value)}/><br/>
+                    <TextField
+                        label="NIC"
+                        placeholder="Enter NIC"
+                        value={nic}
+                        onChange={(e) => setNic(e.target.value)}
+                        fullWidth
+                        margin="normal"
+                    />
                 </div>
-             
                 <div>
                     <label htmlFor="report">Patient report</label>
                     <input type="file" name="patientReport" onChange={(e) => setPatientReport(e.target.files[0])} />
                 </div>
-                <button type="submit">Submit</button>
+                <Button type="submit" variant="contained" color="primary">Submit</Button>
             </form>
+            </PageBody>
+            <Rightbar/>
+            </Stack>
         </div>
     );
 }

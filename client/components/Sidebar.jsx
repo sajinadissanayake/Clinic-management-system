@@ -17,7 +17,7 @@ import Feed from './Feed';
 const Sidebar = () => {
   return (
     <div>
-      <Box bgcolor="" flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
+     <Box bgcolor="" flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}> 
         <h3>Menu </h3>
 
 

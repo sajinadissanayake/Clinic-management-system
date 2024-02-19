@@ -1,57 +1,74 @@
-
 import React, { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { TextField, Button, Typography, Container, Grid, Stack } from '@mui/material';
+import Navbar from "../components/Navbar";
+import Rightbar from "../components/Rightbar";
+import Sidebar from "../components/Sidebar";
+import PageBody from "../components/PageBody";
 
-
- function AddReports() {
-
-    const [nic, setNic] = useState();
+function AddReports() {
+    const [nic, setNic] = useState('');
     const [patientReport, setPatientReport] = useState(null); // New state for patient image
     const navigate = useNavigate();
 
-    const Submit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
         const formData = new FormData();
         formData.append('nic', nic);
-       
         formData.append('patientReport', patientReport); // Append the patient image file
-        
-
-       
 
         axios.post('http://localhost:3001/AddReports', formData)
             .then(result => {
                 console.log(result);
-                navigate('/ReportsView');
+                navigate('/reports');
             })
             .catch(err => console.log(err));
     };
 
+    return (
+        
 
 
-  return (
-    <div>
-
-    <div>
-            <form onSubmit={Submit} encType="multipart/form-data">
-                <h2> Add Reports</h2>
-                <div>
-                    <label htmlFor="">Nic</label>
-                    <input type="text" placeholder="Enter Nic" name="nic" onChange={(e) => setNic(e.target.value)}/><br/>
-                </div>
-             
-                <div>
-                        <label htmlFor="report">Patient report</label>
-                        <input type="file" name="patientReport" onChange={(e) => setPatientReport(e.target.files[0])} />
-                    </div>
-                <button type="submit">Submit</button>
+        <div>
+             <Navbar/>
+            <Stack direction="row" spacing={2} justifyContent="space-between">
+            <Sidebar/>
+            <PageBody> <Container maxWidth="sm">
+            <Typography variant="h4" gutterBottom>Add Report</Typography>
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <TextField
+                            fullWidth
+                            label="NIC"
+                            placeholder="Enter NIC"
+                            variant="outlined"
+                            value={nic}
+                            onChange={(e) => setNic(e.target.value)}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                    <input type="file" name="patientReport" onChange={(e) => setPatientReport(e.target.files[0])} />
+                    
+                        
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button type="submit" variant="contained" color="primary">
+                            upload
+                        </Button>
+                    </Grid>
+                </Grid>
             </form>
+        </Container>
+        </PageBody>
+            <Rightbar/>
+            </Stack>
+            
         </div>
-      
-    </div>
-  )
+       
+    );
 }
 
 export default AddReports;

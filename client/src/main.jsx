@@ -11,6 +11,9 @@ import AddPatient from './AddPatient.jsx'
 import PatientList from './PatientList.jsx'
 import ReportsView from './ReportsView.jsx'
 import AddReports from './AddReports.jsx'
+import UpdatePatient from './UpdatePatient.jsx'
+import OnePatient from './OnePatient.jsx'
+import ReportsUpdate from './ReportsUpdate.jsx'
 
 const router = createBrowserRouter([
   {
@@ -32,6 +35,18 @@ const router = createBrowserRouter([
   {
     path: "/addreports",
     element: <AddReports/>,
+  },
+  {
+    path: "/updatepatient/:id",
+    element: <UpdatePatient />,
+  },
+  {
+    path: "/patient/:id",
+    element: <OnePatient />,
+  },
+  {
+    path: "/updatereport/:id",
+    element: <ReportsUpdate />,
   },
 ]);
 

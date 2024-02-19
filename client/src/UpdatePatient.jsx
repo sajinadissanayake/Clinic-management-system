@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { TextField, Button, RadioGroup, Radio, FormControlLabel, FormLabel, Grid, FormControl } from '@mui/material';
+import { TextField, Button, RadioGroup, Radio, FormControlLabel, FormLabel, Grid, FormControl, Stack } from '@mui/material';
+import Sidebar from "../components/Sidebar";
+import PageBody from "../components/PageBody";
+import Rightbar from "../components/Rightbar";
+import Navbar from "../components/Navbar";
 
 function UpdatePatient() {
     const { id } = useParams();
@@ -79,6 +83,14 @@ function UpdatePatient() {
     return (
        
             <div>
+
+
+
+
+    <Navbar/>
+       <Stack direction="row" spacing={2} justifyContent="space-between">
+            <Sidebar/>
+            <PageBody>
             <form onSubmit={patientUpdate}>
                 <h2>Update patient</h2>
                 
@@ -208,6 +220,10 @@ function UpdatePatient() {
                 
                 <Button type="submit" variant="contained" sx={{ width: '100%' }}>Update</Button>
             </form>
+
+            </PageBody>
+            <Rightbar/>
+            </Stack>
         </div>
        
         
