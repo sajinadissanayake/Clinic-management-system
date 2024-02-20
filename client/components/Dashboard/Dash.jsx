@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState,useEffect } from 'react';
 import { Box,Grid,styled,Paper,Stack,CardActionArea } from '@mui/material'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -18,6 +19,38 @@ const Item = styled(Paper)(({ theme }) => ({
   
 
 function Dash() {
+  const [patientsCount, setPatientsCount] = useState(0);
+  const [reportsCount, setReportsCount] = useState(0);
+
+  useEffect(() => {
+    fetchPatientsCount();
+    fetchReportsCount();
+  }, []);
+
+  const fetchPatientsCount = () => {
+    fetch('http://localhost:3001/')
+      .then(response => response.json())
+      .then(data => {
+        setPatientsCount(data.length);
+      })
+      .catch(error => console.error('Error fetching patients count:', error));
+  };
+
+  const fetchReportsCount = () => {
+    fetch('http://localhost:3001/getReports')
+      .then(response => response.json())
+      .then(data => {
+        setReportsCount(data.length);
+      })
+      .catch(error => console.error('Error fetching reports count:', error));
+  };
+
+
+
+
+
+
+
   return (
 
 
@@ -37,7 +70,7 @@ function Dash() {
                         Patients
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                    00
+                    {patientsCount}
                     </Typography>
                 </CardContent>
           
@@ -54,7 +87,7 @@ function Dash() {
                         Reports
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                    000
+                    {reportsCount}
                     </Typography>
                 </CardContent>
                

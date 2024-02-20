@@ -67,7 +67,7 @@ function Navbar() {
                 textDecoration: 'none',
               }}
             >
-              Heath Recorder
+             Healthy Life clinic
             </Typography>
 
             {/* Responsive navigation menu */}

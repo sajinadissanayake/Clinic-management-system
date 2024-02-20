@@ -42,12 +42,39 @@ function AddPatient() {
     const [snacks, setSnacks] = useState('normaluser');
     const [diseases, setDiseases] = useState('');
     const [allergies, setAllergies] = useState('');
+    const [image, setImage] = useState(null);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        axios.post("http://localhost:3001/AddPatient", { name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies })
+        const formData = new FormData();
+        formData.append('image', image); // Append the uploaded image to form data
+        formData.append('name', name);
+        formData.append('nic', nic);
+        formData.append('email', email);
+        formData.append('age', age);
+        formData.append('dob', dob);
+        formData.append('gender', gender);
+        formData.append('address', address);
+        formData.append('maritial', maritial);
+        formData.append('pnumber', pnumber);
+        formData.append('moh', moh);
+        formData.append('phm', phm);
+        formData.append('phi', phi);
+        formData.append('gnd', gnd);
+        formData.append('dsd', dsd);
+        formData.append('neighbour', neighbour);
+        formData.append('education', education);
+        formData.append('physical', physical);
+        formData.append('tobacco', tobacco);
+        formData.append('tobaccochew', tobaccochew);
+        formData.append('alcohol', alcohol);
+        formData.append('other', other);
+        formData.append('snacks', snacks);
+        formData.append('diseases', diseases);
+        formData.append('allergies', allergies);
+    
+        axios.post("http://localhost:3001/AddPatient", formData)
             .then(response => {
                 console.log(response);
                 navigate('/');
@@ -150,6 +177,7 @@ function AddPatient() {
                 </FormControl><br />
                 <TextField label="Diseases (Other special diseases)" value={diseases} onChange={(e) => setDiseases(e.target.value)} fullWidth /><br/><br/>
                 <TextField label="Allergies" value={allergies} onChange={(e) => setAllergies(e.target.value)} fullWidth />
+                <input type="file" onChange={(e) => setImage(e.target.files[0])} />
                 <Grid container justifyContent="center" paddingTop={2}>
                     <Button type="submit" variant="contained" color="primary">
                         Submit

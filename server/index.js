@@ -6,6 +6,7 @@ const multer = require('multer');
 
 const patientModel = require('./models/patients');
 const reportsModel = require('./models/reports');
+const mexamModel = require('./models/mexam');
 
 const app = express();
 app.use(cors());
@@ -80,16 +81,30 @@ app.delete('/deleteUser/:id', (req, res) => {
         .then(result => res.json(result))
         .catch(err => res.json(err));
 });
-app.post("/AddPatient", (req, res) => {
-    console.log(req.body); // Check if the data is being received
-    patientModel.create(req.body)
-        .then(users => {
-            console.log("patient created:", users);
-            res.json(users);
+// Configure Multer for image upload
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'patientImages/'); // Set the destination folder for uploaded images
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname); // Set the file name
+    },
+});
+
+const upload = multer({ storage: storage });
+
+app.post("/AddPatient", upload.single('image'), (req, res) => {
+    const { name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies } = req.body;
+    const imagePath = req.file.path; // Path to the uploaded image
+
+    patientModel.create({ name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies, imagePath })
+        .then(patient => {
+            console.log("Patient created:", patient);
+            res.json(patient);
         })
         .catch(err => {
             console.error("Error creating patient:", err);
-            res.json(err); 
+            res.status(500).json({ error: 'Internal Server Error' });
         });
 });
 
@@ -155,6 +170,17 @@ app.delete('/deleteReport/:id', (req, res) => {
         .then(result => res.json(result))
         .catch(err => res.json(err));
 });
+
+
+/////////////////////////////////////////////////////////////////////Mexam/////////////////////////////////
+
+
+app.post("/AddMexam", (req, res) =>{
+    mexamModel.create(req.body)
+    .then(records => res.json(records))
+    .catch(err => res.json(err))
+})
+
 
 
 

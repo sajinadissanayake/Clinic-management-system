@@ -59,15 +59,7 @@ const Sidebar = () => {
             </ListItemButton>
           </ListItem>
 
-          <ListItem disablePadding>
-            <ListItemButton component="a"  href='/uploadreport'>
-              <ListItemIcon>
-              <PostAddIcon />
-              </ListItemIcon>
-              <ListItemText primary="upload Report" />
-            </ListItemButton>
-          </ListItem>
-
+         
          
 
           <ListItem disablePadding>
@@ -78,6 +70,16 @@ const Sidebar = () => {
               <ListItemText primary="Reports" />
             </ListItemButton>
           </ListItem>
+
+          <ListItem disablePadding>
+            <ListItemButton component="a"  href='/MEform'>
+              <ListItemIcon>
+              <PostAddIcon />
+              </ListItemIcon>
+              <ListItemText primary="Medical examination" />
+            </ListItemButton>
+          </ListItem>
+
 
 
 
