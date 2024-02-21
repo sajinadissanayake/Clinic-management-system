@@ -6,6 +6,7 @@ import Rightbar from '../components/Rightbar';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import PageBody from '../components/PageBody';
+import BloodSugarChart from '../components/BloodSugarChart';
 
 function OnePatient() {
   const [patient, setPatient] = useState(null);
@@ -65,6 +66,8 @@ function OnePatient() {
                       </CardContent>
                     </Card>
                   </Grid>
+
+
                   <Grid item xs={12} sm={6}>
                     <Card sx={{ width: '100%' }}>
                       <CardContent>
@@ -78,6 +81,15 @@ function OnePatient() {
                         <Typography variant="body1"><strong>Diseases:</strong> {patient.diseases}</Typography>
                         <Typography variant="body1"><strong>Allergies:</strong> {patient.allergies}</Typography>
                         <Typography variant="body1"><strong>Registration Date:</strong> {patient.registrationDate}</Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Card sx={{ width: '100%' }}>
+                      <CardContent>
+                        <Typography variant="h6">Blood Sugar Levels</Typography>
+                        {/* Render BloodSugarChart component */}
+                        <BloodSugarChart nic={patient.nic} />
                       </CardContent>
                     </Card>
                   </Grid>

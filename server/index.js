@@ -194,8 +194,9 @@ app.post("/AddBS", (req, res) =>{
 })
 
 // In your Express app
-app.get('/getBloodSugarData', (req, res) => {
-    BSModel.find({ nic: req.query.nic }) // Assuming you pass the NIC as a query parameter
+app.get('/getBloodSugarData/:nic', (req, res) => {
+    const nic = req.params.nic; // Extract NIC from request parameters
+    BSModel.find({ nic: nic }) // Assuming you pass the NIC as a query parameter
         .then(data => res.json(data))
         .catch(err => res.status(500).json({ error: err.message }));
 });
