@@ -18,11 +18,12 @@ function MEform() {
     const [wc, setWc] = useState('');
     const [bpressure, setBpressure] = useState('');
     const [oexam, setOexam] = useState('');
+    const [specialNotes,setSpecialNotes]= useState('')
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3001/AddMexam", { nic, age, weight, bmi, ibw, wc, bpressure, oexam })
+        axios.post("http://localhost:3001/AddMexam", { nic, age, weight, bmi, ibw, wc, bpressure, oexam, specialNotes})
             .then(result => {
                 console.log(result);
                 navigate('/');
@@ -113,9 +114,22 @@ function MEform() {
                         fullWidth
                     />
                 </div><br />
+                <div>
+                    <TextField
+                                label="Special Notes" // Label for special notes field
+                                variant="outlined"
+                                value={specialNotes}
+                                onChange={(e) => setSpecialNotes(e.target.value)}
+                                multiline // Multiline prop for a larger area
+                                fullWidth
+                                rows={4} // Number of rows to display
+                            /></div><br />
+                
+                
                 <Button type="submit" variant="contained" color="primary" >
                     Submit
                 </Button>
+
             </form>
 
             

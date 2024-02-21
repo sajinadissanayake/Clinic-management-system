@@ -10,8 +10,12 @@ const mexamSchema = new mongoose.Schema({
    wc:String,
    bpressure:String,
    oexam:String,
+   ExaminationDate: {
+      type: Date,
+      default: Date.now  },
 
-   
+   specialNotes:String,
+
 });
 
     

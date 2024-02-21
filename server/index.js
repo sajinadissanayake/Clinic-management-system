@@ -7,6 +7,7 @@ const multer = require('multer');
 const patientModel = require('./models/patients');
 const reportsModel = require('./models/reports');
 const mexamModel = require('./models/mexam');
+const BSModel = require('./models/bloodsugar');
 
 const app = express();
 app.use(cors());
@@ -180,6 +181,25 @@ app.post("/AddMexam", (req, res) =>{
     .then(records => res.json(records))
     .catch(err => res.json(err))
 })
+
+
+
+/////////////////////////////////////////////////////////////////////blood sugar/////////////////////////////////
+
+
+app.post("/AddBS", (req, res) =>{
+    BSModel.create(req.body)
+    .then(records => res.json(records))
+    .catch(err => res.json(err))
+})
+
+// In your Express app
+app.get('/getBloodSugarData', (req, res) => {
+    BSModel.find({ nic: req.query.nic }) // Assuming you pass the NIC as a query parameter
+        .then(data => res.json(data))
+        .catch(err => res.status(500).json({ error: err.message }));
+});
+
 
 
 

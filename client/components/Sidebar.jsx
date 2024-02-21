@@ -12,8 +12,9 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import PeopleIcon from '@mui/icons-material/People';
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
-import Feed from './Feed';
 
+
+import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
 const Sidebar = () => {
   return (
     <div>
@@ -79,6 +80,19 @@ const Sidebar = () => {
               <ListItemText primary="Medical examination" />
             </ListItemButton>
           </ListItem>
+
+          <ListItem disablePadding>
+            <ListItemButton component="a"  href='/bloodsugar'>
+              <ListItemIcon>
+              <MedicalInformationIcon />
+              </ListItemIcon>
+              <ListItemText primary="Blood Sugar" />
+            </ListItemButton>
+          </ListItem>
+
+          
+
+
 
 
 
