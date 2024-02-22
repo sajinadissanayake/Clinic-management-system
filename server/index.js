@@ -202,6 +202,16 @@ app.get('/getBloodSugarData/:nic', (req, res) => {
 });
 
 
+// Add a route to get medical examination records by patient NIC
+app.get('/getMedicalExaminations/:nic', (req, res) => {
+    const nic = req.params.nic;
+    mexamModel.find({ nic: nic })
+        .then(records => res.json(records))
+        .catch(err => res.status(500).json({ error: err.message }));
+});
+
+
+
 
 
 
