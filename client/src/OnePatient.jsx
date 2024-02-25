@@ -102,7 +102,7 @@ function OnePatient() {
                   <Grid item xs={12}>
                     <Card sx={{ width: '100%' }}>
                       <CardContent>
-                        <Typography variant="h6">Blood Sugar Levels</Typography>
+                        <Typography variant="h6">Reports</Typography>
                        
                         <BloodSugarChart nic={patient.nic} />
                       </CardContent>
@@ -114,11 +114,6 @@ function OnePatient() {
             </Grid>
 
           </Container>
-
-
-
-
-
 
         </PageBody>
         <PRightbar patientNIC={patient.nic} />
