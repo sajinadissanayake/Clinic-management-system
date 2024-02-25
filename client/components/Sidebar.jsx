@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -12,112 +13,73 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import PeopleIcon from '@mui/icons-material/People';
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
-
-
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
+
 const Sidebar = () => {
   return (
     <div>
-     <Box bgcolor="" flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}> 
-        <h3>Menu </h3>
-
-
+      <Box bgcolor="" flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}> 
+        <h3>Menu</h3>
         <List>
-
           <ListItem disablePadding>
-            <ListItemButton component="a"  href='/'>
+            <ListItemButton component={Link} to="/">
               <ListItemIcon>
-              <HomeIcon />
+                <HomeIcon />
               </ListItemIcon>
-              <ListItemText primary="home" />
+              <ListItemText primary="Home" />
             </ListItemButton>
           </ListItem>
-
           <ListItem disablePadding>
-            <ListItemButton component="a"  href='/addpatient'>
+            <ListItemButton component={Link} to="/addpatient">
               <ListItemIcon>
-              <PersonAddAlt1Icon />
+                <PersonAddAlt1Icon />
               </ListItemIcon>
               <ListItemText primary="Add patient" />
             </ListItemButton>
           </ListItem>
-
           <ListItem disablePadding>
-            <ListItemButton component="a"  href='/patientslist'>
+            <ListItemButton component={Link} to="/patientslist">
               <ListItemIcon>
-              <PeopleIcon />
+                <PeopleIcon />
               </ListItemIcon>
-              <ListItemText primary="patients" />
+              <ListItemText primary="Patients" />
             </ListItemButton>
           </ListItem>
-
           <ListItem disablePadding>
-            <ListItemButton component="a"  href='/addreports'>
+            <ListItemButton component={Link} to="/addreports">
               <ListItemIcon>
-              <PostAddIcon />
+                <PostAddIcon />
               </ListItemIcon>
               <ListItemText primary="Add Report" />
             </ListItemButton>
           </ListItem>
-
-         
-         
-
           <ListItem disablePadding>
-            <ListItemButton component="a"  href='/reports'>
+            <ListItemButton component={Link} to="/reports">
               <ListItemIcon>
-              <DocumentScannerIcon />
+                <DocumentScannerIcon />
               </ListItemIcon>
               <ListItemText primary="Reports" />
             </ListItemButton>
           </ListItem>
-
           <ListItem disablePadding>
-            <ListItemButton component="a"  href='/MEform'>
+            <ListItemButton component={Link} to="/MEform">
               <ListItemIcon>
-              <PostAddIcon />
+                <PostAddIcon />
               </ListItemIcon>
               <ListItemText primary="Medical examination" />
             </ListItemButton>
           </ListItem>
-
           <ListItem disablePadding>
-            <ListItemButton component="a"  href='/bloodsugar'>
+            <ListItemButton component={Link} to="/bloodsugar">
               <ListItemIcon>
-              <MedicalInformationIcon />
+                <MedicalInformationIcon />
               </ListItemIcon>
               <ListItemText primary="Blood Sugar" />
             </ListItemButton>
           </ListItem>
-
-          
-
-
-
-
-
-
-          </List>
+        </List>
       </Box>
     </div>
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   );
 };
 

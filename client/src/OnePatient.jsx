@@ -93,15 +93,33 @@ function OnePatient() {
                     <Card sx={{ width: '100%' }}>
                       <CardContent>
                         <Typography variant="h6">Blood Sugar Levels</Typography>
-                        {/* Render BloodSugarChart component */}
+                       
                         <BloodSugarChart nic={patient.nic} />
                       </CardContent>
                     </Card>
                   </Grid>
+
+                  <Grid item xs={12}>
+                    <Card sx={{ width: '100%' }}>
+                      <CardContent>
+                        <Typography variant="h6">Blood Sugar Levels</Typography>
+                       
+                        <BloodSugarChart nic={patient.nic} />
+                      </CardContent>
+                    </Card>
+                  </Grid>
+
                 </Grid>
               </Grid>
             </Grid>
+
           </Container>
+
+
+
+
+
+
         </PageBody>
         <PRightbar patientNIC={patient.nic} />
 
