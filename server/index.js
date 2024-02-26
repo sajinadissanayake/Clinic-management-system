@@ -8,6 +8,7 @@ const patientModel = require('./models/patients');
 const reportsModel = require('./models/reports');
 const mexamModel = require('./models/mexam');
 const BSModel = require('./models/bloodsugar');
+const blogModel = require('./models/blog');
 
 const app = express();
 app.use(cors());
@@ -209,8 +210,37 @@ app.get('/getMedicalExaminations/:nic', (req, res) => {
         .then(records => res.json(records))
         .catch(err => res.status(500).json({ error: err.message }));
 });
+app.get('/getmedicals', (req, res) => {
+    mexamModel.find({})
+      .then(reports => res.json(reports))
+      .catch(err => res.json(err));
+  });
 
+  // blog image
+const bstorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'blogposts/'); // Set the destination folder for uploaded images
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname); // Set the file name
+    },
+});
 
+const bupload = multer({ storage: bstorage });
+app.post("/Addblog", bupload.single('image'), (req, res) => {
+    const { title, content, postedDate, type } = req.body;
+    const imagePath = req.file.path; // Path to the uploaded image
+
+    blogModel.create({ title, content, postedDate, type, image: imagePath }) // Corrected the field name to "image"
+        .then(blog => {
+            console.log("post added:", blog);
+            res.json(blog);
+        })
+        .catch(err => {
+            console.error("Error adding blog:", err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
+});
 
 
 

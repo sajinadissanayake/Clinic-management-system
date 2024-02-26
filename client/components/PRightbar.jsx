@@ -88,8 +88,12 @@ function PRightbar({ patientNIC }) {
             )}
           </CardContent>
         </Card>
-        {/* Display blood sugar levels */}
-        <Card sx={{ maxWidth: 345 }}  marginTop={2}>
+        
+        <MEDialog open={openDialog} handleClose={handleClose} patientNIC={patientNIC} />
+      </Box>
+      {/* Display blood sugar levels */}
+      <Box bgcolor="" borderRadius={4} marginTop={1} flex={2} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
+      <Card sx={{ maxWidth: 345 }}  p={3}>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               Blood Sugar Levels 
@@ -111,10 +115,8 @@ function PRightbar({ patientNIC }) {
               </Typography>
             )}
           </CardContent>
-        </Card>
+        </Card></Box>
         
-        <MEDialog open={openDialog} handleClose={handleClose} patientNIC={patientNIC} />
-      </Box>
     </div>
   );
 }

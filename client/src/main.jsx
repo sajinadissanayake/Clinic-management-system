@@ -13,6 +13,8 @@ import OnePatient from './OnePatient.jsx'
 import ReportsUpdate from './ReportsUpdate.jsx'
 import MEform from '../pages/MEform.jsx'
 import BloodSugar from '../pages/BloodSugar.jsx'
+import Home from '../pages/Home.jsx'
+import BlogAdd from '../pages/BlogAdd.jsx'
 
 const router = createBrowserRouter([
   {
@@ -54,6 +56,14 @@ const router = createBrowserRouter([
   {
     path: "/bloodsugar",
     element: <BloodSugar />,
+  },
+  {
+    path: "/home",
+    element: <Home />,
+  },
+  {
+    path: "/blogadd",
+    element: <BlogAdd />,
   },
 ]);
 

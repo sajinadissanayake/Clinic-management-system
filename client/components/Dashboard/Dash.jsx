@@ -7,6 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import PeopleIcon from '@mui/icons-material/People';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -21,10 +22,11 @@ const Item = styled(Paper)(({ theme }) => ({
 function Dash() {
   const [patientsCount, setPatientsCount] = useState(0);
   const [reportsCount, setReportsCount] = useState(0);
-
+  const [medicalCount, setmedicalCount] = useState(0);
   useEffect(() => {
     fetchPatientsCount();
     fetchReportsCount();
+    fetchmedicalsCount();
   }, []);
 
   const fetchPatientsCount = () => {
@@ -43,6 +45,15 @@ function Dash() {
         setReportsCount(data.length);
       })
       .catch(error => console.error('Error fetching reports count:', error));
+  };
+  
+  const fetchmedicalsCount = () => {
+    fetch('http://localhost:3001/getMedicals')
+      .then(response => response.json())
+      .then(data => {
+        setmedicalCount(data.length);
+      })
+      .catch(error => console.error('Error fetching medcals count:', error));
   };
 
 
@@ -66,11 +77,54 @@ function Dash() {
         <Card sx={{ minWidth: 345 }}>
           
                 <CardContent>
+                
                     <Typography gutterBottom variant="h5" component="div">
+                    
                         Patients
+                        
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                     {patientsCount}
+                    </Typography>
+                </CardContent>
+          
+
+               
+        </Card>  </CardActionArea>
+
+
+        <CardActionArea>
+                <Card sx={{ minWidth: 345 }}>
+                
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Reports
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {reportsCount}
+                    </Typography>
+                </CardContent>
+               
+        </Card></CardActionArea>
+
+
+                </Stack>
+        </Grid>
+      </Grid>
+
+      {/* 2nd row */}
+      <Grid container spacing={2}paddingTop={3}>
+        <Grid item xs={8}>
+        <Stack spacing={2} direction={'row'}>
+        <CardActionArea>
+        <Card sx={{ minWidth: 345 }}>
+          
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                       Medical Reports
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                    {medicalCount}
                     </Typography>
                 </CardContent>
           
@@ -98,7 +152,7 @@ function Dash() {
         </Grid>
       </Grid>
 
-      {/* 2nd row */}
+      {/* 3rd row */}
       <Grid container spacing={2} paddingTop={3}>
         <Grid item xs={8}>
         <Stack spacing={2} direction={'row'}>
@@ -136,8 +190,15 @@ function Dash() {
 
                 </Stack>
         </Grid>
+
         
 
+
+
+
+
+        
+      
 
       </Grid>
 

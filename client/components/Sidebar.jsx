@@ -14,7 +14,7 @@ import PostAddIcon from '@mui/icons-material/PostAdd';
 import PeopleIcon from '@mui/icons-material/People';
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
-
+import ArticleIcon from '@mui/icons-material/Article';
 const Sidebar = () => {
   return (
     <div>
@@ -27,6 +27,14 @@ const Sidebar = () => {
                 <HomeIcon />
               </ListItemIcon>
               <ListItemText primary="Home" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component={Link} to="/blogadd">
+              <ListItemIcon>
+              <ArticleIcon/>
+              </ListItemIcon>
+              <ListItemText primary="Add Posts" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>

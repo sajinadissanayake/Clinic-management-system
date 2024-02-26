@@ -45,9 +45,9 @@ function Navbar() {
   };
 
   return (
-    <div>
+    <div style={{ flexGrow: 1 }}>
       {/*  AppBar component */}
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             {/* Logo and app name */}
