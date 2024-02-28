@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 const reportSchema = new mongoose.Schema({
     nic: String,
+    type:String,
     
     patientReport:String,
     uploadDate: {

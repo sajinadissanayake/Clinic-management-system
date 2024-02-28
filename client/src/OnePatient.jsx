@@ -8,6 +8,7 @@ import Sidebar from '../components/Sidebar';
 import PageBody from '../components/PageBody';
 import BloodSugarChart from '../components/BloodSugarChart';
 import PRightbar from '../components/PRightbar';
+import PatientReports from '../components/PatientReports';
 
 function OnePatient() {
   const [patient, setPatient] = useState(null);
@@ -100,11 +101,11 @@ function OnePatient() {
                   </Grid>
 
                   <Grid item xs={12}>
-                    <Card sx={{ width: '100%' }}>
+                  <Card sx={{ width: '100%' }}>
                       <CardContent>
                         <Typography variant="h6">Reports</Typography>
-                       
-                        <BloodSugarChart nic={patient.nic} />
+                        <PatientReports  />
+
                       </CardContent>
                     </Card>
                   </Grid>

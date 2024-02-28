@@ -9,6 +9,7 @@ import PageBody from "../components/PageBody";
 
 function AddReports() {
     const [nic, setNic] = useState('');
+    const [type, setType] = useState('');
     const [patientReport, setPatientReport] = useState(null); // New state for patient image
     const navigate = useNavigate();
 
@@ -17,6 +18,7 @@ function AddReports() {
 
         const formData = new FormData();
         formData.append('nic', nic);
+        formData.append('type', type);
         formData.append('patientReport', patientReport); // Append the patient image file
 
         axios.post('http://localhost:3001/AddReports', formData)
@@ -47,6 +49,16 @@ function AddReports() {
                             variant="outlined"
                             value={nic}
                             onChange={(e) => setNic(e.target.value)}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            fullWidth
+                            label="Type"
+                            placeholder="enter type"
+                            variant="outlined"
+                            value={type}
+                            onChange={(e) => setType(e.target.value)}
                         />
                     </Grid>
                     <Grid item xs={12}>

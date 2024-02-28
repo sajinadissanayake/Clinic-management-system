@@ -15,6 +15,7 @@ import MEform from '../pages/MEform.jsx'
 import BloodSugar from '../pages/BloodSugar.jsx'
 import Home from '../pages/Home.jsx'
 import BlogAdd from '../pages/BlogAdd.jsx'
+import AppointmentAdd from '../pages/AppointmentAdd.jsx'
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
   {
     path: "/blogadd",
     element: <BlogAdd />,
+  },
+  {
+    path: "/appointmentadd",
+    element: <AppointmentAdd />,
   },
 ]);
 

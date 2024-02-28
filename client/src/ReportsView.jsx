@@ -68,6 +68,7 @@ function ReportsView() {
           <TableHead>
             <TableRow>
               <TableCell>NIC</TableCell>
+              <TableCell>Type</TableCell>
               <TableCell>Patient Report</TableCell>
               <TableCell>Date</TableCell>
               <TableCell>Update</TableCell>
@@ -78,6 +79,7 @@ function ReportsView() {
             {filteredReports.map(report => (
               <TableRow key={report._id}>
                 <TableCell>{report.nic}</TableCell>
+                <TableCell>{report.type}</TableCell>
                 <TableCell>
                   <IconButton href={`http://localhost:3001/reports/${report.patientReport}`} target="_blank" rel="noopener noreferrer">
                     <DescriptionIcon />
@@ -102,7 +104,6 @@ function ReportsView() {
       </PageBody>
             <Rightbar/>
             </Stack>
-     
     </div>
   );
 }

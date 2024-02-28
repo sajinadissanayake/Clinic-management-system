@@ -15,6 +15,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
 import ArticleIcon from '@mui/icons-material/Article';
+import BookOnlineIcon from '@mui/icons-material/BookOnline';
 const Sidebar = () => {
   return (
     <div>
@@ -83,6 +84,14 @@ const Sidebar = () => {
                 <MedicalInformationIcon />
               </ListItemIcon>
               <ListItemText primary="Blood Sugar" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component={Link} to="/appointmentadd">
+              <ListItemIcon>
+                <BookOnlineIcon />
+              </ListItemIcon>
+              <ListItemText primary="Add Appointment" />
             </ListItemButton>
           </ListItem>
         </List>

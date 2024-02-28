@@ -9,6 +9,7 @@ const reportsModel = require('./models/reports');
 const mexamModel = require('./models/mexam');
 const BSModel = require('./models/bloodsugar');
 const blogModel = require('./models/blog');
+const appoModel = require('./models/appointments');
 
 const app = express();
 app.use(cors());
@@ -129,9 +130,10 @@ const Rupload = multer({ storage: Rstorage });
 app.post('/AddReports', Rupload.single('patientReport'), (req, res) => {
     // Access the uploaded file using req.file
     const { nic } = req.body;
+    const { type } = req.body;
     const patientReport = req.file.filename;
 
-    reportsModel.create({ nic, patientReport })
+    reportsModel.create({ nic,type, patientReport })
         .then(user => res.json(user)) 
         .catch(err => res.json(err));
  
@@ -172,6 +174,14 @@ app.delete('/deleteReport/:id', (req, res) => {
         .then(result => res.json(result))
         .catch(err => res.json(err));
 });
+// Retrieve reports by patient NIC
+app.get('/getReports/:nic', (req, res) => {
+    const nic = req.params.nic;
+    reportsModel.find({ nic: nic })
+        .then(reports => res.json(reports))
+        .catch(err => res.status(500).json({ error: err.message }));
+});
+
 
 
 /////////////////////////////////////////////////////////////////////Mexam/////////////////////////////////
@@ -244,6 +254,13 @@ app.post("/Addblog", bupload.single('image'), (req, res) => {
 
 
 
+////appointments////////////////////////////////////////////////////////////////////////////////////
+
+app.post("/Addappo", (req, res) =>{
+    appoModel.create(req.body)
+    .then(users => res.json(users))
+    .catch(err => res.json(err))
+})
 
 app.listen(3001, () => {
     console.log("server is running");
