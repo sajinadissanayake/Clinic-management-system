@@ -16,6 +16,7 @@ import BloodSugar from '../pages/BloodSugar.jsx'
 import Home from '../pages/Home.jsx'
 import BlogAdd from '../pages/BlogAdd.jsx'
 import AppointmentAdd from '../pages/AppointmentAdd.jsx'
+import SignInSide from '../pages/SignInSide.jsx'
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
   {
     path: "/appointmentadd",
     element: <AppointmentAdd />,
+  },
+  {
+    path: "/signin",
+    element: <SignInSide />,
   },
 ]);
 
