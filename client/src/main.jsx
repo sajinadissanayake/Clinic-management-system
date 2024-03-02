@@ -22,7 +22,8 @@ import Login from '../pages/Login.jsx'
 import Prescriptionadd from '../pages/Prescriptionadd.jsx'
 import DoctorDash from '../pages/DoctorDash.jsx'
 import Checkout from '../pages/Prescription/Checkout.jsx'
-import PatientSelect from '../pages/PatientSelect.jsx'
+import PatientSelect from '../pages/Prescription/PatientSelect.jsx'
+
 
 const router = createBrowserRouter([
   {
