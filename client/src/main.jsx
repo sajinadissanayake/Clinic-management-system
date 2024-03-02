@@ -17,6 +17,12 @@ import Home from '../pages/Home.jsx'
 import BlogAdd from '../pages/BlogAdd.jsx'
 import AppointmentAdd from '../pages/AppointmentAdd.jsx'
 import SignInSide from '../pages/SignInSide.jsx'
+import RegisterUsers from '../pages/RegisterUsers.jsx'
+import Login from '../pages/Login.jsx'
+import Prescriptionadd from '../pages/Prescriptionadd.jsx'
+import DoctorDash from '../pages/DoctorDash.jsx'
+import Checkout from '../pages/Prescription/Checkout.jsx'
+import PatientSelect from '../pages/PatientSelect.jsx'
 
 const router = createBrowserRouter([
   {
@@ -75,6 +81,32 @@ const router = createBrowserRouter([
     path: "/signin",
     element: <SignInSide />,
   },
+  {
+    path: "/register",
+    element: <RegisterUsers />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/addpresc",
+    element: <Prescriptionadd />,
+  },
+  {
+    path: "/doctordash",
+    element: <DoctorDash />,
+  },
+  {
+    path: "/check",
+    element: <Checkout />,
+  },
+  {
+    path: "/pselect",
+    element: <PatientSelect />,
+  },
+  
+
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
