@@ -33,6 +33,7 @@ function UpdatePatient() {
     const [snacks, setSnacks] = useState(''); 
     const [diseases, setDiseases] = useState(''); 
     const [allergies, setAllergies] = useState(''); 
+    const [blood, setBlood] = useState(''); 
 
     const navigate = useNavigate();
 
@@ -64,6 +65,7 @@ function UpdatePatient() {
                 setSnacks(result.data.snacks);
                 setDiseases(result.data.diseases);
                 setAllergies(result.data.allergies);
+                setBlood(result.data.blood);
             })
             .catch(err => console.log(err));
     }, []);
@@ -71,7 +73,7 @@ function UpdatePatient() {
     const patientUpdate = (e) => {
         e.preventDefault();
         axios.put("http://localhost:3001/UpdatePatient/" + id, {
-            name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies
+            name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies,blood
         })
         .then(result => {
             console.log(result);
@@ -210,6 +212,21 @@ function UpdatePatient() {
                     </RadioGroup>
                 </FormControl>
             </Grid><br/><br/>
+
+            <FormControl component="fieldset">
+                    <FormLabel component="legend">Blood type</FormLabel>
+                    <RadioGroup row aria-label="blood" name="blood" value={blood} onChange={(e) => setBlood(e.target.value)}>
+                        
+                    <FormControlLabel value="A+" control={<Radio />} label="A+" />
+                    <FormControlLabel value="A-" control={<Radio />} label="A-" />
+                    <FormControlLabel value="B+" control={<Radio />} label="B+" />
+                    <FormControlLabel value="B_" control={<Radio />} label="B-" />
+                    <FormControlLabel value="AB+" control={<Radio />} label="AB+" />
+                    <FormControlLabel value="AB-" control={<Radio />} label="AB-" />
+                    <FormControlLabel value="O+" control={<Radio />} label="O+" />
+                    <FormControlLabel value="O-" control={<Radio />} label="O-" />
+                    </RadioGroup>
+                </FormControl><br />
                
                             
                     <TextField label="Diseases" value={diseases} onChange={(e) => setDiseases(e.target.value)} sx={{ width: '100%' }} /><br/><br/>

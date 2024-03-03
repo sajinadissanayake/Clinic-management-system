@@ -42,6 +42,7 @@ function AddPatient() {
     const [snacks, setSnacks] = useState('normaluser');
     const [diseases, setDiseases] = useState('');
     const [allergies, setAllergies] = useState('');
+    const [blood, setBlood] = useState('');
     const [image, setImage] = useState(null);
     const navigate = useNavigate();
 
@@ -73,6 +74,7 @@ function AddPatient() {
         formData.append('snacks', snacks);
         formData.append('diseases', diseases);
         formData.append('allergies', allergies);
+        formData.append('blood', blood);
     
         axios.post("http://localhost:3001/AddPatient", formData)
             .then(response => {
@@ -173,6 +175,20 @@ function AddPatient() {
                         <FormControlLabel value="normaluser" control={<Radio />} label="Normal User" />
                         <FormControlLabel value="nonuser" control={<Radio />} label="Non-User" />
                         <FormControlLabel value="heavyuser" control={<Radio />} label="Heavy User" />
+                    </RadioGroup>
+                </FormControl><br />
+                <FormControl component="fieldset">
+                    <FormLabel component="legend">Blood type</FormLabel>
+                    <RadioGroup row value={blood} onChange={(e) => setBlood(e.target.value)}>
+                        
+                    <FormControlLabel value="A+" control={<Radio />} label="A+" />
+                    <FormControlLabel value="A-" control={<Radio />} label="A-" />
+                    <FormControlLabel value="B+" control={<Radio />} label="B+" />
+                    <FormControlLabel value="B_" control={<Radio />} label="B-" />
+                    <FormControlLabel value="AB+" control={<Radio />} label="AB+" />
+                    <FormControlLabel value="AB-" control={<Radio />} label="AB-" />
+                    <FormControlLabel value="O+" control={<Radio />} label="O+" />
+                    <FormControlLabel value="O-" control={<Radio />} label="O-" />
                     </RadioGroup>
                 </FormControl><br />
                 <TextField label="Diseases (Other special diseases)" value={diseases} onChange={(e) => setDiseases(e.target.value)} fullWidth /><br/><br/>

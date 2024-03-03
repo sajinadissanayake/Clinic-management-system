@@ -23,6 +23,7 @@ import Prescriptionadd from '../pages/Prescriptionadd.jsx'
 import DoctorDash from '../pages/DoctorDash.jsx'
 import Checkout from '../pages/Prescription/Checkout.jsx'
 import PatientSelect from '../pages/Prescription/PatientSelect.jsx'
+import PrescProfile from '../pages/Prescription/PrescProfile.jsx'
 
 
 const router = createBrowserRouter([
@@ -91,7 +92,7 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/addpresc",
+    path: "/addpresc/:id",
     element: <Prescriptionadd />,
   },
   {
@@ -105,6 +106,10 @@ const router = createBrowserRouter([
   {
     path: "/pselect",
     element: <PatientSelect />,
+  },
+  {
+    path: "/prescpatient/:id",
+    element: <PrescProfile />,
   },
   
 

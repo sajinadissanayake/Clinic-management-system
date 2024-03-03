@@ -30,6 +30,7 @@ const patientSchema = new mongoose.Schema({
    snacks:String,
    diseases:String,
    allergies:String,
+   blood:String,
    registrationDate: {
     type: Date,
     default: Date.now  },

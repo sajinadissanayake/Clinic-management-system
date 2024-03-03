@@ -10,6 +10,8 @@ const mexamModel = require('./models/mexam');
 const BSModel = require('./models/bloodsugar');
 const blogModel = require('./models/blog');
 const appoModel = require('./models/appointments');
+const prescModel = require('./models/presciptions');
+
 
 const app = express();
 app.use(cors());
@@ -69,6 +71,7 @@ app.put('/updatePatient/:id', (req, res) => {
         snacks: req.body.snacks,
         diseases:req.body.diseases,
         allergies:req.body.allergies,
+        blood:req.body.blood,
 
 
 
@@ -97,10 +100,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 app.post("/AddPatient", upload.single('image'), (req, res) => {
-    const { name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies } = req.body;
+    const { name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies,blood } = req.body;
     const imagePath = req.file.path; // Path to the uploaded image
 
-    patientModel.create({ name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies, imagePath })
+    patientModel.create({ name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies,blood, imagePath })
         .then(patient => {
             console.log("Patient created:", patient);
             res.json(patient);
@@ -261,6 +264,34 @@ app.post("/Addappo", (req, res) =>{
     .then(users => res.json(users))
     .catch(err => res.json(err))
 })
+
+
+////appointments////////////////////////////////////////////////////////////////////////////////////
+
+
+app.post("/AddPrescription", (req, res) =>{
+    prescModel.create(req.body)
+    .then(records => res.json(records))
+    .catch(err => res.json(err))
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.listen(3001, () => {
     console.log("server is running");

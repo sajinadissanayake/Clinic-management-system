@@ -78,7 +78,7 @@ function PatientSelect() {
                <TableCell>{user.name}</TableCell>
                <TableCell>
 
-               <Button variant='outlined' style={{ marginLeft: '10px' }}><Link style={{ textDecoration: 'none' }} to={`/patient/${user._id}`}>Next</Link></Button>
+               <Button variant='outlined' style={{ marginLeft: '10px' }}><Link style={{ textDecoration: 'none' }} to={`/prescpatient/${user._id}`}>Next</Link></Button>
               
 
                 
