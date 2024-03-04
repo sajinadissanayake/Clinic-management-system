@@ -275,6 +275,12 @@ app.post("/AddPrescription", (req, res) =>{
     .catch(err => res.json(err))
 })
 
+app.get('/getPrescriptions/:nic', (req, res) => {
+    const nic = req.params.nic;
+    prescModel.find({ nic: nic })
+        .then(prescriptions => res.json(prescriptions))
+        .catch(err => res.status(500).json({ error: err.message }));
+});
 
 
 

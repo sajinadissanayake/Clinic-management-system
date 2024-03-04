@@ -9,6 +9,7 @@ import PatientReports from '../../components/PatientReports';
 import BloodSugarChart from '../../components/BloodSugarChart';
 import PRightbar from '../../components/PRightbar';
 import { red } from '@mui/material/colors';
+import PrescLeftbar from '../../components/PrescLeftbar';
 
 function PrescProfile() {
     const [patient, setPatient] = useState(null);
@@ -28,7 +29,7 @@ function PrescProfile() {
         <div>
             <Navbar />
             <Stack direction="row" spacing={2} justifyContent="space-between">
-                <Sidebar />
+            <PrescLeftbar patientNIC={patient.nic} />
                 <PageBody>
                     <Container maxWidth="md" sx={{ marginTop: 4 }}>
                         <Grid container spacing={2}>
