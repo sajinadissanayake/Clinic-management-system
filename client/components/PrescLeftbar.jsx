@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Card, CardContent, Typography, Button, Dialog, AppBar, Toolbar, IconButton, Slide, List, ListItemButton, ListItemText, Divider, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
+import { Box, Card, CardContent, Typography, Button, Dialog, AppBar, Toolbar, IconButton, Slide, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
 import axios from 'axios';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -39,7 +39,7 @@ function PrescLeftbar({ patientNIC }) {
     return (
         <div>
             {lastPrescription && (
-                <Card sx={{ marginBottom: 2 }}>
+                <Card sx={{ marginBottom: 2 , marginTop:3}}>
                     <CardContent>
                         <Typography variant="h6" marginBottom={2}>Last Prescription</Typography>
                         {lastPrescription.prescription.split('\n').map((line, index) => (
@@ -50,7 +50,6 @@ function PrescLeftbar({ patientNIC }) {
                     </CardContent>
                 </Card>
             )}
-
             <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
                 <AppBar sx={{ position: 'relative' }}>
                     <Toolbar>
@@ -61,7 +60,7 @@ function PrescLeftbar({ patientNIC }) {
                             All Prescriptions
                         </Typography>
                         <Button autoFocus color="inherit" onClick={handleClose}>
-                            Save
+                            Close
                         </Button>
                     </Toolbar>
                 </AppBar>

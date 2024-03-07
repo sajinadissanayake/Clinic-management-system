@@ -7,6 +7,7 @@ import { Breadcrumbs, Grid, Stack, Typography, Button } from '@mui/material';
 import PageBody from '../components/PageBody';
 import PRightbar from '../components/PRightbar';
 import { TextareaAutosize } from '@mui/material'; // Import TextareaAutosize
+import PrescLeftbar from '../components/PrescLeftbar';
 function Prescriptionadd() {
   const [patient, setPatient] = useState(null);
   const { id } = useParams();
@@ -50,7 +51,7 @@ function Prescriptionadd() {
       </div>
 
       <Stack direction="row" spacing={2} justifyContent="space-between">
-        <Sidebar />
+      <PrescLeftbar patientNIC={patient.nic} />
         <PageBody>
           <form onSubmit={Submit}>
             <br />

@@ -57,7 +57,7 @@ function PatientReports() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>NIC</TableCell>
+              
               <TableCell>Type</TableCell>
               <TableCell>Patient Report</TableCell>
               <TableCell>Date</TableCell>
@@ -68,7 +68,7 @@ function PatientReports() {
           <TableBody>
             {filteredReports.map(report => (
               <TableRow key={report._id}>
-                <TableCell>{report.nic}</TableCell>
+               
                 <TableCell>{report.type}</TableCell>
                 <TableCell>
                   <IconButton href={`http://localhost:3001/reports/${report.patientReport}`} target="_blank" rel="noopener noreferrer">
