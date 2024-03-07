@@ -90,25 +90,8 @@ function OnePatient() {
                       </CardContent>
                     </Card>
                   </Grid>
-                  <Grid item xs={12}>
-                    <Card sx={{ width: '100%' }}>
-                      <CardContent>
-                        <Typography variant="h6">Blood Sugar Levels</Typography>
-                       
-                        <BloodSugarChart nic={patient.nic} />
-                      </CardContent>
-                    </Card>
-                  </Grid>
-
-                  <Grid item xs={12}>
-                  <Card sx={{ width: '100%' }}>
-                      <CardContent>
-                        <Typography variant="h6">Reports</Typography>
-                        <PatientReports  />
-
-                      </CardContent>
-                    </Card>
-                  </Grid>
+                  
+                 
 
                 </Grid>
               </Grid>

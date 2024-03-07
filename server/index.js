@@ -72,6 +72,7 @@ app.put('/updatePatient/:id', (req, res) => {
         diseases:req.body.diseases,
         allergies:req.body.allergies,
         blood:req.body.blood,
+       
 
 
 
@@ -100,10 +101,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 app.post("/AddPatient", upload.single('image'), (req, res) => {
-    const { name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies,blood } = req.body;
+    const { name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies,blood,sh } = req.body;
     const imagePath = req.file.path; // Path to the uploaded image
 
-    patientModel.create({ name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies,blood, imagePath })
+    patientModel.create({ name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies,blood,sh, imagePath })
         .then(patient => {
             console.log("Patient created:", patient);
             res.json(patient);

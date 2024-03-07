@@ -24,6 +24,8 @@ import DoctorDash from '../pages/DoctorDash.jsx'
 import Checkout from '../pages/Prescription/Checkout.jsx'
 import PatientSelect from '../pages/Prescription/PatientSelect.jsx'
 import PrescProfile from '../pages/Prescription/PrescProfile.jsx'
+import AdminDash from '../pages/AdminDash.jsx'
+import NurseDash from '../pages/NurseDash.jsx'
 
 
 const router = createBrowserRouter([
@@ -111,6 +113,15 @@ const router = createBrowserRouter([
     path: "/prescpatient/:id",
     element: <PrescProfile />,
   },
+  {
+    path: "/AdminDash",
+    element: <AdminDash />,
+  },
+  {
+    path: "/NurseDash",
+    element: <NurseDash/>,
+  },
+  
   
 
 ]);

@@ -43,6 +43,7 @@ function AddPatient() {
     const [diseases, setDiseases] = useState('');
     const [allergies, setAllergies] = useState('');
     const [blood, setBlood] = useState('');
+    const [sh, setSH] = useState('');
     const [image, setImage] = useState(null);
     const navigate = useNavigate();
 
@@ -74,6 +75,7 @@ function AddPatient() {
         formData.append('snacks', snacks);
         formData.append('diseases', diseases);
         formData.append('allergies', allergies);
+        formData.append('sh', sh);
         formData.append('blood', blood);
     
         axios.post("http://localhost:3001/AddPatient", formData)
@@ -93,6 +95,8 @@ function AddPatient() {
             <Stack direction="row" spacing={2} justifyContent="space-between">
             <Sidebar/>
             <PageBody>
+            <div style={{ height: '70vh', overflowY: 'auto' }}>
+              
             <form onSubmit={handleSubmit}>
                 <h2>Add patient</h2>
                 <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} fullWidth/><br/><br/>
@@ -192,14 +196,26 @@ function AddPatient() {
                     </RadioGroup>
                 </FormControl><br />
                 <TextField label="Diseases (Other special diseases)" value={diseases} onChange={(e) => setDiseases(e.target.value)} fullWidth /><br/><br/>
-                <TextField label="Allergies" value={allergies} onChange={(e) => setAllergies(e.target.value)} fullWidth />
+                <TextField label="Allergies" value={allergies} onChange={(e) => setAllergies(e.target.value)} fullWidth /><br/><br/>
+                <TextField
+                    label="Surgical History"
+                    multiline
+                    rows={4} 
+                    onChange={(e) => setSH(e.target.value)}
+                    fullWidth
+                    value={sh}
+                /><br/><br/>
+
+
+
+                <FormLabel component="legend">NIC Image(attach patient NIC image)</FormLabel>
                 <input type="file" onChange={(e) => setImage(e.target.files[0])} />
                 <Grid container justifyContent="center" paddingTop={2}>
                     <Button type="submit" variant="contained" color="primary">
                         Submit
                     </Button>
                 </Grid>
-            </form>
+            </form></div>
 
             </PageBody>
             <Rightbar/>
