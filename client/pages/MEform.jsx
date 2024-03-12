@@ -28,7 +28,7 @@ function MEform() {
         axios.post("http://localhost:3001/AddMexam", { nic, age, weight, bmi, ibw, wc, bpressure, oexam, specialNotes})
             .then(result => {
                 console.log(result);
-                navigate('/');
+                navigate(`/medicals/${nic}`); 
             })
             .catch(err => console.log(err));
     };
