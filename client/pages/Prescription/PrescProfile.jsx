@@ -89,7 +89,7 @@ function PrescProfile() {
                                 <Card sx={{ width: '100%' }}>
                                     <CardContent>
                                         <Typography variant="h6">Reports</Typography>
-                                        <PatientReports  />
+                                        <PatientReports nic={patient.nic}  />
 
                                     </CardContent>
                                 </Card>

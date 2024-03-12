@@ -26,6 +26,12 @@ import PatientSelect from '../pages/Prescription/PatientSelect.jsx'
 import PrescProfile from '../pages/Prescription/PrescProfile.jsx'
 import AdminDash from '../pages/AdminDash.jsx'
 import NurseDash from '../pages/NurseDash.jsx'
+import Mselect from '../pages/NursePages/Mselect.jsx'
+import Medicals from '../pages/NursePages/Medicals.jsx'
+import BsSelect from '../pages/NursePages/BsSelect.jsx'
+import BsTable from '../pages/NursePages/BsTable.jsx'
+
+
 
 
 const router = createBrowserRouter([
@@ -120,6 +126,22 @@ const router = createBrowserRouter([
   {
     path: "/NurseDash",
     element: <NurseDash/>,
+  },
+  {
+    path: "/mselect",
+    element: <Mselect/>,
+  },
+  {
+    path: "/medicals/:nic", 
+    element: <Medicals />, 
+  },
+  {
+    path: "/BsSelect", 
+    element: <BsSelect />, 
+  },
+  {
+    path: "/bstable/:nic", 
+    element: <BsTable />, 
   },
   
   

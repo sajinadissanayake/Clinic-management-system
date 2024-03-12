@@ -12,6 +12,12 @@ import Announcements from '../components/Announcements';
 import prescimg from './images/p.jpg';
 import ann from './images/a.jpg';
 import { Link } from 'react-router-dom';
+import blog  from './images/blogp.png'
+import patient from './images/patient.jpg'
+import medi from './images/medic.jpg'
+import blood from './images/bloods.jpeg'
+import rep from './images/report.jpg'
+import ap from './images/appo.jpg'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -38,7 +44,7 @@ function NurseDash() {
                   <CardMedia
                     component="img"
                     height="140"
-                    image={prescimg}
+                    image={blog}
                     alt="prescription"
                   />
                   <CardContent>
@@ -52,19 +58,62 @@ function NurseDash() {
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <Stack direction="column" spacing={2}>
-            <Link to="/pselect" style={{ textDecoration: 'none' }}>
+            <Link to="/patientslist" style={{ textDecoration: 'none' }}>
               <Card sx={{ maxWidth: 345 }}>
                 <CardActionArea>
                   {/* Add appropriate image and alt text */}
                   <CardMedia
                     component="img"
                     height="140"
-                    image={ann}
+                    image={patient}
                     alt="green iguana"
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                       Patients
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card></Link>
+            </Stack>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Stack direction="column" spacing={2}>
+            <Link to="/Mselect" style={{ textDecoration: 'none' }}>
+              <Card sx={{ maxWidth: 345 }}>
+                <CardActionArea>
+                  {/* Add appropriate image and alt text */}
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={medi}
+                    alt="contemplative reptile"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                         Medical Examinations
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card></Link>
+            </Stack>
+          </Grid>
+          {/* Repeat the structure for the next 3 cards */}
+          <Grid item xs={12} sm={6} md={4}>
+            <Stack direction="column" spacing={2}>
+            <Link to="/bsSelect" style={{ textDecoration: 'none' }}>
+              <Card sx={{ maxWidth: 345 }}>
+                <CardActionArea>
+                  {/* Add appropriate image and alt text */}
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={blood}
+                    alt="contemplative reptile"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      Blood Sugar
                     </Typography>
                   </CardContent>
                 </CardActionArea>
@@ -79,33 +128,12 @@ function NurseDash() {
                   <CardMedia
                     component="img"
                     height="140"
-                    image={prescimg}
+                    image={rep}
                     alt="contemplative reptile"
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                         Doctors
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Stack>
-          </Grid>
-          {/* Repeat the structure for the next 3 cards */}
-          <Grid item xs={12} sm={6} md={4}>
-            <Stack direction="column" spacing={2}>
-              <Card sx={{ maxWidth: 345 }}>
-                <CardActionArea>
-                  {/* Add appropriate image and alt text */}
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={prescimg}
-                    alt="contemplative reptile"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      Nurse
+                    Reports
                     </Typography>
                   </CardContent>
                 </CardActionArea>
@@ -120,32 +148,12 @@ function NurseDash() {
                   <CardMedia
                     component="img"
                     height="140"
-                    image={prescimg}
+                    image={ap}
                     alt="contemplative reptile"
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                     Admins
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Stack>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Stack direction="column" spacing={2}>
-              <Card sx={{ maxWidth: 345 }}>
-                <CardActionArea>
-                  {/* Add appropriate image and alt text */}
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={prescimg}
-                    alt="contemplative reptile"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      Card 6
+                      Check Appointments
                     </Typography>
                   </CardContent>
                 </CardActionArea>

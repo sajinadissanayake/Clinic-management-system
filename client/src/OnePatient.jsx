@@ -23,6 +23,15 @@ function OnePatient() {
   if (!patient) {
     return <div>Loading...</div>;
   }
+  
+  let surgicalHistoryItems = null;
+  if (patient.sh) {
+    surgicalHistoryItems = patient.sh.split('\n').map((item, index) => (
+      <Typography key={index} variant="body1">
+        {item}
+      </Typography>
+    ));
+  }
 
   
 
@@ -32,6 +41,7 @@ function OnePatient() {
       <Stack direction="row" spacing={2} justifyContent="space-between">
         <Sidebar />
         <PageBody>
+        <div style={{ maxHeight: '700px', overflowY: 'scroll' }}> 
           <Container maxWidth="md" sx={{ marginTop: 4 }}>
             <Grid container spacing={2}>
               <Typography variant="h5">{patient.name}</Typography>
@@ -54,20 +64,14 @@ function OnePatient() {
                         <Typography variant="body1"><strong>Name:</strong> <br/>{patient.name}</Typography>
                         <Typography variant="body1"><strong>NIC:</strong>  <br/>{patient.nic}</Typography>
                         <Typography variant="body1"><strong>Email:</strong> <br/> {patient.email}</Typography>
-                        <Typography variant="body1"><strong>Age:</strong> <br/> {patient.age}</Typography>
+                        <Typography variant="body1"><strong>Age at Registration:</strong> <br/> {patient.age}</Typography>
                         <Typography variant="body1"><strong>Date of Birth:</strong> <br/>{new Date(patient.dob).toLocaleDateString()}</Typography>
 
                         <Typography variant="body1"><strong>Gender:</strong> <br/> {patient.gender}</Typography>
                         <Typography variant="body1"><strong>Address:</strong> <br/> {patient.address}</Typography>
                         <Typography variant="body1"><strong>Marital Status:</strong>  <br/>{patient.maritial}</Typography>
                         <Typography variant="body1"><strong>Phone Number:</strong> <br/> {patient.pnumber}</Typography>
-                        <Typography variant="body1"><strong>MOH:</strong> <br/> {patient.moh}</Typography>
-                        <Typography variant="body1"><strong>PHM:</strong> <br/> {patient.phm}</Typography>
-                        <Typography variant="body1"><strong>PHI:</strong>  <br/>{patient.phi}</Typography>
-                        <Typography variant="body1"><strong>GND:</strong>  <br/>{patient.gnd}</Typography>
-                        <Typography variant="body1"><strong>DSD:</strong>  <br/>{patient.dsd}</Typography>
-                        <Typography variant="body1"><strong>Neighbour:</strong>  <br/>{patient.neighbour}</Typography>
-                        <Typography variant="body1"><strong>Education:</strong>  <br/>{patient.education}</Typography>
+                       
                       </CardContent>
                     </Card>
                   </Grid>
@@ -90,6 +94,45 @@ function OnePatient() {
                       </CardContent>
                     </Card>
                   </Grid>
+                  <Grid item xs={12} sm={6}>
+                  <Card sx={{ width: '100%' }}>
+                  <CardContent>
+                    <Typography variant="body1"><strong>MOH Area:</strong>  {patient.moh}</Typography>
+                    <Typography variant="body1"><strong>PHM Area:</strong>{patient.phm}</Typography>
+                    <Typography variant="body1"><strong>PHI Area:</strong>  {patient.phi}</Typography>
+                    <Typography variant="body1"><strong>GN Division </strong>  {patient.gnd}</Typography>
+                 </CardContent></Card>
+
+                  </Grid>
+
+
+                  <Grid item xs={12} sm={6}>
+                  <Card sx={{ width: '100%' }}>
+                  <CardContent>
+                  <Typography variant="body1"><strong>DS Division:</strong>  {patient.dsd}</Typography>
+                    <Typography variant="body1"><strong>Neighbour:</strong>  <br/>{patient.neighbour}</Typography>
+                    <Typography variant="body1"><strong>Education:</strong>  {patient.education}</Typography>
+                    
+                    
+                    
+                    
+                    </CardContent></Card></Grid>
+                    <Grid item xs={12} sm={12}>
+
+                  <Card sx={{ width: '100%' }}>
+                  <CardContent>
+                  <CardContent>
+                  <Typography variant="body1"><strong>Surgical History</strong></Typography>
+                        {surgicalHistoryItems}
+                      </CardContent>
+                    </CardContent></Card></Grid>
+
+
+                    
+
+                    
+                  
+                 
                   
                  
 
@@ -98,7 +141,7 @@ function OnePatient() {
             </Grid>
 
           </Container>
-
+        </div>
         </PageBody>
         <PRightbar patientNIC={patient.nic} />
 

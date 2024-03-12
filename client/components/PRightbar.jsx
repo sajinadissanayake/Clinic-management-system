@@ -128,9 +128,7 @@ function PRightbar({ patientNIC }) {
                 Random Blood Sugar: {bloodSugarLevels.random.rbs}
               </Typography>
             )}
-             <Button size="small" color="primary" onClick={handleClickOpen1}>
-                    More
-                  </Button>
+             
           </CardContent>
         </Card></Box>
         

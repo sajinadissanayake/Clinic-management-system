@@ -179,12 +179,6 @@ app.delete('/deleteReport/:id', (req, res) => {
         .catch(err => res.json(err));
 });
 // Retrieve reports by patient NIC
-app.get('/getReports/:nic', (req, res) => {
-    const nic = req.params.nic;
-    reportsModel.find({ nic: nic })
-        .then(reports => res.json(reports))
-        .catch(err => res.status(500).json({ error: err.message }));
-});
 
 
 
@@ -197,7 +191,13 @@ app.post("/AddMexam", (req, res) =>{
     .catch(err => res.json(err))
 })
 
-
+// Add a route to get medical examination records by patient NIC
+app.get('/getMedicalExaminations/:nic', (req, res) => {
+    const nic = req.params.nic;
+    mexamModel.find({ nic: nic })
+        .then(records => res.json(records))
+        .catch(err => res.status(500).json({ error: err.message }));
+});
 
 /////////////////////////////////////////////////////////////////////blood sugar/////////////////////////////////
 
@@ -217,13 +217,8 @@ app.get('/getBloodSugarData/:nic', (req, res) => {
 });
 
 
+
 // Add a route to get medical examination records by patient NIC
-app.get('/getMedicalExaminations/:nic', (req, res) => {
-    const nic = req.params.nic;
-    mexamModel.find({ nic: nic })
-        .then(records => res.json(records))
-        .catch(err => res.status(500).json({ error: err.message }));
-});
 app.get('/getmedicals', (req, res) => {
     mexamModel.find({})
       .then(reports => res.json(reports))
