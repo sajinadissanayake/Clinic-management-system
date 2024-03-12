@@ -8,6 +8,7 @@ import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
 import PageBody from '../../components/PageBody';
 import Rightbar from '../../components/Rightbar';
+import NurseLeftbar from './NurseLeftbar';
 
 
 function Mselect() {
@@ -34,7 +35,7 @@ function Mselect() {
     <div>
       <Navbar/>
       <Stack direction="row" spacing={2} justifyContent="space-between">
-        <Sidebar/>
+        <NurseLeftbar/>
         <PageBody>
           <div>
             <Stack direction="row" alignItems="center" spacing={1} justifyContent="space-between">
@@ -46,6 +47,7 @@ function Mselect() {
               />
               
             </Stack><br/>
+            <div style={{ height: '70vh', overflowY: 'auto' }}>
             <div>
               {filteredUsers.map((user) => (
                 <div key={user._id} style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
@@ -70,7 +72,7 @@ function Mselect() {
                   </div>
                 </div>
               ))}
-            </div>
+            </div></div>
           </div>
         </PageBody>
         <Rightbar/>

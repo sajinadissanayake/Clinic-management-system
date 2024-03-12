@@ -8,6 +8,8 @@ import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import PageBody from '../components/PageBody';
 import Rightbar from '../components/Rightbar';
+import NurseDash from '../pages/NurseDash';
+import NurseLeftbar from '../pages/NursePages/NurseLeftbar';
 
 function PatientList() {
   const [users, setUsers] = useState([]);
@@ -40,7 +42,7 @@ function PatientList() {
     <div>
       <Navbar/>
       <Stack direction="row" spacing={2} justifyContent="space-between">
-        <Sidebar/>
+        <NurseLeftbar/>
         <PageBody>
           <div>
             <Stack direction="row" alignItems="center" spacing={1} justifyContent="space-between">
@@ -56,6 +58,7 @@ function PatientList() {
                 </IconButton>
               </Link>
             </Stack><br/>
+            <div style={{ height: '70vh', overflowY: 'auto' }}>
             <div>
               {filteredUsers.map((user) => (
                 <div key={user._id} style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
@@ -75,9 +78,7 @@ function PatientList() {
                       <Button variant='outlined' style={{ marginRight: '10px' }}>
                         <Link style={{ textDecoration: 'none' }} to={`/patient/${user._id}`}>View</Link>
                       </Button>
-                      <Button variant='outlined' style={{ marginRight: '10px' }}>
-                        <Link style={{ textDecoration: 'none' }} to={`/updatepatient/${user._id}`}>Update</Link>
-                      </Button>
+                      
                       <Button variant='outlined' color='error' onClick={() => handleDelete(user._id)}>
                         Delete
                       </Button>
@@ -85,7 +86,7 @@ function PatientList() {
                   </div>
                 </div>
               ))}
-            </div>
+            </div></div>
           </div>
         </PageBody>
         <Rightbar/>

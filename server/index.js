@@ -198,12 +198,29 @@ app.get('/getMedicalExaminations/:nic', (req, res) => {
         .then(records => res.json(records))
         .catch(err => res.status(500).json({ error: err.message }));
 });
-app.get('/getMedicalExaminations/:id', (req, res) => {
-    const nic = req.params.nic;
-    mexamModel.find({ id: id })
-        .then(records => res.json(records))
+
+app.get('/getMedicalExamination/:id', (req, res) => {
+    const id = req.params.id;
+    mexamModel.findById(id) // Use findById to search by _id
+        .then(record => res.json(record))
         .catch(err => res.status(500).json({ error: err.message }));
 });
+// Update a medical examination record
+app.put('/updateMedicalExamination/:id', (req, res) => {
+    const id = req.params.id;
+    const updatedData = req.body; // Data to update
+    
+    // Find the record by ID and update it
+    mexamModel.findByIdAndUpdate(id, updatedData, { new: true })
+        .then(updatedRecord => {
+            if (!updatedRecord) {
+                return res.status(404).json({ error: 'Medical examination record not found' });
+            }
+            res.json(updatedRecord); // Send back the updated record
+        })
+        .catch(err => res.status(500).json({ error: err.message }));
+});
+
 /////////////////////////////////////////////////////////////////////blood sugar/////////////////////////////////
 
 

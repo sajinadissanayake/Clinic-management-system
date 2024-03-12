@@ -30,6 +30,7 @@ import Mselect from '../pages/NursePages/Mselect.jsx'
 import Medicals from '../pages/NursePages/Medicals.jsx'
 import BsSelect from '../pages/NursePages/BsSelect.jsx'
 import BsTable from '../pages/NursePages/BsTable.jsx'
+import MedicalUpdate from '../pages/NursePages/MedicalUpdate.jsx'
 
 
 
@@ -143,7 +144,10 @@ const router = createBrowserRouter([
     path: "/bstable/:nic", 
     element: <BsTable />, 
   },
-  
+  {
+    path: "/medicalupdate/:id", 
+    element: <MedicalUpdate />, 
+  },
   
 
 ]);

@@ -41,7 +41,7 @@ function MEform() {
             <PageBody>
             <form onSubmit={handleSubmit}>
                 <h2>Medical Examination</h2>
-                
+                <div style={{ height: '70vh', overflowY: 'auto' }}>
                 <div>
                     <TextField
                         label="Age"
@@ -121,7 +121,7 @@ function MEform() {
                 <Button type="submit" variant="contained" color="primary" >
                     Submit
                 </Button>
-
+                </div>
             </form>
 
             

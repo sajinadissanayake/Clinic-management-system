@@ -81,6 +81,7 @@ function AddPatient() {
         axios.post("http://localhost:3001/AddPatient", formData)
             .then(response => {
                 console.log(response);
+                window.alert("Patient added successfully");
                 navigate('/');
             })
             .catch(error => console.log(error));
@@ -95,7 +96,7 @@ function AddPatient() {
             <Stack direction="row" spacing={2} justifyContent="space-between">
             <Sidebar/>
             <PageBody>
-            <div style={{ height: '70vh', overflowY: 'auto' }}>
+            <div style={{ height: '80vh', overflowY: 'auto' }}>
               
             <form onSubmit={handleSubmit}>
                 <h2>Add patient</h2>
@@ -216,6 +217,7 @@ function AddPatient() {
                     </Button>
                 </Grid>
             </form></div>
+            
 
             </PageBody>
             <Rightbar/>

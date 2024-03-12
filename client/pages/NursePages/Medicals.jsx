@@ -23,6 +23,7 @@ import Navbar from '../../components/Navbar';
 import Rightbar from '../../components/Rightbar';
 import Sidebar from '../../components/Sidebar';
 import PageBody from '../../components/PageBody';
+import NurseLeftbar from './NurseLeftbar';
 
 function Medicals() {
   const { nic } = useParams();
@@ -53,7 +54,7 @@ function Medicals() {
     <div>
       <Navbar />
       <Stack direction="row" spacing={2} justifyContent="space-between">
-        <Sidebar />
+        <NurseLeftbar />
         <PageBody>
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -84,6 +85,7 @@ function Medicals() {
                 </Fab></Link>
               </Stack>
             </Grid>
+            
             {filteredExaminations.map((exam, index) => (
               <Grid item xs={12} sm={gridItemSize} md={gridItemSize} key={index}>
                 <Card style={{ backgroundColor: '#f3f3f3', marginBottom: '20px' }}>
@@ -132,7 +134,7 @@ function Medicals() {
                           <TableRow hover>
                             <TableCell>
                               <Button variant='outlined' style={{ marginRight: '10px' }}>
-                                <Link style={{ textDecoration: 'none' }} to={`/updatepatient/${exam._id}`}>Update</Link>
+                                <Link style={{ textDecoration: 'none' }} to={`/medicalupdat/${exam._id}`}>Update</Link>
                               </Button>
                             </TableCell>
                             <TableCell>
@@ -150,7 +152,7 @@ function Medicals() {
             ))}
           </Grid>
         </PageBody>
-        <Rightbar />
+        
       </Stack>
     </div>
   );

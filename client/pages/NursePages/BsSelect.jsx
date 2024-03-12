@@ -8,6 +8,7 @@ import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
 import PageBody from '../../components/PageBody';
 import Rightbar from '../../components/Rightbar';
+import NurseLeftbar from './NurseLeftbar';
 
 
 function BsSelect() {
@@ -33,7 +34,7 @@ function BsSelect() {
     <div>
           <Navbar/>
       <Stack direction="row" spacing={2} justifyContent="space-between">
-        <Sidebar/>
+        <NurseLeftbar/>
         <PageBody>
           <div>
             <Stack direction="row" alignItems="center" spacing={1} justifyContent="space-between">
