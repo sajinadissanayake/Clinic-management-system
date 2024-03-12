@@ -198,7 +198,12 @@ app.get('/getMedicalExaminations/:nic', (req, res) => {
         .then(records => res.json(records))
         .catch(err => res.status(500).json({ error: err.message }));
 });
-
+app.get('/getMedicalExaminations/:id', (req, res) => {
+    const nic = req.params.nic;
+    mexamModel.find({ id: id })
+        .then(records => res.json(records))
+        .catch(err => res.status(500).json({ error: err.message }));
+});
 /////////////////////////////////////////////////////////////////////blood sugar/////////////////////////////////
 
 

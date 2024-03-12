@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Rightbar from '../components/Rightbar';
@@ -10,7 +11,8 @@ import Sidebar from '../components/Sidebar';
 import PageBody from '../components/PageBody';
 
 function MEform() {
-    const [nic, setNic] = useState('');
+   
+    const { nic } = useParams();
     const [age, setAge] = useState('');
     const [weight, setWeight] = useState('');
     const [bmi, setBmi] = useState('');
@@ -30,7 +32,6 @@ function MEform() {
             })
             .catch(err => console.log(err));
     };
-
     return (
         <div>
 
@@ -40,16 +41,7 @@ function MEform() {
             <PageBody>
             <form onSubmit={handleSubmit}>
                 <h2>Medical Examination</h2>
-                <div>
-                    <TextField
-                        label="NIC"
-                        variant="outlined"
-                        value={nic}
-                        onChange={(e) => setNic(e.target.value)}
-                        fullWidth
-                        
-                    />
-                </div><br />
+                
                 <div>
                     <TextField
                         label="Age"

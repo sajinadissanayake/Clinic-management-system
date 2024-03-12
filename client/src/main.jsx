@@ -68,7 +68,7 @@ const router = createBrowserRouter([
     element: <ReportsUpdate />,
   },
   {
-    path: "/MEform",
+    path: "/MEform/:nic",
     element: <MEform />,
   },
   {
