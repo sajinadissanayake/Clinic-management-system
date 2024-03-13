@@ -188,7 +188,10 @@ function PrescProfile() {
                     <Dialog open={openReportsDialog} onClose={handleReportsDialogClose}>
                         <DialogTitle>Reports</DialogTitle>
                         <DialogContent>
-                       
+                        <Grid item xs={12}>
+                                {/* Displaying the Gauge Chart */}
+                                <GradientGaugeChart />
+                            </Grid>
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleReportsDialogClose}>Close</Button>
