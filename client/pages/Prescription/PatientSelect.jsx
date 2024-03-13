@@ -20,14 +20,7 @@ function PatientSelect() {
         .catch(err => console.log(err));
     }, []);
   
-    const handleDelete = (id) => {
-      axios.delete(`http://localhost:3001/deleteUser/${id}`)
-        .then(res => {
-          console.log(res);
-          window.location.reload();
-        })
-        .catch(err => console.log(err));
-    };
+    
     const handleSearch = (e) => {
         setSearchTerm(e.target.value);
       };
@@ -43,32 +36,26 @@ function PatientSelect() {
       <Navbar />
 
       {/* Add margin or padding to create space */}
-      <div style={{ margin: '20px 0', width: '100%' }}>
-        <Breadcrumbs aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/">
-            Dashboard
-          </Link>
-          <Typography color="text.primary">select patient</Typography>
-        </Breadcrumbs>
-      </div>
-
+      
       <Stack direction="row" spacing={2} justifyContent="space-between">
         <Sidebar/>
-       <PageBody>
 
+       <PageBody>
+       
               
        <TextField
-         label="Search"
+         label="Search by name or NIC"
          variant="outlined"
          value={searchTerm}
          onChange={handleSearch}
          
        />
+       <div style={{ height: '60vh', overflowY: 'auto' }}>
        <Table>
          <TableHead>
            <TableRow>
+             <TableCell>NIC</TableCell>
              <TableCell>Name</TableCell>
-             <TableCell>Action</TableCell>
            </TableRow>
          </TableHead>
          <TableBody>
@@ -89,7 +76,7 @@ function PatientSelect() {
            ))}
          </TableBody>
        </Table>
-          
+          </div>
        </PageBody>
         <Announcements />
       </Stack>

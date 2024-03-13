@@ -55,7 +55,7 @@ function Medicals() {
       <Navbar />
       <Stack direction="row" spacing={2} justifyContent="space-between">
         <NurseLeftbar />
-        <PageBody>
+        
           <Grid container spacing={2}>
             <Grid item xs={12}>
               {/* Dropdown to filter by year */}
@@ -151,7 +151,7 @@ function Medicals() {
               </Grid>
             ))}
           </Grid>
-        </PageBody>
+        
         
       </Stack>
     </div>
