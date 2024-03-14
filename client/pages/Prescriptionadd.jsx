@@ -38,29 +38,21 @@ function Prescriptionadd() {
   return (
     <div>
       <Navbar />
-      <div style={{ margin: '20px 0', width: '100%' }}>
-        <Breadcrumbs aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/">
-            Dashboard
-          </Link>
-          <Link underline="hover" color="inherit" href="/">
-            Patient profile
-          </Link>
-          <Typography color="text.primary">create prescription</Typography>
-        </Breadcrumbs>
-      </div>
+      
 
       <Stack direction="row" spacing={2} justifyContent="space-between">
       <PrescLeftbar patientNIC={patient.nic} />
         <PageBody>
+          
           <form onSubmit={Submit}>
             <br />
             <Typography variant="h5">Prescription</Typography><br />
-            <Typography variant="body1">patient name: {patient.name}</Typography><br />
+            <Typography variant="body1">patient Name: {patient.name}</Typography><br />
+            <Typography variant="body1">Age: {patient.age}</Typography><br />
 
             <TextareaAutosize
-              minRows={5}
-              placeholder="prescription"
+              minRows={7}
+              placeholder="Write prescription Here"
               value={prescription}
               onChange={(e) => setPrescription(e.target.value)}
               style={{ width: '100%', padding: '10px' }}
@@ -68,7 +60,7 @@ function Prescriptionadd() {
 
             <Grid container justifyContent="center" paddingTop={2}>
               <Button type="submit" variant="contained" color="primary">
-                Submit
+                Create
               </Button>
             </Grid>
           </form>

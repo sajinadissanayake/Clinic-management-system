@@ -3,6 +3,7 @@ import { Box, Button, Card, CardActions, CardContent, Typography } from '@mui/ma
 import axios from 'axios';
 import MEDialog from './Dialogs/MEDialog';
 import BSchartdialog from './Dialogs/BSchartdialog';
+import GradientGaugeChart from './bloodmeter/GradientGaugeChart';
 
 function PRightbar({ patientNIC }) {
   const [latestMedicalExamination, setLatestMedicalExamination] = useState(null);
@@ -20,19 +21,19 @@ function PRightbar({ patientNIC }) {
         setLatestMedicalExamination(sortedExams[0]);
       })
       .catch(error => console.error('Error fetching medical examinations:', error));
-
+  
     // Fetch blood sugar levels for the patient NIC
     axios.get(`http://localhost:3001/getBloodSugarData/${patientNIC}`)
       .then(response => {
-        // Filter blood sugar levels into fasting and random
-        const fastingRecord = response.data.find(record => record.type === 'fasting');
-        const randomRecord = response.data.find(record => record.type === 'random');
+        // Set the last fasting and random blood sugar records
+        const lastFastingRecord = response.data.filter(record => record.type === 'fasting').pop();
+        const lastRandomRecord = response.data.filter(record => record.type === 'random').pop();
         // Set the blood sugar levels
-        setBloodSugarLevels({ fasting: fastingRecord, random: randomRecord });
+        setBloodSugarLevels({ fasting: lastFastingRecord, random: lastRandomRecord });
       })
       .catch(error => console.error('Error fetching blood sugar levels:', error));
   }, [patientNIC]);
-
+  
   const handleClickOpen = () => {
     setOpenDialog(true);
   };
@@ -106,27 +107,37 @@ function PRightbar({ patientNIC }) {
         
       </Box>
       {/* Display blood sugar levels */}
-      <Box bgcolor="" borderRadius={4} marginTop={1} flex={2} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
+      <Box bgcolor="" borderRadius={4}  flex={2} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
       <Card sx={{ maxWidth: 345 }}  p={3}>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               Blood Sugar Levels 
             </Typography>
             <Typography gutterBottom variant="h6" component="div">
-             Latest Record
+             Latest Records
             </Typography>
             {/* Display fasting blood sugar record */}
             {bloodSugarLevels.fasting && (
-              <Typography variant="body2" color="text.secondary">
-                Fasting Blood Sugar: {bloodSugarLevels.fasting.rbs}
-              </Typography>
+              <div><Typography variant="body2" color="text.secondary">
+              Fasting Blood Sugar: {bloodSugarLevels.fasting.rbs}
+            </Typography>
+            <GradientGaugeChart value={bloodSugarLevels.fasting.rbs}/>
+            </div>
+              
+              
+
+
             )}
             
             {/* Display random blood sugar record */}
             {bloodSugarLevels.random && (
-              <Typography variant="body2" color="text.secondary">
-                Random Blood Sugar: {bloodSugarLevels.random.rbs}
-              </Typography>
+               <div>
+               <Typography variant="body2" color="text.secondary">
+                 Random Blood Sugar: {bloodSugarLevels.random.rbs}
+               </Typography>
+               <GradientGaugeChart value={bloodSugarLevels.random.rbs}/>
+
+             </div>
             )}
              
           </CardContent>

@@ -50,7 +50,7 @@ function PatientSelect() {
          onChange={handleSearch}
          
        />
-       <div style={{ height: '60vh', overflowY: 'auto' }}>
+       <div style={{ height: '70vh', overflowY: 'auto' }}>
        <Table>
          <TableHead>
            <TableRow>

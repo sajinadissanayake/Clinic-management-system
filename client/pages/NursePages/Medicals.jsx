@@ -134,7 +134,7 @@ function Medicals() {
                           <TableRow hover>
                             <TableCell>
                               <Button variant='outlined' style={{ marginRight: '10px' }}>
-                                <Link style={{ textDecoration: 'none' }} to={`/medicalupdat/${exam._id}`}>Update</Link>
+                                <Link style={{ textDecoration: 'none' }} to={`/medicalupdate/${exam._id}`}>Update</Link>
                               </Button>
                             </TableCell>
                             <TableCell>

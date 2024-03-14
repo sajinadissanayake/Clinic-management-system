@@ -17,6 +17,7 @@ import {
     CardActionArea,
     
 } from '@mui/material';
+import { TableContainer, Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@mui/material';
 import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
 import PageBody from '../../components/PageBody';
@@ -40,9 +41,13 @@ function PrescProfile() {
     const { id } = useParams();
 
     useEffect(() => {
+        console.log();
         axios.get(`http://localhost:3001/getPatient/${id}`)
+        
             .then(response => setPatient(response.data))
             .catch(error => console.error('Error fetching patient:', error));
+            console.log();
+
     }, [id]);
 
     const handlePersonalDialogOpen = () => {
@@ -101,7 +106,7 @@ function PrescProfile() {
                             <CardActionArea sx={{ display: 'flex', justifyContent: 'center' }}>
                                 <Card onClick={handlePersonalDialogOpen} sx={{ width: '100%', cursor: 'pointer' }}>
                                 <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                    <Typography variant="h6">Personal Details</Typography>
+                                    <Typography variant="body1">Personal Details</Typography>
                                     <PersonIcon color='primary' sx={{ fontSize: 100 }} />
                                 </CardContent>
 
@@ -110,7 +115,7 @@ function PrescProfile() {
                             <Grid item xs={6} md={3}>
                             <CardActionArea > <Card onClick={handleHealthDialogOpen} sx={{ width: '100%', cursor: 'pointer' }}>
                             <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                        <Typography variant="h6">Health Details</Typography>
+                                        <Typography variant="body1">Health Details</Typography>
                                         <LocalHospitalIcon color='primary' sx={{ fontSize: 100 }} />
                                     </CardContent>
                                 </Card></CardActionArea>
@@ -119,7 +124,7 @@ function PrescProfile() {
                             <CardActionArea>     <Card sx={{ width: '100%' }}>
                             <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                         
-                                    <Typography variant="h6">Surgical History</Typography>
+                                    <Typography variant="body1">Surgical History</Typography>
                                        <MedicalServicesIcon color='primary' sx={{ fontSize: 100 }}/>
                                     </CardContent>
                                 </Card></CardActionArea>
@@ -128,7 +133,7 @@ function PrescProfile() {
                                 <CardActionArea>
                                     <Card onClick={handleReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer' }}>
                                         <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                            <Typography variant="h6">Reports</Typography>
+                                            <Typography variant="body1">Reports</Typography>
                                             <TextSnippetIcon color='primary' sx={{ fontSize: 100 }}/>
                                         </CardContent>
                                     </Card>
@@ -150,16 +155,54 @@ function PrescProfile() {
                                 <DialogContent>
                                 <CardContent>
                                
-                                <Typography variant="body1"><strong>Name:</strong> <br/>{patient.name}</Typography>
-                                <Typography variant="body1"><strong>NIC:</strong>  <br/>{patient.nic}</Typography>
-                                <Typography variant="body1"><strong>Email:</strong> <br/> {patient.email}</Typography>
-                                <Typography variant="body1"><strong>Age at Registration:</strong> <br/> {patient.age}</Typography>
-                                <Typography variant="body1"><strong>Date of Birth:</strong> <br/>{new Date(patient.dob).toLocaleDateString()}</Typography>
+                                <TableContainer component={Paper}>
+                                            <Table aria-label="patient details table" size="small">
+                                                <TableHead>
+                                                <TableRow>
+                                                    <TableCell colSpan={2} align="center"><Typography variant="h6">Patient Details</Typography></TableCell>
+                                                </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+                                                <TableRow hover>
+                                                    <TableCell><strong>Name:</strong></TableCell>
+                                                    <TableCell>{patient.name}</TableCell>
+                                                </TableRow>
+                                                <TableRow hover>
+                                                    <TableCell><strong>NIC:</strong></TableCell>
+                                                    <TableCell>{patient.nic}</TableCell>
+                                                </TableRow>
+                                                <TableRow hover>
+                                                    <TableCell><strong>Email:</strong></TableCell>
+                                                    <TableCell>{patient.email}</TableCell>
+                                                </TableRow>
+                                                <TableRow hover>
+                                                    <TableCell><strong>Age at Registration:</strong></TableCell>
+                                                    <TableCell>{patient.age}</TableCell>
+                                                </TableRow>
+                                                <TableRow hover>
+                                                    <TableCell><strong>Date of Birth:</strong></TableCell>
+                                                    <TableCell>{new Date(patient.dob).toLocaleDateString()}</TableCell>
+                                                </TableRow>
+                                                <TableRow hover>
+                                                    <TableCell><strong>Gender:</strong></TableCell>
+                                                    <TableCell>{patient.gender}</TableCell>
+                                                </TableRow>
+                                                <TableRow hover>
+                                                    <TableCell><strong>Address:</strong></TableCell>
+                                                    <TableCell>{patient.address}</TableCell>
+                                                </TableRow>
+                                                <TableRow hover>
+                                                    <TableCell><strong>Marital Status:</strong></TableCell>
+                                                    <TableCell>{patient.maritial}</TableCell>
+                                                </TableRow>
+                                                <TableRow hover>
+                                                    <TableCell><strong>Phone Number:</strong></TableCell>
+                                                    <TableCell>{patient.pnumber}</TableCell>
+                                                </TableRow>
+                                                </TableBody>
+                                            </Table>
+                                            </TableContainer>
 
-                                <Typography variant="body1"><strong>Gender:</strong> <br/> {patient.gender}</Typography>
-                                <Typography variant="body1"><strong>Address:</strong> <br/> {patient.address}</Typography>
-                                <Typography variant="body1"><strong>Marital Status:</strong>  <br/>{patient.maritial}</Typography>
-                                <Typography variant="body1"><strong>Phone Number:</strong> <br/> {patient.pnumber}</Typography>
                                     </CardContent>
                                 </DialogContent>
                                 <DialogActions>
@@ -171,14 +214,50 @@ function PrescProfile() {
                             <Dialog open={openHealthDialog} onClose={handleHealthDialogClose}>
                                 <DialogTitle>Health Details</DialogTitle>
                                 <DialogContent>
-                                <Typography variant="body1"><strong>Physical Condition:</strong> {patient.physical}</Typography>
-                                        <Typography variant="body1"><strong>Tobacco Use:</strong> {patient.tobacco}</Typography>
-                                        <Typography variant="body1"><strong>Tobacco Chewing:</strong> {patient.tobaccochew}</Typography>
-                                        <Typography variant="body1"><strong>Alcohol Consumption:</strong> {patient.alcohol}</Typography>
-                                        <Typography variant="body1"><strong>Other Drugs:</strong> {patient.other}</Typography>
-                                        <Typography variant="body1"><strong>Snacks:</strong> {patient.snacks}</Typography>
-                                        <Typography variant="body1"><strong>Diseases:</strong> {patient.diseases}</Typography>
-                                        <Typography variant="body1"><strong>Allergies:</strong> {patient.allergies}</Typography>
+                               <Card>
+                                <CardContent>
+                                <TableContainer component={Paper}>
+                                        <Table aria-label="patient details table" size="small">
+                                           
+                                            <TableBody>
+                                           
+                                            <TableRow hover>
+                                                <TableCell><strong>Physical Condition:</strong></TableCell>
+                                                <TableCell>{patient.physical}</TableCell>
+                                            </TableRow>
+                                            <TableRow hover>
+                                                <TableCell><strong>Tobacco Use:</strong></TableCell>
+                                                <TableCell>{patient.tobacco}</TableCell>
+                                            </TableRow>
+                                            <TableRow hover>
+                                                <TableCell><strong>Tobacco Chewing:</strong></TableCell>
+                                                <TableCell>{patient.tobaccochew}</TableCell>
+                                            </TableRow>
+                                            <TableRow hover>
+                                                <TableCell><strong>Alcohol Consumption:</strong></TableCell>
+                                                <TableCell>{patient.alcohol}</TableCell>
+                                            </TableRow>
+                                            <TableRow hover>
+                                                <TableCell><strong>Other Drugs:</strong></TableCell>
+                                                <TableCell>{patient.other}</TableCell>
+                                            </TableRow>
+                                            <TableRow hover>
+                                                <TableCell><strong>Snacks:</strong></TableCell>
+                                                <TableCell>{patient.snacks}</TableCell>
+                                            </TableRow>
+                                            <TableRow hover>
+                                                <TableCell><strong>Diseases:</strong></TableCell>
+                                                <TableCell>{patient.diseases}</TableCell>
+                                            </TableRow>
+                                            <TableRow hover>
+                                                <TableCell><strong>Allergies:</strong></TableCell>
+                                                <TableCell>{patient.allergies}</TableCell>
+                                            </TableRow>
+                                            </TableBody>
+                                        </Table>
+                                        </TableContainer>
+                                </CardContent>
+                               </Card>
                                 </DialogContent>
                                 <DialogActions>
                                     <Button onClick={handleHealthDialogClose}>Close</Button>
@@ -190,7 +269,7 @@ function PrescProfile() {
                         <DialogContent>
                         <Grid item xs={12}>
                                 {/* Displaying the Gauge Chart */}
-                                <GradientGaugeChart />
+                                
                             </Grid>
                         </DialogContent>
                         <DialogActions>

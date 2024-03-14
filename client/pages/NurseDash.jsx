@@ -91,7 +91,7 @@ function NurseDash() {
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                         Medical Examinations
+                         Medical records
                     </Typography>
                   </CardContent>
                 </CardActionArea>
