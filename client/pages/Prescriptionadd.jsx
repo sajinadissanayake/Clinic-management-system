@@ -3,11 +3,12 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
-import { Breadcrumbs, Grid, Stack, Typography, Button } from '@mui/material';
+import { Breadcrumbs, Grid, Stack, Typography, Button, Container } from '@mui/material'; // Import Container from MUI
 import PageBody from '../components/PageBody';
 import PRightbar from '../components/PRightbar';
 import { TextareaAutosize } from '@mui/material'; // Import TextareaAutosize
 import PrescLeftbar from '../components/PrescLeftbar';
+
 function Prescriptionadd() {
   const [patient, setPatient] = useState(null);
   const { id } = useParams();
@@ -23,7 +24,7 @@ function Prescriptionadd() {
 
   const Submit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3001/AddPrescription", { prescription,nic:patient.nic })
+    axios.post("http://localhost:3001/AddPrescription", { prescription, nic: patient.nic })
       .then(result => {
         console.log(result);
         navigate('/pselect');
@@ -38,32 +39,31 @@ function Prescriptionadd() {
   return (
     <div>
       <Navbar />
-      
-
       <Stack direction="row" spacing={2} justifyContent="space-between">
-      <PrescLeftbar patientNIC={patient.nic} />
+        <PrescLeftbar patientNIC={patient.nic} />
         <PageBody>
-          
-          <form onSubmit={Submit}>
-            <br />
-            <Typography variant="h5">Prescription</Typography><br />
-            <Typography variant="body1">patient Name: {patient.name}</Typography><br />
-            <Typography variant="body1">Age: {patient.age}</Typography><br />
+          <Container maxWidth="xl"> {/* Adjusted Container width */}
+            <form onSubmit={Submit} style={{ width: '100%' }}>
+              <br />
+              <Typography variant="h5">Prescription</Typography><br />
+              <Typography variant="body1">patient Name: {patient.name}</Typography><br />
+              <Typography variant="body1">Age: {patient.age}</Typography><br />
 
-            <TextareaAutosize
-              minRows={7}
-              placeholder="Write prescription Here"
-              value={prescription}
-              onChange={(e) => setPrescription(e.target.value)}
-              style={{ width: '100%', padding: '10px' }}
-            /><br /><br />
+              <TextareaAutosize
+                minRows={7}
+                placeholder="Write prescription Here"
+                value={prescription}
+                onChange={(e) => setPrescription(e.target.value)}
+                style={{ width: '100%', padding: '10px' }}
+              /><br /><br />
 
-            <Grid container justifyContent="center" paddingTop={2}>
-              <Button type="submit" variant="contained" color="primary">
-                Create
-              </Button>
-            </Grid>
-          </form>
+              <Grid container justifyContent="center" paddingTop={2}>
+                <Button type="submit" variant="contained" color="primary">
+                  Create
+                </Button>
+              </Grid>
+            </form>
+          </Container>
         </PageBody>
         <PRightbar patientNIC={patient.nic} />
       </Stack>

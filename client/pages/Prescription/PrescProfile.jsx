@@ -89,20 +89,18 @@ function PrescProfile() {
                 <PageBody>
                     <Container maxWidth="md" sx={{ marginTop: 4 }}>
                         <Grid container spacing={2}>
-                            <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
-                               
-                                <Avatar alt={patient.name} src={patient.avatarUrl} sx={{ width: 120, height: 120, marginBottom: 2 }} />
-                                <Typography variant="h5">{patient.name}</Typography>
-                                <Typography variant="h6" style={{ color: 'red' }}>Blood Type: {patient.blood}</Typography>
+                                <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+                                    <Stack direction="row" spacing={2} alignItems="center">
+                                        <Avatar alt={patient.name} src={patient.avatarUrl} sx={{ width: 60, height: 60, marginRight: 2 }} />
+                                        <div>
+                                            <Typography variant="h5">{patient.name}</Typography>
+                                            <Typography variant="h6" style={{ color: 'red' }}>Blood Type: {patient.blood}</Typography>
+                                        </div>
+                                    </Stack>
+                                    
+                                </Grid>
 
-                                
-                                <Button variant='outlined' style={{ marginTop: 10 }}>
-                                    <Link style={{ textDecoration: 'none' }} to={`/addpresc/${patient._id}`}>
-                                        add prescription
-                                    </Link>
-                                </Button>
-                            </Grid>
-                            <Grid item xs={6} md={3}>
+                            <Grid item xs={6} md={3} >
                             <CardActionArea sx={{ display: 'flex', justifyContent: 'center' }}>
                                 <Card onClick={handlePersonalDialogOpen} sx={{ width: '100%', cursor: 'pointer' }}>
                                 <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -137,6 +135,17 @@ function PrescProfile() {
                                             <TextSnippetIcon color='primary' sx={{ fontSize: 100 }}/>
                                         </CardContent>
                                     </Card>
+                                </CardActionArea>
+                            </Grid>
+                            <Grid item xs={6} md={3}>
+                                <CardActionArea>
+                                <Link style={{ textDecoration: 'none' }} to={`/addpresc/${patient._id}`}>
+                                    <Card onClick={handleReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer' }}>
+                                        <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                            <Typography variant="body1">Add Prescription</Typography>
+                                            <TextSnippetIcon color='primary' sx={{ fontSize: 100 }}/>
+                                        </CardContent>
+                                    </Card></Link>
                                 </CardActionArea>
                             </Grid>
                            
@@ -269,7 +278,7 @@ function PrescProfile() {
                         <DialogContent>
                         <Grid item xs={12}>
                                 {/* Displaying the Gauge Chart */}
-                                
+                                <PatientReports patientNIC={patient.nic}/>
                             </Grid>
                         </DialogContent>
                         <DialogActions>

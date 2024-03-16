@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import { TextField, Button, Stack, IconButton, Avatar } from '@mui/material';
+import { TextField, Button, Stack, IconButton, Avatar, Container, Grid, Card, CardContent, Typography } from '@mui/material'; // Import Material-UI components
 import { Add as AddIcon } from '@mui/icons-material';
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from '../components/Navbar';
@@ -44,7 +44,7 @@ function PatientList() {
       <Stack direction="row" spacing={2} justifyContent="space-between">
         <NurseLeftbar/>
         <PageBody>
-          <div>
+          <Container style={{ minWidth: "800px" }}> {/* Adjust minWidth directly */}
             <Stack direction="row" alignItems="center" spacing={1} justifyContent="space-between">
               <TextField
                 label="Search"
@@ -58,36 +58,40 @@ function PatientList() {
                 </IconButton>
               </Link>
             </Stack><br/>
-            <div style={{ height: '70vh', overflowY: 'auto' }}>
-            <div>
-              {filteredUsers.map((user) => (
-                <div key={user._id} style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-                  <Avatar 
-                    src={user.avatar} 
-                    alt={user.name} 
-                    sx={{ 
-                      width:80, 
-                      height: 80,
-                      backgroundColor: user.gender === 'male' ? 'skyblue' : 'pink' // Set background color based on gender
-                    }} 
-                  />
-                  <div style={{ marginLeft: '20px' }}>
-                    <div style={{ fontWeight: 'bold' }}>{user.nic}</div>
-                    <div>{user.name}</div>
-                    <div>
-                      <Button variant='outlined' style={{ marginRight: '10px' }}>
-                        <Link style={{ textDecoration: 'none' }} to={`/patient/${user._id}`}>View</Link>
-                      </Button>
-                      
-                      <Button variant='outlined' color='error' onClick={() => handleDelete(user._id)}>
-                        Delete
-                      </Button>
-                    </div>
-                  </div>
-                </div>
+            <Grid container spacing={3}>
+              {filteredUsers.map((user, index) => (
+                <Grid item key={user._id} xs={12} sm={6} md={6}> {/* Set xs to 12 to display one card in a row on smaller screens */}
+                  <Card>
+                    <CardContent>
+                      <Avatar 
+                        src={user.avatar} 
+                        alt={user.name} 
+                        sx={{ 
+                          width: 80, 
+                          height: 80,
+                          backgroundColor: user.gender === 'male' ? 'skyblue' : 'pink' // Set background color based on gender
+                        }} 
+                      />
+                      <Typography variant="h6" component="div">
+                        {user.nic}
+                      </Typography>
+                      <Typography variant="subtitle1" component="div">
+                        {user.name}
+                      </Typography>
+                      <div>
+                        <Button variant='outlined' style={{ marginRight: '10px' }}>
+                          <Link style={{ textDecoration: 'none' }} to={`/patient/${user._id}`}>View</Link>
+                        </Button>
+                        <Button variant='outlined' color='error' onClick={() => handleDelete(user._id)}>
+                          Delete
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Grid>
               ))}
-            </div></div>
-          </div>
+            </Grid>
+          </Container>
         </PageBody>
         <Rightbar/>
       </Stack>
