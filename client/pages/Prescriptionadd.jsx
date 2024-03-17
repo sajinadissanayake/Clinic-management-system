@@ -12,7 +12,7 @@ import PrescLeftbar from '../components/PrescLeftbar';
 function Prescriptionadd() {
   const [patient, setPatient] = useState(null);
   const { id } = useParams();
-  const status = "Pending";
+  const status = "pending";
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,11 +51,11 @@ function Prescriptionadd() {
               <Typography variant="body1">Age: {patient.age}</Typography><br />
 
               <TextareaAutosize
-                minRows={7}
+                minRows={10}
                 placeholder="Write prescription Here"
                 value={prescription}
                 onChange={(e) => setPrescription(e.target.value)}
-                style={{ width: '100%', padding: '10px' }}
+                style={{ width: '100%', padding: '10px', borderRadius:6}}
               /><br /><br />
 
               <Grid container justifyContent="center" paddingTop={2}>

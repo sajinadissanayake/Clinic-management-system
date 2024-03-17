@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, Card, CardContent, Typography, Button, Dialog, AppBar, Toolbar, IconButton, Slide, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
 import axios from 'axios';
 import CloseIcon from '@mui/icons-material/Close';
-import DeleteIcon from '@mui/icons-material/Delete'; // Import DeleteIcon
+import DeleteIcon from '@mui/icons-material/Delete';
 import UpdatePrescriptionDialog from './UpdatePrescriptionDialog';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -94,8 +94,8 @@ function PrescLeftbar({ patientNIC }) {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>Prescription</TableCell>
-                                    <TableCell> Date</TableCell>
-                                    <TableCell> Actions</TableCell> {/* Changed heading */}
+                                    <TableCell>Date</TableCell>
+                                    <TableCell>Actions</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -112,6 +112,7 @@ function PrescLeftbar({ patientNIC }) {
                                                 variant='outlined' 
                                                 style={{ marginRight: '10px' }}
                                                 onClick={() => handleUpdateClick(prescription._id)}
+                                                disabled={prescription.status !== "pending"} // Disable if status is not pending
                                             >
                                                 Update
                                             </Button>
@@ -119,6 +120,7 @@ function PrescLeftbar({ patientNIC }) {
                                                 variant='outlined' 
                                                 color="error"
                                                 onClick={() => handleDelete(prescription._id)}
+                                                disabled={prescription.status !== "pending"} // Disable if status is not pending
                                             >
                                                 <DeleteIcon />
                                             </Button>

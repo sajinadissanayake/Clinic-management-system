@@ -31,7 +31,7 @@ import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
-
+import RequestReportsDialog from  '../../components/RequestReportsDialog';
 import DriveFileMoveIcon from '@mui/icons-material/DriveFileMove';
 function PrescProfile() {
     const [patient, setPatient] = useState(null);
@@ -83,6 +83,18 @@ function PrescProfile() {
     const handleSurgicalDialogClose = () => {
         setOpenSurgicalDialog(false);
     };
+
+    // report request
+const [openRequestReportsDialog, setOpenRequestReportsDialog] = useState(false);
+
+const handleRequestReportsDialogOpen = () => {
+    setOpenRequestReportsDialog(true);
+};
+
+const handleRequestReportsDialogClose = () => {
+    setOpenRequestReportsDialog(false);
+};
+
 
    
     
@@ -177,15 +189,17 @@ function PrescProfile() {
                                     </Card></Link>
                                 </CardActionArea>
                             </Grid>
+                            <RequestReportsDialog patientNIC={patient.nic}  open={openRequestReportsDialog} onClose={handleRequestReportsDialogClose} />
+
+                           
                             <Grid item xs={6} md={3}>
                                 <CardActionArea>
-                                <Link style={{ textDecoration: 'none' }} to={`/addpresc/${patient._id}`}>
-                                    <Card onClick={handleReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:6 }}>
+                                    <Card onClick={handleRequestReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer', borderRadius: 6 }}>
                                         <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                             <Typography variant="body1">Request Reports</Typography>
-                                            < DriveFileMoveIcon color='primary' sx={{ fontSize: 100 }}/>
+                                            <DriveFileMoveIcon color='primary' sx={{ fontSize: 100 }}/>
                                         </CardContent>
-                                    </Card></Link>
+                                    </Card>
                                 </CardActionArea>
                             </Grid>
                             <Grid item xs={6} md={3}>

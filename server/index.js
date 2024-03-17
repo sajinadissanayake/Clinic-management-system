@@ -11,6 +11,7 @@ const BSModel = require('./models/bloodsugar');
 const blogModel = require('./models/blog');
 const appoModel = require('./models/appointments');
 const prescModel = require('./models/presciptions');
+const ReportRequestModel = require('./models/ReportRequests')
 
 
 const app = express();
@@ -327,7 +328,20 @@ app.delete('/deletePrescription/:id', (req, res) => {
 });
 
 
+app.post("/AddReportRequest", (req, res) => {
+    const { nic, type ,status} = req.body;
 
+    // Create a new report request using the ReportRequestModel
+    ReportRequestModel.create({ nic, type,status })
+        .then(reportRequest => {
+            console.log("Report request created:", reportRequest);
+            res.json(reportRequest);
+        })
+        .catch(err => {
+            console.error("Error creating report request:", err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
+});
 
 
 
