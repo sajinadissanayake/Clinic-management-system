@@ -300,7 +300,23 @@ app.get('/getPrescriptions/:nic', (req, res) => {
         .catch(err => res.status(500).json({ error: err.message }));
 });
 
+// Add a new endpoint to get a single prescription by ID
+app.get('/getPrescription/:id', (req, res) => {
+    const id = req.params.id;
+    prescModel.findById(id)
+        .then(prescription => res.json(prescription))
+        .catch(err => res.status(500).json({ error: err.message }));
+});
 
+// Add a new endpoint to update a prescription by ID
+app.put('/updatePrescription/:id', (req, res) => {
+    const id = req.params.id;
+    const { prescription } = req.body;
+
+    prescModel.findByIdAndUpdate(id, { prescription })
+        .then(updatedPrescription => res.json(updatedPrescription))
+        .catch(err => res.status(500).json({ error: err.message }));
+});
 
 
 

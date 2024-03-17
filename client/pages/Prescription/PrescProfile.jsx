@@ -31,7 +31,8 @@ import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
-import GradientGaugeChart from '../../components/bloodmeter/GradientGaugeChart';
+
+import DriveFileMoveIcon from '@mui/icons-material/DriveFileMove';
 function PrescProfile() {
     const [patient, setPatient] = useState(null);
     const [openPersonalDialog, setOpenPersonalDialog] = useState(false);
@@ -72,6 +73,16 @@ function PrescProfile() {
     const handleReportsDialogClose = () => {
         setOpenReportsDialog(false);
     };
+    const [openSurgicalDialog, setOpenSurgicalDialog] = useState(false);
+
+    // Handlers for surgical dialog...
+    const handleSurgicalDialogOpen = () => {
+        setOpenSurgicalDialog(true);
+    };
+
+    const handleSurgicalDialogClose = () => {
+        setOpenSurgicalDialog(false);
+    };
 
    
     
@@ -102,7 +113,7 @@ function PrescProfile() {
 
                             <Grid item xs={6} md={3} >
                             <CardActionArea sx={{ display: 'flex', justifyContent: 'center' }}>
-                                <Card onClick={handlePersonalDialogOpen} sx={{ width: '100%', cursor: 'pointer' }}>
+                                <Card onClick={handlePersonalDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:8 }}>
                                 <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                     <Typography variant="body1">Personal Details</Typography>
                                     <PersonIcon color='primary' sx={{ fontSize: 100 }} />
@@ -111,25 +122,43 @@ function PrescProfile() {
                                 </Card></CardActionArea>
                             </Grid>
                             <Grid item xs={6} md={3}>
-                            <CardActionArea > <Card onClick={handleHealthDialogOpen} sx={{ width: '100%', cursor: 'pointer' }}>
+                            <CardActionArea > <Card onClick={handleHealthDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:6 }}>
                             <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                         <Typography variant="body1">Health Details</Typography>
                                         <LocalHospitalIcon color='primary' sx={{ fontSize: 100 }} />
                                     </CardContent>
                                 </Card></CardActionArea>
                             </Grid>
-                            <Grid item xs={6} md={3}>
-                            <CardActionArea>     <Card sx={{ width: '100%' }}>
-                            <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                        
-                                    <Typography variant="body1">Surgical History</Typography>
-                                       <MedicalServicesIcon color='primary' sx={{ fontSize: 100 }}/>
-                                    </CardContent>
-                                </Card></CardActionArea>
-                            </Grid>
+
+
                             <Grid item xs={6} md={3}>
                                 <CardActionArea>
-                                    <Card onClick={handleReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer' }}>
+                                    <Card onClick={handleSurgicalDialogOpen} sx={{ width: '100%', cursor: 'pointer', borderRadius: 6 }}>
+                                        <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                            <Typography variant="body1">Surgical History</Typography>
+                                            <MedicalServicesIcon color='primary' sx={{ fontSize: 100 }} />
+                                        </CardContent>
+                                    </Card>
+                                </CardActionArea>
+                            </Grid>
+
+                            {/* Blood sugar levels and other components... */}
+
+                            {/* Surgical Details Dialog */}
+                            <Dialog open={openSurgicalDialog} onClose={handleSurgicalDialogClose}>
+                                <DialogTitle>Surgical History</DialogTitle>
+                                <DialogContent>
+                                    {/* Content for surgical history dialog */}
+                                    <Typography variant="body1">{patient.sh}</Typography>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={handleSurgicalDialogClose}>Close</Button>
+                                </DialogActions>
+                            </Dialog>
+
+                            <Grid item xs={6} md={3}>
+                                <CardActionArea>
+                                    <Card onClick={handleReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:6 }}>
                                         <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                             <Typography variant="body1">Reports</Typography>
                                             <TextSnippetIcon color='primary' sx={{ fontSize: 100 }}/>
@@ -140,7 +169,7 @@ function PrescProfile() {
                             <Grid item xs={6} md={3}>
                                 <CardActionArea>
                                 <Link style={{ textDecoration: 'none' }} to={`/addpresc/${patient._id}`}>
-                                    <Card onClick={handleReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer' }}>
+                                    <Card onClick={handleReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:6 }}>
                                         <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                             <Typography variant="body1">Add Prescription</Typography>
                                             <TextSnippetIcon color='primary' sx={{ fontSize: 100 }}/>
@@ -148,9 +177,31 @@ function PrescProfile() {
                                     </Card></Link>
                                 </CardActionArea>
                             </Grid>
+                            <Grid item xs={6} md={3}>
+                                <CardActionArea>
+                                <Link style={{ textDecoration: 'none' }} to={`/addpresc/${patient._id}`}>
+                                    <Card onClick={handleReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:6 }}>
+                                        <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                            <Typography variant="body1">Request Reports</Typography>
+                                            < DriveFileMoveIcon color='primary' sx={{ fontSize: 100 }}/>
+                                        </CardContent>
+                                    </Card></Link>
+                                </CardActionArea>
+                            </Grid>
+                            <Grid item xs={6} md={3}>
+                                <CardActionArea>
+                                <Link style={{ textDecoration: 'none' }} to={`/addpresc/${patient._id}`}>
+                                    <Card onClick={handleReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:6 }}>
+                                        <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                            <Typography variant="body1">Request Record</Typography>
+                                            <DriveFileMoveIcon color='primary' sx={{ fontSize: 100 }}/>
+                                        </CardContent>
+                                    </Card></Link>
+                                </CardActionArea>
+                            </Grid>
                            
                             <Grid item xs={12}>
-                                <Card sx={{ width: '100%' }}>
+                                <Card sx={{ width: '100%',borderRadius:6 }}>
                                     <CardContent>
                                         <Typography variant="h6">Blood Sugar Levels</Typography>
                                         <BloodSugarChart nic={patient.nic} />
@@ -272,12 +323,13 @@ function PrescProfile() {
                                     <Button onClick={handleHealthDialogClose}>Close</Button>
                                 </DialogActions>
                             </Dialog>
+                            
 
                     <Dialog open={openReportsDialog} onClose={handleReportsDialogClose}>
                         <DialogTitle>Reports</DialogTitle>
                         <DialogContent>
                         <Grid item xs={12}>
-                                {/* Displaying the Gauge Chart */}
+                                
                                 <PatientReports patientNIC={patient.nic}/>
                             </Grid>
                         </DialogContent>
@@ -285,6 +337,8 @@ function PrescProfile() {
                             <Button onClick={handleReportsDialogClose}>Close</Button>
                         </DialogActions>
                  </Dialog>
+
+
 
                             
                         </Grid>

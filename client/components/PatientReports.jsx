@@ -39,7 +39,7 @@ function PatientReports() {
     <div>
       <h3>Reports View</h3>
       <TextField
-        label="Search by NIC"
+        label="Search by type"
         variant="outlined"
         value={searchTerm}
         onChange={handleSearchChange}
@@ -61,8 +61,7 @@ function PatientReports() {
               <TableCell>Type</TableCell>
               <TableCell>Patient Report</TableCell>
               <TableCell>Date</TableCell>
-              <TableCell>Update</TableCell>
-              <TableCell>Delete</TableCell>
+             
             </TableRow>
           </TableHead>
           <TableBody>
@@ -76,16 +75,7 @@ function PatientReports() {
                   </IconButton>
                 </TableCell>
                 <TableCell>{new Date(report.uploadDate).toLocaleDateString()}</TableCell>
-                <TableCell>
-                  <IconButton component={Link} to={`/updateReport/${report._id}`}>
-                    <EditIcon />
-                  </IconButton>
-                </TableCell>
-                <TableCell>
-                  <IconButton onClick={() => handleDelete(report._id)} color="secondary">
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell>
+               
               </TableRow>
             ))}
           </TableBody>

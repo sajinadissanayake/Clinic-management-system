@@ -58,10 +58,11 @@ function PatientList() {
                 </IconButton>
               </Link>
             </Stack><br/>
+              <div style={{ height: '70vh', overflowY: 'auto' }}>
             <Grid container spacing={3}>
               {filteredUsers.map((user, index) => (
                 <Grid item key={user._id} xs={12} sm={6} md={6}> {/* Set xs to 12 to display one card in a row on smaller screens */}
-                  <Card>
+                  <Card >
                     <CardContent>
                       <Avatar 
                         src={user.avatar} 
@@ -69,7 +70,8 @@ function PatientList() {
                         sx={{ 
                           width: 80, 
                           height: 80,
-                          backgroundColor: user.gender === 'male' ? 'skyblue' : 'pink' // Set background color based on gender
+                          backgroundColor: user.gender === 'male' ? 'skyblue' : 'pink', // Set background color based on gender
+                          
                         }} 
                       />
                       <Typography variant="h6" component="div">
@@ -90,7 +92,7 @@ function PatientList() {
                   </Card>
                 </Grid>
               ))}
-            </Grid>
+            </Grid></div>
           </Container>
         </PageBody>
         <Rightbar/>
