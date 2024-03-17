@@ -317,6 +317,15 @@ app.put('/updatePrescription/:id', (req, res) => {
         .then(updatedPrescription => res.json(updatedPrescription))
         .catch(err => res.status(500).json({ error: err.message }));
 });
+// delete
+
+app.delete('/deletePrescription/:id', (req, res) => {
+    const id = req.params.id;
+    prescModel.findByIdAndDelete(id)
+        .then(result => res.json(result))
+        .catch(err => res.json(err));
+});
+
 
 
 

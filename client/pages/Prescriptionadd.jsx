@@ -12,6 +12,7 @@ import PrescLeftbar from '../components/PrescLeftbar';
 function Prescriptionadd() {
   const [patient, setPatient] = useState(null);
   const { id } = useParams();
+  const status = "Pending";
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,7 +25,7 @@ function Prescriptionadd() {
 
   const Submit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3001/AddPrescription", { prescription, nic: patient.nic })
+    axios.post("http://localhost:3001/AddPrescription", { prescription, nic: patient.nic,status })
       .then(result => {
         console.log(result);
         navigate('/pselect');

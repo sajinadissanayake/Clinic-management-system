@@ -1,8 +1,10 @@
+// PrescLeftbar.jsx
+
 import React, { useState, useEffect } from 'react';
 import { Box, Card, CardContent, Typography, Button, Dialog, AppBar, Toolbar, IconButton, Slide, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
 import axios from 'axios';
 import CloseIcon from '@mui/icons-material/Close';
-import { Link } from 'react-router-dom';
+import DeleteIcon from '@mui/icons-material/Delete'; // Import DeleteIcon
 import UpdatePrescriptionDialog from './UpdatePrescriptionDialog';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -37,6 +39,20 @@ function PrescLeftbar({ patientNIC }) {
     const handleUpdateClick = (prescriptionId) => {
         setSelectedPrescriptionId(prescriptionId);
         setOpen(true);
+    };
+
+    const handleDelete = (prescriptionId) => {
+        axios.delete(`http://localhost:3001/deletePrescription/${prescriptionId}`)
+            .then(response => {
+                console.log(response);
+                // Refresh prescription list after deletion
+                axios.get(`http://localhost:3001/getPrescriptions/${patientNIC}`)
+                    .then(response => {
+                        setPrescriptions(response.data);
+                    })
+                    .catch(error => console.error('Error fetching prescriptions:', error));
+            })
+            .catch(error => console.error('Error deleting prescription:', error));
     };
 
     const formatDate = (dateString) => {
@@ -79,7 +95,7 @@ function PrescLeftbar({ patientNIC }) {
                                 <TableRow>
                                     <TableCell>Prescription</TableCell>
                                     <TableCell> Date</TableCell>
-                                    <TableCell> Action</TableCell>
+                                    <TableCell> Actions</TableCell> {/* Changed heading */}
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -94,10 +110,17 @@ function PrescLeftbar({ patientNIC }) {
                                         <TableCell>
                                             <Button 
                                                 variant='outlined' 
-                                                style={{ marginLeft: 'auto', marginRight: 'auto', display: 'block' }}
+                                                style={{ marginRight: '10px' }}
                                                 onClick={() => handleUpdateClick(prescription._id)}
                                             >
                                                 Update
+                                            </Button>
+                                            <Button 
+                                                variant='outlined' 
+                                                color="error"
+                                                onClick={() => handleDelete(prescription._id)}
+                                            >
+                                                <DeleteIcon />
                                             </Button>
                                         </TableCell>
                                     </TableRow>

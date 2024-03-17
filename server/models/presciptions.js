@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const prescSchema = new mongoose.Schema({
     prescription: String,
     nic:String,
+    status:String,
     PostedDate: {
     type: Date,
     default: Date.now  },
