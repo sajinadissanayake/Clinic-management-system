@@ -32,6 +32,10 @@ import Medicals from '../pages/NursePages/Medicals.jsx'
 import BsSelect from '../pages/NursePages/BsSelect.jsx'
 import BsTable from '../pages/NursePages/BsTable.jsx'
 import MedicalUpdate from '../pages/NursePages/MedicalUpdate.jsx'
+import PharmacyDash from '../pages/PharmacyDash.jsx'
+import AllPrescriptions from '../pages/PharmacyPages/AllPrescriptions.jsx'
+
+
 
 
 
@@ -149,6 +153,15 @@ const router = createBrowserRouter([
     path: "/medicalupdate/:id", 
     element: <MedicalUpdate />, 
   },
+  {
+    path: "/pharmacydash", 
+    element: <PharmacyDash />, 
+  },
+  {
+    path: "/allprescriptions", 
+    element: <AllPrescriptions />, 
+  },
+
   
 
 ]);

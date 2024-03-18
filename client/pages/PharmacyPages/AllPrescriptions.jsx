@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-
-import { TextField, Table, TableHead, TableBody, TableRow, TableCell, Button, Avatar, Card, CardContent, Typography, Container, Grid, Stack } from '@mui/material';
+import Navbar from '../../components/Navbar';
+import { TextField, Table, TableHead, TableBody, TableRow, TableCell, Button, Avatar, Card, CardContent, Typography, Container, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Navbar from '../components/Navbar';
 
 function AllPrescriptions() {
     const [users, setUsers] = useState([]);
@@ -28,7 +27,7 @@ function AllPrescriptions() {
         <div>
             <Navbar />
             <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 64px)' }}> {/* Adjusted height to consider the height of the Navbar */}
-                <Card sx={{ borderRadius: 6, width: '100%', maxWidth: 1000 }}> {/* Added width and maxWidth for responsiveness */}
+                <Card sx={{ borderRadius: 6, width: '100%', maxWidth: 600 }}> {/* Added width and maxWidth for responsiveness */}
                     <CardContent>
                     <TextField
                       label="Search by name or NIC"
@@ -63,15 +62,10 @@ function AllPrescriptions() {
                                             <TableCell>{user.nic}</TableCell>
                                             <TableCell>{user.name}</TableCell>
                                             <TableCell>
-                                            <Stack direction="row" spacing={1} justifyContent="flex-end">
-                                                <Button variant='outlined' style={{ marginRight: '10px' }}>
-                                                  <Link style={{ textDecoration: 'none' }} to={`/patient/${user._id}`}>View</Link>
-                                                </Button>
-                                                <Button variant='outlined' color='error' onClick={() => handleDelete(user._id)}>
-                                                  Delete
-                                                </Button>
-                                              </Stack>
+                                                <Button variant='outlined' style={{ marginLeft: '10px' }}>
+                                                <Link style={{ textDecoration: 'none' }} to={`/prescriptions/${user.nic}`}>Next</Link>
 
+                                                </Button>
                                             </TableCell>
                                         </TableRow>
                                     ))}

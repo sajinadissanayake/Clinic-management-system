@@ -33,6 +33,7 @@ import VaccinesIcon from '@mui/icons-material/Vaccines';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import RequestReportsDialog from  '../../components/RequestReportsDialog';
 import DriveFileMoveIcon from '@mui/icons-material/DriveFileMove';
+import RequestRecordDialog from '../../components/RequestRecordDialog';
 function PrescProfile() {
     const [patient, setPatient] = useState(null);
     const [openPersonalDialog, setOpenPersonalDialog] = useState(false);
@@ -94,8 +95,16 @@ const handleRequestReportsDialogOpen = () => {
 const handleRequestReportsDialogClose = () => {
     setOpenRequestReportsDialog(false);
 };
+// record
+const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
 
+    const handleRequestRecordDialogOpen = () => {
+        setOpenRequestRecordDialog(true);
+    };
 
+    const handleRequestRecordDialogClose = () => {
+        setOpenRequestRecordDialog(false);
+    };
    
     
 
@@ -202,15 +211,18 @@ const handleRequestReportsDialogClose = () => {
                                     </Card>
                                 </CardActionArea>
                             </Grid>
+                            <RequestRecordDialog open={openRequestRecordDialog} onClose={handleRequestRecordDialogClose} />
+                            
                             <Grid item xs={6} md={3}>
                                 <CardActionArea>
-                                <Link style={{ textDecoration: 'none' }} to={`/addpresc/${patient._id}`}>
-                                    <Card onClick={handleReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:6 }}>
-                                        <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                            <Typography variant="body1">Request Record</Typography>
-                                            <DriveFileMoveIcon color='primary' sx={{ fontSize: 100 }}/>
-                                        </CardContent>
-                                    </Card></Link>
+                              
+                                <Card onClick={handleRequestRecordDialogOpen} sx={{ width: '100%', cursor: 'pointer', borderRadius: 6 }}>
+                                    <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                        <Typography variant="body1">Request Record</Typography>
+                                        <DriveFileMoveIcon color='primary' sx={{ fontSize: 100 }} />
+                                    </CardContent>
+                                </Card>
+
                                 </CardActionArea>
                             </Grid>
                            
