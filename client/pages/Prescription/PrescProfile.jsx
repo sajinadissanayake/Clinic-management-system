@@ -34,6 +34,8 @@ import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import RequestReportsDialog from  '../../components/RequestReportsDialog';
 import DriveFileMoveIcon from '@mui/icons-material/DriveFileMove';
 import RequestRecordDialog from '../../components/RequestRecordDialog';
+import maleAvatar from '../images/male.png';
+import femaleAvatar from '../images/female.png';
 function PrescProfile() {
     const [patient, setPatient] = useState(null);
     const [openPersonalDialog, setOpenPersonalDialog] = useState(false);
@@ -123,7 +125,7 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                         <Grid container spacing={2}>
                                 <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
                                     <Stack direction="row" spacing={2} alignItems="center">
-                                        <Avatar alt={patient.name} src={patient.avatarUrl} sx={{ width: 60, height: 60, marginRight: 2 }} />
+                                    <Avatar alt={patient.name} src={patient.gender === 'male' ? maleAvatar : femaleAvatar} sx={{ width: 60, height: 60, marginRight: 2 }} />
                                         <div>
                                             <Typography variant="h5">{patient.name}</Typography>
                                             <Typography variant="h6" style={{ color: 'red' }}>Blood Type: {patient.blood}</Typography>

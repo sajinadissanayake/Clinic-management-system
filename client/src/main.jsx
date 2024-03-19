@@ -34,6 +34,8 @@ import BsTable from '../pages/NursePages/BsTable.jsx'
 import MedicalUpdate from '../pages/NursePages/MedicalUpdate.jsx'
 import PharmacyDash from '../pages/PharmacyDash.jsx'
 import AllPrescriptions from '../pages/PharmacyPages/AllPrescriptions.jsx'
+import Pprescriptions from '../pages/PharmacyPages/Pprescriptions.jsx'
+
 
 
 
@@ -161,7 +163,10 @@ const router = createBrowserRouter([
     path: "/allprescriptions", 
     element: <AllPrescriptions />, 
   },
-
+  {
+    path: "/Pprescriptions/:nic", 
+    element: <Pprescriptions />, 
+  },
   
 
 ]);

@@ -1,11 +1,12 @@
-// PrescLeftbar.jsx
-
 import React, { useState, useEffect } from 'react';
 import { Box, Card, CardContent, Typography, Button, Dialog, AppBar, Toolbar, IconButton, Slide, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
 import axios from 'axios';
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
 import UpdatePrescriptionDialog from './UpdatePrescriptionDialog';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Link } from 'react-router-dom';
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -16,6 +17,7 @@ function PrescLeftbar({ patientNIC }) {
     const [prescriptions, setPrescriptions] = useState([]);
     const [lastPrescription, setLastPrescription] = useState(null);
     const [selectedPrescriptionId, setSelectedPrescriptionId] = useState(null);
+    const [pendingReportRequests, setPendingReportRequests] = useState([]);
 
     useEffect(() => {
         axios.get(`http://localhost:3001/getPrescriptions/${patientNIC}`)
@@ -26,6 +28,12 @@ function PrescLeftbar({ patientNIC }) {
                 }
             })
             .catch(error => console.error('Error fetching prescriptions:', error));
+
+        axios.get(`http://localhost:3001/getReportRequests/${patientNIC}`)
+            .then(response => {
+                setPendingReportRequests(response.data.filter(request => request.status === "pending"));
+            })
+            .catch(error => console.error('Error fetching pending report requests:', error));
     }, [patientNIC]);
 
     const handleClickOpen = () => {
@@ -55,15 +63,30 @@ function PrescLeftbar({ patientNIC }) {
             .catch(error => console.error('Error deleting prescription:', error));
     };
 
+    const handleCancelReportRequest = (requestId) => {
+        // Implement cancellation of report request
+        console.log('Cancel report request with ID:', requestId);
+    };
+
     const formatDate = (dateString) => {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         return new Date(dateString).toLocaleDateString(undefined, options);
     };
+    
 
     return (
         <div>
+            <Link to="/pselect" style={{ textDecoration: 'none' }}>
+            <Card sx={{ marginBottom: 2 , marginTop:3, borderRadius:6}}>
+            <CardContent sx={{ display: 'flex' }}>
+            <Button  startIcon={<ArrowBackIcon />}>
+                Back
+            </Button>
+        </CardContent>
+            </Card></Link>
+
             {lastPrescription && (
-                <Card sx={{ marginBottom: 2 , marginTop:3, borderRadius:6}}>
+                <Card sx={{ marginBottom: 2 , borderRadius:6}}>
                     <CardContent>
                         <Typography variant="h6" marginBottom={2}>Last Prescription</Typography>
                         {lastPrescription.prescription.split('\n').map((line, index) => (
@@ -74,6 +97,42 @@ function PrescLeftbar({ patientNIC }) {
                     </CardContent>
                 </Card>
             )}
+
+            {pendingReportRequests.length > 0 && (
+                <Card sx={{ marginBottom: 2 , borderRadius:6}}>
+                    <CardContent>
+                        <Typography variant="h6" marginBottom={2}>Pending Report Requests</Typography>
+                        <TableContainer component={Paper}>
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Report Type</TableCell>
+                                        <TableCell>Action</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {pendingReportRequests.map(request => (
+                                        <TableRow key={request._id}>
+                                            <TableCell>{request.type}</TableCell>
+                                            <TableCell>
+                                                <Button
+                                                    variant="outlined"
+                                                    color="error"
+                                                    size="small" // Set size to small
+                                                    onClick={() => handleCancelReportRequest(request._id)}
+                                                >
+                                                    Cancel
+                                                </Button>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </CardContent>
+                </Card>
+            )}
+
             <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
                 <AppBar sx={{ position: 'relative' }}>
                     <Toolbar>

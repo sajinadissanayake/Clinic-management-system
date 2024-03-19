@@ -300,6 +300,12 @@ app.get('/getPrescriptions/:nic', (req, res) => {
         .then(prescriptions => res.json(prescriptions))
         .catch(err => res.status(500).json({ error: err.message }));
 });
+app.get('/getPrescriptions/:nic', (req, res) => {
+    const nic = req.params.nic;
+    prescModel.find({ nic: nic })
+        .then(prescriptions => res.json(prescriptions))
+        .catch(err => res.status(500).json({ error: err.message }));
+});
 
 // Add a new endpoint to get a single prescription by ID
 app.get('/getPrescription/:id', (req, res) => {
@@ -342,7 +348,16 @@ app.post("/AddReportRequest", (req, res) => {
             res.status(500).json({ error: 'Internal Server Error' });
         });
 });
-
+app.get('/getReportRequests/:nic', async (req, res) => {
+    try {
+        const { nic } = req.params;
+        const reportRequests = await ReportRequestModel.find({ nic, status: "pending" });
+        res.json(reportRequests);
+    } catch (error) {
+        console.error('Error fetching report requests:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 
 

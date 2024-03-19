@@ -3,15 +3,25 @@ import Navbar from '../../components/Navbar';
 import { TextField, Table, TableHead, TableBody, TableRow, TableCell, Button, Avatar, Card, CardContent, Typography, Container, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import maleAvatar from '../images/male.png';
+import femaleAvatar from '../images/female.png';
 
 function AllPrescriptions() {
     const [users, setUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [loading, setLoading] = useState(true); // State to manage loading indicator
+    const [error, setError] = useState(null); // State to manage errors
 
     useEffect(() => {
         axios.get('http://localhost:3001')
-            .then(result => setUsers(result.data))
-            .catch(err => console.log(err));
+            .then(result => {
+                setUsers(result.data);
+                setLoading(false); // Set loading to false when data is fetched
+            })
+            .catch(err => {
+                setError(err); // Set error state if request fails
+                setLoading(false); // Set loading to false on error
+            });
     }, []);
 
     const handleSearch = (e) => {
@@ -23,48 +33,51 @@ function AllPrescriptions() {
         (user.nic && user.nic.toLowerCase().includes(searchTerm.toLowerCase()))
     );
 
+    if (loading) return <p>Loading...</p>; // Display loading indicator
+    if (error) return <p>Error: {error.message}</p>; // Display error message if request fails
+
     return (
         <div>
             <Navbar />
-            <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 64px)' }}> {/* Adjusted height to consider the height of the Navbar */}
-                <Card sx={{ borderRadius: 6, width: '100%', maxWidth: 600 }}> {/* Added width and maxWidth for responsiveness */}
+            <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 64px)' }}>
+                <Card sx={{ borderRadius: 6, width: '100%', maxWidth: 600 }}>
                     <CardContent>
-                    <TextField
-                      label="Search by name or NIC"
-                      variant="outlined"
-                      value={searchTerm}
-                      onChange={handleSearch}
-                      fullWidth
-                      mb={2}
-                      sx={{
-                          '& .MuiOutlinedInput-root': {
-                              borderRadius: '6px',
-                          },
-                      }}
-                  />
+                        <TextField
+                            label="Search by name or NIC"
+                            variant="outlined"
+                            value={searchTerm}
+                            onChange={handleSearch}
+                            fullWidth
+                            mb={2}
+                            sx={{
+                                '& .MuiOutlinedInput-root': {
+                                    borderRadius: '6px',
+                                },
+                            }}
+                        />
 
-
-                        <div style={{ maxHeight: '60vh', overflowY: 'auto', marginTop: '20px' }}> {/* Adjusted maxHeight */}
+                        <div style={{ maxHeight: '60vh', overflowY: 'auto', marginTop: '20px' }}>
                             <Table>
                                 <TableHead>
                                     <TableRow>
                                         <TableCell></TableCell>
                                         <TableCell>NIC</TableCell>
                                         <TableCell>Name</TableCell>
+                                        <TableCell>Action</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
                                     {filteredUsers.map((user) => (
                                         <TableRow key={user._id}>
                                             <TableCell>
-                                                <Avatar alt={user.name} src={user.avatarUrl} />
+                                                {/* Conditional rendering for Avatar based on gender */}
+                                                <Avatar alt={user.name} src={user.gender === 'male' ? maleAvatar : femaleAvatar} />
                                             </TableCell>
                                             <TableCell>{user.nic}</TableCell>
                                             <TableCell>{user.name}</TableCell>
                                             <TableCell>
-                                                <Button variant='outlined' style={{ marginLeft: '10px' }}>
-                                                <Link style={{ textDecoration: 'none' }} to={`/prescriptions/${user.nic}`}>Next</Link>
-
+                                                <Button variant='outlined' component={Link} to={`/Pprescriptions/${user.nic}`} style={{ marginLeft: '10px' }}>
+                                                    Next
                                                 </Button>
                                             </TableCell>
                                         </TableRow>
