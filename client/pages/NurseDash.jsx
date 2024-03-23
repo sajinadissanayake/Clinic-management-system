@@ -223,72 +223,7 @@ function NurseDash() {
             </Card>
           </Grid>
 
-          {/* Square Cards */}
-          <Grid item xs={12} md={8}>
-            <Card sx={{ maxWidth: '100%', margin: 'auto', marginBottom: 4, borderRadius: 8 }}>
-              <CardContent>
-                <Grid container spacing={2} justifyContent="center">
-                  <Grid item xs={6} sm={4} md={4}>
-                    <Link to="/bloodpressure" style={{ textDecoration: 'none' }}>
-                      <SquareCard>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="100%" // Match height to width to make it square
-                            image={blood}
-                            alt="Blood Pressure"
-                          />
-                          <CardContent>
-                            <Typography gutterBottom variant="body2" component="div">
-                              Blood Pressure
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </SquareCard>
-                    </Link>
-                  </Grid>
-                  <Grid item xs={6} sm={4} md={4}>
-                    <Link to="/respiratoryrate" style={{ textDecoration: 'none' }}>
-                      <SquareCard>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="100%" // Match height to width to make it square
-                            image={rep}
-                            alt="Respiratory Rate"
-                          />
-                          <CardContent>
-                            <Typography gutterBottom variant="body2" component="div">
-                              Respiratory Rate
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </SquareCard>
-                    </Link>
-                  </Grid>
-                  <Grid item xs={6} sm={4} md={4}>
-                    <Link to="/temperature" style={{ textDecoration: 'none' }}>
-                      <SquareCard>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="100%" // Match height to width to make it square
-                            image={ap}
-                            alt="Temperature"
-                          />
-                          <CardContent>
-                            <Typography gutterBottom variant="body2" component="div">
-                              Temperature
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </SquareCard>
-                    </Link>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          </Grid>
+     
         </Grid>
       </Stack>
     </div>

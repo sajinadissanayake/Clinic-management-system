@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Config from '../../config/config';
 import Navbar from '../../components/Navbar';
-import { Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, RadioGroup, Radio, FormControlLabel } from '@mui/material';
+import { Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, RadioGroup, Radio, FormControlLabel, Button } from '@mui/material';
 import NurseLeftbar from './NurseLeftbar';
 import PageBody from '../../components/PageBody';
 import Rightbar from '../../components/Rightbar';
@@ -59,6 +59,16 @@ function BsTable() {
                                         <TableCell>{entry.type}</TableCell>
                                         <TableCell>{entry.rbs}</TableCell>
                                         <TableCell>{entry.specialNotes}</TableCell>
+                                        <TableCell>
+                              <Button variant='outlined' style={{ marginRight: '10px' }}>
+                                <Link style={{ textDecoration: 'none' }} >Update</Link>
+                              </Button>
+                            </TableCell>
+                            <TableCell>
+                              <Button variant='outlined' color='error' >
+                                Delete
+                              </Button>
+                            </TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>

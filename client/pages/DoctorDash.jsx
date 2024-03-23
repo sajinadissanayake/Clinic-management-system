@@ -168,7 +168,7 @@ function DoctorDash() {
                           />
                           <CardContent>
                             <Typography gutterBottom variant="body2" component="div">
-                              Blood Sugar
+                              ///////////////////
                             </Typography>
                           </CardContent>
                         </CardActionArea>

@@ -10,6 +10,7 @@ import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
 import PageBody from '../../components/PageBody';
 import Rightbar from '../../components/Rightbar';
+import NurseLeftbar from './NurseLeftbar';
 
 function MedicalUpdate() {
     const { id,nic } = useParams();
@@ -57,7 +58,7 @@ function MedicalUpdate() {
         <div>
             <Navbar />
             <Stack direction="row" spacing={2} justifyContent="space-between">
-                <Sidebar />
+                <NurseLeftbar/>
                 <PageBody>
                     <form onSubmit={handleSubmit}>
                         <h2>Update Medical Examination</h2>

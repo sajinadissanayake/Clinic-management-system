@@ -8,6 +8,7 @@ import PageBody from '../../components/PageBody';
 import Sidebar from '../../components/Sidebar';
 import maleAvatar from '../images/male.png';
 import femaleAvatar from '../images/female.png';
+import DoctorSidebar from '../../components/DoctorSidebar';
 
 function PatientSelect() {
     const [users, setUsers] = useState([]);
@@ -32,7 +33,7 @@ function PatientSelect() {
         <div>
             <Navbar />
             <Stack direction="row" spacing={2} justifyContent="space-between">
-                <Sidebar />
+                <DoctorSidebar />
                 <PageBody>
                     <TextField
                         label="Search by name or NIC"

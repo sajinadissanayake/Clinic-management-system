@@ -1,84 +1,87 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+
+import { Box, Breadcrumbs, Stack, Typography, TextField, Table, TableHead, TableBody, TableRow, TableCell, Button, Avatar } from '@mui/material';
+import { Link } from 'react-router-dom';
+
 import axios from 'axios';
-import { TextField, Button, Stack, IconButton, Avatar } from '@mui/material';
-import { Add as AddIcon } from '@mui/icons-material';
-import { useParams, useNavigate } from "react-router-dom";
-import Navbar from '../../components/Navbar';
-import Sidebar from '../../components/Sidebar';
-import PageBody from '../../components/PageBody';
-import Rightbar from '../../components/Rightbar';
+
+import maleAvatar from '../images/male.png'
+import femaleAvatar from '../images/female.png'
 import NurseLeftbar from './NurseLeftbar';
+import Navbar from '../../components/Navbar';
+import PageBody from '../../components/PageBody';
+import Announcements from '../../components/Announcements';
+
+
 
 
 function Mselect() {
-  const [users, setUsers] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+    const [patients, setPatients] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => {
-    axios.get('http://localhost:3001')
-      .then(result => setUsers(result.data))
-      .catch(err => console.log(err));
-  }, []);
+    useEffect(() => {
+        axios.get('http://localhost:3001')
+            .then(result => setPatients(result.data))
+            .catch(err => console.log(err));
+    }, []);
 
+    const handleSearch = (e) => {
+        setSearchTerm(e.target.value);
+    };
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
+    const filteredPatients = patients.filter(patient =>
+        (patient.name && patient.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (patient.nic && patient.nic.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
 
-  const filteredUsers = users.filter(user =>
-    user.name && user.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    user.nic && user.nic.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  return (
-    <div>
-      <Navbar/>
-      <Stack direction="row" spacing={2} justifyContent="space-between">
-        <NurseLeftbar/>
-        <PageBody>
-          <div>
-            <Stack direction="row" alignItems="center" spacing={1} justifyContent="space-between">
-              <TextField
-                label="Search by Nic or Name"
-                variant="outlined"
-                value={searchTerm}
-                onChange={handleSearch}
-              />
-              
-            </Stack><br/>
-            <div style={{ height: '70vh', overflowY: 'auto' }}>
-            <div>
-              {filteredUsers.map((user) => (
-                <div key={user._id} style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-                  <Avatar 
-                    src={user.avatar} 
-                    alt={user.name} 
-                    sx={{ 
-                      width:80, 
-                      height: 80,
-                      backgroundColor: user.gender === 'male' ? 'skyblue' : 'pink' // Set background color based on gender
-                    }} 
-                  />
-                  <div style={{ marginLeft: '20px' }}>
-                    <div style={{ fontWeight: 'bold' }}>{user.nic}</div>
-                    <div>{user.name}</div>
-                    <div>
-                      <Button variant='outlined' style={{ marginRight: '10px' }}>
-                        <Link style={{ textDecoration: 'none' }} to={`/medicals/${user.nic}`}>View Examinations</Link>
+    return (
+        <div>
+            <Navbar />
+            <Stack direction="row" spacing={2} justifyContent="space-between">
+                <NurseLeftbar/>
+                <PageBody>
+                    <TextField
+                        label="Search by name or NIC"
+                        variant="outlined"
+                        value={searchTerm}
+                        onChange={handleSearch}
+                        fullWidth
+                    />
+                    <div style={{ height: '70vh', overflowY: 'auto' }}>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell></TableCell>
+                                    <TableCell>NIC</TableCell>
+                                    <TableCell>Name</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {filteredPatients.map((patient) => (
+                                    <TableRow key={patient._id}>
+                                        <TableCell>
+                                            <Avatar alt={patient.name} src={patient.gender === 'male' ? maleAvatar : femaleAvatar} />
+                                        </TableCell>
+                                        <TableCell>{patient.nic}</TableCell>
+                                        <TableCell>{patient.name}</TableCell>
+                                        <TableCell>
+                                        <Stack direction="row" spacing={1} justifyContent="flex-end">
+                                        <Button variant='outlined' style={{ marginRight: '10px' }}>
+                        <Link style={{ textDecoration: 'none' }} to={`/medicals/${patient.nic}`}>View medicals </Link>
                       </Button>
-                     
+                                              </Stack>
+
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
                     </div>
-                  </div>
-                </div>
-              ))}
-            </div></div>
-          </div>
-        </PageBody>
-        <Rightbar/>
-      </Stack>
-    </div>
-  );
+                </PageBody>
+                <Announcements/>
+            </Stack>
+        </div>
+    );
 }
 
 export default Mselect;
