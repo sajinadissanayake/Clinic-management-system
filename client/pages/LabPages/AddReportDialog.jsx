@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+// AddReportDialog.jsx
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, Grid } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function AddReportDialog({ open, onClose, recordId }) {
-    const [nic, setNic] = useState('');
-    const [type, setType] = useState('');
+function AddReportDialog({ open, onClose, recordId, nic, type }) {
     const [patientReport, setPatientReport] = useState(null); // New state for patient image
     const navigate = useNavigate();
 
@@ -13,8 +12,8 @@ function AddReportDialog({ open, onClose, recordId }) {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append('nic', nic);
-        formData.append('type', type);
+        formData.append('nic', nic); // Append the NIC of the record
+        formData.append('type', type); // Append the type of the record
         formData.append('patientReport', patientReport); // Append the patient image file
 
         try {
@@ -37,24 +36,10 @@ function AddReportDialog({ open, onClose, recordId }) {
                 <DialogContent>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <TextField
-                                fullWidth
-                                label="NIC"
-                                placeholder="Enter NIC"
-                                variant="outlined"
-                                value={nic}
-                                onChange={(e) => setNic(e.target.value)}
-                            />
+                            <p>NIC: {nic}</p> {/* Display NIC as text */}
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField
-                                fullWidth
-                                label="Type"
-                                placeholder="Enter type"
-                                variant="outlined"
-                                value={type}
-                                onChange={(e) => setType(e.target.value)}
-                            />
+                            <p>Type: {type}</p> {/* Display type as text */}
                         </Grid>
                         <Grid item xs={12}>
                             <input type="file" name="patientReport" onChange={(e) => setPatientReport(e.target.files[0])} />

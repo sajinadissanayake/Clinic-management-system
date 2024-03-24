@@ -1,3 +1,4 @@
+// LabRequestsPage.jsx
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import PharmacySidebar from '../../components/PharmacySidebar';
@@ -10,6 +11,8 @@ function LabRequestsPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [openDialog, setOpenDialog] = useState(false); // State to control dialog visibility
     const [selectedRecordId, setSelectedRecordId] = useState(null); // State to hold the ID of the selected record
+    const [recordNic, setRecordNic] = useState('');
+    const [recordType, setRecordType] = useState('');
 
     const fetchRecords = () => {
         axios.get('http://localhost:3001/getLabRequests')
@@ -27,8 +30,10 @@ function LabRequestsPage() {
 
     const filteredRecords = records.filter(record => record.nic.includes(searchQuery));
 
-    const handleOpenDialog = (recordId) => {
+    const handleOpenDialog = (recordId, nic, type) => {
         setSelectedRecordId(recordId);
+        setRecordNic(nic); // Set the NIC of the selected record
+        setRecordType(type); // Set the type of the selected record
         setOpenDialog(true);
     };
 
@@ -60,14 +65,14 @@ function LabRequestsPage() {
                                     <TableCell>{record.status}</TableCell>
                                     <TableCell>{new Date(record.requestedDate).toLocaleString()}</TableCell>
                                     <TableCell>
-                                        <Button variant='outlined' onClick={() => handleOpenDialog(record._id)}>Add Report</Button>
+                                        <Button variant='outlined' onClick={() => handleOpenDialog(record._id, record.nic, record.type)}>Add Report</Button>
                                     </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <AddReportDialog open={openDialog} onClose={handleCloseDialog} recordId={selectedRecordId} />
+                <AddReportDialog open={openDialog} onClose={handleCloseDialog} recordId={selectedRecordId} nic={recordNic} type={recordType} />
             </Stack>
         </div>
     );
