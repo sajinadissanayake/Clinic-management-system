@@ -5,6 +5,7 @@ import PharmacySidebar from '../../components/PharmacySidebar';
 import { Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
 import axios from 'axios';
 import AddReportDialog from './AddReportDialog'; // Import the dialog component
+import PageBody from '../../components/PageBody';
 
 function LabRequestsPage() {
     const [records, setRecords] = useState([]);
@@ -46,6 +47,7 @@ function LabRequestsPage() {
             <Navbar />
             <Stack direction="row" spacing={2} justifyContent="space-between">
                 <PharmacySidebar />
+                
                 <TableContainer component={Paper}>
                     <Table>
                         <TableHead>
