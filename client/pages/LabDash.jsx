@@ -100,7 +100,7 @@ function LabDash() {
               <CardContent>
                 <Grid container spacing={2} justifyContent="center">
                   <Grid item xs={6} sm={4} md={3}>
-                    <Link to="/pselect" style={{ textDecoration: 'none' }}>
+                    <Link to="/labrequestspage" style={{ textDecoration: 'none' }}>
                       <Item>
                         <CardActionArea>
                           <CardMedia

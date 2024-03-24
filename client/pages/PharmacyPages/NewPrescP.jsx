@@ -62,7 +62,7 @@ function NewPrescP() {
         <PharmacySidebar />
         <div style={{ margin: 'auto', textAlign: 'center' }}>
           <h1>Pending prescriptions</h1>
-          <TableContainer component={Paper} style={{ minWidth: '1000px', margin: 'auto' }}>
+          <TableContainer component={Paper} style={{ minWidth: '1000px', margin: 'auto', borderRadius:6 }}>
             <Table size="large">
               <TableHead>
                 <TableRow>
@@ -79,7 +79,7 @@ function NewPrescP() {
                     <TableCell>{prescription.status}</TableCell>
                     <TableCell>{formatDate(prescription.PostedDate)}</TableCell>
                     <TableCell>
-                      <Button onClick={() => handleViewPrescription(prescription)}>View</Button>
+                      <Button variant='outlined' onClick={() => handleViewPrescription(prescription)}>View</Button>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -88,16 +88,20 @@ function NewPrescP() {
           </TableContainer>
         </div>
 
-        <Dialog open={openDialog} onClose={handleCloseDialog}>
-          <DialogTitle>Prescription Details</DialogTitle>
-          <DialogContent>
-            <div>{selectedPrescription?.prescription}</div>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseDialog}>Close</Button>
-            <Button onClick={handleMarkAsIssued}>Mark as Issued</Button>
-          </DialogActions>
-        </Dialog>
+        <Dialog open={openDialog} onClose={handleCloseDialog} sx={{ borderRadius: 8 }}>
+  <DialogTitle>Prescription Details Of Patient NIC: {selectedPrescription?.nic}</DialogTitle>
+  <DialogContent>
+    {selectedPrescription?.prescription.split('\n').map((line, index) => (
+      <div key={index}>{line}</div>
+    ))}
+  </DialogContent>
+
+  <DialogActions>
+    <Button variant='outlined' onClick={handleCloseDialog}>Close</Button>
+    <Button variant='contained' onClick={handleMarkAsIssued}>Mark as Issued</Button>
+  </DialogActions>
+</Dialog>
+
       </Stack>
     </div>
   );

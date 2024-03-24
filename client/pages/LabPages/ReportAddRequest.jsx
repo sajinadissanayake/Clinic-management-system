@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import axios from 'axios';
+import React, { useState } from 'react'
+import Navbar from '../../components/Navbar';
+import { Button, Container, Grid, Stack, TextField, Typography } from '@mui/material';
+import Sidebar from '../../components/Sidebar';
+import PageBody from '../../components/PageBody';
+import Rightbar from '../../components/Rightbar';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, Typography, Container, Grid, Stack } from '@mui/material';
-import Navbar from "../components/Navbar";
-import Rightbar from "../components/Rightbar";
-import Sidebar from "../components/Sidebar";
-import PageBody from "../components/PageBody";
 
-function AddReports() {
+function ReportAddRequest() {
+
     const [nic, setNic] = useState('');
     const [type, setType] = useState('');
     const [patientReport, setPatientReport] = useState(null); // New state for patient image
@@ -29,11 +29,10 @@ function AddReports() {
             .catch(err => console.log(err));
     };
 
-    return (
-        
 
 
-        <div>
+  return (
+    <div>
              <Navbar/>
             <Stack direction="row" spacing={2} justifyContent="space-between">
             <Sidebar/>
@@ -79,8 +78,7 @@ function AddReports() {
             </Stack>
             
         </div>
-       
-    );
+  )
 }
 
-export default AddReports;
+export default ReportAddRequest

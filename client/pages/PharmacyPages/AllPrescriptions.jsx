@@ -42,6 +42,7 @@ function AllPrescriptions() {
             <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 64px)' }}>
                 <Card sx={{ borderRadius: 6, width: '100%', maxWidth: 600 }}>
                     <CardContent>
+                        <Typography variant="h5" gutterBottom>Select Patient</Typography> {/* Add this line */}
                         <TextField
                             label="Search by name or NIC"
                             variant="outlined"

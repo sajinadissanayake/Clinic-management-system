@@ -105,6 +105,7 @@ function Pprescriptions() {
                     <TableHead>
                         <TableRow>
                             <TableCell>Prescription</TableCell>
+                            <TableCell>Status</TableCell>
                             <TableCell>Date</TableCell>
                         </TableRow>
                     </TableHead>
@@ -116,7 +117,9 @@ function Pprescriptions() {
                                         <Typography key={index}>{line}</Typography>
                                     ))}
                                 </TableCell>
+                                <TableCell>{prescription.status}</TableCell>
                                 <TableCell>{new Date(prescription.PostedDate).toLocaleDateString()}</TableCell>
+                              
                             </TableRow>
                         ))}
                     </TableBody>

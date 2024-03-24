@@ -83,7 +83,7 @@ function AddPatient() {
             .then(response => {
                 console.log(response);
                 window.alert("Patient added successfully");
-                navigate('/');
+                navigate('/patientslist');
             })
             .catch(error => console.log(error));
     }

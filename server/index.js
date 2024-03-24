@@ -130,8 +130,6 @@ app.post("/AddPatient", upload.single('image'), (req, res) => {
         });
 });
 
-
-
 ////////////////////////////////reports///////////////////////////////////////////////////////////////////////////////
 // Configure Multer in reports
 const Rstorage = multer.diskStorage({
@@ -383,17 +381,15 @@ app.get('/getReportRequests/:nic', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
-
-
-
-
-
-
-
-
-
-
+// Route to fetch all lab requests
+app.get('/getLabRequests', async (req, res) => {
+    try {
+        const labRequests = await ReportRequestModel.find();
+        res.json(labRequests);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
 
 
 app.listen(3001, () => {

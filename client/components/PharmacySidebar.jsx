@@ -22,7 +22,7 @@ const PharmacySidebar = () => {
         <Card sx={{borderRadius:6}}>
           <List>
             <ListItem disablePadding>
-              <ListItemButton component={Link} to="/doctordash">
+              <ListItemButton component={Link} to="/pharmacydash">
                 <Grid container direction="column" alignItems="center" spacing={1}>
                   <Grid item>
                     <HomeIcon sx={{ fontSize: 40 }} />
@@ -40,11 +40,24 @@ const PharmacySidebar = () => {
                     <ArticleIcon sx={{ fontSize: 40 }} />
                   </Grid>
                   <Grid item>
-                    <Typography variant="body1">Add Prescription</Typography>
+                    <Typography variant="body1">New Prescriptions</Typography>
                   </Grid>
                 </Grid>
               </ListItemButton>
             </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton component={Link} to="/pselect">
+                <Grid container direction="column" alignItems="center" spacing={1}>
+                  <Grid item>
+                    <ArticleIcon sx={{ fontSize: 40 }} />
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="body1">Other Prescriptions</Typography>
+                  </Grid>
+                </Grid>
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding></ListItem>
             <ListItem disablePadding>
               <ListItemButton component={Link} to="#">
                 <Grid container direction="column" alignItems="center" spacing={1}>
