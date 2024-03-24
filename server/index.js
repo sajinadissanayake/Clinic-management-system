@@ -36,6 +36,20 @@ app.get('/getPatient/:id', (req, res) => {
         .catch(err => res.json(err));
 });
 
+app.get('/getPatient/:nic', (req, res) => {
+    const nic = req.params.nic;
+    patientModel.findOne({ nic: nic }) // Use findOne instead of findByNIC
+        .then(patient => {
+            if (!patient) {
+                res.status(404).json({ error: 'Patient not found' });
+            } else {
+                res.json(patient);
+            }
+        })
+        .catch(err => res.status(500).json({ error: err.message }));
+});
+
+
 
 
 app.put('/updatePatient/:id', (req, res) => {
@@ -300,18 +314,20 @@ app.get('/getPrescriptions/:nic', (req, res) => {
         .then(prescriptions => res.json(prescriptions))
         .catch(err => res.status(500).json({ error: err.message }));
 });
-app.get('/getPrescriptions/:nic', (req, res) => {
-    const nic = req.params.nic;
-    prescModel.find({ nic: nic })
-        .then(prescriptions => res.json(prescriptions))
-        .catch(err => res.status(500).json({ error: err.message }));
-});
+
 
 // Add a new endpoint to get a single prescription by ID
 app.get('/getPrescription/:id', (req, res) => {
     const id = req.params.id;
     prescModel.findById(id)
         .then(prescription => res.json(prescription))
+        .catch(err => res.status(500).json({ error: err.message }));
+});
+
+// Retrieve all prescriptions
+app.get('/getPrescriptions', (req, res) => {
+    prescModel.find({})
+        .then(prescriptions => res.json(prescriptions))
         .catch(err => res.status(500).json({ error: err.message }));
 });
 
@@ -324,7 +340,16 @@ app.put('/updatePrescription/:id', (req, res) => {
         .then(updatedPrescription => res.json(updatedPrescription))
         .catch(err => res.status(500).json({ error: err.message }));
 });
-// delete
+
+app.put('/updatePrescriptionStatus/:id', (req, res) => {
+    const id = req.params.id;
+    const { status } = req.body;
+
+    prescModel.findByIdAndUpdate(id, { status })
+        .then(updatedPrescription => res.json(updatedPrescription))
+        .catch(err => res.status(500).json({ error: err.message }));
+});
+
 
 app.delete('/deletePrescription/:id', (req, res) => {
     const id = req.params.id;

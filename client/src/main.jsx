@@ -35,6 +35,7 @@ import MedicalUpdate from '../pages/NursePages/MedicalUpdate.jsx'
 import PharmacyDash from '../pages/PharmacyDash.jsx'
 import AllPrescriptions from '../pages/PharmacyPages/AllPrescriptions.jsx'
 import Pprescriptions from '../pages/PharmacyPages/Pprescriptions.jsx'
+import NewPrescP from '../pages/PharmacyPages/NewPrescP.jsx'
 
 
 
@@ -166,6 +167,10 @@ const router = createBrowserRouter([
   {
     path: "/Pprescriptions/:nic", 
     element: <Pprescriptions />, 
+  },
+  {
+    path: "/NewPresc", 
+    element: <NewPrescP />, 
   },
   
 

@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-
 import { Box, Breadcrumbs, Stack, Typography, TextField, Table, TableHead, TableBody, TableRow, TableCell, Button, Avatar } from '@mui/material';
 import { Link } from 'react-router-dom';
-
 import axios from 'axios';
-
-import maleAvatar from '../pages/images/male.png'
-import femaleAvatar from '../pages/images/female.png'
+import maleAvatar from '../pages/images/male.png';
+import femaleAvatar from '../pages/images/female.png';
 import Navbar from '../components/Navbar';
-import Sidebar from '../components/Sidebar';
+
 import PageBody from '../components/PageBody';
 import Announcements from '../components/Announcements';
+import NurseLeftbar from '../pages/NursePages/NurseLeftbar';
+// Import AddCircleIcon
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 function PatientList() {
     const [patients, setPatients] = useState([]);
@@ -35,15 +35,19 @@ function PatientList() {
         <div>
             <Navbar />
             <Stack direction="row" spacing={2} justifyContent="space-between">
-                <Sidebar />
+                <NurseLeftbar/>
                 <PageBody>
-                    <TextField
-                        label="Search by name or NIC"
-                        variant="outlined"
-                        value={searchTerm}
-                        onChange={handleSearch}
-                        fullWidth
-                    />
+                    <Stack direction="row" alignItems="center" justifyContent="space-between">
+                        <TextField
+                            label="Search by name or NIC"
+                            variant="outlined"
+                            value={searchTerm}
+                            onChange={handleSearch}
+                            fullWidth
+                        />
+                        {/* Add AddCircleIcon */}
+                        <Link style={{ textDecoration: 'none' }} to={`/addpatient`}><AddCircleIcon  style={{ cursor: 'pointer', fontSize: 40, color: '#778da9' }} /></Link>
+                    </Stack>
                     <div style={{ height: '70vh', overflowY: 'auto' }}>
                         <Table>
                             <TableHead>
@@ -62,15 +66,14 @@ function PatientList() {
                                         <TableCell>{patient.nic}</TableCell>
                                         <TableCell>{patient.name}</TableCell>
                                         <TableCell>
-                                        <Stack direction="row" spacing={1} justifyContent="flex-end">
+                                            <Stack direction="row" spacing={1} justifyContent="flex-end">
                                                 <Button variant='outlined' style={{ marginRight: '10px' }}>
-                                                  <Link style={{ textDecoration: 'none' }} to={`/patient/${patient._id}`}>View</Link>
+                                                    <Link style={{ textDecoration: 'none' }} to={`/patient/${patient._id}`}>View</Link>
                                                 </Button>
                                                 <Button variant='outlined' color='error' onClick={() => handleDelete(patient._id)}>
-                                                  Delete
+                                                    Delete
                                                 </Button>
-                                              </Stack>
-
+                                            </Stack>
                                         </TableCell>
                                     </TableRow>
                                 ))}

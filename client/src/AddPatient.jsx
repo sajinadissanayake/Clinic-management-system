@@ -14,6 +14,7 @@ import Sidebar from "../components/Sidebar";
 import Body from "../components/PageBody";
 import PageBody from "../components/PageBody";
 import Rightbar from "../components/Rightbar";
+import NurseLeftbar from "../pages/NursePages/NurseLeftbar";
 
 
 
@@ -94,7 +95,7 @@ function AddPatient() {
         <div>
             <Navbar/>
             <Stack direction="row" spacing={2} justifyContent="space-between">
-            <Sidebar/>
+           <NurseLeftbar/>
             <PageBody>
             <div style={{ height: '80vh', overflowY: 'auto' }}>
               
