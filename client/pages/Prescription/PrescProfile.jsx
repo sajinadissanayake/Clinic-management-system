@@ -213,8 +213,12 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                                     </Card>
                                 </CardActionArea>
                             </Grid>
-                            <RequestRecordDialog open={openRequestRecordDialog} onClose={handleRequestRecordDialogClose} />
-                            
+                            <RequestRecordDialog
+                                open={openRequestRecordDialog}
+                                onClose={handleRequestRecordDialogClose}
+                                patientNIC={patient.nic} // Pass patient's NIC as prop
+                            />
+                                                        
                             <Grid item xs={6} md={3}>
                                 <CardActionArea>
                               

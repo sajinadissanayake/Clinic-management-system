@@ -2,43 +2,46 @@
 
 import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
+import axios from 'axios';
 
-function RequestRecordDialog({ open, onClose }) {
-    const [reason, setReason] = useState('');
+function RequestRecordDialog({ open, onClose,patientNIC  }) {
+   
 
-    const handleReasonChange = (event) => {
-        setReason(event.target.value);
-    };
+    const nic = patientNIC;
+    const [type, setType] = useState('');
+    const status =  "pending";
 
-    const handleRequest = () => {
-        // Handle the request action here
-        // For example, you can send the reason for the request to the server
-        // and close the dialog
-        console.log('Requested record for reason:', reason);
-        onClose();
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post("http://localhost:3001/AddRecordRequest", { nic, type,status})
+            .then(result => {
+                console.log(result);
+                onClose()
+                window.location.reload();
+            })
+            .catch(err => console.log(err));
     };
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle>Request Record</DialogTitle>
-            <DialogContent>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="reason"
-                    label="Reason for request"
-                    fullWidth
-                    value={reason}
-                    onChange={handleReasonChange}
-                />
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={onClose}>Cancel</Button>
-                <Button onClick={handleRequest} color="primary">
-                    Request
-                </Button>
-            </DialogActions>
-        </Dialog>
+        <DialogTitle>Request Reports</DialogTitle>
+        <DialogContent>
+            <TextField
+                autoFocus
+                margin="dense"
+                id="type"
+                label="Enter ReCord Type"
+                fullWidth
+                multiline
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+            />
+        </DialogContent>
+        <DialogActions>
+            <Button onClick={onClose}>Cancel</Button>
+            <Button onClick={handleSubmit} color="primary">Submit Request</Button>
+        </DialogActions>
+    </Dialog>
     );
 }
 

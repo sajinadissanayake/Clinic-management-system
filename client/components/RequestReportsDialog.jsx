@@ -10,16 +10,18 @@ function RequestReportsDialog({ open, onClose,patientNIC }) {
     const nic = patientNIC;
     const [type, setType] = useState('');
     const status =  "pending";
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3001/AddReportRequest", { nic, type,status})
+        axios.post("http://localhost:3001/AddReportRequest", { nic, type, status })
             .then(result => {
                 console.log(result);
-                onClose()
+                onClose();
+                window.location.reload(); // Reload the page
             })
             .catch(err => console.log(err));
     };
+    
 
     return (
         <Dialog open={open} onClose={onClose}>
@@ -29,7 +31,7 @@ function RequestReportsDialog({ open, onClose,patientNIC }) {
                     autoFocus
                     margin="dense"
                     id="type"
-                    label="Enter your request message"
+                    label="Enter Report Type"
                     fullWidth
                     multiline
                     value={type}

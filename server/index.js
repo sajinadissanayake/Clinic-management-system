@@ -12,6 +12,7 @@ const blogModel = require('./models/blog');
 const appoModel = require('./models/appointments');
 const prescModel = require('./models/presciptions');
 const ReportRequestModel = require('./models/ReportRequests')
+const RecordRequestModel = require( './models/RecordRequests' )
 
 
 const app = express();
@@ -417,6 +418,63 @@ app.put('/updateReportRequest/:id', async (req, res) => {
       res.status(500).send('Internal Server Error');
     }
   });
+// Add a route to delete report request
+app.delete('/deleteReportRequest/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        
+        // Find the report request by ID and delete it
+        await ReportRequestModel.findByIdAndDelete(id);
+
+        res.status(200).send('Report request deleted successfully');
+    } catch (error) {
+        console.error('Error deleting report request:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
+  /////////////////////records//////////////////////////////////////////
+  app.post("/AddRecordRequest", (req, res) => {
+    const { nic, type ,status} = req.body;
+
+    // Create a new report request using the ReportRequestModel
+    RecordRequestModel.create({ nic, type,status })
+        .then(recordRequest => {
+            console.log("Record request created:", recordRequest);
+            res.json(recordRequest);
+        })
+        .catch(err => {
+            console.error("Error creating record request:", err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
+});
+app.get('/getRecordRequests/:nic', async (req, res) => {
+    try {
+        const { nic } = req.params;
+        const recordRequests = await RecordRequestModel.find({ nic, status: "pending" });
+        res.json(recordRequests);
+    } catch (error) {
+        console.error('Error fetching record requests:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+// Add a route to delete record request
+app.delete('/deleteRecordRequest/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        
+        // Find the record request by ID and delete it
+        await RecordRequestModel.findByIdAndDelete(id);
+
+        res.status(200).send('Record request deleted successfully');
+    } catch (error) {
+        console.error('Error deleting record request:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
   
 
 

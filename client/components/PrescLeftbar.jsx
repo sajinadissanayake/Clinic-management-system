@@ -18,6 +18,7 @@ function PrescLeftbar({ patientNIC }) {
     const [lastPrescription, setLastPrescription] = useState(null);
     const [selectedPrescriptionId, setSelectedPrescriptionId] = useState(null);
     const [pendingReportRequests, setPendingReportRequests] = useState([]);
+    const [pendingRecordRequests, setPendingRecordRequests] = useState([]);
 
     useEffect(() => {
         axios.get(`http://localhost:3001/getPrescriptions/${patientNIC}`)
@@ -34,6 +35,12 @@ function PrescLeftbar({ patientNIC }) {
                 setPendingReportRequests(response.data.filter(request => request.status === "pending"));
             })
             .catch(error => console.error('Error fetching pending report requests:', error));
+
+        axios.get(`http://localhost:3001/getRecordRequests/${patientNIC}`)
+            .then(response => {
+                setPendingRecordRequests(response.data.filter(request => request.status === "pending"));
+            })
+            .catch(error => console.error('Error fetching pending Record requests:', error));
     }, [patientNIC]);
 
     const handleClickOpen = () => {
@@ -64,29 +71,52 @@ function PrescLeftbar({ patientNIC }) {
     };
 
     const handleCancelReportRequest = (requestId) => {
-        // Implement cancellation of report request
-        console.log('Cancel report request with ID:', requestId);
+        axios.delete(`http://localhost:3001/deleteReportRequest/${requestId}`)
+            .then(response => {
+                console.log('Report request deleted successfully');
+                // Refresh pending report requests
+                axios.get(`http://localhost:3001/getReportRequests/${patientNIC}`)
+                    .then(response => {
+                        setPendingReportRequests(response.data.filter(request => request.status === "pending"));
+                    })
+                    .catch(error => console.error('Error fetching pending report requests:', error));
+            })
+            .catch(error => console.error('Error deleting report request:', error));
+    };
+
+    const handleCancelRecordRequest = (requestId) => {
+        axios.delete(`http://localhost:3001/deleteRecordRequest/${requestId}`)
+            .then(response => {
+                console.log('Record request deleted successfully');
+                // Refresh pending record requests
+                axios.get(`http://localhost:3001/getRecordRequests/${patientNIC}`)
+                    .then(response => {
+                        setPendingRecordRequests(response.data.filter(request => request.status === "pending"));
+                    })
+                    .catch(error => console.error('Error fetching pending record requests:', error));
+            })
+            .catch(error => console.error('Error deleting record request:', error));
     };
 
     const formatDate = (dateString) => {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         return new Date(dateString).toLocaleDateString(undefined, options);
     };
-    
 
     return (
         <div>
             <Link to="/pselect" style={{ textDecoration: 'none' }}>
-            <Card sx={{ marginBottom: 2 , marginTop:3, borderRadius:6}}>
-            <CardContent sx={{ display: 'flex' }}>
-            <Button  startIcon={<ArrowBackIcon />}>
-                Back
-            </Button>
-        </CardContent>
-            </Card></Link>
+                <Card sx={{ marginBottom: 2, marginTop: 3, borderRadius: 6 }}>
+                    <CardContent sx={{ display: 'flex' }}>
+                        <Button startIcon={<ArrowBackIcon />}>
+                            Back
+                        </Button>
+                    </CardContent>
+                </Card>
+            </Link>
 
             {lastPrescription && (
-                <Card sx={{ marginBottom: 2 , borderRadius:6}}>
+                <Card sx={{ marginBottom: 2, borderRadius: 6 }}>
                     <CardContent>
                         <Typography variant="h6" marginBottom={2}>Last Prescription</Typography>
                         {lastPrescription.prescription.split('\n').map((line, index) => (
@@ -99,7 +129,7 @@ function PrescLeftbar({ patientNIC }) {
             )}
 
             {pendingReportRequests.length > 0 && (
-                <Card sx={{ marginBottom: 2 , borderRadius:6}}>
+                <Card sx={{ marginBottom: 2, borderRadius: 6 }}>
                     <CardContent>
                         <Typography variant="h6" marginBottom={2}>Pending Report Requests</Typography>
                         <TableContainer component={Paper}>
@@ -118,9 +148,43 @@ function PrescLeftbar({ patientNIC }) {
                                                 <Button
                                                     variant="outlined"
                                                     color="error"
-                                                    size="small" // Set size to small
+                                                    size="small"
                                                     onClick={() => handleCancelReportRequest(request._id)}
                                                 >
+                                                    Cancel
+                                                </Button>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </CardContent>
+                </Card>
+            )}
+
+            {pendingRecordRequests.length > 0 && (
+                <Card sx={{ marginBottom: 2, borderRadius: 6 }}>
+                    <CardContent>
+                        <Typography variant="h6" marginBottom={2}>Pending Record Requests</Typography>
+                        <TableContainer component={Paper}>
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Record Type</TableCell>
+                                        <TableCell>Action</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {pendingRecordRequests.map(request => (
+                                        <TableRow key={request._id}>
+                                            <TableCell>{request.type}</TableCell>
+                                            <TableCell>
+                                                <Button
+                                                    variant="outlined"
+                                                    color="error"
+                                                    size="small"
+                                                    onClick={() => handleCancelRecordRequest(request._id)}>
                                                     Cancel
                                                 </Button>
                                             </TableCell>
@@ -167,16 +231,16 @@ function PrescLeftbar({ patientNIC }) {
                                         </TableCell>
                                         <TableCell>{formatDate(prescription.PostedDate)}</TableCell>
                                         <TableCell>
-                                            <Button 
-                                                variant='outlined' 
+                                            <Button
+                                                variant='outlined'
                                                 style={{ marginRight: '10px' }}
                                                 onClick={() => handleUpdateClick(prescription._id)}
                                                 disabled={prescription.status !== "pending"} // Disable if status is not pending
                                             >
                                                 Update
                                             </Button>
-                                            <Button 
-                                                variant='outlined' 
+                                            <Button
+                                                variant='outlined'
                                                 color="error"
                                                 onClick={() => handleDelete(prescription._id)}
                                                 disabled={prescription.status !== "pending"} // Disable if status is not pending
@@ -202,3 +266,4 @@ function PrescLeftbar({ patientNIC }) {
 }
 
 export default PrescLeftbar;
+

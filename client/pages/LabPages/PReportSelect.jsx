@@ -8,7 +8,7 @@ import Announcements from '../../components/Announcements';
 import PageBody from '../../components/PageBody';
 import maleAvatar from '../images/male.png';
 import femaleAvatar from '../images/female.png';
-
+import LabSidebar from '../../components/LabSidebar';
 
 function PReportSelect() {
     const [patients, setPatients] = useState([]);
@@ -33,7 +33,7 @@ function PReportSelect() {
         <div>
             <Navbar />
             <Stack direction="row" spacing={2} justifyContent="space-between">
-                <NurseLeftbar/>
+                <LabSidebar/>
                 <PageBody>
                     <Stack direction="row" alignItems="center" justifyContent="space-between">
                         <TextField
@@ -42,9 +42,9 @@ function PReportSelect() {
                             value={searchTerm}
                             onChange={handleSearch}
                             fullWidth
+                            style={{width: '250px'}} // Adjust width here
                         />
-                        {/* Add AddCircleIcon */}
-                       
+                        <Typography variant="subtitle1">{filteredPatients.length} Results</Typography>
                     </Stack>
                     <div style={{ height: '70vh', overflowY: 'auto' }}>
                         <Table>
@@ -68,7 +68,6 @@ function PReportSelect() {
                                                 <Button variant='outlined' style={{ marginRight: '10px' }}>
                                                     <Link style={{ textDecoration: 'none' }} to={`/reports/${patient.nic}`}>View</Link>
                                                 </Button>
-                                               
                                             </Stack>
                                         </TableCell>
                                     </TableRow>

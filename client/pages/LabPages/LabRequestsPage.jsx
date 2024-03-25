@@ -5,6 +5,7 @@ import { Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 import axios from 'axios';
 import AddReportDialog from './AddReportDialog';
 import Announcements from '../../components/Announcements';
+import LabSidebar from '../../components/LabSidebar';
 
 function LabRequestsPage() {
     const [records, setRecords] = useState([]);
@@ -50,9 +51,9 @@ function LabRequestsPage() {
         <div>
             <Navbar />
             <Stack direction="row" spacing={2} justifyContent="space-between">
-                <PharmacySidebar />
+                <LabSidebar/>
                 <Stack direction="column" alignItems="center" spacing={2}>
-                    <Typography variant="h4" sx={{marginTop:4}}>Lab Requests</Typography>
+                    <Typography variant="h4" sx={{marginTop:8}}>Lab Requests</Typography>
                     <Card style={{ borderRadius: 6 }}>
                         <Grid container justifyContent="flex-start" alignItems="center" spacing={2}>
                             <Grid item xs={3}>
@@ -65,7 +66,7 @@ function LabRequestsPage() {
                                 />
                             </Grid>
                             <Grid item xs={9} container justifyContent="flex-start"> {/* Changed justifyContent to flex-start */}
-                                <Typography variant="h6" sx={{marginLeft:2,marginTop:2,color:"primary"}}> {totalRequests}  Requests</Typography>
+                                <Typography variant="body1" sx={{marginLeft:2,marginTop:2,color:"#415a77"}}> {totalRequests}  Results</Typography>
                             </Grid>
                             <Grid item xs={12}>
                                 <TableContainer component={Paper}>
@@ -86,7 +87,8 @@ function LabRequestsPage() {
                                                     <TableCell>{record.type}</TableCell>
                                                     <TableCell>{record.status}</TableCell>
                                                     <TableCell>
-                                                        {record.requestedDate ? new Date(record.requestedDate).toLocaleString() : 'Invalid Date'}
+                                                    {record.requestedDate ? new Date(record.requestedDate).toLocaleDateString() : 'Invalid Date'}
+
                                                     </TableCell>
                                                     <TableCell>
                                                         <Button variant='outlined' onClick={() => handleOpenDialog(record)}>Add Report</Button>
