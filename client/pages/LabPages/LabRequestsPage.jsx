@@ -1,17 +1,16 @@
-// LabRequestsPage.jsx
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import PharmacySidebar from '../../components/PharmacySidebar';
-import { Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
+import { Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography, Card, TextField, Grid } from '@mui/material';
 import axios from 'axios';
-import AddReportDialog from './AddReportDialog'; // Import the dialog component
-import PageBody from '../../components/PageBody';
+import AddReportDialog from './AddReportDialog';
+import Announcements from '../../components/Announcements';
 
 function LabRequestsPage() {
     const [records, setRecords] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
-    const [openDialog, setOpenDialog] = useState(false); // State to control dialog visibility
-    const [selectedRecordId, setSelectedRecordId] = useState(null); // State to hold the ID of the selected record
+    const [openDialog, setOpenDialog] = useState(false);
+    const [selectedRecord, setSelectedRecord] = useState(null);
     const [recordNic, setRecordNic] = useState('');
     const [recordType, setRecordType] = useState('');
 
@@ -29,12 +28,13 @@ function LabRequestsPage() {
         fetchRecords();
     }, []);
 
-    const filteredRecords = records.filter(record => record.nic.includes(searchQuery));
+    const filteredRecords = records.filter(record => record.status === 'pending' && record.nic.includes(searchQuery));
+    const totalRequests = filteredRecords.length;
 
-    const handleOpenDialog = (recordId, nic, type) => {
-        setSelectedRecordId(recordId);
-        setRecordNic(nic); // Set the NIC of the selected record
-        setRecordType(type); // Set the type of the selected record
+    const handleOpenDialog = (record) => {
+        setSelectedRecord(record);
+        setRecordNic(record.nic);
+        setRecordType(record.type);
         setOpenDialog(true);
     };
 
@@ -42,39 +42,66 @@ function LabRequestsPage() {
         setOpenDialog(false);
     };
 
+    const handleSearchChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
     return (
         <div>
             <Navbar />
             <Stack direction="row" spacing={2} justifyContent="space-between">
                 <PharmacySidebar />
-                
-                <TableContainer component={Paper}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>NIC</TableCell>
-                                <TableCell>Type</TableCell>
-                                <TableCell>Status</TableCell>
-                                <TableCell>Requested Date</TableCell>
-                                <TableCell>Action</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {filteredRecords.map(record => (
-                                <TableRow key={record._id}>
-                                    <TableCell>{record.nic}</TableCell>
-                                    <TableCell>{record.type}</TableCell>
-                                    <TableCell>{record.status}</TableCell>
-                                    <TableCell>{new Date(record.requestedDate).toLocaleString()}</TableCell>
-                                    <TableCell>
-                                        <Button variant='outlined' onClick={() => handleOpenDialog(record._id, record.nic, record.type)}>Add Report</Button>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <AddReportDialog open={openDialog} onClose={handleCloseDialog} recordId={selectedRecordId} nic={recordNic} type={recordType} />
+                <Stack direction="column" alignItems="center" spacing={2}>
+                    <Typography variant="h4" sx={{marginTop:4}}>Lab Requests</Typography>
+                    <Card style={{ borderRadius: 6 }}>
+                        <Grid container justifyContent="flex-start" alignItems="center" spacing={2}>
+                            <Grid item xs={3}>
+                                <TextField
+                                    label="Search by NIC"
+                                    variant="outlined"
+                                    value={searchQuery}
+                                    onChange={handleSearchChange}
+                                    sx={{marginLeft:2,marginTop:2}}
+                                />
+                            </Grid>
+                            <Grid item xs={9} container justifyContent="flex-start"> {/* Changed justifyContent to flex-start */}
+                                <Typography variant="h6" sx={{marginLeft:2,marginTop:2,color:"primary"}}> {totalRequests}  Requests</Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TableContainer component={Paper}>
+                                    <Table>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>NIC</TableCell>
+                                                <TableCell>Type</TableCell>
+                                                <TableCell>Status</TableCell>
+                                                <TableCell>Requested Date</TableCell>
+                                                <TableCell>Action</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {filteredRecords.map(record => (
+                                                <TableRow key={record._id}>
+                                                    <TableCell>{record.nic}</TableCell>
+                                                    <TableCell>{record.type}</TableCell>
+                                                    <TableCell>{record.status}</TableCell>
+                                                    <TableCell>
+                                                        {record.requestedDate ? new Date(record.requestedDate).toLocaleString() : 'Invalid Date'}
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <Button variant='outlined' onClick={() => handleOpenDialog(record)}>Add Report</Button>
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                            </Grid>
+                        </Grid>
+                    </Card>
+                </Stack>
+                <AddReportDialog open={openDialog} onClose={handleCloseDialog} selectedRecord={selectedRecord} />
+                <Announcements />
             </Stack>
         </div>
     );

@@ -1,20 +1,14 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const ReportRequestSchema = new mongoose.Schema({
-    
-   nic:String,
-   type:String,
-   status:String,
-
-    requstedDate: {
+   nic: String,
+   type: String,
+   status: String,
+   requestedDate: {
       type: Date,
-      default: Date.now  },
-
-
+      default: Date.now
+   }
 });
 
-    
-
-
-const ReportRequestModel = mongoose.model("ReportRequests", ReportRequestSchema)
+const ReportRequestModel = mongoose.model("ReportRequests", ReportRequestSchema);
 module.exports = ReportRequestModel;

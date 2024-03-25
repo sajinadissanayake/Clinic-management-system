@@ -192,8 +192,21 @@ app.delete('/deleteReport/:id', (req, res) => {
         .catch(err => res.json(err));
 });
 // Retrieve reports by patient NIC
-
-
+// Route to retrieve reports data associated with a specific NIC
+app.get('/getReports/:nic', (req, res) => {
+    const { nic } = req.params;
+    reportsModel.find({ nic })
+      .then(reports => res.json(reports))
+      .catch(err => res.status(500).json({ error: 'Error fetching reports', details: err }));
+  });
+  
+  // Route to serve PDF report files
+  app.get('/reports/:filename', (req, res) => {
+    const { filename } = req.params;
+    const filePath = path.join(__dirname, 'reports', filename);
+    res.sendFile(filePath);
+  });
+  
 
 /////////////////////////////////////////////////////////////////////Mexam/////////////////////////////////
 
@@ -390,6 +403,21 @@ app.get('/getLabRequests', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
+app.put('/updateReportRequest/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Update report request status to "added"
+      await ReportRequestModel.findByIdAndUpdate(id, { status: 'added' });
+  
+      res.status(200).send('Report request status updated successfully');
+    } catch (error) {
+      console.error('Error updating report request status:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+  
 
 
 app.listen(3001, () => {

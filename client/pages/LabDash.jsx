@@ -119,7 +119,7 @@ function LabDash() {
                     </Link>
                   </Grid>
                   <Grid item xs={6} sm={4} md={3}>
-                    <Link to="/allprescriptions" style={{ textDecoration: 'none' }}>
+                    <Link to="/PReportSelect" style={{ textDecoration: 'none' }}>
                     <Item>
                         <CardActionArea>
                           <CardMedia

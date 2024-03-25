@@ -38,7 +38,10 @@ import Pprescriptions from '../pages/PharmacyPages/Pprescriptions.jsx'
 import NewPrescP from '../pages/PharmacyPages/NewPrescP.jsx'
 import LabDash from '../pages/LabDash.jsx'
 import LabRequestsPage from '../pages/LabPages/LabRequestsPage.jsx'
-import ReportAddRequest from '../pages/LabPages/ReportAddRequest.jsx'
+import PReportSelect from '../pages/LabPages/PReportSelect.jsx'
+import Reports from '../pages/LabPages/Reports.jsx'
+
+
 
 
 
@@ -184,9 +187,14 @@ const router = createBrowserRouter([
     element: <LabRequestsPage />, 
   },
   {
-    path: "/reportaddrequest", 
-    element: <ReportAddRequest />, 
+    path: "/PReportSelect", 
+    element: <PReportSelect/>, 
   },
+  {
+    path: "/reports/:nic", 
+    element: <Reports/>, 
+  },
+ 
 
   
 
