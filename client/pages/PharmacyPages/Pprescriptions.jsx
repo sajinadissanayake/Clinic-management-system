@@ -17,9 +17,10 @@ function Pprescriptions() {
 
     useEffect(() => {
         // Fetch patient data
-        axios.get(`http://localhost:3001/getPatient/${nic}`)
+        axios.get(`http://localhost:3001/getPatient/nic/${nic}`)
             .then(response => {
                 setPatient(response.data);
+                console.log(response.data);
             })
             .catch(error => {
                 setError(error);
@@ -57,10 +58,10 @@ function Pprescriptions() {
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
-
     return (
         <div>
             <Navbar />
+            
             {patient && (
                 <Container>
                     <Card>

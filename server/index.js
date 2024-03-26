@@ -37,7 +37,8 @@ app.get('/getPatient/:id', (req, res) => {
         .catch(err => res.json(err));
 });
 
-app.get('/getPatient/:nic', (req, res) => {
+app.get('/getPatient/nic/:nic', (req, res) => {
+    console.log
     const nic = req.params.nic;
     patientModel.findOne({ nic: nic }) // Use findOne instead of findByNIC
         .then(patient => {
@@ -194,10 +195,11 @@ app.delete('/deleteReport/:id', (req, res) => {
 });
 // Retrieve reports by patient NIC
 // Route to retrieve reports data associated with a specific NIC
-app.get('/getReports/:nic', (req, res) => {
+app.get('/getReports/nic/:nic', (req, res) => {
     const { nic } = req.params;
+    console.log(nic);
     reportsModel.find({ nic })
-      .then(reports => res.json(reports))
+      .then(reports => {console.log(reports);res.json(reports)})
       .catch(err => res.status(500).json({ error: 'Error fetching reports', details: err }));
   });
   

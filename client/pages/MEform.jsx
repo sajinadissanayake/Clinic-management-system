@@ -9,6 +9,7 @@ import Navbar from '../components/Navbar';
 import { Stack } from '@mui/material';
 import Sidebar from '../components/Sidebar';
 import PageBody from '../components/PageBody';
+import NurseLeftbar from './NursePages/NurseLeftbar';
 
 function MEform() {
    
@@ -37,10 +38,11 @@ function MEform() {
 
 <Navbar/>
             <Stack direction="row" spacing={2} justifyContent="space-between">
-            <Sidebar/>
+            <NurseLeftbar/>
             <PageBody>
             <form onSubmit={handleSubmit}>
                 <h2>Medical Examination</h2>
+                <h3>Of Patient NIC :</h3>
                 <div style={{ height: '70vh', overflowY: 'auto' }}>
                 <div>
                     <TextField
