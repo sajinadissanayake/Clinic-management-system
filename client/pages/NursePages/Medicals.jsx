@@ -55,104 +55,103 @@ function Medicals() {
       <Navbar />
       <Stack direction="row" spacing={2} justifyContent="space-between">
         <NurseLeftbar />
-        
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              {/* Dropdown to filter by year */}
-              <Stack direction="row" alignItems="center" justifyContent="space-between">
-                <FormControl fullWidth sx={{ maxWidth: 200 }}>
-                  <InputLabel id="year-select-label">Filter by Year</InputLabel>
-                  <Select
-                    labelId="year-select-label"
-                    id="year-select"
-                    value={selectedYear}
-                    onChange={(e) => setSelectedYear(e.target.value)}
-                    sx={{ width: '100%', minWidth: 120 }}
-                  >
-                    <MenuItem value="">All Records</MenuItem>
-                    {years.map((year) => (
-                      <MenuItem key={year} value={year}>
-                        {year}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-                <Link style={{ textDecoration: 'none' }} to={`/MEform/${nic}`} >
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            {/* Displaying the patient NIC */}
+            <Typography variant="h6" gutterBottom>
+              Checkups of patient NIC: {nic}
+            </Typography>
+            {/* Dropdown to filter by year */}
+            <Stack direction="row" alignItems="center" justifyContent="space-between">
+              <FormControl fullWidth sx={{ maxWidth: 200 }}>
+                <InputLabel id="year-select-label">Filter by Year</InputLabel>
+                <Select
+                  labelId="year-select-label"
+                  id="year-select"
+                  value={selectedYear}
+                  onChange={(e) => setSelectedYear(e.target.value)}
+                  sx={{ width: '100%', minWidth: 120 }}
+                >
+                  <MenuItem value="">All Records</MenuItem>
+                  {years.map((year) => (
+                    <MenuItem key={year} value={year}>
+                      {year}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <Link style={{ textDecoration: 'none' }} to={`/MEform/${nic}`} >
                 <Fab color="primary" aria-label="add" size="small">
-                  
-                    <AddIcon />
-                  
-                </Fab></Link>
-              </Stack>
-            </Grid>
-            
-            {filteredExaminations.map((exam, index) => (
-              <Grid item xs={12} sm={gridItemSize} md={gridItemSize} key={index}>
-                <Card style={{ backgroundColor: '#f3f3f3', marginBottom: '20px' }}>
-                  <CardContent>
-                    <div style={{ overflowX: 'auto', maxWidth: '100%' }}>
-                      <Table>
-                        <TableHead>
-                          <TableRow>
-                            <TableCell>Date</TableCell>
-                            <TableCell>{new Date(exam.ExaminationDate).toLocaleDateString()}</TableCell>
-                          </TableRow>
-                        </TableHead>
-                        <tbody>
-                          <TableRow hover>
-                            <TableCell style={{ fontSize: '14px' }}>Age</TableCell>
-                            <TableCell>{exam.age}</TableCell>
-                          </TableRow>
-                          <TableRow hover>
-                            <TableCell>Weight</TableCell>
-                            <TableCell>{exam.weight}</TableCell>
-                          </TableRow>
-                          <TableRow hover>
-                            <TableCell>BMI</TableCell>
-                            <TableCell>{exam.bmi}</TableCell>
-                          </TableRow>
-                          <TableRow hover>
-                            <TableCell>Ideal Body Weight</TableCell>
-                            <TableCell>{exam.ibw}</TableCell>
-                          </TableRow>
-                          <TableRow hover>
-                            <TableCell>Waist Circumference</TableCell>
-                            <TableCell>{exam.wc}</TableCell>
-                          </TableRow>
-                          <TableRow hover>
-                            <TableCell>Blood Pressure</TableCell>
-                            <TableCell>{exam.bpressure}</TableCell>
-                          </TableRow>
-                          <TableRow hover>
-                            <TableCell>Oral Examination</TableCell>
-                            <TableCell>{exam.oexam}</TableCell>
-                          </TableRow>
-                          <TableRow hover>
-                            <TableCell>Special Notes</TableCell>
-                            <TableCell>{exam.specialNotes}</TableCell>
-                          </TableRow>
-                          <TableRow hover>
-                            <TableCell>
-                              <Button variant='outlined' style={{ marginRight: '10px' }}>
-                                <Link style={{ textDecoration: 'none' }} to={`/medicalupdate/${exam._id}`}>Update</Link>
-                              </Button>
-                            </TableCell>
-                            <TableCell>
-                              <Button variant='outlined' color='error' onClick={() => handleDelete(exam._id)}>
-                                Delete
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        </tbody>
-                      </Table>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
+                  <AddIcon />
+                </Fab>
+              </Link>
+            </Stack>
           </Grid>
-        
-        
+          {filteredExaminations.map((exam, index) => (
+            <Grid item xs={12} sm={gridItemSize} md={gridItemSize} key={index}>
+              <Card style={{ backgroundColor: '#f3f3f3', marginBottom: '20px' }}>
+                <CardContent>
+                  <div style={{ overflowX: 'auto', maxWidth: '100%' }}>
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>Date</TableCell>
+                          <TableCell>{new Date(exam.ExaminationDate).toLocaleDateString()}</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <tbody>
+                        <TableRow hover>
+                          <TableCell style={{ fontSize: '14px' }}>Age</TableCell>
+                          <TableCell>{exam.age}</TableCell>
+                        </TableRow>
+                        <TableRow hover>
+                          <TableCell>Weight</TableCell>
+                          <TableCell>{exam.weight}</TableCell>
+                        </TableRow>
+                        <TableRow hover>
+                          <TableCell>BMI</TableCell>
+                          <TableCell>{exam.bmi}</TableCell>
+                        </TableRow>
+                        <TableRow hover>
+                          <TableCell>Ideal Body Weight</TableCell>
+                          <TableCell>{exam.ibw}</TableCell>
+                        </TableRow>
+                        <TableRow hover>
+                          <TableCell>Waist Circumference</TableCell>
+                          <TableCell>{exam.wc}</TableCell>
+                        </TableRow>
+                        <TableRow hover>
+                          <TableCell>Blood Pressure</TableCell>
+                          <TableCell>{exam.bpressure}</TableCell>
+                        </TableRow>
+                        <TableRow hover>
+                          <TableCell>Oral Examination</TableCell>
+                          <TableCell>{exam.oexam}</TableCell>
+                        </TableRow>
+                        <TableRow hover>
+                          <TableCell>Special Notes</TableCell>
+                          <TableCell>{exam.specialNotes}</TableCell>
+                        </TableRow>
+                        <TableRow hover>
+                          <TableCell>
+                            <Button variant='outlined' style={{ marginRight: '10px' }}>
+                              <Link style={{ textDecoration: 'none' }} to={`/medicalupdate/${exam._id}`}>Update</Link>
+                            </Button>
+                          </TableCell>
+                          <TableCell>
+                            <Button variant='outlined' color='error' onClick={() => handleDelete(exam._id)}>
+                              Delete
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      </tbody>
+                    </Table>
+                  </div>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
       </Stack>
     </div>
   );

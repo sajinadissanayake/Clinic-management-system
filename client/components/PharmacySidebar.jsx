@@ -46,7 +46,7 @@ const PharmacySidebar = () => {
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton component={Link} to="/pselect">
+              <ListItemButton component={Link} to="/allprescriptions">
                 <Grid container direction="column" alignItems="center" spacing={1}>
                   <Grid item>
                     <ArticleIcon sx={{ fontSize: 40 }} />

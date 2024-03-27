@@ -15,22 +15,32 @@ import ReportsUpdateDialog from './ReportsUpdateDialog'; // Import the dialog co
 import { useParams } from 'react-router-dom';
 
 function Reports() {
-    const [reports, setReports] = useState([]);
-    const [filteredReports, setFilteredReports] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [dialogOpen, setDialogOpen] = useState(false);
-    const [selectedReportId, setSelectedReportId] = useState(null);
-    const { nic } = useParams();
+  const [reports, setReports] = useState([]);
+  const [filteredReports, setFilteredReports] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [addDialogOpen, setAddDialogOpen] = useState(false); // Separate state for Add Report dialog
+  const [updateDialogOpen, setUpdateDialogOpen] = useState(false); // Separate state for Update Report dialog
+  const [selectedReportId, setSelectedReportId] = useState(null);
+  const { nic } = useParams();
 
-    const handleOpenDialog = (reportId) => {
-        setSelectedReportId(reportId);
-        setDialogOpen(true);
-    };
+  const handleOpenAddDialog = () => {
+      setAddDialogOpen(true);
+  };
 
-    const handleCloseDialog = () => {
-        setDialogOpen(false);
-        setSelectedReportId(null);
-    };
+  const handleCloseAddDialog = () => {
+      setAddDialogOpen(false);
+  };
+
+  const handleOpenUpdateDialog = (reportId) => {
+      setSelectedReportId(reportId);
+      setUpdateDialogOpen(true);
+  };
+
+  const handleCloseUpdateDialog = () => {
+      setUpdateDialogOpen(false);
+      setSelectedReportId(null);
+  };
+
 
     useEffect(() => {
         axios.get(`http://localhost:3001/getReports/nic/${nic}`)
@@ -96,9 +106,9 @@ function Reports() {
                                 <Typography variant="body1" sx={{ mr: 2 }}>
                                     Total Reports: {filteredReports.length}
                                 </Typography>
-                                <IconButton color="primary">
-                                    <AddCircleOutlineIcon />
-                                </IconButton>
+                                <IconButton color="primary" onClick={handleOpenAddDialog}> {/* Trigger Add Report dialog */}
+                                  <AddCircleOutlineIcon />
+                              </IconButton>
                             </Box>
                         </Box>
                         <TableContainer component={Paper} style={{ maxHeight: '600px'}}>
@@ -129,9 +139,10 @@ function Reports() {
                                                 </IconButton>
                                             </TableCell>
                                             <TableCell>
-                                                <IconButton onClick={() => handleOpenDialog(report._id)}>
-                                                    <EditIcon />
-                                                </IconButton>
+                                            <IconButton onClick={() => handleOpenUpdateDialog(report._id)}> {/* Use handleOpenUpdateDialog */}
+                                                <EditIcon />
+                                            </IconButton>
+
                                             </TableCell>
                                             <TableCell>
                                                 <IconButton color="secondary" onClick={() => handleDeleteReport(report._id)}>
@@ -152,8 +163,8 @@ function Reports() {
                 </Card>
                 <Announcements />
             </Stack>
-            <MAddReportDialog />
-            <ReportsUpdateDialog open={dialogOpen} onClose={handleCloseDialog} reportId={selectedReportId} />
+            <MAddReportDialog open={addDialogOpen} onClose={handleCloseAddDialog} nic={nic} />
+            <ReportsUpdateDialog open={updateDialogOpen} onClose={handleCloseUpdateDialog} reportId={selectedReportId} />
         </div>
     );
 }

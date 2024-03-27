@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/Navbar';
-import { TextField, Table, TableHead, TableBody, TableRow, TableCell, Button, Avatar, Card, CardContent, Typography, Container, Grid } from '@mui/material';
+import { TextField, Table, TableHead, TableBody, TableRow, TableCell, Button, Avatar, Card, CardContent, Typography, Container, Grid, Stack } from '@mui/material';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import maleAvatar from '../images/male.png';
 import femaleAvatar from '../images/female.png';
+import PharmacySidebar from '../../components/PharmacySidebar';
+import { Announcement } from '@mui/icons-material';
+import Announcements from '../../components/Announcements';
 
 function AllPrescriptions() {
     const [users, setUsers] = useState([]);
@@ -39,6 +42,8 @@ function AllPrescriptions() {
     return (
         <div>
             <Navbar />
+            <Stack direction="row" spacing={2} justifyContent="space-between">
+                <PharmacySidebar/>
             <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 64px)' }}>
                 <Card sx={{ borderRadius: 6, width: '100%', maxWidth: 600 }}>
                     <CardContent>
@@ -89,6 +94,8 @@ function AllPrescriptions() {
                     </CardContent>
                 </Card>
             </Container>
+            <Announcements/>
+            </Stack>
         </div>
     );
 }

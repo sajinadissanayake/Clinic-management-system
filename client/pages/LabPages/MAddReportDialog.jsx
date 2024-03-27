@@ -6,7 +6,7 @@ import axios from 'axios';
 function MAddReportDialog({ open, onClose, nic }) {
   const [type, setType] = useState('');
   const [patientReport, setPatientReport] = useState(null);
-  const navigate = useNavigate();
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
