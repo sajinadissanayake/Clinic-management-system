@@ -180,9 +180,10 @@ app.get('/getReports/:id', (req, res) => {
 app.put('/updateReport/:id', Rupload.single('patientReport'), (req, res) => {
     const id = req.params.id;
     const { nic } = req.body;
+    const {type} = req.body;
     const patientReport = req.file.filename;
 
-    reportsModel.findByIdAndUpdate(id, { nic, patientReport })
+    reportsModel.findByIdAndUpdate(id, { nic, patientReport,type })
         .then(report => res.json(report))
         .catch(err => res.json(err));
 });

@@ -9,6 +9,8 @@ import PageBody from '../components/PageBody';
 import BloodSugarChart from '../components/BloodSugarChart';
 import PRightbar from '../components/PRightbar';
 import PatientReports from '../components/PatientReports';
+import NurseLeftbar from '../pages/NursePages/NurseLeftbar';
+import Announcements from '../components/Announcements';
 
 function OnePatient() {
   const [patient, setPatient] = useState(null);
@@ -39,7 +41,7 @@ function OnePatient() {
     <div>
       <Navbar />
       <Stack direction="row" spacing={2} justifyContent="space-between">
-        <Sidebar />
+       <NurseLeftbar/>
         <PageBody>
         <div style={{ maxHeight: '700px', overflowY: 'scroll' }}> 
           <Container maxWidth="md" sx={{ marginTop: 4 }}>
@@ -143,7 +145,7 @@ function OnePatient() {
           </Container>
         </div>
         </PageBody>
-        <PRightbar patientNIC={patient.nic} />
+        <Announcements/>
 
       </Stack>
     </div>

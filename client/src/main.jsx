@@ -11,7 +11,6 @@ import ReportsView from './ReportsView.jsx'
 import AddReports from './AddReports.jsx'
 import UpdatePatient from './UpdatePatient.jsx'
 import OnePatient from './OnePatient.jsx'
-import ReportsUpdate from './ReportsUpdate.jsx'
 import MEform from '../pages/MEform.jsx'
 import BloodSugar from '../pages/BloodSugar.jsx'
 import Home from '../pages/Home.jsx'
@@ -63,7 +62,7 @@ const router = createBrowserRouter([
     element: <PatientList/>,
   },
   {
-    path: "/reports",
+    path: "/reportsview",
     element: <ReportsView/>,
   },
   {
@@ -78,10 +77,7 @@ const router = createBrowserRouter([
     path: "/patient/:id",
     element: <OnePatient />,
   },
-  {
-    path: "/updatereport/:id",
-    element: <ReportsUpdate />,
-  },
+  
   {
     path: "/MEform/:nic",
     element: <MEform />,
