@@ -13,7 +13,7 @@ import UpdatePatient from './UpdatePatient.jsx'
 import OnePatient from './OnePatient.jsx'
 import MEform from '../pages/MEform.jsx'
 import BloodSugar from '../pages/BloodSugar.jsx'
-import Home from '../pages/Home.jsx'
+
 import BlogAdd from '../pages/BlogAdd.jsx'
 import AppointmentAdd from '../pages/AppointmentAdd.jsx'
 import SignInSide from '../pages/SignInSide.jsx'
@@ -39,6 +39,11 @@ import LabDash from '../pages/LabDash.jsx'
 import LabRequestsPage from '../pages/LabPages/LabRequestsPage.jsx'
 import PReportSelect from '../pages/LabPages/PReportSelect.jsx'
 import Reports from '../pages/LabPages/Reports.jsx'
+import Home from '../components/Home/Home.jsx'
+
+
+
+
 
 
 
@@ -86,10 +91,7 @@ const router = createBrowserRouter([
     path: "/bloodsugar",
     element: <BloodSugar />,
   },
-  {
-    path: "/home",
-    element: <Home />,
-  },
+  
   {
     path: "/blogadd",
     element: <BlogAdd />,
@@ -190,6 +192,12 @@ const router = createBrowserRouter([
     path: "/reports/:nic", 
     element: <Reports/>, 
   },
+  {
+    path: "/home", 
+    element: <Home/>, 
+  },
+
+
  
 
   

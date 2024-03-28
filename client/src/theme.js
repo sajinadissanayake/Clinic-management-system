@@ -3,12 +3,13 @@ import { createTheme } from "@mui/material";
 export const theme = createTheme({
     palette: {
         primary: {
-            main: "#415a77",
+            main: "#086788",
             light: "skyblue",
         },
         secondary: {
-            main: '#778da9',
+            main: '#FFFFFF',
         },
+        
         // You can define other Material-UI palette colors here if needed
     },
     // Define additional custom colors outside of the palette object
