@@ -6,7 +6,7 @@ import Div1 from './Div1'
 function Home() {
   return (
     <div>
-        <Navbar/>
+       
         
           <Div1/>
 

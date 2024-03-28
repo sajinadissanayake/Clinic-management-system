@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import staff from './images/staff.png';
 import Button from '@mui/material/Button';
+import Header from './Header'; // Importing the Header component
 
 function Div1() {
   const [fadeIn, setFadeIn] = useState(false);
@@ -18,17 +19,18 @@ function Div1() {
   const containerStyle = {
     position: 'relative',
     width: '100%',
-    height: '700px', // You can adjust the height as needed
+    minHeight: '100vh', // Set minimum height to cover the viewport
+    overflow: 'hidden', // Hide overflow to prevent scrolling
   };
 
-  const boxStyle = {
+  const backgroundStyle = {
     backgroundImage: `url(${staff})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     width: '100%',
     height: '100%',
-    transition: 'opacity 1s ease', // Adding transition effect to opacity
-    opacity: fadeIn ? 1 : 0, // Setting opacity based on fadeIn state
+    position: 'fixed', // Keep the background image fixed
+    zIndex: -1, // Ensure the background remains behind other content
   };
 
   const overlayStyle = {
@@ -58,16 +60,33 @@ function Div1() {
     borderRadius: '20px', // Increase border radius (rounded corners)
     width: '200px', // Increase button width
   };
-  
+
+  const whiteBoxStyle = {
+    backgroundColor: 'white',
+    height: '800px',
+    padding: '20px',
+    marginTop:'10vh',// Adjust the margin to push it below the viewport
+    zIndex: 2, // Ensure the white box appears above the overlay
+  };
+
   return (
-    <div style={containerStyle}>
-      <div style={boxStyle}></div>
-      <div style={overlayStyle}></div>
-      <div style={textStyle}>
-        <h1>"A healthy outside starts from the inside."</h1>
-        <p>Be Healthy And Active..........</p>
-        <Button variant="outlined" color="secondary" style={buttonStyle}>Login</Button>
+    <div>
+      <Header /> {/* Render the Header component */}
+      <div style={containerStyle}>
+        <div style={backgroundStyle}></div> {/* Background image */}
+        <div style={overlayStyle}></div>
+        <div style={textStyle}>
+          <h1>"A healthy outside starts from the inside."</h1>
+          <p>Be Healthy And Active..........</p>
+          <Button variant="outlined" color="secondary" style={buttonStyle}>Login</Button>
+        </div>
+       
       </div>
+      <div style={whiteBoxStyle}>
+          {/* Content of the white box */}
+          <h2>This is a white box</h2>
+          <p>Place your content here...</p>
+        </div>
     </div>
   );
 }
