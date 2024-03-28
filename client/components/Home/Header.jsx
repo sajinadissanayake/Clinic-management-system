@@ -81,7 +81,7 @@ function Header() {
                   textDecoration: 'none',
                 }}
               >
-                Healthy Life Clinic
+                Healthy LifeStyle  Center
               </Typography>
 
               {/* Responsive navigation menu */}

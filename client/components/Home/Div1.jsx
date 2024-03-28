@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import staff from './images/staff.png';
 import Button from '@mui/material/Button';
 import Header from './Header'; // Importing the Header component
+import Div2 from './Div2';
+import Div3 from './DIv3';
+import Div4 from './Div4';
+import Div5 from './Div5';
+import Footer from '../Footer';
+
 
 function Div1() {
   const [fadeIn, setFadeIn] = useState(false);
@@ -61,13 +67,7 @@ function Div1() {
     width: '200px', // Increase button width
   };
 
-  const whiteBoxStyle = {
-    backgroundColor: 'white',
-    height: '800px',
-    padding: '20px',
-    marginTop:'10vh',// Adjust the margin to push it below the viewport
-    zIndex: 2, // Ensure the white box appears above the overlay
-  };
+  
 
   return (
     <div>
@@ -82,11 +82,12 @@ function Div1() {
         </div>
        
       </div>
-      <div style={whiteBoxStyle}>
-          {/* Content of the white box */}
-          <h2>This is a white box</h2>
-          <p>Place your content here...</p>
-        </div>
+      <Div2/>
+      <Div3/>
+      <Div4/>
+      <Div5/>
+      <Footer/>
+     
     </div>
   );
 }
