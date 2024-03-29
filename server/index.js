@@ -303,18 +303,60 @@ app.post("/Addblog", bupload.single('image'), (req, res) => {
         });
 });
 
-
-
 ////appointments////////////////////////////////////////////////////////////////////////////////////
 
-app.post("/Addappo", (req, res) =>{
-    appoModel.create(req.body)
-    .then(users => res.json(users))
-    .catch(err => res.json(err))
-})
+
+app.post("/Addappo", async (req, res) => {
+    try {
+        const { nic, title, date } = req.body;
+
+        // Parse the incoming date string into a JavaScript Date object
+        const parsedDate = new Date(date);
+
+        // Find existing appointments on the given date
+        const existingAppointments = await appoModel.find({ date: { $gte: parsedDate, $lt: new Date(parsedDate.getTime() + 86400000) } }); // Search for appointments within the same day
+
+        let nextAppointmentTime;
+
+        if (existingAppointments.length === 0) {
+            // If no appointments exist for the given date, set the time slot to 7:30 AM
+            nextAppointmentTime = parsedDate.setHours(7, 30, 0, 0);
+        } else {
+            // Calculate the next available appointment time by adding 6 minutes to the last appointment time
+            const lastAppointmentTime = existingAppointments[existingAppointments.length - 1].date;
+            nextAppointmentTime = new Date(lastAppointmentTime.getTime() + 6 * 60000).toISOString();
+        }
+
+        // Ensure the next appointment time does not exceed 12:30 PM
+        const endTime = new Date(parsedDate).setHours(12, 30, 0, 0);
+        if (nextAppointmentTime > endTime) {
+            throw new Error('Cannot add more appointments for this date. Appointments are full.');
+        }
+
+        // Create the new appointment
+        const newAppointment = await appoModel.create({ nic, title, date: nextAppointmentTime });
+
+        res.json(newAppointment);
+    } catch (error) {
+        console.error('Error creating appointment:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 
-////appointments////////////////////////////////////////////////////////////////////////////////////
+  // Define a route to fetch all appointments
+app.get('/getAppointments', async (req, res) => {
+    try {
+      const appointments = await appoModel.find({});
+      res.json(appointments);
+    } catch (error) {
+      console.error('Error fetching appointments:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  
+  
+////Prescriptions////////////////////////////////////////////////////////////////////////////////////
 
 
 app.post("/AddPrescription", (req, res) =>{
