@@ -23,12 +23,12 @@ function Prescriptionadd() {
 
   const [prescription, setPrescription] = useState('');
 
-  const Submit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3001/AddPrescription", { prescription, nic: patient.nic,status })
+    axios.post("http://localhost:3001/AddPrescription", { prescription, nic: patient.nic, status })
       .then(result => {
         console.log(result);
-        navigate('/pselect');
+        navigate(`/AppointmentAdd?nic=${patient.nic}`); // Navigate to AppointmentAdd with nic as a query parameter
       })
       .catch(err => console.log(err));
   };
@@ -44,7 +44,7 @@ function Prescriptionadd() {
         <PrescLeftbar patientNIC={patient.nic} />
         <PageBody>
           <Container maxWidth="xl"> {/* Adjusted Container width */}
-            <form onSubmit={Submit} style={{ width: '100%' }}>
+            <form onSubmit={handleSubmit} style={{ width: '100%' }}>
               <br />
               <Typography variant="h5">Prescription</Typography><br />
               <Typography variant="body1">patient Name: {patient.name}</Typography><br />
@@ -55,7 +55,7 @@ function Prescriptionadd() {
                 placeholder="Write prescription Here"
                 value={prescription}
                 onChange={(e) => setPrescription(e.target.value)}
-                style={{ width: '100%', padding: '10px', borderRadius:6}}
+                style={{ width: '100%', padding: '10px', borderRadius: 6 }}
               /><br /><br />
 
               <Grid container justifyContent="center" paddingTop={2}>

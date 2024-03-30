@@ -40,7 +40,6 @@ import LabRequestsPage from '../pages/LabPages/LabRequestsPage.jsx'
 import PReportSelect from '../pages/LabPages/PReportSelect.jsx'
 import Reports from '../pages/LabPages/Reports.jsx'
 import Home from '../components/Home/Home.jsx'
-import PrescCalender from '../pages/Prescription/PrescCalender.jsx'
 import ClinicDates from '../pages/ClinicDates.jsx'
 
 
@@ -198,10 +197,7 @@ const router = createBrowserRouter([
     path: "/home", 
     element: <Home/>, 
   },
-  {
-    path: "/PrescCalender", 
-    element: <PrescCalender/>, 
-  },
+  
   {
     path: "/clinicdates", 
     element: <ClinicDates/>, 
