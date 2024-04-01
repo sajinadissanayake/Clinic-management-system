@@ -116,21 +116,49 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+const nodemailer = require('nodemailer');
+
+// Other imports and configurations...
 
 app.post("/AddPatient", upload.single('image'), (req, res) => {
-    const { name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies,blood,sh } = req.body;
+    const { name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies, blood, sh } = req.body;
     const imagePath = req.file.path; // Path to the uploaded image
 
-    patientModel.create({ name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies,blood,sh, imagePath })
+    patientModel.create({ name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies, blood, sh, imagePath })
         .then(patient => {
             console.log("Patient created:", patient);
             res.json(patient);
+
+            // Sending email to the registered patient
+            const transporter = nodemailer.createTransport({
+                service: 'Gmail',
+                auth: {
+                    user: 'clinichealthylifestyle@gmail.com',
+                    pass: 'idhz qmax uihy qhjq'
+                }
+            });
+
+            const mailOptions = {
+                from: 'clinichealthylifestyle@gmail.com',
+                to: email, // Patient's email
+                subject: 'Thank you for registering',
+                text: `Dear ${name},\n\nThank you for registering with us.\n\nBest regards,\nYour Healthcare Team`
+            };
+
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    console.error('Error sending email:', error);
+                } else {
+                    console.log('Email sent:', info.response);
+                }
+            });
         })
         .catch(err => {
             console.error("Error creating patient:", err);
             res.status(500).json({ error: 'Internal Server Error' });
         });
 });
+
 
 ////////////////////////////////reports///////////////////////////////////////////////////////////////////////////////
 // Configure Multer in reports
@@ -305,10 +333,10 @@ app.post("/Addblog", bupload.single('image'), (req, res) => {
 
 ////appointments////////////////////////////////////////////////////////////////////////////////////
 
-
 app.post("/Addappo", async (req, res) => {
     try {
-        const { nic, title, date } = req.body;
+        console.log(req.body);
+        const { nic, title, date, email } = req.body;
 
         // Parse the incoming date string into a JavaScript Date object
         const parsedDate = new Date(date);
@@ -336,12 +364,44 @@ app.post("/Addappo", async (req, res) => {
         // Create the new appointment
         const newAppointment = await appoModel.create({ nic, title, date: nextAppointmentTime });
 
+        // Send email to the patient
+        sendAppointmentEmail(email, parsedDate);
+
         res.json(newAppointment);
     } catch (error) {
         console.error('Error creating appointment:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+// Function to send an appointment confirmation email to the patient
+const sendAppointmentEmail = (recipientEmail, appointmentDate) => {
+    // Create a Nodemailer transporter
+    const transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'clinichealthylifestyle@gmail.com', // Your Gmail email address
+            pass: 'idhz qmax uihy qhjq' // Your Gmail password
+        }
+    });
+
+    // Email content
+    const mailOptions = {
+        from: 'clinichealthylifestyle@gmail.com', // Your Gmail email address
+        to: recipientEmail, // Patient's email address
+        subject: 'Appointment Confirmation',
+        text: `Dear Patient,\n\nYour next clinic date is scheduled for ${appointmentDate}.\n\nBest regards,\n Healthy Lifestyle Clinic`
+    };
+
+    // Send email
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Error sending email:', error);
+        } else {
+            console.log('Email sent:', info.response);
+        }
+    });
+};
 
 
   // Define a route to fetch all appointments

@@ -3,10 +3,10 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
-import { Breadcrumbs, Grid, Stack, Typography, Button, Container } from '@mui/material'; // Import Container from MUI
+import { Breadcrumbs, Grid, Stack, Typography, Button, Container } from '@mui/material'; 
 import PageBody from '../components/PageBody';
 import PRightbar from '../components/PRightbar';
-import { TextareaAutosize } from '@mui/material'; // Import TextareaAutosize
+import { TextareaAutosize } from '@mui/material'; 
 import PrescLeftbar from '../components/PrescLeftbar';
 
 function Prescriptionadd() {
@@ -25,10 +25,11 @@ function Prescriptionadd() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3001/AddPrescription", { prescription, nic: patient.nic, status })
+    axios.post("http://localhost:3001/AddPrescription", { prescription, nic: patient.nic,email:patient.email, status })
       .then(result => {
         console.log(result);
-        navigate(`/AppointmentAdd?nic=${patient.nic}`); // Navigate to AppointmentAdd with nic as a query parameter
+        navigate(`/appointmentAdd?nic=${patient.nic}&email=${patient.email}`);
+         // Pass email as query parameter
       })
       .catch(err => console.log(err));
   };
@@ -43,7 +44,7 @@ function Prescriptionadd() {
       <Stack direction="row" spacing={2} justifyContent="space-between">
         <PrescLeftbar patientNIC={patient.nic} />
         <PageBody>
-          <Container maxWidth="xl"> {/* Adjusted Container width */}
+          <Container maxWidth="xl"> 
             <form onSubmit={handleSubmit} style={{ width: '100%' }}>
               <br />
               <Typography variant="h5">Prescription</Typography><br />

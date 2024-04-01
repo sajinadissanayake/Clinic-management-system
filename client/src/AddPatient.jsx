@@ -50,6 +50,19 @@ function AddPatient() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+    
+        // Perform form validation here
+        if (!name || !nic || !email || !age || !dob || !address || !pnumber || !moh || !phm || !phi || !gnd || !dsd || !neighbour || !diseases || !allergies || !blood || !sh || !image) {
+            // Display error message using SweetAlerts if any field is empty
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please fill in all fields!',
+            });
+            return; // Exit early if validation fails
+        }
+    
+        // Continue with form submission if validation passes
         const formData = new FormData();
         formData.append('image', image); // Append the uploaded image to form data
         formData.append('name', name);
@@ -82,13 +95,24 @@ function AddPatient() {
         axios.post("http://localhost:3001/AddPatient", formData)
             .then(response => {
                 console.log(response);
-                window.alert("Patient added successfully");
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Patient added successfully',
+                });
                 navigate('/patientslist');
             })
-            .catch(error => console.log(error));
-    }
-
-
+            .catch(error => {
+                console.log(error);
+                // Display error message using SweetAlerts if an error occurs during submission
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong. Please try again later!',
+                });
+            });
+    };
+    
     
 
     return (

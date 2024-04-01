@@ -43,7 +43,7 @@ function OnePatient() {
       <Stack direction="row" spacing={2} justifyContent="space-between">
        <NurseLeftbar/>
         <PageBody>
-        <div style={{ maxHeight: '700px', overflowY: 'scroll' }}> 
+        <div style={{ maxHeight: '600px', overflowY: 'scroll' }}> 
           <Container maxWidth="md" sx={{ marginTop: 4 }}>
             <Grid container spacing={2}>
               <Typography variant="h5">{patient.name}</Typography>

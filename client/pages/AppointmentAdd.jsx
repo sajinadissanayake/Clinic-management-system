@@ -1,83 +1,66 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Stack, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
+import { TextField, Button, Stack, Card, CardContent, Grid, Typography } from '@mui/material';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import Lottie from 'react-lottie'; // Import Lottie
+import Lottie from 'react-lottie'; 
 import Swal from 'sweetalert2';
-
-import calender from './images/calender.json';
 import PageBody from '../components/PageBody';
+import calender from './images/calender.json';
 
 function AppointmentAdd() {
   const [nic, setNic] = useState('');
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
+  const [email, setEmail] = useState(''); // State to store email
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Extract the nic from the URL query parameter
-  const searchParams = new URLSearchParams(location.search);
-  const nicFromQuery = searchParams.get('nic');
-
-  // Use the nicFromQuery if it exists, otherwise use the state
-  const nicValue = nicFromQuery ? nicFromQuery : nic;
-
   useEffect(() => {
-    // componentDidMount logic here
-    // You can fetch data or perform side effects here
-  }, []); // Empty dependency array to mimic componentDidMount behavior
+    const searchParams = new URLSearchParams(location.search);
+    const emailFromQuery = searchParams.get('email'); 
+    const nicFromQuery = searchParams.get('nic'); // Retrieve email from query parameter
+    setEmail(emailFromQuery); // Set email state
+    setNic(nicFromQuery); // Set NIC state
+  }, [location.search]);
 
-  useEffect(() => {
-    // componentDidUpdate logic here
-    // You can update data or perform side effects based on state changes here
-  });
-// Inside the handleSubmit function
-const handleSubmit = (e) => {
-  e.preventDefault();
-
-  // Check if date is empty
-  if (!date) {
-    // Show error alert using SweetAlert
-    Swal.fire({
-      icon: 'error',
-      title: 'Please select a date',
-      text: 'You must select a date before adding the appointment.',
-    });
-    return; // Exit the function early
-  }
-
-  // Format the date in YYYY-MM-DD format
-  const formattedDate = new Date(date).toISOString().split('T')[0];
-  let title = "Diabetic";
-
-  axios.post("http://localhost:3001/Addappo", { nic: nicValue, title, date: formattedDate })
-    .then(result => {
-      console.log(result);
-      // Show SweetAlert notification
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!date) {
       Swal.fire({
-        icon: 'success',
-        title: 'Clinic Date Added Successfully',
-        showConfirmButton: false,
-        timer: 1500
+        icon: 'error',
+        title: 'Please select a date',
+        text: 'You must select a date before adding the appointment.',
       });
-      navigate('/clinicdates');
-    })
-    .catch(err => console.log(err));
-}
+      return;
+    }
+    const formattedDate = new Date(date).toISOString().split('T')[0];
+    let title = "Diabetic";
 
+    axios.post("http://localhost:3001/Addappo", { nic, title, date: formattedDate, email })
+      .then(result => {
+        console.log(result);
+        Swal.fire({
+          icon: 'success',
+          title: 'Clinic Date Added Successfully',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        navigate('/clinicdates');
+      })
+      .catch(err => console.log(err));
+  }
 
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    animationData: calender, // Corrected the variable name to calender
+    animationData: calender, 
     rendererSettings: {
       preserveAspectRatio: 'xMidYMid slice'
     }
   };
 
   const handleContinueWithoutAdding = () => {
-    // Navigate to the desired page when continuing without adding clinic date
     navigate('/desiredPage');
   }
 
