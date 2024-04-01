@@ -36,6 +36,17 @@ function AppointmentAdd() {
 const handleSubmit = (e) => {
   e.preventDefault();
 
+  // Check if date is empty
+  if (!date) {
+    // Show error alert using SweetAlert
+    Swal.fire({
+      icon: 'error',
+      title: 'Please select a date',
+      text: 'You must select a date before adding the appointment.',
+    });
+    return; // Exit the function early
+  }
+
   // Format the date in YYYY-MM-DD format
   const formattedDate = new Date(date).toISOString().split('T')[0];
   let title = "Diabetic";
@@ -54,6 +65,7 @@ const handleSubmit = (e) => {
     })
     .catch(err => console.log(err));
 }
+
 
   const defaultOptions = {
     loop: true,

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+
 import { ThemeProvider} from '@mui/material'
 import {theme} from './theme.js'
 
@@ -41,24 +41,17 @@ import PReportSelect from '../pages/LabPages/PReportSelect.jsx'
 import Reports from '../pages/LabPages/Reports.jsx'
 import Home from '../components/Home/Home.jsx'
 import ClinicDates from '../pages/ClinicDates.jsx'
-
-
-
-
-
-
-
-
-
-
+import ClinicPatients from '../pages/NursePages/ClinicPatients.jsx';
 
 
 
 const router = createBrowserRouter([
+
   {
-    path: "/",
-    element: <App/>,
+    path: "/", 
+    element: <Home/>, 
   },
+  
   {
     path: "/addpatient",
     element: <AddPatient/>,
@@ -193,15 +186,16 @@ const router = createBrowserRouter([
     path: "/reports/:nic", 
     element: <Reports/>, 
   },
-  {
-    path: "/home", 
-    element: <Home/>, 
-  },
-  
+
   {
     path: "/clinicdates", 
     element: <ClinicDates/>, 
   },
+  {
+    path: "/clinicpatients", 
+    element: <ClinicPatients/>, 
+  },
+
 
 
 

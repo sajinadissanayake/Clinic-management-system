@@ -87,7 +87,8 @@ function RegisterUsers() {
                 >
                   <MenuItem value={'doctor'}>Doctor</MenuItem>
                   <MenuItem value={'admin'}>Admin</MenuItem>
-                  <MenuItem value={'receptionist'}>Receptionist</MenuItem>
+                  <MenuItem value={'lab'}>Lab</MenuItem>
+                  <MenuItem value={'pharmacy'}>Pharmacy</MenuItem>
                 </Select>
               </FormControl>
               <Button 

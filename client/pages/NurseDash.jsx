@@ -186,21 +186,22 @@ function NurseDash() {
                   </Grid>
                   <Grid item xs={6} sm={4} md={4}>
                     
+                  <Link to="/clinicpatients" style={{ textDecoration: 'none' }}>
                     <Item>
                       <CardActionArea>
                         <CardMedia
                           component="img"
                           height="100"
-                          image={rep}
-                          alt="Reports"
+                          image={ap}
+                          alt="Appointments"
                         />
                         <CardContent>
                           <Typography gutterBottom variant="body2" component="div">
-                            Reports
+                          Clinic Patients
                           </Typography>
                         </CardContent>
                       </CardActionArea>
-                    </Item>
+                    </Item></Link>
                   </Grid>
                   <Grid item xs={6} sm={4} md={4}>
                   <Link to="/clinicdates" style={{ textDecoration: 'none' }}>
@@ -214,7 +215,7 @@ function NurseDash() {
                         />
                         <CardContent>
                           <Typography gutterBottom variant="body2" component="div">
-                          Clinic Dates
+                          Clinic Calender
                           </Typography>
                         </CardContent>
                       </CardActionArea>
