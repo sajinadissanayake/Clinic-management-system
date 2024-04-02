@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import { Grid, Stack } from '@mui/material';
+import { Box, Grid, Stack } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -13,6 +13,9 @@ import cinic from './images/cinic.jpg';
 import blood from './images/sugar.jpg';
 import { Link } from 'react-router-dom';
 import hospital from './images/hospital.jpg';
+import DoctorSidebar from '../components/DoctorSidebar';
+import Layout from '../components/Layout';
+import Calendar from 'react-calendar'; // Importing the calendar component
 
 const Item = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -58,129 +61,63 @@ function DoctorDash() {
 
   return (
     <div>
-      <Navbar />
-      <Stack direction="row" spacing={2} justifyContent="center">
-        <Grid container spacing={2} justifyContent="center">
-          {/* New Card */}
-          <Grid item xs={12} md={8}>
-            <Card sx={{ maxWidth: '100%', margin: 'auto', marginBottom: 2, borderRadius: 8 }}>
-              <CardContent>
-                <Typography variant="h5" component="div" style={{ textAlign: 'left', marginBottom: '1rem' }}>
-                  Dashboard
-                  <Typography variant="body2" component="span" style={{ float: 'right' }}>
-                    {currentDateTime.toLocaleTimeString()}
+      <Navbar pageTitle="Doctor Dashboard" />
+      <Layout>
+        <Stack direction="row" spacing={1} justifyContent="space-between">
+          <DoctorSidebar />
+          <Grid container spacing={2} justifyContent="left">
+            {/* New Card */}
+            <Grid item xs={12} md={8}>
+              <Card sx={{ margin: 'auto', marginBottom: 2, borderRadius: 8, marginTop:3 }}>
+                <CardContent>
+                  <Typography variant="h5" component="div" style={{ textAlign: 'left', marginBottom: '1rem' }}>
+                    <Typography variant="body2" component="span" style={{ float: 'right' }}>
+                      {currentDateTime.toLocaleTimeString()}
+                    </Typography>
                   </Typography>
-                </Typography>
-                
-                <Grid container justifyContent="center">
-                  <Grid item xs={6} md={6}>
-                    <Typography variant="h6" gutterBottom>
-                      Welcome
-                    </Typography>
-                    <Typography variant="body1" gutterBottom>
-                      {greeting}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={6} md={6}>
-                  <CardMedia
+                  <Grid container justifyContent="center">
+                    <Grid item xs={6} md={6}>
+                      <Typography variant="h6" gutterBottom>
+                        Welcome
+                      </Typography>
+                      <Typography variant="body1" gutterBottom>
+                        {greeting}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6} md={6}>
+                      <CardMedia
                         component="img"
                         height="150"
                         image={hospital}
                         alt="Welcome Image"
                       />
+                    </Grid>
                   </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </Grid>
+
+            {/* Calendar Card */}
+            <Grid item xs={12} md={4}>
+              <Card sx={{ margin: 'auto', marginBottom: 2, borderRadius: 8, marginTop:3 }}>
+                <CardContent>
+                  <Typography variant="h5" component="div" style={{ textAlign: 'left', marginBottom: '1rem' }}>
+                    <Typography variant="body2" component="span" style={{ float: 'right' }}>
+                      Calendar
+                    </Typography>
+                  </Typography>
+                  <Grid container justifyContent="center">
+                    <Grid item xs={12}>
+                      <Calendar />
+                    </Grid>
+                  </Grid>
+                </CardContent>
+              </Card>
+            </Grid>
+
           </Grid>
-          
-          {/* Main Card */}
-          <Grid item xs={12} md={8}>
-            <Card sx={{ maxWidth: '100%', margin: 'auto', marginBottom: 4 ,borderRadius: 8 }}>
-              <CardContent>
-                <Grid container spacing={2} justifyContent="center">
-                  <Grid item xs={6} sm={4} md={3}>
-                    <Link to="/pselect" style={{ textDecoration: 'none' }}>
-                      <Item>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="100"
-                            image={rep}
-                            alt="Prescription"
-                          />
-                          <CardContent>
-                            <Typography gutterBottom variant="body2" component="div">
-                              Add Prescription
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </Item>
-                    </Link>
-                  </Grid>
-                  <Grid item xs={6} sm={4} md={3}>
-                    <Link to="/patientslist" style={{ textDecoration: 'none' }}>
-                      <Item>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="100"
-                            image={annoucement}
-                            alt="Patients"
-                          />
-                          <CardContent>
-                            <Typography gutterBottom variant="body2" component="div">
-                              Add Announcement
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </Item>
-                    </Link>
-                  </Grid>
-                  <Grid item xs={6} sm={4} md={3}>
-                    <Link to="/Mselect" style={{ textDecoration: 'none' }}>
-                      <Item>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="100"
-                            image={cinic}
-                            alt="Medical Records"
-                          />
-                          <CardContent>
-                            <Typography gutterBottom variant="body2" component="div">
-                              Clinic Status
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </Item>
-                    </Link>
-                  </Grid>
-                  <Grid item xs={6} sm={4} md={3}>
-                    <Link to="/bsSelect" style={{ textDecoration: 'none' }}>
-                      <Item>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="100"
-                            image={blood}
-                            alt="Blood Sugar"
-                          />
-                          <CardContent>
-                            <Typography gutterBottom variant="body2" component="div">
-                              ///////////////////
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </Item>
-                    </Link>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Stack>
+        </Stack>
+      </Layout>
     </div>
   );
 }

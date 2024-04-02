@@ -53,8 +53,53 @@ function PRightbar({ patientNIC }) {
   return (
     <div>
       <Box bgcolor="" borderRadius={4} marginTop={1} flex={2} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
+      <Card sx={{ maxWidth: 345, borderRadius:6}}  p={3}>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              Blood Sugar Levels 
+            </Typography>
+            <Typography gutterBottom variant="h6" component="div">
+             Latest Records
+            </Typography>
+            {/* Display fasting blood sugar record */}
+            {bloodSugarLevels.fasting && (
+              <div><Typography variant="body2" color="text.secondary">
+              Fasting Blood Sugar: {bloodSugarLevels.fasting.rbs}
+            </Typography>
+            <GradientGaugeChart value={bloodSugarLevels.fasting.rbs}/>
+            </div>
+              
+              
+
+
+            )}
+            
+            {/* Display random blood sugar record */}
+            {bloodSugarLevels.random && (
+               <div>
+               <Typography variant="body2" color="text.secondary">
+                 Random Blood Sugar: {bloodSugarLevels.random.rbs}
+               </Typography>
+               <GradientGaugeChart value={bloodSugarLevels.random.rbs}/>
+
+             </div>
+            )}
+             
+          </CardContent>
+        </Card>
+       
         
-        <Card sx={{ maxWidth: 345, borderRadius:6 }}>
+        <MEDialog open={openDialog} handleClose={handleClose} patientNIC={patientNIC} />
+        {/* Pass openDialog1 state and handleClose1 function to the second dialog */}
+        <BSchartdialog open={openDialog1} handleClose={handleClose1} patientNIC={patientNIC}/>
+       
+        
+      </Box>
+      {/* Display blood sugar levels */}
+      <Box bgcolor="" borderRadius={4}  flex={2} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
+
+         
+      <Card sx={{ maxWidth: 345, borderRadius:6 }}>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               Medical Examinations
@@ -99,49 +144,7 @@ function PRightbar({ patientNIC }) {
             )}
           </CardContent>
         </Card>
-        
-        <MEDialog open={openDialog} handleClose={handleClose} patientNIC={patientNIC} />
-        {/* Pass openDialog1 state and handleClose1 function to the second dialog */}
-        <BSchartdialog open={openDialog1} handleClose={handleClose1} patientNIC={patientNIC}/>
-       
-        
-      </Box>
-      {/* Display blood sugar levels */}
-      <Box bgcolor="" borderRadius={4}  flex={2} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
-      <Card sx={{ maxWidth: 345, borderRadius:6}}  p={3}>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Blood Sugar Levels 
-            </Typography>
-            <Typography gutterBottom variant="h6" component="div">
-             Latest Records
-            </Typography>
-            {/* Display fasting blood sugar record */}
-            {bloodSugarLevels.fasting && (
-              <div><Typography variant="body2" color="text.secondary">
-              Fasting Blood Sugar: {bloodSugarLevels.fasting.rbs}
-            </Typography>
-            <GradientGaugeChart value={bloodSugarLevels.fasting.rbs}/>
-            </div>
-              
-              
-
-
-            )}
-            
-            {/* Display random blood sugar record */}
-            {bloodSugarLevels.random && (
-               <div>
-               <Typography variant="body2" color="text.secondary">
-                 Random Blood Sugar: {bloodSugarLevels.random.rbs}
-               </Typography>
-               <GradientGaugeChart value={bloodSugarLevels.random.rbs}/>
-
-             </div>
-            )}
-             
-          </CardContent>
-        </Card></Box>
+     </Box>
         
     </div>
   );

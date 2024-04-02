@@ -24,7 +24,7 @@ function RequestRecordDialog({ open, onClose,patientNIC  }) {
 
     return (
         <Dialog open={open} onClose={onClose}>
-        <DialogTitle>Request Reports</DialogTitle>
+        <DialogTitle>Request Records</DialogTitle>
         <DialogContent>
             <TextField
                 autoFocus

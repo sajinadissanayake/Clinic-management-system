@@ -15,6 +15,7 @@ import {
     DialogContent,
     DialogActions,
     CardActionArea,
+    Box,
     
 } from '@mui/material';
 import { TableContainer, Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@mui/material';
@@ -117,9 +118,11 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
 
     return (
         <div>
-            <Navbar />
+            <Navbar pageTitle="Patient Profile" />
+            <Box bgcolor={'background.bg3'}>
             <Stack direction="row" spacing={2} justifyContent="space-between">
             <PrescLeftbar patientNIC={patient.nic} />
+           
                 <PageBody>
                     <Container maxWidth="md" sx={{ marginTop: 4 }}>
                         <Grid container spacing={2}>
@@ -377,7 +380,7 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                     </Container>
                 </PageBody>
                 <PRightbar patientNIC={patient.nic} />
-            </Stack>
+            </Stack></Box>
         </div>
     )
 }

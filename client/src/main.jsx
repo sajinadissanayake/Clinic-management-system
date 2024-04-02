@@ -45,6 +45,7 @@ import ClinicPatients from '../pages/NursePages/ClinicPatients.jsx';
 
 
 
+
 const router = createBrowserRouter([
 
   {
@@ -195,6 +196,8 @@ const router = createBrowserRouter([
     path: "/clinicpatients", 
     element: <ClinicPatients/>, 
   },
+
+
 
 
 

@@ -1,15 +1,22 @@
 import { createTheme } from "@mui/material";
-
 export const theme = createTheme({
+
     palette: {
         primary: {
-            main: "#086788",
+            main: "#07A0C3",// light blue
             light: "skyblue",
+            w:	"#FFFFFF"
         },
         secondary: {
             main: '#FFFFFF',
         },
-        
+        background:{
+            default: "#FFFFFF",
+            bg2:"#07A0C3",// light blue
+            bg3:"#CAF0F8",// light blue 2
+            bg4:"#086788",//dark blue 
+            bgw:"#FFFFFF" // Corrected background color value
+        }
         // You can define other Material-UI palette colors here if needed
     },
     // Define additional custom colors outside of the palette object

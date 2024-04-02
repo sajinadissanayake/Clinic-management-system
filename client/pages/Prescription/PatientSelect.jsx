@@ -9,6 +9,7 @@ import Sidebar from '../../components/Sidebar';
 import maleAvatar from '../images/male.png';
 import femaleAvatar from '../images/female.png';
 import DoctorSidebar from '../../components/DoctorSidebar';
+import Footer from  '../../components/Footer';
 
 function PatientSelect() {
     const [users, setUsers] = useState([]);
@@ -31,7 +32,8 @@ function PatientSelect() {
 
     return (
         <div>
-            <Navbar />
+            <Navbar pageTitle="Select The Patient" />
+            <Box bgcolor={'background.bg3'}>
             <Stack direction="row" spacing={2} justifyContent="space-between">
                 <DoctorSidebar />
                 <PageBody>
@@ -42,28 +44,25 @@ function PatientSelect() {
                         onChange={handleSearch}
                         fullWidth
                     />
-                    <div style={{ height: '70vh', overflowY: 'auto' }}>
+                    <div style={{ height: '76vh', overflowY: 'auto' }}>
                         <Table>
                             <TableHead>
-                                <TableRow>
-                                    <TableCell></TableCell>
-                                    <TableCell>NIC</TableCell>
-                                    <TableCell>Name</TableCell>
-                                </TableRow>
+                               
                             </TableHead>
                             <TableBody>
                                 {filteredUsers.map((user) => (
                                     <TableRow key={user._id}>
-                                        <TableCell>
+                                      <TableCell >
+                                            
                                             {/* Conditional rendering for Avatar based on gender */}
                                             <Avatar alt={user.name} src={user.gender === 'male' ? maleAvatar : femaleAvatar} />
                                         </TableCell>
                                         <TableCell>{user.nic}</TableCell>
                                         <TableCell>{user.name}</TableCell>
                                         <TableCell>
-                                            <Button variant='outlined' style={{ marginLeft: '10px' }}>
-                                                <Link style={{ textDecoration: 'none' }} to={`/prescpatient/${user._id}`}>Next</Link>
-                                            </Button>
+                                        <Link style={{ textDecoration: 'none' }} to={`/prescpatient/${user._id}`}>  <Button variant='outlined' style={{ marginLeft: '10px' }}>
+                                                Next
+                                            </Button></Link>
                                         </TableCell>
                                     </TableRow>
                                 ))}
@@ -73,6 +72,10 @@ function PatientSelect() {
                 </PageBody>
                 <Announcements />
             </Stack>
+
+            </Box>
+            <Footer/>
+           
         </div>
     );
 }
