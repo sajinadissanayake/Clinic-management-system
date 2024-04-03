@@ -1,35 +1,23 @@
-import React from 'react'
-import { useState,useEffect } from 'react';
-import { Box,Grid,styled,Paper,Stack,CardActionArea } from '@mui/material'
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import PeopleIcon from '@mui/icons-material/People';
-
-
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
-  
+import React, { useState, useEffect } from 'react';
+import { Grid, Card, CardContent, Typography } from '@mui/material';
 
 function Dash() {
   const [patientsCount, setPatientsCount] = useState(0);
   const [reportsCount, setReportsCount] = useState(0);
-  const [medicalCount, setmedicalCount] = useState(0);
+  const [medicalCount, setMedicalCount] = useState(0);
+  const [prescriptionsCount, setPrescriptionsCount] = useState(0);
+  const [appointmentsCount, setAppointmentsCount] = useState(0);
+
   useEffect(() => {
     fetchPatientsCount();
     fetchReportsCount();
-    fetchmedicalsCount();
+    fetchMedicalCount();
+    fetchPrescriptionsCount();
+    fetchAppointmentsCount();
   }, []);
 
   const fetchPatientsCount = () => {
+    // Fetch patients count from the backend
     fetch('http://localhost:3001/')
       .then(response => response.json())
       .then(data => {
@@ -39,6 +27,7 @@ function Dash() {
   };
 
   const fetchReportsCount = () => {
+    // Fetch reports count from the backend
     fetch('http://localhost:3001/getReports')
       .then(response => response.json())
       .then(data => {
@@ -46,175 +35,96 @@ function Dash() {
       })
       .catch(error => console.error('Error fetching reports count:', error));
   };
-  
-  const fetchmedicalsCount = () => {
-    fetch('http://localhost:3001/getMedicals')
+
+  const fetchMedicalCount = () => {
+    // Fetch medical count from the backend
+    fetch('http://localhost:3001/getmedicals')
       .then(response => response.json())
       .then(data => {
-        setmedicalCount(data.length);
+        setMedicalCount(data.length);
       })
-      .catch(error => console.error('Error fetching medcals count:', error));
+      .catch(error => console.error('Error fetching medical count:', error));
+  };
+
+  const fetchPrescriptionsCount = () => {
+    // Fetch prescriptions count from the backend
+    fetch('http://localhost:3001/getPrescriptions')
+      .then(response => response.json())
+      .then(data => {
+        setPrescriptionsCount(data.length);
+      })
+      .catch(error => console.error('Error fetching prescriptions count:', error));
+  };
+
+  const fetchAppointmentsCount = () => {
+    // Fetch appointments count for today from the backend
+    fetch('http://localhost:3001/getAppointments')
+      .then(response => response.json())
+      .then(data => {
+        // Filter appointments for today
+        const today = new Date().setHours(0, 0, 0, 0);
+        const appointmentsToday = data.filter(appointment => new Date(appointment.date).setHours(0, 0, 0, 0) === today);
+        setAppointmentsCount(appointmentsToday.length);
+      })
+      .catch(error => console.error('Error fetching appointments count:', error));
   };
 
 
-
-
-
-
-
   return (
-
-
-
-    
-    <div>
-
-<Box sx={{ flexGrow: 1 }} height={70} p={3}>
-      <Grid container spacing={2}>
-        <Grid item xs={8}>
-        <Stack spacing={2} direction={'row'}>
-        <CardActionArea>
-        <Card sx={{ minWidth: 345 }}>
-          
-                <CardContent>
-                
-                    <Typography gutterBottom variant="h5" component="div">
-                    
-                        Patients
-                        
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                    {patientsCount}
-                    </Typography>
-                </CardContent>
-          
-
-               
-        </Card>  </CardActionArea>
-
-
-        <CardActionArea>
-                <Card sx={{ minWidth: 345 }}>
-                
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Reports
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {reportsCount}
-                    </Typography>
-                </CardContent>
-               
-        </Card></CardActionArea>
-
-
-                </Stack>
-        </Grid>
+<Grid container spacing={2}>
+      <Grid item xs={12} sm={3}>
+        <Card sx={{ borderRadius: 5 }}>
+          <CardContent>
+            <Typography variant="h5" component="div">
+              Patients
+            </Typography>
+            <Typography variant="h4" color={'background.bg2'}>{patientsCount}</Typography>
+          </CardContent>
+        </Card>
       </Grid>
-
-      {/* 2nd row */}
-      <Grid container spacing={2}paddingTop={3}>
-        <Grid item xs={8}>
-        <Stack spacing={2} direction={'row'}>
-        <CardActionArea>
-        <Card sx={{ minWidth: 345 }}>
-          
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                       Medical Reports
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                    {medicalCount}
-                    </Typography>
-                </CardContent>
-          
-
-               
-        </Card>  </CardActionArea>
-
-
-        <CardActionArea>
-                <Card sx={{ minWidth: 345 }}>
-                
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Reports
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                    {reportsCount}
-                    </Typography>
-                </CardContent>
-               
-        </Card></CardActionArea>
-
-
-                </Stack>
-        </Grid>
+      <Grid item xs={12} sm={3}>
+        <Card sx={{ borderRadius: 5 }}>
+          <CardContent>
+            <Typography variant="h5" component="div">
+              Reports
+            </Typography>
+            <Typography variant="h4" color={'background.bg2'}>{reportsCount}</Typography>
+          </CardContent>
+        </Card>
       </Grid>
-
-      {/* 3rd row */}
-      <Grid container spacing={2} paddingTop={3}>
-        <Grid item xs={8}>
-        <Stack spacing={2} direction={'row'}>
-        <CardActionArea>
-        <Card sx={{ minWidth: 345 }}>
-          
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Staff members
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                    00
-                    </Typography>
-                </CardContent>
-          
-
-               
-        </Card>  </CardActionArea>
-
-
-        <CardActionArea>
-                <Card sx={{ minWidth: 345 }}>
-                
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Doctors
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                    000
-                    </Typography>
-                </CardContent>
-               
-        </Card></CardActionArea>
-
-
-                </Stack>
-        </Grid>
-
-        
-
-
-
-
-
-        
-      
-
+      <Grid item xs={12} sm={3}>
+        <Card sx={{ borderRadius: 5 }}>
+          <CardContent>
+            <Typography variant="h5" component="div">
+              Medicals
+            </Typography>
+            <Typography variant="h4" color={'background.bg2'}>{medicalCount}</Typography>
+          </CardContent>
+        </Card>
       </Grid>
-
-   
-    </Box>
-
-
-
-
-
-
-
-
-      
-    </div>
-  )
+      <Grid item xs={12} sm={3}>
+        <Card sx={{ borderRadius: 5 }}>
+          <CardContent>
+            <Typography variant="h5" component="div">
+              Prescriptions
+            </Typography>
+            <Typography variant="h4" color={'background.bg2'}>{prescriptionsCount}</Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+      {/* New Card for displaying appointments count */}
+      <Grid item xs={12} sm={6}>
+        <Card sx={{ borderRadius: 5, textAlign: 'center'}}>
+          <CardContent style={{alignItems: 'center'}}>
+            <Typography variant="h6" component="div">
+              Today Clinic Patients Count 
+            </Typography>
+            <Typography variant="h4" color={'background.bg2'}>{appointmentsCount}</Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
+  );
 }
 
-export default Dash
+export default Dash;

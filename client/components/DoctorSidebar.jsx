@@ -11,6 +11,7 @@ import ArticleIcon from '@mui/icons-material/Article';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 const DoctorSidebar = () => {
   return (
@@ -69,14 +70,15 @@ const DoctorSidebar = () => {
             <ListItemButton component={Link} to="#">
               <Grid container direction="column" alignItems="center" spacing={1}>
                 <Grid item>
-                  <CampaignIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
+                  <CalendarMonthIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
                 </Grid>
                 <Grid item>
-                  <Typography variant="body1">Announcement</Typography>
+                  <Typography variant="body1">Clinic Calender</Typography>
                 </Grid>
               </Grid>
             </ListItemButton>
           </ListItem>
+          
           <ListItem disablePadding>
             <ListItemButton component={Link} to="#">
               <Grid container direction="column" alignItems="center" spacing={1}>
