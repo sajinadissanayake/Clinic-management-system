@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/Navbar';
-import { Grid, Stack } from '@mui/material';
+import Navbar from '../components/Navbar'; // Adjust the path as per your project structure
+import { Box, Grid, Stack } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import blog from './images/blogp.png';
-import patient from './images/patient.jpg';
-import medi from './images/record.jpg';
-import blood from './images/sugar.jpg';
-import rep from './images/report.jpg';
-import ap from './images/appointment.jpg';
-import { Link } from 'react-router-dom';
-import { format } from 'date-fns';
-import hospital from './images/hospital.jpg';
+import hospital from './images/hospital.jpg'; // Adjust the path for the hospital image
+import Layout from '../components/Layout'; // Adjust the path as per your project structure
+import { Calendar } from 'antd'; // Adjust the path for antd if necessary
+import 'antd/dist/reset.css'; // Adjust the path for antd CSS if necessary
+import Dash from '../components/Dashboard/Dash';
+import NurseLeftbar from './NursePages/NurseLeftbar';
 
 const Item = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -23,15 +19,11 @@ const Item = styled(Card)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: 'center',
   color: theme.palette.text.secondary,
-  borderRadius: 10, // Add border radius here
-  transition: 'transform 0.3s ease-in-out', // Add transition effect
+  borderRadius: 10,
+  transition: 'transform 0.3s ease-in-out',
   '&:hover': {
-    transform: 'scale(1.05)', // Zoom effect on hover
+    transform: 'scale(1.05)',
   },
-}));
-
-const SquareCard = styled(Item)(({ theme }) => ({
-  height: '100%', // Match height to width to make it square
 }));
 
 function NurseDash() {
@@ -65,170 +57,65 @@ function NurseDash() {
 
   return (
     <div>
-      <Navbar />
-      <Stack direction="row" spacing={2} justifyContent="center">
-        <Grid container spacing={2} justifyContent="center">
-          {/* New Card */}
-          <Grid item xs={12} md={8}>
-            <Card sx={{ maxWidth: '100%', margin: 'auto', marginBottom: 2, borderRadius: 8 }}>
-              <CardContent>
-                <Typography variant="h5" component="div" style={{ textAlign: 'left', marginBottom: '1rem' }}>
-                  Dashboard
-                  <Typography variant="body2" component="span" style={{ float: 'right' }}>
-                    {currentDateTime.toLocaleTimeString()}
-                  </Typography>
-                </Typography>
-                
-                <Grid container justifyContent="center">
-                  <Grid item xs={6} md={6}>
-                    <Typography variant="h6" gutterBottom>
-                      Welcome
-                    </Typography>
-                    <Typography variant="body1" gutterBottom>
-                      {greeting}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={6} md={6}>
-                    <Typography variant="body1" component="div">
-                      <CardMedia
-                        component="img"
-                        height="150"
-                        image={hospital}
-                        alt="Welcome Image"
-                      />
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          </Grid>
+      <Navbar pageTitle="Nurse Dashboard" />
+      <Layout>
+      <Grid container spacing={3}>
+      <Grid item xs={1.5}>
+        <NurseLeftbar/>
+      </Grid>
+      <Grid item xs={7.5}>
           
-          {/* Main Card */}
-          <Grid item xs={12} md={8}>
-            <Card sx={{ maxWidth: '100%', margin: 'auto', marginBottom: 4 ,borderRadius: 8 }}>
-              <CardContent>
-                <Grid container spacing={2} justifyContent="center">
-                  <Grid item xs={6} sm={4} md={4}>
-                    <Link to="/blogadd" style={{ textDecoration: 'none' }}>
-                      <Item>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="100"
-                            image={blog}
-                            alt="Prescription"
-                          />
-                          <CardContent>
-                            <Typography gutterBottom variant="body2" component="div">
-                              Posts
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </Item>
-                    </Link>
-                  </Grid>
-                  <Grid item xs={6} sm={4} md={4}>
-                    <Link to="/patientslist" style={{ textDecoration: 'none' }}>
-                      <Item>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="100"
-                            image={patient}
-                            alt="Patients"
-                          />
-                          <CardContent>
-                            <Typography gutterBottom variant="body2" component="div">
-                              Patients
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </Item>
-                    </Link>
-                  </Grid>
-                  <Grid item xs={6} sm={4} md={4}>
-                    <Link to="/Mselect" style={{ textDecoration: 'none' }}>
-                      <Item>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="100"
-                            image={medi}
-                            alt="Medical Records"
-                          />
-                          <CardContent>
-                            <Typography gutterBottom variant="body2" component="div">
-                              Medical Records
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </Item>
-                    </Link>
-                  </Grid>
-                  <Grid item xs={6} sm={4} md={4}>
-                    <Link to="/bsSelect" style={{ textDecoration: 'none' }}>
-                      <Item>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="100"
-                            image={blood}
-                            alt="Blood Sugar"
-                          />
-                          <CardContent>
-                            <Typography gutterBottom variant="body2" component="div">
-                              Blood Sugar
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </Item>
-                    </Link>
-                  </Grid>
-                  <Grid item xs={6} sm={4} md={4}>
-                    
-                  <Link to="/clinicpatients" style={{ textDecoration: 'none' }}>
-                    <Item>
-                      <CardActionArea>
-                        <CardMedia
-                          component="img"
-                          height="100"
-                          image={ap}
-                          alt="Appointments"
-                        />
-                        <CardContent>
-                          <Typography gutterBottom variant="body2" component="div">
-                          Clinic Patients
+                  <Card sx={{ margin: 'auto', marginBottom: 2, borderRadius: 8, marginTop: 3 }}>
+                    <CardContent>
+                      <Typography variant="h5" component="div" style={{ textAlign: 'left', marginBottom: '1rem' }}>
+                        <Typography variant="body2" component="span" style={{ float: 'right' }}>
+                          {currentDateTime.toLocaleTimeString()}
+                        </Typography>
+                      </Typography>
+                      <Grid container justifyContent="center">
+                        <Grid item xs={6} md={6}>
+                          <Typography variant="h6" gutterBottom>
+                            Welcome
                           </Typography>
-                        </CardContent>
-                      </CardActionArea>
-                    </Item></Link>
-                  </Grid>
-                  <Grid item xs={6} sm={4} md={4}>
-                  <Link to="/clinicdates" style={{ textDecoration: 'none' }}>
-                    <Item>
-                      <CardActionArea>
-                        <CardMedia
-                          component="img"
-                          height="100"
-                          image={ap}
-                          alt="Appointments"
-                        />
-                        <CardContent>
-                          <Typography gutterBottom variant="body2" component="div">
-                          Clinic Calender
+                          <Typography variant="body1" gutterBottom>
+                            {greeting}
                           </Typography>
-                        </CardContent>
-                      </CardActionArea>
-                    </Item></Link>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          </Grid>
+                        </Grid>
+                        <Grid item xs={6} md={6}>
+                          <CardMedia
+                            component="img"
+                            height="150"
+                            image={hospital}
+                            alt="Welcome Image"
+                          />
+                        </Grid>
+                      </Grid>
+                    </CardContent>
+                  </Card>
+               
+                {/* Dash Component */}
+               
+                  <Dash />
+               
 
-     
-        </Grid>
-      </Stack>
+      </Grid>
+      <Grid item xs={3}>
+      <Card sx={{ margin: 'auto', marginBottom: 2, borderRadius: 8, marginTop: 3, maxHeight: '600px', display: 'flex', flexDirection: 'column' }}>
+                <CardContent style={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column' }}>
+                  <Typography variant="h5" component="div" style={{ textAlign: 'left', marginBottom: '1rem' }}>
+                    <Typography variant="body2" component="span" style={{ float: 'right' }}>
+                      Calendar
+                    </Typography>
+                  </Typography>
+                  <div style={{ flex: 1, overflowY: 'auto' }}>
+                    <Calendar style={{ height: '100%' }} />
+                  </div>
+                </CardContent>
+              </Card>
+
+      </Grid>
+</Grid>
+      </Layout>
     </div>
   );
 }

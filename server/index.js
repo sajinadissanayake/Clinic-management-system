@@ -295,9 +295,29 @@ app.get('/getBloodSugarData/:nic', (req, res) => {
         .then(data => res.json(data))
         .catch(err => res.status(500).json({ error: err.message }));
 });
-
-
-
+// Get blood sugar record by ID
+app.get('/api/bloodsugars/:id', async (req, res) => {
+    try {
+      const record = await BSModel.findById(req.params.id);
+      res.json(record);
+    } catch (error) {
+      console.error('Error fetching blood sugar record:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
+  // Update blood sugar record by ID
+  app.put('/api/bloodsugars/:id', async (req, res) => {
+    try {
+      const updatedRecord = await BSModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      res.json(updatedRecord);
+    } catch (error) {
+      console.error('Error updating blood sugar record:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
+///////////////////////////////////////////////////////////////Medical/////////////////////////////////////
 // Add a route to get medical examination records by patient NIC
 app.get('/getmedicals', (req, res) => {
     mexamModel.find({})

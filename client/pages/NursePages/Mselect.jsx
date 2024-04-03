@@ -10,6 +10,7 @@ import PageBody from '../../components/PageBody';
 import Announcements from '../../components/Announcements';
 import AddChartIcon from '@mui/icons-material/AddChart';
 import RequestDisplay from './RequestDisplay'; // Import the RequestDisplay component
+import Layout from '../../components/Layout';
 
 function Mselect() {
     const [patients, setPatients] = useState([]);
@@ -57,7 +58,8 @@ function Mselect() {
 
     return (
         <div>
-            <Navbar />
+           <Navbar pageTitle="Select Patient" />
+           <Layout>
             <Stack direction="row" spacing={2} justifyContent="space-between">
                 <NurseLeftbar />
                 <PageBody>
@@ -67,7 +69,7 @@ function Mselect() {
                         value={searchTerm}
                         onChange={handleSearch}
                         fullWidth
-                    />
+                    />  <div style={{ height: '76vh', overflowY: 'auto' }}>
                     <Table>
                         <TableHead>
                             <TableRow>
@@ -101,10 +103,10 @@ function Mselect() {
                                 </TableRow>
                             ))}
                         </TableBody>
-                    </Table>
+                    </Table></div>
                 </PageBody>
                 <Announcements />
-            </Stack>
+            </Stack></Layout>
             <RequestDisplay open={selectedPatient !== null} onClose={handleCloseRequestsDialog} patientNIC={selectedPatient} />
         </div>
     );

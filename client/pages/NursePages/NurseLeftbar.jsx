@@ -1,4 +1,4 @@
-import { Box, Card, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Box, Card, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
@@ -7,20 +7,21 @@ import PeopleIcon from '@mui/icons-material/People';
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
 import ArticleIcon from '@mui/icons-material/Article';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import React from 'react';
+import PersonIcon from '@mui/icons-material/Person';
 
 function NurseLeftbar() {
   return (
     <div>
-      <Box bgcolor="" flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}> 
-        <h3>Menu</h3>
-        <Card sx={{borderRadius:6}}>
-          <List>
+     <Box display="flex" flexDirection="column" justifyContent="flex-start" alignItems="flex-start" height="100%">
+      <Card sx={{ marginTop:5,borderTopRightRadius:30, borderBottomRightRadius: 30, backgroundColor: "background.bgw", flexGrow: 1, width: '100%' }}>
+      <List>
             <ListItem disablePadding>
               <ListItemButton component={Link} to="/Nursedash">
                 <Grid container direction="column" alignItems="center" spacing={1}>
                   <Grid item>
-                    <HomeIcon sx={{ fontSize: 40 }} />
+                    <HomeIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
                   </Grid>
                   <Grid item>
                     <ListItemText primary="Dashboard" />
@@ -32,43 +33,43 @@ function NurseLeftbar() {
               <ListItemButton component={Link} to="/blogadd">
                 <Grid container direction="column" alignItems="center" spacing={1}>
                   <Grid item>
-                    <ArticleIcon sx={{ fontSize: 40 }} />
+                    <ArticleIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
                   </Grid>
                   <Grid item>
-                    <ListItemText primary="Add Posts" />
+                    <ListItemText primary="Article" />
                   </Grid>
                 </Grid>
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton component={Link} to="/addpatient">
+              <ListItemButton component={Link} to="/patientslist">
                 <Grid container direction="column" alignItems="center" spacing={1}>
                   <Grid item>
-                    <PersonAddAlt1Icon sx={{ fontSize: 40 }} />
+                    <PersonIcon sx={{ fontSize: 40 , color: 'background.bg2'}} />
                   </Grid>
                   <Grid item>
-                    <ListItemText primary="Add patient" />
+                    <ListItemText primary="Patients" />
                   </Grid>
                 </Grid>
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton component={Link} to="/reports">
-                <Grid container direction="column" alignItems="center" spacing={1}>
-                  <Grid item>
-                    <DocumentScannerIcon sx={{ fontSize: 40 }} />
-                  </Grid>
-                  <Grid item>
-                    <ListItemText primary="Reports" />
-                  </Grid>
+            <ListItemButton component={Link} to="/clinicdates">
+              <Grid container direction="column" alignItems="center" spacing={1}>
+                <Grid item>
+                  <CalendarMonthIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
                 </Grid>
-              </ListItemButton>
-            </ListItem>
+                <Grid item>
+                  <Typography variant="body1">Clinic Calender</Typography>
+                </Grid>
+              </Grid>
+            </ListItemButton>
+          </ListItem>
             <ListItem disablePadding>
               <ListItemButton component={Link} to="/mselect">
                 <Grid container direction="column" alignItems="center" spacing={1}>
                   <Grid item>
-                    <PostAddIcon sx={{ fontSize: 40 }} />
+                    <PostAddIcon sx={{ fontSize: 40 , color: 'background.bg2'}} />
                   </Grid>
                   <Grid item>
                     <ListItemText primary="Medical examinations" />
@@ -80,7 +81,7 @@ function NurseLeftbar() {
               <ListItemButton component={Link} to="/bloodsugar">
                 <Grid container direction="column" alignItems="center" spacing={1}>
                   <Grid item>
-                    <MedicalInformationIcon sx={{ fontSize: 40 }} />
+                    <MedicalInformationIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
                   </Grid>
                   <Grid item>
                     <ListItemText primary="Blood Sugar" />
@@ -89,8 +90,9 @@ function NurseLeftbar() {
               </ListItemButton>
             </ListItem>
           </List>
-        </Card>
-      </Box>
+
+      </Card>
+    </Box>
     </div>
   );
 }
