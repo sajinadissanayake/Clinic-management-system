@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import { TextField, Button, CircularProgress, Typography, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 
 function ReportsUpdateDialog({ open, onClose, reportId }) {
@@ -34,11 +35,26 @@ function ReportsUpdateDialog({ open, onClose, reportId }) {
             .then(result => {
                 console.log(result);
                 onClose();
-                window.location.reload();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Report Updated Successfully',
+                    showConfirmButton: true, // Show the "OK" button
+                    timer: 1500
+                }).then(() => {
+                    window.location.reload(); // Refresh the page after clicking "OK"
+                });
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    showConfirmButton: true // Show the "OK" button
+                });
+            });
     };
-
+    
     const handleCancel = () => {
         onClose();
     };

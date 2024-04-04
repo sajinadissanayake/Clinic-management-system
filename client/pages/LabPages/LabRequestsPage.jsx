@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import PharmacySidebar from '../../components/PharmacySidebar';
-import { Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography, Card, TextField, Grid } from '@mui/material';
+import { Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography, Card, TextField, Grid, CircularProgress } from '@mui/material';
 import axios from 'axios';
 import AddReportDialog from './AddReportDialog';
 import Announcements from '../../components/Announcements';
 import LabSidebar from '../../components/LabSidebar';
+import Layout from '../../components/Layout';
+import PageBody from '../../components/PageBody';
 
 function LabRequestsPage() {
     const [records, setRecords] = useState([]);
@@ -14,14 +16,18 @@ function LabRequestsPage() {
     const [selectedRecord, setSelectedRecord] = useState(null);
     const [recordNic, setRecordNic] = useState('');
     const [recordType, setRecordType] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const fetchRecords = () => {
+        setLoading(true);
         axios.get('http://localhost:3001/getLabRequests')
             .then(response => {
                 setRecords(response.data);
+                setLoading(false);
             })
             .catch(error => {
                 console.error('Error fetching records:', error);
+                setLoading(false);
             });
     };
 
@@ -49,27 +55,39 @@ function LabRequestsPage() {
 
     return (
         <div>
-            <Navbar />
-            <Stack direction="row" spacing={2} justifyContent="space-between">
-                <LabSidebar/>
-                <Stack direction="column" alignItems="center" spacing={2}>
-                    <Typography variant="h4" sx={{marginTop:8}}>Lab Requests</Typography>
-                    <Card style={{ borderRadius: 6 }}>
-                        <Grid container justifyContent="flex-start" alignItems="center" spacing={2}>
-                            <Grid item xs={3}>
-                                <TextField
-                                    label="Search by NIC"
-                                    variant="outlined"
-                                    value={searchQuery}
-                                    onChange={handleSearchChange}
-                                    sx={{marginLeft:2,marginTop:2}}
-                                />
-                            </Grid>
-                            <Grid item xs={9} container justifyContent="flex-start"> {/* Changed justifyContent to flex-start */}
-                                <Typography variant="body1" sx={{marginLeft:2,marginTop:2,color:"#415a77"}}> {totalRequests}  Results</Typography>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TableContainer component={Paper}>
+            <Navbar pageTitle="Reports" />
+            <Layout>
+                <Stack direction="row" spacing={2} justifyContent="space-between">
+                    <LabSidebar/>
+                    <PageBody>
+                        <Stack direction="column" alignItems="center" spacing={2}>
+                            <Typography variant="h4" sx={{ marginTop: 8 }}>Lab Requests</Typography>
+                            <Card style={{ borderRadius: 10, backgroundColor: 'rgba(255, 255, 255, 0.9)', padding: 20 }}>
+                                <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
+                                    <Grid item xs={9}>
+                                        <TextField
+                                            label="Search by NIC"
+                                            variant="outlined"
+                                            value={searchQuery}
+                                            onChange={handleSearchChange}
+                                            fullWidth
+                                        />
+                                    </Grid>
+                                    <Grid item xs={3} container justifyContent="flex-end">
+                                        <Typography variant="body1" sx={{ color: "#415a77" }}>{totalRequests} Requests</Typography>
+                                    </Grid>
+                                </Grid>
+                            </Card>
+                            {loading ? (
+                                <Grid container justifyContent="center" alignItems="center" style={{ height: '50vh' }}>
+                                    <CircularProgress />
+                                </Grid>
+                            ) : totalRequests === 0 ? (
+                                <Typography variant="body1" sx={{ marginTop: 2, color: "#FF0000", textAlign: 'center' }}>
+                                    No results found
+                                </Typography>
+                            ) : (
+                                <TableContainer component={Paper} style={{ marginTop: 20 }}>
                                     <Table>
                                         <TableHead>
                                             <TableRow>
@@ -86,10 +104,7 @@ function LabRequestsPage() {
                                                     <TableCell>{record.nic}</TableCell>
                                                     <TableCell>{record.type}</TableCell>
                                                     <TableCell>{record.status}</TableCell>
-                                                    <TableCell>
-                                                    {record.requestedDate ? new Date(record.requestedDate).toLocaleDateString() : 'Invalid Date'}
-
-                                                    </TableCell>
+                                                    <TableCell>{record.requestedDate ? new Date(record.requestedDate).toLocaleDateString() : 'Invalid Date'}</TableCell>
                                                     <TableCell>
                                                         <Button variant='outlined' onClick={() => handleOpenDialog(record)}>Add Report</Button>
                                                     </TableCell>
@@ -98,13 +113,13 @@ function LabRequestsPage() {
                                         </TableBody>
                                     </Table>
                                 </TableContainer>
-                            </Grid>
-                        </Grid>
-                    </Card>
+                            )}
+                        </Stack>
+                    </PageBody>
+                    <AddReportDialog open={openDialog} onClose={handleCloseDialog} selectedRecord={selectedRecord} />
+                    <Announcements />
                 </Stack>
-                <AddReportDialog open={openDialog} onClose={handleCloseDialog} selectedRecord={selectedRecord} />
-                <Announcements />
-            </Stack>
+            </Layout>
         </div>
     );
 }

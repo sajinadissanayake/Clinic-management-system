@@ -1,4 +1,4 @@
-import { Box, Card, Grid, Typography } from '@mui/material';
+import { Box, Card, Grid, ListItemText, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
@@ -17,15 +17,14 @@ import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 const PharmacySidebar = () => {
   return (
     <div>
-      <Box bgcolor="" flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}> 
-        <h3>Menu</h3>
-        <Card sx={{borderRadius:6}}>
-          <List>
-            <ListItem disablePadding>
+     <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" height="100%">
+      <Card sx={{ marginTop:5,borderTopRightRadius:30, borderBottomRightRadius: 30, backgroundColor: "background.bgw", flexGrow: 1, width: '100%' }}>
+      <List>
+      <ListItem disablePadding>
               <ListItemButton component={Link} to="/pharmacydash">
                 <Grid container direction="column" alignItems="center" spacing={1}>
                   <Grid item>
-                    <HomeIcon sx={{ fontSize: 40 }} />
+                    <HomeIcon sx={{ fontSize: 40,color: 'background.bg2' }} />
                   </Grid>
                   <Grid item>
                     <Typography variant="body1">Home</Typography>
@@ -34,10 +33,10 @@ const PharmacySidebar = () => {
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton component={Link} to="/pselect">
+              <ListItemButton component={Link} to="/newpresc">
                 <Grid container direction="column" alignItems="center" spacing={1}>
                   <Grid item>
-                    <ArticleIcon sx={{ fontSize: 40 }} />
+                    <ArticleIcon sx={{ fontSize: 40,color: 'background.bg2' }} />
                   </Grid>
                   <Grid item>
                     <Typography variant="body1">New Prescriptions</Typography>
@@ -49,7 +48,7 @@ const PharmacySidebar = () => {
               <ListItemButton component={Link} to="/allprescriptions">
                 <Grid container direction="column" alignItems="center" spacing={1}>
                   <Grid item>
-                    <ArticleIcon sx={{ fontSize: 40 }} />
+                    <ArticleIcon sx={{ fontSize: 40,color: 'background.bg2' }} />
                   </Grid>
                   <Grid item>
                     <Typography variant="body1">Other Prescriptions</Typography>
@@ -62,7 +61,7 @@ const PharmacySidebar = () => {
               <ListItemButton component={Link} to="#">
                 <Grid container direction="column" alignItems="center" spacing={1}>
                   <Grid item>
-                    <EqualizerIcon sx={{ fontSize: 40 }} />
+                    <EqualizerIcon sx={{ fontSize: 40,color: 'background.bg2' }} />
                   </Grid>
                   <Grid item>
                     <Typography variant="body1">Clinic Status</Typography>
@@ -70,23 +69,12 @@ const PharmacySidebar = () => {
                 </Grid>
               </ListItemButton>
             </ListItem>
+         
             <ListItem disablePadding>
               <ListItemButton component={Link} to="#">
                 <Grid container direction="column" alignItems="center" spacing={1}>
                   <Grid item>
-                    <CampaignIcon sx={{ fontSize: 40 }} />
-                  </Grid>
-                  <Grid item>
-                    <Typography variant="body1">Annoucement</Typography>
-                  </Grid>
-                </Grid>
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton component={Link} to="#">
-                <Grid container direction="column" alignItems="center" spacing={1}>
-                  <Grid item>
-                    <HealthAndSafetyIcon sx={{ fontSize: 40 }} />
+                    <HealthAndSafetyIcon sx={{ fontSize: 40,color: 'background.bg2' }} />
                   </Grid>
                   <Grid item>
                     <Typography variant="body1">Clinic</Typography>
@@ -95,8 +83,10 @@ const PharmacySidebar = () => {
               </ListItemButton>
             </ListItem>
           </List>
-        </Card>
-      </Box>
+
+
+      </Card>
+    </Box>
     </div>
   );
 };

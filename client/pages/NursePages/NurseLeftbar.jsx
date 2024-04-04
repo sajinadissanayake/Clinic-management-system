@@ -10,6 +10,7 @@ import ArticleIcon from '@mui/icons-material/Article';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import React from 'react';
 import PersonIcon from '@mui/icons-material/Person';
+import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 
 function NurseLeftbar() {
   return (
@@ -78,18 +79,18 @@ function NurseLeftbar() {
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton component={Link} to="/bloodsugar">
-                <Grid container direction="column" alignItems="center" spacing={1}>
-                  <Grid item>
-                    <MedicalInformationIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
-                  </Grid>
-                  <Grid item>
-                    <ListItemText primary="Blood Sugar" />
-                  </Grid>
+            <ListItemButton component={Link} to="/clinicpatients">
+              <Grid container direction="column" alignItems="center" spacing={1}>
+                <Grid item>
+                  <HealthAndSafetyIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
                 </Grid>
-              </ListItemButton>
-            </ListItem>
-          </List>
+                <Grid item>
+                  <Typography variant="body1">Clinic</Typography>
+                </Grid>
+              </Grid>
+            </ListItemButton>
+          </ListItem>
+        </List>
 
       </Card>
     </Box>

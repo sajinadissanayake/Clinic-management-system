@@ -1,7 +1,6 @@
-// BsTable.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Config from '../../config/config';
 import Navbar from '../../components/Navbar';
 import { Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, RadioGroup, Radio, FormControlLabel, Button, Toolbar, Typography, IconButton } from '@mui/material';
@@ -9,24 +8,23 @@ import NurseLeftbar from './NurseLeftbar';
 import PageBody from '../../components/PageBody';
 import Announcements from '../../components/Announcements';
 import Layout from '../../components/Layout';
-import EditIcon from '@mui/icons-material/Edit';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import BSUpdateDialog from './BSUpdateDialog'; // Import the dialog component
 import BsAddDialog from './BsAddDialog';
+import Swal from 'sweetalert2'; // Import SweetAlert
 
 function BsTable() {
     const { nic } = useParams();
     const [bloodSugarData, setBloodSugarData] = useState([]);
     const [filterType, setFilterType] = useState('all'); // 'all' by default
     const [openDialog, setOpenDialog] = useState(false); // State to manage dialog open/close
-    const [openUpdateDialog, setOpenUpdateDialog] = useState(false); // State to manage update dialog open/close
-    const [selectedRecordId, setSelectedRecordId] = useState(null); // State to manage selected record ID
 
     useEffect(() => {
         // Fetch blood sugar data based on NIC
         axios.get(`${Config().getBaseServerUrl}/getBloodSugarData/${nic}`)
             .then(response => {
-                setBloodSugarData(response.data);
+                // Sort the data array in descending order based on the record date
+                const sortedData = response.data.sort((a, b) => new Date(b.Recorddate) - new Date(a.Recorddate));
+                setBloodSugarData(sortedData);
             })
             .catch(error => {
                 console.error('Error fetching blood sugar data:', error);
@@ -37,13 +35,39 @@ function BsTable() {
         setFilterType(event.target.value);
     };
 
-    const filteredData = filterType === 'all' ? bloodSugarData : bloodSugarData.filter(entry => entry.type === filterType);
-
-    const handleUpdateButtonClick = (recordId) => {
-        console.log(recordId);
-        setSelectedRecordId(recordId);
-        setOpenUpdateDialog(true);
+    const deleteRecord = (id) => {
+        // Show SweetAlert confirmation dialog
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You are about to delete this record. This action cannot be undone.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If confirmed, delete the record
+                axios.delete(`${Config().getBaseServerUrl}/deletebs/${id}`)
+                    .then(response => {
+                        // Remove the deleted record from bloodSugarData state
+                        setBloodSugarData(bloodSugarData.filter(entry => entry._id !== id));
+                        // Show success message
+                        Swal.fire('Deleted!', 'The record has been deleted.', 'success');
+                    })
+                    .catch(error => {
+                        console.error('Error deleting record:', error);
+                        // Show error message
+                        Swal.fire('Error!', 'An error occurred while deleting the record.', 'error');
+                    });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                // If cancelled, do nothing
+                Swal.fire('Cancelled', 'The record deletion has been cancelled.', 'info');
+            }
+        });
     };
+
+    const filteredData = filterType === 'all' ? bloodSugarData : bloodSugarData.filter(entry => entry.type === filterType);
 
     return (
         <div>
@@ -74,6 +98,7 @@ function BsTable() {
                                         <TableCell>Type</TableCell>
                                         <TableCell>Value</TableCell>
                                         <TableCell>Special Notes</TableCell>
+                                        <TableCell>Actions</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -84,12 +109,7 @@ function BsTable() {
                                             <TableCell>{entry.rbs}</TableCell>
                                             <TableCell>{entry.specialNotes}</TableCell>
                                             <TableCell>
-                                                <Button variant='outlined' style={{ marginRight: '10px' }} onClick={() => handleUpdateButtonClick(entry._id)}>
-                                                    Update
-                                                </Button>
-                                            </TableCell>
-                                            <TableCell>
-                                                <Button variant='outlined' color='error'>
+                                                <Button variant='outlined' color='error' onClick={() => deleteRecord(entry._id)}>
                                                     Delete
                                                 </Button>
                                             </TableCell>
@@ -102,9 +122,6 @@ function BsTable() {
                     <Announcements />
                     {/* Pass the 'nic' prop to BsAddDialog */}
                     <BsAddDialog open={openDialog} onClose={() => setOpenDialog(false)} nic={nic} />
-
-                    {/* Pass selected record ID to BSUpdateDialog */}
-                    <BSUpdateDialog open={openUpdateDialog} onClose={() => setOpenUpdateDialog(false)} recordId={selectedRecordId} />
                 </Stack>
             </Layout>
         </div>

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Card, CardContent, Typography } from '@mui/material';
 
-function Dash() {
+function PDash() {
   const [patientsCount, setPatientsCount] = useState(0);
   const [reportsCount, setReportsCount] = useState(0);
   const [medicalCount, setMedicalCount] = useState(0);
   const [prescriptionsCount, setPrescriptionsCount] = useState(0);
   const [appointmentsCount, setAppointmentsCount] = useState({ startTime: '', endTime: '' });
   const [todayAppointmentCount, setTodayAppointmentCount] = useState(0);
+  const [pendingPrescriptionsCount, setPendingPrescriptionsCount] = useState(0);
 
   useEffect(() => {
     fetchPatientsCount();
@@ -16,45 +17,34 @@ function Dash() {
     fetchPrescriptionsCount();
     fetchAppointmentsCount();
     fetchTodayAppointmentCount();
+    fetchPendingPrescriptionsCount();
   }, []);
 
   const fetchPatientsCount = () => {
-    // Fetch patients count from the backend
     fetch('http://localhost:3001/')
       .then(response => response.json())
-      .then(data => {
-        setPatientsCount(data.length);
-      })
+      .then(data => setPatientsCount(data.length))
       .catch(error => console.error('Error fetching patients count:', error));
   };
 
   const fetchReportsCount = () => {
-    // Fetch reports count from the backend
     fetch('http://localhost:3001/getReports')
       .then(response => response.json())
-      .then(data => {
-        setReportsCount(data.length);
-      })
+      .then(data => setReportsCount(data.length))
       .catch(error => console.error('Error fetching reports count:', error));
   };
 
   const fetchMedicalCount = () => {
-    // Fetch medical count from the backend
     fetch('http://localhost:3001/getmedicals')
       .then(response => response.json())
-      .then(data => {
-        setMedicalCount(data.length);
-      })
+      .then(data => setMedicalCount(data.length))
       .catch(error => console.error('Error fetching medical count:', error));
   };
 
   const fetchPrescriptionsCount = () => {
-    // Fetch prescriptions count from the backend
     fetch('http://localhost:3001/getPrescriptions')
       .then(response => response.json())
-      .then(data => {
-        setPrescriptionsCount(data.length);
-      })
+      .then(data => setPrescriptionsCount(data.length))
       .catch(error => console.error('Error fetching prescriptions count:', error));
   };
 
@@ -95,17 +85,24 @@ function Dash() {
       })
       .catch(error => console.error('Error fetching appointments count:', error));
   };
+
+
   const fetchTodayAppointmentCount = () => {
-    // Fetch today's appointment count from the backend
     fetch('http://localhost:3001/getAppointments')
       .then(response => response.json())
       .then(data => {
-        // Filter appointments for today
         const today = new Date().setHours(0, 0, 0, 0);
         const appointmentsToday = data.filter(appointment => new Date(appointment.date).setHours(0, 0, 0, 0) === today);
         setTodayAppointmentCount(appointmentsToday.length);
       })
       .catch(error => console.error('Error fetching today\'s appointment count:', error));
+  };
+
+  const fetchPendingPrescriptionsCount = () => {
+    fetch('http://localhost:3001/getPrescriptions?status=pending') // Filter by status "pending"
+      .then(response => response.json())
+      .then(data => setPendingPrescriptionsCount(data.length))
+      .catch(error => console.error('Error fetching pending prescriptions count:', error));
   };
 
   return (
@@ -150,7 +147,6 @@ function Dash() {
           </CardContent>
         </Card>
       </Grid>
-      {/* Clinic time range card */}
       <Grid item xs={12} sm={6}>
   <Card sx={{ borderRadius: 5, textAlign: 'center' }}>
     <CardContent style={{ alignItems: 'center' }}>
@@ -169,7 +165,7 @@ function Dash() {
     </CardContent>
   </Card>
 </Grid>
-      {/* Today's appointment count card */}
+
       <Grid item xs={12} sm={6}>
         <Card sx={{ borderRadius: 5, textAlign: 'center' }}>
           <CardContent style={{ alignItems: 'center' }}>
@@ -182,8 +178,18 @@ function Dash() {
           </CardContent>
         </Card>
       </Grid>
+      <Grid item xs={12} sm={3}>
+        <Card sx={{ borderRadius: 5 }}>
+          <CardContent>
+            <Typography variant="h5" component="div">
+              Pending Prescriptions
+            </Typography>
+            <Typography variant="h4" color={'background.bg2'}>{pendingPrescriptionsCount}</Typography>
+          </CardContent>
+        </Card>
+      </Grid>
     </Grid>
   );
 }
 
-export default Dash;
+export default PDash;

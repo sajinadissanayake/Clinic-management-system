@@ -13,34 +13,35 @@ import Announcements from '../../components/Announcements';
 import MAddReportDialog from './MAddReportDialog';
 import ReportsUpdateDialog from './ReportsUpdateDialog'; // Import the dialog component
 import { useParams } from 'react-router-dom';
+import Layout from '../../components/Layout';
+import Swal from 'sweetalert2'
 
 function Reports() {
-  const [reports, setReports] = useState([]);
-  const [filteredReports, setFilteredReports] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [addDialogOpen, setAddDialogOpen] = useState(false); // Separate state for Add Report dialog
-  const [updateDialogOpen, setUpdateDialogOpen] = useState(false); // Separate state for Update Report dialog
-  const [selectedReportId, setSelectedReportId] = useState(null);
-  const { nic } = useParams();
+    const [reports, setReports] = useState([]);
+    const [filteredReports, setFilteredReports] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [addDialogOpen, setAddDialogOpen] = useState(false); // Separate state for Add Report dialog
+    const [updateDialogOpen, setUpdateDialogOpen] = useState(false); // Separate state for Update Report dialog
+    const [selectedReportId, setSelectedReportId] = useState(null);
+    const { nic } = useParams();
 
-  const handleOpenAddDialog = () => {
-      setAddDialogOpen(true);
-  };
+    const handleOpenAddDialog = () => {
+        setAddDialogOpen(true);
+    };
 
-  const handleCloseAddDialog = () => {
-      setAddDialogOpen(false);
-  };
+    const handleCloseAddDialog = () => {
+        setAddDialogOpen(false);
+    };
 
-  const handleOpenUpdateDialog = (reportId) => {
-      setSelectedReportId(reportId);
-      setUpdateDialogOpen(true);
-  };
+    const handleOpenUpdateDialog = (reportId) => {
+        setSelectedReportId(reportId);
+        setUpdateDialogOpen(true);
+    };
 
-  const handleCloseUpdateDialog = () => {
-      setUpdateDialogOpen(false);
-      setSelectedReportId(null);
-  };
-
+    const handleCloseUpdateDialog = () => {
+        setUpdateDialogOpen(false);
+        setSelectedReportId(null);
+    };
 
     useEffect(() => {
         axios.get(`http://localhost:3001/getReports/nic/${nic}`)
@@ -70,99 +71,118 @@ function Reports() {
     }, [searchTerm, reports]);
 
     const handleDeleteReport = (id) => {
-        axios.delete(`http://localhost:3001/deleteReport/${id}`)
-            .then(response => {
-                setReports(reports.filter(report => report._id !== id));
-                setFilteredReports(filteredReports.filter(report => report._id !== id));
-            })
-            .catch(error => {
-                console.error('Error deleting report:', error);
-            });
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You will not be able to recover this report!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`http://localhost:3001/deleteReport/${id}`)
+                    .then(response => {
+                        setReports(reports.filter(report => report._id !== id));
+                        setFilteredReports(filteredReports.filter(report => report._id !== id));
+                        Swal.fire('Deleted!', 'Your report has been deleted.', 'success');
+                    })
+                    .catch(error => {
+                        console.error('Error deleting report:', error);
+                        Swal.fire('Error!', 'An error occurred while deleting the report.', 'error');
+                    });
+            }
+        });
     };
 
     return (
         <div>
-            <Navbar />
-            <Stack direction="row" spacing={2} justifyContent="space-between">
-                <LabSidebar />
-                <Card sx={{ borderRadius: 8 }}>
-                    <CardContent>
-                        <h2>Reports for NIC: {nic}</h2>
-                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
-                            <TextField
-                                label="Search by Report Type"
-                                variant="outlined"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <SearchIcon />
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                <Typography variant="body1" sx={{ mr: 2 }}>
-                                    Total Reports: {filteredReports.length}
-                                </Typography>
-                                <IconButton color="primary" onClick={handleOpenAddDialog}> {/* Trigger Add Report dialog */}
-                                  <AddCircleOutlineIcon />
-                              </IconButton>
-                            </Box>
-                        </Box>
-                        <TableContainer component={Paper} style={{ maxHeight: '600px'}}>
-                            <Table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell style={{ minWidth: 150 }}>Report Type</TableCell>
-                                        <TableCell style={{ minWidth: 150 }}>Upload Date</TableCell>
-                                        <TableCell style={{ minWidth: 150 }}>PDF Report</TableCell>
-                                        <TableCell style={{ minWidth: 100 }}>Edit</TableCell>
-                                        <TableCell style={{ minWidth: 100 }}>Delete</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody style={{ maxHeight: '400px', overflowY: 'auto' }}>
-                                    {Array.isArray(filteredReports) && filteredReports.map(report => (
-                                        <TableRow key={report._id}>
-                                            <TableCell>
-                                                <Typography variant="body1" style={{ whiteSpace: 'pre-wrap' }}>{report.type}</Typography>
-                                            </TableCell>
-                                            <TableCell>{new Date(report.uploadDate).toLocaleDateString()}</TableCell>
-                                            <TableCell>
-                                                <IconButton
-                                                    href={`http://localhost:3001/reports/${report.patientReport}`}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                >
-                                                    <SummarizeIcon />
-                                                </IconButton>
-                                            </TableCell>
-                                            <TableCell>
-                                            <IconButton onClick={() => handleOpenUpdateDialog(report._id)}> {/* Use handleOpenUpdateDialog */}
-                                                <EditIcon />
+            <Navbar pageTitle="Reports" />
+            <Layout>
+                <Stack direction="row" spacing={2} justifyContent="space-between">
+                    <LabSidebar />
+                    <PageBody>
+                        <Card sx={{ borderRadius: 8, boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)' }}>
+                            <CardContent>
+                                <Box sx={{ mb: 2 }}>
+                                    <Typography variant="h4" sx={{ mb: 2 }}>Reports for NIC: {nic}</Typography>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                        <TextField
+                                            label="Search by Report Type"
+                                            variant="outlined"
+                                            value={searchTerm}
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <InputAdornment position="start">
+                                                        <SearchIcon />
+                                                    </InputAdornment>
+                                                ),
+                                            }}
+                                        />
+                                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                            <Typography variant="body1" sx={{ mr: 2 }}>
+                                                Total Reports: {filteredReports.length}
+                                            </Typography>
+                                            <IconButton color="primary" onClick={handleOpenAddDialog}>
+                                                <AddCircleOutlineIcon />
                                             </IconButton>
-
-                                            </TableCell>
-                                            <TableCell>
-                                                <IconButton color="secondary" onClick={() => handleDeleteReport(report._id)}>
-                                                    <DeleteIcon />
-                                                </IconButton>
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
-                                    {filteredReports.length === 0 && (
-                                        <TableRow>
-                                            <TableCell colSpan={5}>No reports found</TableCell>
-                                        </TableRow>
-                                    )}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </CardContent>
-                </Card>
-                <Announcements />
-            </Stack>
+                                        </Box>
+                                    </Box>
+                                </Box>
+                                <TableContainer component={Paper} sx={{ maxHeight: '600px', overflow: 'auto' }}>
+                                    <Table>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell style={{ minWidth: 150 }}>Report Type</TableCell>
+                                                <TableCell style={{ minWidth: 150 }}>Upload Date</TableCell>
+                                                <TableCell style={{ minWidth: 150 }}>PDF Report</TableCell>
+                                                <TableCell style={{ minWidth: 100 }}>Edit</TableCell>
+                                                <TableCell style={{ minWidth: 100 }}>Delete</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {Array.isArray(filteredReports) && filteredReports.map(report => (
+                                                <TableRow key={report._id}>
+                                                    <TableCell>
+                                                        <Typography variant="body1" style={{ whiteSpace: 'pre-wrap' }}>{report.type}</Typography>
+                                                    </TableCell>
+                                                    <TableCell>{new Date(report.uploadDate).toLocaleDateString()}</TableCell>
+                                                    <TableCell>
+                                                        <IconButton
+                                                            href={`http://localhost:3001/reports/${report.patientReport}`}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                        >
+                                                            <SummarizeIcon />
+                                                        </IconButton>
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <IconButton onClick={() => handleOpenUpdateDialog(report._id)}>
+                                                            <EditIcon />
+                                                        </IconButton>
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <IconButton color='error' onClick={() => handleDeleteReport(report._id)}>
+                                                            <DeleteIcon />
+                                                        </IconButton>
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))}
+                                            {filteredReports.length === 0 && (
+                                                <TableRow>
+                                                    <TableCell colSpan={5}>No reports found</TableCell>
+                                                </TableRow>
+                                            )}
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                            </CardContent>
+                        </Card>
+                    </PageBody>
+                    <Announcements />
+                </Stack>
+            </Layout>
             <MAddReportDialog open={addDialogOpen} onClose={handleCloseAddDialog} nic={nic} />
             <ReportsUpdateDialog open={updateDialogOpen} onClose={handleCloseUpdateDialog} reportId={selectedReportId} />
         </div>

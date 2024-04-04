@@ -9,6 +9,7 @@ import PageBody from '../../components/PageBody';
 import maleAvatar from '../images/male.png';
 import femaleAvatar from '../images/female.png';
 import LabSidebar from '../../components/LabSidebar';
+import Layout from '../../components/Layout';
 
 function PReportSelect() {
     const [patients, setPatients] = useState([]);
@@ -31,7 +32,8 @@ function PReportSelect() {
 
     return (
         <div>
-            <Navbar />
+             <Navbar pageTitle="Reports" />
+            <Layout>
             <Stack direction="row" spacing={2} justifyContent="space-between">
                 <LabSidebar/>
                 <PageBody>
@@ -77,7 +79,7 @@ function PReportSelect() {
                     </div>
                 </PageBody>
                 <Announcements />
-            </Stack>
+            </Stack></Layout>
         </div>
     );
 }

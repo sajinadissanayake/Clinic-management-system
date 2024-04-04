@@ -5,6 +5,7 @@ import Navbar from '../../components/Navbar';
 import NurseLeftbar from './NurseLeftbar';
 import Announcements from '../../components/Announcements';
 import PageBody from '../../components/PageBody';
+import Layout from '../../components/Layout';
 
 function ClinicPatients() {
   const [appointments, setAppointments] = useState([]);
@@ -36,46 +37,47 @@ function ClinicPatients() {
 
   return (
     <div>
-        <Navbar/>
-        <Stack direction="row" spacing={2} justifyContent="space-between">
-            <NurseLeftbar />
-            <PageBody>
-                <div>
-                  <Typography variant="h6">Clinic Patients</Typography>
-                  <TextField
-                    id="date"
-                    label="Select Date"
-                    type="date"
-                    defaultValue={selectedDate.toISOString().split('T')[0]}
-                    onChange={handleDateChange}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                  <div style={{ width: '100%', overflowX: 'auto' }}> {/* Added wrapping div with width and overflow styling */}
-                    <Table style={{ minWidth: 650 }}> {/* Applied style to the Table component */}
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>Date</TableCell>
-                          <TableCell>Time</TableCell>
-                          <TableCell>NIC</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {filteredAppointments.map(appointment => (
-                          <TableRow key={appointment._id}>
-                            <TableCell>{new Date(appointment.date).toLocaleDateString()}</TableCell>
-                            <TableCell>{new Date(appointment.date).toLocaleTimeString()}</TableCell>
-                            <TableCell>{appointment.nic}</TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </div>
-                </div>
-            </PageBody>
-            <Announcements/>
-        </Stack>
+       <Navbar pageTitle="Clinic Patients " />
+       <Layout>
+      <Stack direction="row" spacing={2} justifyContent="space-between">
+        <NurseLeftbar />
+        <PageBody>
+          <div>
+           
+            <TextField
+              id="date"
+              label="Select Date"
+              type="date"
+              defaultValue={selectedDate.toISOString().split('T')[0]}
+              onChange={handleDateChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <div style={{ width: '100%', overflowX: 'auto' }}>
+              <Table style={{ minWidth: 650 }}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Time</TableCell>
+                    <TableCell>NIC</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {filteredAppointments.map(appointment => (
+                    <TableRow key={appointment._id}>
+                      <TableCell>{new Date(appointment.date).toLocaleDateString()}</TableCell>
+                      <TableCell>{new Date(appointment.date).toLocaleTimeString()}</TableCell>
+                      <TableCell>{appointment.nic}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+        </PageBody>
+        <Announcements />
+      </Stack></Layout>
     </div>
   );
 }

@@ -24,6 +24,7 @@ import Rightbar from '../../components/Rightbar';
 import Sidebar from '../../components/Sidebar';
 import PageBody from '../../components/PageBody';
 import NurseLeftbar from './NurseLeftbar';
+import Layout from '../../components/Layout';
 
 function Medicals() {
   const { nic } = useParams();
@@ -52,7 +53,8 @@ function Medicals() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar pageTitle="Checkups " />
+            <Layout>
       <Stack direction="row" spacing={2} justifyContent="space-between">
         <NurseLeftbar />
         <Grid container spacing={2}>
@@ -152,7 +154,7 @@ function Medicals() {
             </Grid>
           ))}
         </Grid>
-      </Stack>
+      </Stack></Layout>
     </div>
   );
 }

@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/Navbar';
-import { Grid, Stack } from '@mui/material';
+import Navbar from '../components/Navbar'; // Adjust the path as per your project structure
+import { Box, Grid, Stack } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import rep from './images/report.jpg';
-import annoucement from './images/annoucement.jpg';
-import cinic from './images/cinic.jpg';
-import blood from './images/sugar.jpg';
-import { Link } from 'react-router-dom';
-import hospital from './images/hospital.jpg';
+import hospital from './images/hospital.jpg'; // Adjust the path for the hospital image
+import Layout from '../components/Layout'; // Adjust the path as per your project structure
+import { Calendar } from 'antd'; // Adjust the path for antd if necessary
+import 'antd/dist/reset.css'; // Adjust the path for antd CSS if necessary
+import Dash from '../components/Dashboard/Dash';
+import NurseLeftbar from './NursePages/NurseLeftbar';
+import LabSidebar from '../components/LabSidebar';
+import LDash from '../components/Dashboard/LDash';
 
 const Item = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -44,13 +45,13 @@ function LabDash() {
     let greetingMessage = '';
 
     if (hour >= 5 && hour < 12) {
-      greetingMessage = 'Good Morning User...!';
+      greetingMessage = 'Good Morning user...!';
     } else if (hour >= 12 && hour < 18) {
-      greetingMessage = 'Good Afternoon User...!';
+      greetingMessage = 'Good Afternoon user...!';
     } else if (hour >= 18 && hour < 22) {
-      greetingMessage = 'Good Evening User...!';
+      greetingMessage = 'Good Evening user...!';
     } else {
-      greetingMessage = 'Good Night User ....!';
+      greetingMessage = 'Good Night user ....!';
     }
 
     setGreeting(greetingMessage);
@@ -58,129 +59,65 @@ function LabDash() {
 
   return (
     <div>
-      <Navbar />
-      <Stack direction="row" spacing={2} justifyContent="center">
-        <Grid container spacing={2} justifyContent="center">
-          {/* New Card */}
-          <Grid item xs={12} md={8}>
-            <Card sx={{ maxWidth: '100%', margin: 'auto', marginBottom: 2, borderRadius: 8 }}>
-              <CardContent>
-                <Typography variant="h5" component="div" style={{ textAlign: 'left', marginBottom: '1rem' }}>
-                  Dashboard
-                  <Typography variant="body2" component="span" style={{ float: 'right' }}>
-                    {currentDateTime.toLocaleTimeString()}
-                  </Typography>
-                </Typography>
-                
-                <Grid container justifyContent="center">
-                  <Grid item xs={6} md={6}>
-                    <Typography variant="h6" gutterBottom>
-                      Welcome
-                    </Typography>
-                    <Typography variant="body1" gutterBottom>
-                      {greeting}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={6} md={6}>
-                  <CardMedia
-                        component="img"
-                        height="150"
-                        image={hospital}
-                        alt="Welcome Image"
-                      />
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          </Grid>
+      <Navbar pageTitle="Lab Dashboard" />
+      <Layout>
+      <Grid container spacing={3}>
+      <Grid item xs={1.5}>
+        <LabSidebar/>
+      </Grid>
+      <Grid item xs={7.5}>
           
-          {/* Main Card */}
-          <Grid item xs={12} md={8}>
-            <Card sx={{ maxWidth: '100%', margin: 'auto', marginBottom: 4 ,borderRadius: 8 }}>
-              <CardContent>
-                <Grid container spacing={2} justifyContent="center">
-                  <Grid item xs={6} sm={4} md={3}>
-                    <Link to="/labrequestspage" style={{ textDecoration: 'none' }}>
-                      <Item>
-                        <CardActionArea>
+                  <Card sx={{ margin: 'auto', marginBottom: 2, borderRadius: 8, marginTop: 3 }}>
+                    <CardContent>
+                      <Typography variant="h5" component="div" style={{ textAlign: 'left', marginBottom: '1rem' }}>
+                        <Typography variant="body2" component="span" style={{ float: 'right' }}>
+                          {currentDateTime.toLocaleTimeString()}
+                        </Typography>
+                      </Typography>
+                      <Grid container justifyContent="center">
+                        <Grid item xs={6} md={6}>
+                          <Typography variant="h6" gutterBottom>
+                            Welcome
+                          </Typography>
+                          <Typography variant="body1" gutterBottom>
+                            {greeting}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={6} md={6}>
                           <CardMedia
                             component="img"
-                            height="100"
-                            image={rep}
-                            alt="Prescription"
+                            height="150"
+                            image={hospital}
+                            alt="Welcome Image"
                           />
-                          <CardContent>
-                            <Typography gutterBottom variant="body2" component="div">
-                              Lab Requests
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </Item>
-                    </Link>
-                  </Grid>
-                  <Grid item xs={6} sm={4} md={3}>
-                    <Link to="/PReportSelect" style={{ textDecoration: 'none' }}>
-                    <Item>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="100"
-                            image={rep}
-                            alt="Prescription"
-                          />
-                          <CardContent>
-                            <Typography gutterBottom variant="body2" component="div">
-                             Lab reports
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </Item>
-                    </Link>
-                  </Grid>
-                  <Grid item xs={6} sm={4} md={3}>
-                    <Link to="/Mselect" style={{ textDecoration: 'none' }}>
-                      <Item>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="100"
-                            image={cinic}
-                            alt="Medical Records"
-                          />
-                          <CardContent>
-                            <Typography gutterBottom variant="body2" component="div">
-                              /////////
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </Item>
-                    </Link>
-                  </Grid>
-                  <Grid item xs={6} sm={4} md={3}>
-                    <Link to="/bsSelect" style={{ textDecoration: 'none' }}>
-                      <Item>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="100"
-                            image={blood}
-                            alt="Blood Sugar"
-                          />
-                          <CardContent>
-                            <Typography gutterBottom variant="body2" component="div">
-                             ////////
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </Item>
-                    </Link>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Stack>
+                        </Grid>
+                      </Grid>
+                    </CardContent>
+                  </Card>
+               
+                {/* Dash Component */}
+               
+                 <LDash/>
+               
+
+      </Grid>
+      <Grid item xs={3}>
+      <Card sx={{ margin: 'auto', marginBottom: 2, borderRadius: 8, marginTop: 3, maxHeight: '600px', display: 'flex', flexDirection: 'column' }}>
+                <CardContent style={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column' }}>
+                  <Typography variant="h5" component="div" style={{ textAlign: 'left', marginBottom: '1rem' }}>
+                    <Typography variant="body2" component="span" style={{ float: 'right' }}>
+                      Calendar
+                    </Typography>
+                  </Typography>
+                  <div style={{ flex: 1, overflowY: 'auto' }}>
+                    <Calendar style={{ height: '100%' }} />
+                  </div>
+                </CardContent>
+              </Card>
+
+      </Grid>
+</Grid>
+      </Layout>
     </div>
   );
 }

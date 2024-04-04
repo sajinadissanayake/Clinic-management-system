@@ -5,6 +5,7 @@ import moment from 'moment';
 import Navbar from '../../components/Navbar';
 import PharmacyDash from '../PharmacyDash';
 import PharmacySidebar from '../../components/PharmacySidebar';
+import Layout from '../../components/Layout';
 
 function NewPrescP() {
   const [prescriptions, setPrescriptions] = useState([]);
@@ -64,11 +65,13 @@ function NewPrescP() {
 
   return (
     <div>
-      <Navbar />
+       <Navbar pageTitle="Prescriptions" />
+            <Layout>
       <Stack direction="row" spacing={2} justifyContent="space-between">
         <PharmacySidebar />
         <div style={{ margin: 'auto', textAlign: 'center' }}>
-          <h1>Pending prescriptions</h1>
+         
+          <Typography variant='h4'> New prescriptions</Typography>
           <Stack direction="row" alignItems="center" justifyContent="flex-start" spacing={2}>
             <TextField
               label="Search by NIC"
@@ -79,30 +82,35 @@ function NewPrescP() {
             />
             <Typography variant="body1">{`Total Pending Prescriptions: ${filteredPrescriptions.length}`}</Typography>
           </Stack>
-          <TableContainer component={Paper} style={{ minWidth: '1000px', margin: 'auto', borderRadius: 6 }}>
-            <Table size="large">
-              <TableHead>
-                <TableRow>
-                  <TableCell>NIC</TableCell>
-                  <TableCell>Status</TableCell>
-                  <TableCell>Posted Date</TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {filteredPrescriptions.map(prescription => (
-                  <TableRow key={prescription._id}>
-                    <TableCell>{prescription.nic}</TableCell>
-                    <TableCell>{prescription.status}</TableCell>
-                    <TableCell>{formatDate(prescription.PostedDate)}</TableCell>
-                    <TableCell>
-                      <Button variant='outlined' onClick={() => handleViewPrescription(prescription)}>View</Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          
+          <div style={{ overflowY: 'auto', maxHeight: '500px' }}>
+  <TableContainer component={Paper} style={{ minWidth: '1000px', margin: 'auto', borderRadius: 6 }}>
+    <Table size="large">
+      <TableHead>
+        <TableRow>
+          <TableCell>NIC</TableCell>
+          <TableCell>Status</TableCell>
+          <TableCell>Posted Date</TableCell>
+          <TableCell></TableCell>
+        </TableRow>
+      </TableHead>
+      
+      <TableBody>
+        {filteredPrescriptions.map(prescription => (
+          <TableRow key={prescription._id}>
+            <TableCell>{prescription.nic}</TableCell>
+            <TableCell>{prescription.status}</TableCell>
+            <TableCell>{formatDate(prescription.PostedDate)}</TableCell>
+            <TableCell>
+              <Button variant='outlined' onClick={() => handleViewPrescription(prescription)}>View</Button>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  </TableContainer>
+</div>
+
         </div>
 
         <Dialog open={openDialog} onClose={handleCloseDialog} sx={{ borderRadius: 8 }}>
@@ -119,7 +127,7 @@ function NewPrescP() {
           </DialogActions>
         </Dialog>
 
-      </Stack>
+      </Stack></Layout>
     </div>
   );
 }

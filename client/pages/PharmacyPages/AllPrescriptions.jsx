@@ -8,6 +8,7 @@ import femaleAvatar from '../images/female.png';
 import PharmacySidebar from '../../components/PharmacySidebar';
 import { Announcement } from '@mui/icons-material';
 import Announcements from '../../components/Announcements';
+import Layout from '../../components/Layout';
 
 function AllPrescriptions() {
     const [users, setUsers] = useState([]);
@@ -41,13 +42,14 @@ function AllPrescriptions() {
 
     return (
         <div>
-            <Navbar />
+             <Navbar pageTitle="Select Patient" />
+            <Layout>
             <Stack direction="row" spacing={2} justifyContent="space-between">
                 <PharmacySidebar/>
             <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 64px)' }}>
                 <Card sx={{ borderRadius: 6, width: '100%', maxWidth: 600 }}>
                     <CardContent>
-                        <Typography variant="h5" gutterBottom>Select Patient</Typography> {/* Add this line */}
+                        
                         <TextField
                             label="Search by name or NIC"
                             variant="outlined"
@@ -95,7 +97,7 @@ function AllPrescriptions() {
                 </Card>
             </Container>
             <Announcements/>
-            </Stack>
+            </Stack></Layout>
         </div>
     );
 }

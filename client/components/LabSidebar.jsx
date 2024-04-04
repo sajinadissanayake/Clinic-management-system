@@ -1,4 +1,4 @@
-import { Box, Card, Grid, Typography } from '@mui/material';
+import { Box, Card, Grid, ListItemText, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
@@ -17,15 +17,14 @@ import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 const LabSidebar = () => {
   return (
     <div>
-      <Box bgcolor="" flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}> 
-        <h3> Lab Menu</h3>
-        <Card sx={{borderRadius:6}}>
-          <List>
+     <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" height="100%">
+      <Card sx={{ marginTop:5,borderTopRightRadius:30, borderBottomRightRadius: 30, backgroundColor: "background.bgw", flexGrow: 1, width: '100%' }}>
+      <List>
             <ListItem disablePadding>
               <ListItemButton component={Link} to="/Labdash">
                 <Grid container direction="column" alignItems="center" spacing={1}>
                   <Grid item>
-                    <HomeIcon sx={{ fontSize: 40 }} />
+                    <HomeIcon sx={{ fontSize: 40,color: 'background.bg2' }} />
                   </Grid>
                   <Grid item>
                     <Typography variant="body1">Home</Typography>
@@ -37,7 +36,7 @@ const LabSidebar = () => {
               <ListItemButton component={Link} to="/LabRequestsPage">
                 <Grid container direction="column" alignItems="center" spacing={1}>
                   <Grid item>
-                    <ArticleIcon sx={{ fontSize: 40 }} />
+                    <ArticleIcon sx={{ fontSize: 40,color: 'background.bg2' }} />
                   </Grid>
                   <Grid item>
                     <Typography variant="body1">Lab Requests</Typography>
@@ -49,7 +48,7 @@ const LabSidebar = () => {
               <ListItemButton component={Link} to="/PReportSelect">
                 <Grid container direction="column" alignItems="center" spacing={1}>
                   <Grid item>
-                    <ArticleIcon sx={{ fontSize: 40 }} />
+                    <ArticleIcon sx={{ fontSize: 40,color: 'background.bg2' }} />
                   </Grid>
                   <Grid item>
                     <Typography variant="body1">Reports</Typography>
@@ -62,7 +61,7 @@ const LabSidebar = () => {
               <ListItemButton component={Link} to="#">
                 <Grid container direction="column" alignItems="center" spacing={1}>
                   <Grid item>
-                    <EqualizerIcon sx={{ fontSize: 40 }} />
+                    <EqualizerIcon sx={{ fontSize: 40,color: 'background.bg2' }} />
                   </Grid>
                   <Grid item>
                     <Typography variant="body1">Reports Status</Typography>
@@ -70,11 +69,10 @@ const LabSidebar = () => {
                 </Grid>
               </ListItemButton>
             </ListItem>
-            
-           
           </List>
-        </Card>
-      </Box>
+
+      </Card>
+    </Box>
     </div>
   );
 };

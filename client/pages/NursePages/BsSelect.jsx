@@ -36,7 +36,8 @@ function BsSelect() {
 
     return (
         <div>
-            <Navbar />
+            <Navbar pageTitle="Select Patient " />
+            <Layout>
             <Stack direction="row" spacing={2} justifyContent="space-between">
                 <NurseLeftbar/>
                 <PageBody>
@@ -81,7 +82,7 @@ function BsSelect() {
                     </div>
                 </PageBody>
                 <Announcements/>
-            </Stack>
+            </Stack></Layout>
         </div>
     );
 }
