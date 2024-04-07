@@ -55,12 +55,12 @@ function MAddReportDialog({ open, onClose, nic }) {
                 />
               </Grid>
               <Grid item xs={12}>
-                <div {...getRootProps()} style={{ border: '1px dashed #ccc', padding: '20px', textAlign: 'center', height:'300' }}>
+                <div {...getRootProps()} style={{ border: '1px dashed #ccc', padding: '20px', textAlign: 'center', height:'300px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                   <input {...getInputProps()} />
                   {
                     isDragActive ?
-                      <p style={{ display: 'flex', alignItems: 'center' }}><CloudUploadIcon fontSize="large" htmlColor="primary" /> </p> :
-                      <p style={{ display: 'flex', alignItems: 'center' }}><CloudUploadIcon fontSize="large" htmlColor="primary" /> Drag and drop reports or click to browse the Reports</p>
+                      <p style={{ display: 'flex', alignItems: 'center', }}><CloudUploadIcon fontSize="large" htmlColor="primary" /> </p> :
+                      <p style={{ display: 'flex', alignItems: 'center',  }}><CloudUploadIcon fontSize="large" htmlColor="primary" /> Drag and drop reports or click to browse the Reports</p>
                   }
                   {patientReport && (
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>
