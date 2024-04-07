@@ -1,21 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Container, Typography, Grid, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useDropzone } from 'react-dropzone';
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 function MAddReportDialog({ open, onClose, nic }) {
   const [type, setType] = useState('');
   const [patientReport, setPatientReport] = useState(null);
-  
+
+  const onDrop = useCallback(acceptedFiles => {
+    setPatientReport(acceptedFiles[0]);
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+  const handleRemoveFile = () => {
+    setPatientReport(null);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     const formData = new FormData();
     formData.append('nic', nic);
     formData.append('type', type);
     formData.append('patientReport', patientReport);
-
+  
     axios.post('http://localhost:3001/AddReports', formData)
       .then(result => {
         console.log(result);
@@ -24,7 +36,7 @@ function MAddReportDialog({ open, onClose, nic }) {
       })
       .catch(err => console.log(err));
   };
-
+  
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Add Report</DialogTitle>
@@ -43,7 +55,21 @@ function MAddReportDialog({ open, onClose, nic }) {
                 />
               </Grid>
               <Grid item xs={12}>
-                <input type="file" name="patientReport" onChange={(e) => setPatientReport(e.target.files[0])} />
+                <div {...getRootProps()} style={{ border: '1px dashed #ccc', padding: '20px', textAlign: 'center', height:'300' }}>
+                  <input {...getInputProps()} />
+                  {
+                    isDragActive ?
+                      <p style={{ display: 'flex', alignItems: 'center' }}><CloudUploadIcon fontSize="large" htmlColor="primary" /> </p> :
+                      <p style={{ display: 'flex', alignItems: 'center' }}><CloudUploadIcon fontSize="large" htmlColor="primary" /> Drag and drop reports or click to browse the Reports</p>
+                  }
+                  {patientReport && (
+                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>
+                      <InsertDriveFileIcon />
+                      <span>{patientReport.name}</span>
+                      <Button variant="outlined" color="error" onClick={handleRemoveFile} style={{ marginLeft: '10px' }}>Remove</Button>
+                    </div>
+                  )}
+                </div>
               </Grid>
             </Grid>
           </Container>
@@ -52,7 +78,7 @@ function MAddReportDialog({ open, onClose, nic }) {
           <Button type="submit" variant="contained" color="primary">
             Upload
           </Button>
-          <Button onClick={onClose} variant="outlined" color="secondary">
+          <Button onClick={onClose} variant="outlined" >
             Cancel
           </Button>
         </DialogActions>
