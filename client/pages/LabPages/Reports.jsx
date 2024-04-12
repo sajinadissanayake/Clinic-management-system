@@ -8,7 +8,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import SearchIcon from '@mui/icons-material/Search';
 import Navbar from '../../components/Navbar';
 import LabSidebar from '../../components/LabSidebar';
-import PageBody from  '../../components/PageBody';
+import PageBody from '../../components/PageBody';
 import Announcements from '../../components/Announcements';
 import MAddReportDialog from './MAddReportDialog';
 import ReportsUpdateDialog from './ReportsUpdateDialog'; // Import the dialog component
@@ -102,10 +102,10 @@ function Reports() {
                 <Stack direction="row" spacing={2} justifyContent="space-between">
                     <LabSidebar />
                     <PageBody>
-                        <Card sx={{ borderRadius: 8, boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)' }}>
+                      
                             <CardContent>
                                 <Box sx={{ mb: 2 }}>
-                                    <Typography variant="h4" sx={{ mb: 2 }}>Reports for NIC: {nic}</Typography>
+                                    <Typography variant="h5" sx={{ mb: 2 }}>Reports for NIC: {nic}</Typography>
                                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                         <TextField
                                             label="Search by Report Type"
@@ -130,7 +130,7 @@ function Reports() {
                                         </Box>
                                     </Box>
                                 </Box>
-                                <TableContainer component={Paper} sx={{ maxHeight: '600px', overflow: 'auto' }}>
+                                <TableContainer component={Paper} sx={{ maxHeight: '450px', overflow: 'auto' }}>
                                     <Table>
                                         <TableHead>
                                             <TableRow>
@@ -178,7 +178,7 @@ function Reports() {
                                     </Table>
                                 </TableContainer>
                             </CardContent>
-                        </Card>
+                     
                     </PageBody>
                     <Announcements />
                 </Stack>

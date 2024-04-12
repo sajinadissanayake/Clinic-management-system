@@ -24,7 +24,7 @@ import DoctorDash from '../pages/DoctorDash.jsx'
 import Checkout from '../pages/Prescription/Checkout.jsx'
 import PatientSelect from '../pages/Prescription/PatientSelect.jsx'
 import PrescProfile from '../pages/Prescription/PrescProfile.jsx'
-import AdminDash from '../pages/AdminDash.jsx'
+
 import NurseDash from '../pages/NurseDash.jsx'
 import Mselect from '../pages/NursePages/Mselect.jsx'
 import Medicals from '../pages/NursePages/Medicals.jsx'
@@ -42,6 +42,9 @@ import Reports from '../pages/LabPages/Reports.jsx'
 import Home from '../components/Home/Home.jsx'
 import ClinicDates from '../pages/ClinicDates.jsx'
 import ClinicPatients from '../pages/NursePages/ClinicPatients.jsx';
+import ClinicCancel from '../pages/NursePages/ClinicCancel.jsx';
+import ClinicUpdate from '../pages/NursePages/ClinicUpdate.jsx';
+import AdminDash from '../pages/Admin/AdminDash.jsx';
 
 
 
@@ -127,10 +130,7 @@ const router = createBrowserRouter([
     path: "/prescpatient/:id",
     element: <PrescProfile />,
   },
-  {
-    path: "/AdminDash",
-    element: <AdminDash />,
-  },
+
   {
     path: "/NurseDash",
     element: <NurseDash/>,
@@ -196,6 +196,22 @@ const router = createBrowserRouter([
     path: "/clinicpatients", 
     element: <ClinicPatients/>, 
   },
+  {
+    path: "/cliniccancel", 
+    element: <ClinicCancel/>, 
+  },
+  {
+    path: "/clinicUpdate", 
+    element: <ClinicUpdate/>, 
+    
+  },
+  {
+    path: "/admindash", 
+    element: <AdminDash/>, 
+    
+  },
+
+
 
 
 
