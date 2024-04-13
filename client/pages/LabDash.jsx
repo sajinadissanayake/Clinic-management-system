@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/Navbar'; // Adjust the path as per your project structure
+import Navbar from '../components/Navbar'; 
 import { Box, Grid, Stack } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import hospital from './images/hospital.jpg'; // Adjust the path for the hospital image
-import Layout from '../components/Layout'; // Adjust the path as per your project structure
-import { Calendar } from 'antd'; // Adjust the path for antd if necessary
-import 'antd/dist/reset.css'; // Adjust the path for antd CSS if necessary
+import hospital from './images/hospital.jpg'; 
+import Layout from '../components/Layout'; 
+import { Calendar } from 'antd'; 
+import 'antd/dist/reset.css'; 
 import Dash from '../components/Dashboard/Dash';
 import NurseLeftbar from './NursePages/NurseLeftbar';
 import LabSidebar from '../components/LabSidebar';

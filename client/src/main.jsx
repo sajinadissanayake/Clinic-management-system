@@ -45,6 +45,7 @@ import ClinicPatients from '../pages/NursePages/ClinicPatients.jsx';
 import ClinicCancel from '../pages/NursePages/ClinicCancel.jsx';
 import ClinicUpdate from '../pages/NursePages/ClinicUpdate.jsx';
 import AdminDash from '../pages/Admin/AdminDash.jsx';
+import Reportgen from '../pages/LabPages/Reportgen.jsx';
 
 
 
@@ -208,8 +209,12 @@ const router = createBrowserRouter([
   {
     path: "/admindash", 
     element: <AdminDash/>, 
-    
   },
+  {
+    path: "/reportgen", 
+    element: <Reportgen/>, 
+  },
+
 
 
 

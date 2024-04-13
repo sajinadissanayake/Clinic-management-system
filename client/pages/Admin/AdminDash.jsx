@@ -14,6 +14,7 @@ import Dash from '../../components/Dashboard/Dash';
 import AdminLeftbar from './AdminLeftbar';
 import admin from '../images/admin.json';
 import Lottie from 'lottie-react'; // Import Lottie
+import ADash from '../../components/Dashboard/ADash';
 
 const Item = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -90,7 +91,7 @@ function AdminDash() {
               </CardContent>
             </Card>
             {/* Dash Component */}
-            <Dash/>
+          <ADash/>
           </Grid>
           <Grid item xs={3}>
             <Card sx={{ margin: 'auto', marginBottom: 2, borderRadius: 8, marginTop: 3, maxHeight: '600px', display: 'flex', flexDirection: 'column' }}>

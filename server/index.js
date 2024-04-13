@@ -587,6 +587,8 @@ app.delete('/deleteRecordRequest/:id', async (req, res) => {
 
   
 
+// Importing test.js
+require('./reportgenerator');
 
 app.listen(3001, () => {
     console.log("server is running");
