@@ -12,7 +12,8 @@ import Navbar from '../../components/Navbar';
 import Layout from '../../components/Layout';
 import Dash from '../../components/Dashboard/Dash';
 import AdminLeftbar from './AdminLeftbar';
-
+import admin from '../images/admin.json';
+import Lottie from 'lottie-react'; // Import Lottie
 
 const Item = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -60,62 +61,52 @@ function AdminDash() {
     <div>
       <Navbar pageTitle="Admin Dashboard" />
       <Layout>
-      <Grid container spacing={3}>
-      <Grid item xs={1.5}>
-        <AdminLeftbar/>
-      </Grid>
-      <Grid item xs={7.5}>
-          
-                  <Card sx={{ margin: 'auto', marginBottom: 2, borderRadius: 8, marginTop: 3 }}>
-                    <CardContent>
-                      <Typography variant="h5" component="div" style={{ textAlign: 'left', marginBottom: '1rem' }}>
-                        <Typography variant="body2" component="span" style={{ float: 'right' }}>
-                          {currentDateTime.toLocaleTimeString()}
-                        </Typography>
-                      </Typography>
-                      <Grid container justifyContent="center">
-                        <Grid item xs={6} md={6}>
-                          <Typography variant="h6" gutterBottom>
-                            Welcome
-                          </Typography>
-                          <Typography variant="body1" gutterBottom>
-                            {greeting}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={6} md={6}>
-                          <CardMedia
-                            component="img"
-                            height="150"
-                            image={hospital}
-                            alt="Welcome Image"
-                          />
-                        </Grid>
-                      </Grid>
-                    </CardContent>
-                  </Card>
-               
-                {/* Dash Component */}
-               
-                  <Dash/>
-               
-
-      </Grid>
-      <Grid item xs={3}>
-      <Card sx={{ margin: 'auto', marginBottom: 2, borderRadius: 8, marginTop: 3, maxHeight: '600px', display: 'flex', flexDirection: 'column' }}>
-                <CardContent style={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column' }}>
-                  <Typography variant="h5" component="div" style={{ textAlign: 'left', marginBottom: '1rem' }}>
-                    <Typography variant="body2" component="span" style={{ float: 'right' }}>
-                      Calendar
-                    </Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={1.5}>
+            <AdminLeftbar/>
+          </Grid>
+          <Grid item xs={7.5}>
+            <Card sx={{ margin: 'auto', marginBottom: 2, borderRadius: 8, marginTop: 3 }}>
+              <CardContent>
+                <Typography variant="h5" component="div" style={{ textAlign: 'left', marginBottom: '1rem' }}>
+                  <Typography variant="body2" component="span" style={{ float: 'right' }}>
+                    {currentDateTime.toLocaleTimeString()}
                   </Typography>
-                  <div style={{ flex: 1, overflowY: 'auto' }}>
-                    <Calendar style={{ height: '100%' }} />
-                  </div>
-                </CardContent>
-              </Card>
-
-      </Grid>
-</Grid>
+                </Typography>
+                <Grid container justifyContent="center">
+                  <Grid item xs={6} md={6}>
+                    <Typography variant="h6" gutterBottom>
+                      Welcome
+                    </Typography>
+                    <Typography variant="body1" gutterBottom>
+                      {greeting}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6} md={6}>
+                    {/* Display the Lottie animation */}
+                    <Lottie animationData={admin} />
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
+            {/* Dash Component */}
+            <Dash/>
+          </Grid>
+          <Grid item xs={3}>
+            <Card sx={{ margin: 'auto', marginBottom: 2, borderRadius: 8, marginTop: 3, maxHeight: '600px', display: 'flex', flexDirection: 'column' }}>
+              <CardContent style={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column' }}>
+                <Typography variant="h5" component="div" style={{ textAlign: 'left', marginBottom: '1rem' }}>
+                  <Typography variant="body2" component="span" style={{ float: 'right' }}>
+                    Calendar
+                  </Typography>
+                </Typography>
+                <div style={{ flex: 1, overflowY: 'auto' }}>
+                  <Calendar style={{ height: '100%' }} />
+                </div>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
       </Layout>
     </div>
   );

@@ -14,6 +14,8 @@ import Dash from '../components/Dashboard/Dash';
 import NurseLeftbar from './NursePages/NurseLeftbar';
 import LabSidebar from '../components/LabSidebar';
 import LDash from '../components/Dashboard/LDash';
+import lab from './images/lab.json';
+import Lottie from 'lottie-react'; // Import Lottie
 
 const Item = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -84,12 +86,7 @@ function LabDash() {
                           </Typography>
                         </Grid>
                         <Grid item xs={6} md={6}>
-                          <CardMedia
-                            component="img"
-                            height="150"
-                            image={hospital}
-                            alt="Welcome Image"
-                          />
+                        <Lottie animationData={lab} />
                         </Grid>
                       </Grid>
                     </CardContent>

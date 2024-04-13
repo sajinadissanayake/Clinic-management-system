@@ -12,6 +12,8 @@ import Layout from '../components/Layout'; // Adjust the path as per your projec
 import { Calendar } from 'antd'; // Adjust the path for antd if necessary
 import 'antd/dist/reset.css'; // Adjust the path for antd CSS if necessary
 import Dash from '../components/Dashboard/Dash';
+import doctor from './images/doctor.json';
+import Lottie from 'lottie-react'; // Import Lottie
 
 const Item = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -82,12 +84,7 @@ function DoctorDash() {
                           </Typography>
                         </Grid>
                         <Grid item xs={6} md={6}>
-                          <CardMedia
-                            component="img"
-                            height="150"
-                            image={hospital}
-                            alt="Welcome Image"
-                          />
+                        <Lottie animationData={doctor} />
                         </Grid>
                       </Grid>
                     </CardContent>
