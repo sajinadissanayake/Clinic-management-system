@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../../components/Navbar';
-import { Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, IconButton, Toolbar, Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material'; // Import Dialog components
+import { Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, IconButton, Toolbar, Dialog, DialogTitle, DialogContent, DialogActions, Button, Container, Card, CardContent, Avatar } from '@mui/material'; // Import Dialog components
 import NurseLeftbar from './NurseLeftbar';
 import PageBody from '../../components/PageBody';
 import Announcements from '../../components/Announcements';
@@ -12,11 +12,16 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteIcon from '@mui/icons-material/Delete'; // Import DeleteIcon
 import BPadd from './BPadd';
 import Swal from 'sweetalert2';
+import maleAvatar from '../images/male.png';
+import femaleAvatar from '../images/female.png';
+import MedicalMenu from './MedicalMenu';
 
 function BPressure() {
     const { nic } = useParams();
     const [bloodPressureData, setBloodPressureData] = useState([]);
     const [openDialog, setOpenDialog] = useState(false); // State for dialog open/close
+    const [patient, setPatient] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         // Fetch blood pressure data based on NIC
@@ -29,12 +34,22 @@ function BPressure() {
             .catch(error => {
                 console.error('Error fetching blood pressure data:', error);
             });
+
+        axios.get(`http://localhost:3001/getPatient/nic/${nic}`)
+            .then(response => {
+                setPatient(response.data);
+            })
+            .catch(error => {
+                setError(error);
+            });
     }, [nic]);
 
     // Function to format date and time
+    // Function to format date (without time)
     const formatDate = (date) => {
-        return new Date(date).toLocaleString();
+        return new Date(date).toLocaleDateString();
     };
+
 
     // Function to handle opening the dialog
     const handleOpenDialog = () => {
@@ -78,6 +93,10 @@ function BPressure() {
         });
     };
 
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+
     return (
         <div>
             <Navbar pageTitle="Blood Pressure" />
@@ -85,47 +104,55 @@ function BPressure() {
                 <Stack direction="row" spacing={2} justifyContent="space-between">
                     <NurseLeftbar />
                     <PageBody>
-                        <Typography variant="h5" gutterBottom>
-                            Blood Pressure Data for patient NIC: {nic}
-                        </Typography>
-                        <Toolbar>
-                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}></Typography>
-                            <IconButton onClick={handleOpenDialog}>
-                                <AddCircleIcon />
-                            </IconButton>
-                        </Toolbar>
-                        <TableContainer component={Paper}>
-                            <Table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Systolic</TableCell>
-                                        <TableCell>Diastolic</TableCell>
-                                        <TableCell>Record Date</TableCell>
-                                        <TableCell>Action</TableCell> {/* Add column for actions */}
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-    {bloodPressureData.map((data) => (
-        <TableRow key={data._id}>
-            <TableCell>{data.systolic}</TableCell>
-            <TableCell>{data.diastolic}</TableCell>
-            <TableCell>{formatDate(data.Recorddate)}</TableCell>
-            <TableCell>
-                <IconButton
-                    color="error" // Set color to "error" for red color
-                    onClick={() => handleDeleteRecord(data._id)}
-                >
-                    <DeleteIcon />
-                </IconButton>
-            </TableCell>
-        </TableRow>
-    ))}
-</TableBody>
+                        <Container>
+                            <Card sx={{ borderRadius: 5, backgroundColor: 'background.bg1' }}>
+                                <CardContent>
+                                    <Avatar alt={patient ? patient.name : ''} src={patient && patient.gender === 'male' ? maleAvatar : femaleAvatar} />
+                                    <Typography variant="h6">{patient ? patient.name : 'Loading...'}: {nic}</Typography>
+                                </CardContent>
+                            </Card>
+                            <Toolbar>
+                                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}></Typography>
+                                <IconButton onClick={handleOpenDialog}>
+                                    <AddCircleIcon />
+                                </IconButton>
+                            </Toolbar>
+                            <div style={{ maxHeight: '400px', overflowY: 'auto' }}> {/* Adjust the maxHeight to your preference */}
 
-                            </Table>
-                        </TableContainer>
+                                <TableContainer component={Paper}>
+                                    <Table>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>Systolic</TableCell>
+                                                <TableCell>Diastolic</TableCell>
+                                                <TableCell>Record Date</TableCell>
+                                                <TableCell>Action</TableCell> {/* Add column for actions */}
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {bloodPressureData.map((data) => (
+                                                <TableRow key={data._id}>
+                                                    <TableCell>{data.systolic}</TableCell>
+                                                    <TableCell>{data.diastolic}</TableCell>
+                                                    <TableCell>{formatDate(data.Recorddate)}</TableCell>
+                                                    <TableCell>
+                                                        <IconButton
+                                                            color="error" // Set color to "error" for red color
+                                                            onClick={() => handleDeleteRecord(data._id)}
+                                                        >
+                                                            <DeleteIcon />
+                                                        </IconButton>
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                            </div>
+                        </Container>
+
                     </PageBody>
-                    <Announcements />
+                    <MedicalMenu/>
                 </Stack>
             </Layout>
 
@@ -134,7 +161,7 @@ function BPressure() {
                 <DialogTitle>Add Blood Pressure</DialogTitle>
                 <DialogContent>
                     {/* Render your BPadd component here */}
-                    <BPadd handleCloseDialog={handleCloseDialog}nic={nic} />
+                    <BPadd handleCloseDialog={handleCloseDialog} nic={nic} />
                 </DialogContent>
             </Dialog>
         </div>
