@@ -14,7 +14,7 @@ import OnePatient from './OnePatient.jsx'
 import MEform from '../pages/MEform.jsx'
 import BloodSugar from '../pages/BloodSugar.jsx'
 
-import BlogAdd from '../pages/BlogAdd.jsx'
+
 import AppointmentAdd from '../pages/AppointmentAdd.jsx'
 import SignInSide from '../pages/SignInSide.jsx'
 import RegisterUsers from '../pages/RegisterUsers.jsx'
@@ -47,6 +47,7 @@ import ClinicUpdate from '../pages/NursePages/ClinicUpdate.jsx';
 import AdminDash from '../pages/Admin/AdminDash.jsx';
 import Reportgen from '../pages/LabPages/Reportgen.jsx';
 import BPressure from '../pages/NursePages/BPressure.jsx';
+import ArticleSend from '../pages/NursePages/ArticleSend.jsx';
 
 
 
@@ -93,8 +94,8 @@ const router = createBrowserRouter([
   },
   
   {
-    path: "/blogadd",
-    element: <BlogAdd />,
+    path: "/ArticleSend",
+    element: <ArticleSend />,
   },
   {
     path: "/appointmentadd",

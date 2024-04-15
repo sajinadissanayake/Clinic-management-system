@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
         .then(users => res.json(users))
         .catch(err => res.json(err));
 });
-// pa
+
 
 
 app.get('/getPatient/:id', (req, res) => {
@@ -623,6 +623,64 @@ app.delete('/deleteBloodpressure/:id', async (req, res) => {
 
 
 
+///////////////////////////article sender
+// Update the route to send articles to all patients' emails
+app.post('/sendArticleToPatients', async (req, res) => {
+    try {
+        const { subject, text, image } = req.body;
+
+        // Fetch all patient emails from the database
+        const patients = await patientModel.find({}, 'email');
+
+        // Prepare email sending tasks for each patient
+        const emailTasks = patients.map(patient => {
+            return new Promise((resolve, reject) => {
+                const transporter = nodemailer.createTransport({
+                    service: 'Gmail',
+                    auth: {
+                        user: 'clinichealthylifestyle@gmail.com',
+                    pass: 'idhz qmax uihy qhjq'
+                    }
+                });
+
+                const mailOptions = {
+                    from: 'clinichealthylifestyle@gmail.com', // Your Gmail email address
+                    to: patient.email, // Patient's email address
+                    subject: subject,
+                    text: text,
+                    html: `<p>${text}</p>` // Add the text as HTML content
+                };
+
+                // Attach image if available
+                if (image) {
+                    mailOptions.attachments = [{
+                        filename: 'image.jpg',
+                        path: image.path
+                    }];
+                }
+
+                // Send email
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        console.error('Error sending email:', error);
+                        reject(error);
+                    } else {
+                        console.log('Email sent:', info.response);
+                        resolve(info.response);
+                    }
+                });
+            });
+        });
+
+        // Wait for all email tasks to complete
+        await Promise.all(emailTasks);
+
+        res.status(200).json({ message: 'Articles sent to all patients successfully' });
+    } catch (error) {
+        console.error('Error sending articles to patients:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 
 app.listen(3001, () => {

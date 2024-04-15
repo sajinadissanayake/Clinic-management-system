@@ -31,7 +31,7 @@ function NurseLeftbar() {
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton component={Link} to="/blogadd">
+              <ListItemButton component={Link} to="/ArticleSend">
                 <Grid container direction="column" alignItems="center" spacing={1}>
                   <Grid item>
                     <ArticleIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
