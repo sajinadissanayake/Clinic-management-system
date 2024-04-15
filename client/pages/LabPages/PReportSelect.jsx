@@ -32,7 +32,8 @@ function PReportSelect() {
 
     return (
         <div>
-             <Navbar pageTitle="Reports" />
+            
+            <Navbar pageTitle="Reports" />
             <Layout>
             <Stack direction="row" spacing={2} justifyContent="space-between">
                 <LabSidebar/>

@@ -7,12 +7,12 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import HomeIcon from '@mui/icons-material/Home';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import PeopleIcon from '@mui/icons-material/People';
+
 import ArticleIcon from '@mui/icons-material/Article';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
-import CampaignIcon from '@mui/icons-material/Campaign';
-import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
+
+
 
 const LabSidebar = () => {
   return (
@@ -56,19 +56,22 @@ const LabSidebar = () => {
                 </Grid>
               </ListItemButton>
             </ListItem>
-            <ListItem disablePadding></ListItem>
             <ListItem disablePadding>
-              <ListItemButton component={Link} to="#">
+
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton component={Link} to="/reportgen">
                 <Grid container direction="column" alignItems="center" spacing={1}>
                   <Grid item>
-                    <EqualizerIcon sx={{ fontSize: 40,color: 'background.bg2' }} />
+                    <NoteAddIcon sx={{ fontSize: 40,color: 'background.bg2' }} />
                   </Grid>
                   <Grid item>
-                    <Typography variant="body1">Reports Status</Typography>
+                    <Typography variant="body1">Create Report</Typography>
                   </Grid>
                 </Grid>
               </ListItemButton>
             </ListItem>
+            
           </List>
 
       </Card>

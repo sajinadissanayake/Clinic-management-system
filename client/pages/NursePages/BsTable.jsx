@@ -76,7 +76,8 @@ function BsTable() {
                 <Stack direction="row" spacing={2} justifyContent="space-between">
                     <NurseLeftbar />
                     <PageBody>
-                        <h6>Blood Sugar Data for patient NIC: {nic}</h6>
+                        
+                        <Typography variant='h5'>Blood Sugar Data for patient NIC: {nic}</Typography>
                         <RadioGroup row aria-label="filter" name="filter" value={filterType} onChange={handleFilterChange}>
                             <FormControlLabel value="all" control={<Radio />} label="All" />
                             <FormControlLabel value="random" control={<Radio />} label="Random" />

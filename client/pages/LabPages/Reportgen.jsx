@@ -160,6 +160,14 @@ function Reportgen() {
     // Generate PDF
     html2pdf().from(htmlTemplate).save('report.pdf');
 
+     // Trigger SweetAlert
+     Swal.fire({
+      icon: 'success',
+      title: 'Report Generated Successfully',
+      text: 'Check your downloads folder for the report.',
+    });
+
+
     // Clear form fields
     setNic('');
     setName('');

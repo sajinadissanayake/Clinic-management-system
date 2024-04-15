@@ -21,7 +21,7 @@ const AdminLeftbar = () => {
       <Card sx={{ marginTop:5,borderTopRightRadius:30, borderBottomRightRadius: 30, backgroundColor: "background.bgw", flexGrow: 1, width: '100%' }}>
         <List>
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/doctordash">
+            <ListItemButton component={Link} to="/admindash">
               <Grid container direction="column" alignItems="center" spacing={1}>
                 <Grid item>
                   <HomeIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
@@ -33,7 +33,7 @@ const AdminLeftbar = () => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/pselect">
+            <ListItemButton component={Link} to="/register">
               <Grid container direction="column" alignItems="center" spacing={1}>
                 <Grid item>
                   <PersonIcon sx={{ fontSize: 40, color: 'background.bg2' }} />

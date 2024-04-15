@@ -14,7 +14,6 @@ const prescModel = require('./models/presciptions');
 const ReportRequestModel = require('./models/ReportRequests')
 const RecordRequestModel = require( './models/RecordRequests' )
 
-
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -584,11 +583,47 @@ app.delete('/deleteRecordRequest/:id', async (req, res) => {
     }
 });
 
+////////////////////////////////////bp/////////////////////////////////////////////
 
-  
+// Route to handle saving blood pressure data
+const BpModel = require( './models/bp' )
+app.post("/AddBp", (req, res) =>{
+    BpModel.create(req.body)
+    .then(records => res.json(records))
+    .catch(err => res.json(err))
+})
+app.get('/getBloodpressure/:nic', (req, res) => {
+    const nic = req.params.nic; 
+    BpModel.find({ nic: nic }) 
+        .then(data => res.json(data))
+        .catch(err => res.status(500).json({ error: err.message }));
+});  
 
-// Importing test.js
-require('./reportgenerator');
+app.delete('/deleteBloodpressure/:id', async (req, res) => {
+    try {
+        // Extract the ID from the request parameters
+        const { id } = req.params;
+
+        // Find the blood pressure record by ID and delete it
+        const deletedRecord = await BpModel.findByIdAndDelete(id);
+
+        if (!deletedRecord) {
+            // If the record with the specified ID doesn't exist, return a 404 Not Found status
+            return res.status(404).json({ message: 'Record not found' });
+        }
+
+        // If the record is successfully deleted, return a success message
+        res.json({ message: 'Record deleted successfully' });
+    } catch (error) {
+        // If an error occurs, return a 500 Internal Server Error status
+        console.error('Error deleting record:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+
+
+
 
 app.listen(3001, () => {
     console.log("server is running");

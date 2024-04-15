@@ -94,6 +94,12 @@ function Mselect() {
                                                 <Button variant='outlined' style={{ marginRight: '10px' }}>
                                                     <Link style={{ textDecoration: 'none' }} to={`/bstable/${patient.nic}`}>Blood Sugar</Link>
                                                 </Button>
+                                                <Button variant='outlined' style={{ marginRight: '10px' }}>
+                                                    <Link style={{ textDecoration: 'none' }} to={`/bpressure/${patient.nic}`}>blood pressure</Link>
+                                                </Button>
+                                                <Button variant='outlined' style={{ marginRight: '10px' }}>
+                                                    <Link style={{ textDecoration: 'none' }} to={`/bstable/${patient.nic}`}>Lipid Profile</Link>
+                                                </Button>
                                         <IconButton onClick={() => handleOpenRequestsDialog(patient.nic)}>
                                             <Badge badgeContent={recordRequestsCounts[patient.nic]} color="primary">
                                                 <AddChartIcon />

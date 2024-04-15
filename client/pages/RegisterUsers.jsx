@@ -5,6 +5,9 @@ import Sidebar from '../components/Sidebar';
 import PageBody from '../components/PageBody';
 import Rightbar from '../components/Rightbar';
 import { useNavigate } from 'react-router-dom';
+import AdminLeftbar from './Admin/AdminLeftbar';
+import Announcements from '../components/Announcements';
+import Layout from '../components/Layout';
 
 function RegisterUsers() {
   const [nic, setNic] = useState('');
@@ -35,9 +38,10 @@ function RegisterUsers() {
 
   return (
     <div>
-      <Navbar />
+       <Navbar pageTitle="Register" />
+       <Layout>
       <Stack direction="row" spacing={2} justifyContent="space-between">
-        <Sidebar />
+      <AdminLeftbar/>
         <PageBody>
           <form onSubmit={handleSubmit}>
             <Stack direction="column" spacing={2}>
@@ -102,8 +106,8 @@ function RegisterUsers() {
             </Stack>
           </form>
         </PageBody>
-        <Rightbar />
-      </Stack>
+    <Announcements/>
+      </Stack></Layout>
     </div>
   );
 }

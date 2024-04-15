@@ -25,7 +25,7 @@ export const theme = createTheme({
     },
     // Define additional custom colors within the palette object
     customPalette: {
-        customColor1: '#ff0000', // Red color
+        red: '#ff0000', // Red color
         customColor2: '#00ff00', // Green color
         customColor3: '#0000ff', // Blue color
         // Add more custom colors as needed

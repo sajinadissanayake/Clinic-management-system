@@ -46,6 +46,7 @@ import ClinicCancel from '../pages/NursePages/ClinicCancel.jsx';
 import ClinicUpdate from '../pages/NursePages/ClinicUpdate.jsx';
 import AdminDash from '../pages/Admin/AdminDash.jsx';
 import Reportgen from '../pages/LabPages/Reportgen.jsx';
+import BPressure from '../pages/NursePages/BPressure.jsx';
 
 
 
@@ -214,6 +215,12 @@ const router = createBrowserRouter([
     path: "/reportgen", 
     element: <Reportgen/>, 
   },
+  
+  {
+    path: "/bpressure/:nic", 
+    element: <BPressure/>, 
+  },
+
 
 
 
