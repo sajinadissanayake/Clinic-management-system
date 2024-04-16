@@ -48,6 +48,9 @@ import AdminDash from '../pages/Admin/AdminDash.jsx';
 import Reportgen from '../pages/LabPages/Reportgen.jsx';
 import BPressure from '../pages/NursePages/BPressure.jsx';
 import ArticleSend from '../pages/NursePages/ArticleSend.jsx';
+import LMselect from '../pages/LabPages/LMselect.jsx';
+import Lipid from '../pages/LabPages/Lipid.jsx';
+import LipidAdd from '../pages/LabPages/LipidAdd.jsx';
 
 
 
@@ -221,6 +224,19 @@ const router = createBrowserRouter([
     path: "/bpressure/:nic", 
     element: <BPressure/>, 
   },
+  {
+    path: "/Lmselect", 
+    element: <LMselect/>, 
+  },
+  {
+    path: "/lipidadd", 
+    element: <LipidAdd/>, 
+  },
+  {
+    path: "/lipid/:nic", 
+    element: <Lipid/>, 
+  },
+
 
 
 

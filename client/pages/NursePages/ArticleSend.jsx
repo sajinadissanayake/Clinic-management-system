@@ -6,7 +6,7 @@ import axios from 'axios';
 import NurseLeftbar from './NurseLeftbar';
 import Announcements from '../../components/Announcements';
 import Swal from 'sweetalert2'; // Import SweetAlert
-
+import Layout from '../../components/Layout';
 function ArticleSend() {
     const [subject, setSubject] = useState('');
     const [text, setText] = useState('');
@@ -50,6 +50,7 @@ function ArticleSend() {
     return (
         <div>
             <Navbar pageTitle="Article Sender" />
+            <Layout>
             <Stack direction="row" spacing={2} justifyContent="space-between">
                 <NurseLeftbar />
                 <PageBody>
@@ -82,6 +83,7 @@ function ArticleSend() {
                 </PageBody>
                 <Announcements />
             </Stack>
+            </Layout>
         </div>
     );
 }

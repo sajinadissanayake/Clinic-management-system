@@ -11,6 +11,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import ArticleIcon from '@mui/icons-material/Article';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import PostAddIcon from '@mui/icons-material/PostAdd';
 
 
 
@@ -59,6 +60,7 @@ const LabSidebar = () => {
             <ListItem disablePadding>
 
             </ListItem>
+            
             <ListItem disablePadding>
               <ListItemButton component={Link} to="/reportgen">
                 <Grid container direction="column" alignItems="center" spacing={1}>
@@ -67,6 +69,19 @@ const LabSidebar = () => {
                   </Grid>
                   <Grid item>
                     <Typography variant="body1">Create Report</Typography>
+                  </Grid>
+                </Grid>
+              </ListItemButton>
+            </ListItem>
+
+            <ListItem disablePadding>
+              <ListItemButton component={Link} to="/lmselect">
+                <Grid container direction="column" alignItems="center" spacing={1}>
+                  <Grid item>
+                    <PostAddIcon sx={{ fontSize: 40,color: 'background.bg2' }} />
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="body1">Medical Records</Typography>
                   </Grid>
                 </Grid>
               </ListItemButton>

@@ -683,6 +683,21 @@ app.post('/sendArticleToPatients', async (req, res) => {
 });
 
 
+///////////////////////////////////////////////////////////////////////////////////////
+// Route to handle saving blood pressure data
+const lpModel = require( './models/lp' )
+app.post("/Addlp", (req, res) =>{
+    lpModel.create(req.body)
+    .then(records => res.json(records))
+    .catch(err => res.json(err))
+});
+app.get('/getLp/:nic', (req, res) => {
+    const nic = req.params.nic; 
+    lpModel.find({ nic: nic }) 
+        .then(data => res.json(data))
+        .catch(err => res.status(500).json({ error: err.message }));
+});  
+
 app.listen(3001, () => {
     console.log("server is running");
 });
