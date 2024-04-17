@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import AdminLeftbar from './Admin/AdminLeftbar';
 import Announcements from '../components/Announcements';
 import Layout from '../components/Layout';
+import axios from 'axios';
 
 function RegisterUsers() {
   const [nic, setNic] = useState('');
@@ -18,12 +19,21 @@ function RegisterUsers() {
   const [passwordMatch, setPasswordMatch] = useState(true);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (pwd === confirmPwd) {
       // Passwords match, proceed with registration
-      console.log("Passwords match. Proceed with registration...");
-      navigate('/');
+      //console.log("Passwords match. Proceed with registration...");
+      const url = "http://localhost:3001/api/users";
+      const data = {
+        nic: nic,
+        email: email,
+        password: pwd,
+        utype: utype,
+      };
+			const { data: res } = await axios.post(url, data);
+			console.log(res.message);
+      navigate('/login');
     } else {
       // Passwords don't match, show error
       setPasswordMatch(false);
@@ -93,6 +103,7 @@ function RegisterUsers() {
                   <MenuItem value={'admin'}>Admin</MenuItem>
                   <MenuItem value={'lab'}>Lab</MenuItem>
                   <MenuItem value={'pharmacy'}>Pharmacy</MenuItem>
+                  <MenuItem value={'patient'}>Patient</MenuItem>
                 </Select>
               </FormControl>
               <Button 

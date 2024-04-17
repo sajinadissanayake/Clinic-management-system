@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, TableHead, TableBody, TableRow, TableCell, Stack, Card, CardContent, Avatar, Typography, Toolbar, IconButton } from '@mui/material';
+import { Table, TableHead, TableBody, TableRow, TableCell, Stack, Card, CardContent, Avatar, Typography, Toolbar, IconButton, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
@@ -17,7 +17,7 @@ function Lipid() {
     const [lpData, setLpData] = useState(null);
     const [patient, setPatient] = useState(null);
     const [error, setError] = useState(null);
-    const [openDialog, setOpenDialog] = useState(false); // State for opening/closing the dialog
+    const [openDialog, setOpenDialog] = useState(false); // State for dialog open/close
 
     useEffect(() => {
         axios.get(`http://localhost:3001/getLp/${nic}`)
@@ -41,6 +41,7 @@ function Lipid() {
         setOpenDialog(true);
     };
 
+    // Function to handle closing the dialog
     const handleCloseDialog = () => {
         setOpenDialog(false);
     };
@@ -61,10 +62,10 @@ function Lipid() {
                             </CardContent>
                         </Card>
                         <Toolbar>
-                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}></Typography>
-                            <IconButton onClick={handleOpenDialog}>
-                                <AddCircleIcon />
-                            </IconButton>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}></Typography>
+                        <IconButton onClick={handleOpenDialog}> {/* Pass handleOpenDialog as onClick handler */}
+                            <AddCircleIcon />
+                        </IconButton>
                         </Toolbar>
                         <Table>
                             <TableHead>
@@ -92,8 +93,17 @@ function Lipid() {
                     <MedicalMenu />
                 </Stack>
             </Layout>
-            {/* Render the LipidAddDialog component */}
-            <LipidAddDialog open={openDialog} handleClose={handleCloseDialog} />
+           
+           
+
+
+           
+                    
+                    
+            <LipidAddDialog open={openDialog} handleCloseDialog={handleCloseDialog} />
+
+ 
+                
         </div>
     );
 }

@@ -12,6 +12,10 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import login from './images/login.json'
+import Lottie from 'lottie-react'; // Import Lottie
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import axios from "axios";
 
 function Copyright(props) {
     return (
@@ -32,13 +36,31 @@ function Copyright(props) {
 
 function Login() {
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-          email: data.get('email'),
-          password: data.get('password'),
-        });
+        try {
+          const url = "http://localhost:3001/api/auth";
+          const data = new FormData(event.currentTarget);
+          const postData = {
+            email: data.get('email'),
+            password: data.get('password'),
+          };
+          const { data: res } = await axios.post(url, postData);
+          //localStorage.setItem("token", res.data);
+          localStorage.setItem("loggedInUser", JSON.stringify(res.user));
+          
+        
+
+          //window.location = "/";
+        } catch (error) {
+          if (
+            error.response &&
+            error.response.status >= 400 &&
+            error.response.status <= 500
+          ) {
+            console.log(error.response.data.message);
+          }
+        }
       };
 
 
@@ -54,14 +76,15 @@ function Login() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
-            backgroundRepeat: 'no-repeat',
+    
+        
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
-        />
+        >
+        <Lottie animationData={login} /></Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
@@ -72,8 +95,8 @@ function Login() {
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
+            <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+              <VpnKeyIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
              Login
@@ -83,9 +106,9 @@ function Login() {
                 margin="normal"
                 required
                 fullWidth
-                id="nic"
-                label="NIC"
-                name="nic"
+                id="email"
+                label="Email"
+                name="email"
                 autoFocus
               />
               <TextField

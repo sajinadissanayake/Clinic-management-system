@@ -3,7 +3,7 @@ import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField } 
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-function LipidAddDialog({ open, handleClose }) {
+function LipidAddDialog({ open, handleCloseDialog}) { // Pass 'handleCloseDialog' as a prop
     const [nic, setNic] = useState('');
     const [total, setTotal] = useState('');
     const [hdl, setHdl] = useState('');
@@ -20,7 +20,7 @@ function LipidAddDialog({ open, handleClose }) {
                     title: 'Lipid Profile Added',
                     text: 'Lipid Profile data has been successfully added.',
                 }).then(() => {
-                    handleClose();
+                    handleCloseDialog(); // Call handleCloseDialog function to close the dialog
                     window.location.reload();
                 });
             })
@@ -35,8 +35,8 @@ function LipidAddDialog({ open, handleClose }) {
     };
 
     return (
-        <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Add Lipid Profile Data</DialogTitle>
+        <Dialog open={open} onClose={handleCloseDialog}>{/* Pass open state and handleCloseDialog as props */}
+            <DialogTitle>Add Lipid Profile</DialogTitle>
             <DialogContent>
                 <TextField
                     id="nic"
@@ -89,7 +89,7 @@ function LipidAddDialog({ open, handleClose }) {
                 />
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleCloseDialog}>Cancel</Button> {/* Use handleCloseDialog */}
                 <Button onClick={handleSubmit} variant="contained" color="primary">Submit</Button>
             </DialogActions>
         </Dialog>
