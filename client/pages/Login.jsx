@@ -49,9 +49,22 @@ function Login() {
           //localStorage.setItem("token", res.data);
           localStorage.setItem("loggedInUser", JSON.stringify(res.user));
           
-        
+          const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+          if (loggedInUser.utype == "doctor") {
+            window.location = "/doctordash";
+          } else if (loggedInUser.utype == "admin") {
+            window.location = "/admindash";
+          } else if (loggedInUser.utype == "pharmacy"){
+            window.location = "/pharmacydash";
+          }else if (loggedInUser.utype == "nurse"){
+            window.location = "/nursedash";
+          }else if (loggedInUser.utype == ","){
+            window.location = "/nursedash";
+          }
 
-          //window.location = "/";
+          
+
+         
         } catch (error) {
           if (
             error.response &&
