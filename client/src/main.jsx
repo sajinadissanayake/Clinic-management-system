@@ -51,6 +51,7 @@ import ArticleSend from '../pages/NursePages/ArticleSend.jsx';
 import LMselect from '../pages/LabPages/LMselect.jsx';
 import Lipid from '../pages/LabPages/Lipid.jsx';
 import LipidAdd from '../pages/LabPages/LipidAdd.jsx';
+import PatientHome from '../pages/Patient/PatientHome.jsx';
 
 
 
@@ -236,6 +237,11 @@ const router = createBrowserRouter([
     path: "/lipid/:nic", 
     element: <Lipid/>, 
   },
+  {
+    path: "/patienthome", 
+    element: <PatientHome/>, 
+  },
+
 
 
 
