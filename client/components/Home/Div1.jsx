@@ -7,6 +7,7 @@ import Div3 from './DIv3';
 import Div4 from './Div4';
 import Div5 from './Div5';
 import Footer from '../Footer';
+import { Link } from 'react-router-dom';
 
 
 function Div1() {
@@ -78,7 +79,7 @@ function Div1() {
         <div style={textStyle}>
           <h1>"A healthy outside starts from the inside."</h1>
           <p>Be Healthy And Active..........</p>
-          <Button variant="outlined" color="secondary" style={buttonStyle}>Login</Button>
+          <Button variant="outlined" color="secondary" component={Link} to="/login" style={buttonStyle}>Login</Button>
         </div>
        
       </div>
