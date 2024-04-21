@@ -30,7 +30,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'blood Sugar Line Chart',
+      text: 'Blood Sugar Line Chart',
     },
   },
 };

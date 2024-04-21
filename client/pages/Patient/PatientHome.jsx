@@ -3,6 +3,15 @@ import axios from 'axios'; // Import Axios for HTTP requests
 import Pnav from './Pnav';
 import Layout from '../../components/Layout';
 import { Card, CardContent, Typography, Grid } from '@mui/material';
+import login from '../images/login.json'
+import Lottie from 'lottie-react'; // Import Lottie
+import Homediv1 from './Homediv1';
+import BloodSugarChart from '../../components/BloodSugarChart';
+import Pdiv2 from './Pdiv2';
+
+
+
+
 
 function PatientHome() {
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
@@ -32,37 +41,46 @@ function PatientHome() {
 
     return (
         <div>
-            
             <Layout>
-            <Pnav />
-                <Grid >
-                    <Grid item xs={12} sm={6} md={4} style={{ marginTop:10}}>
-                        <Card style={{borderRadius:10}}>
-                            <CardContent>
-                                <Typography variant="h6" gutterBottom>
-                                    Hello {patient.name}
-                                </Typography>
-                                {/* Your content goes here */}
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    {/* Add more Grid items as needed */}
-                    <Grid item xs={12} sm={6} md={4} style={{ marginTop:10}}>
-                        <Card style={{borderRadius:10}}>
-                            <CardContent>
-                                <Typography variant="h6" gutterBottom>
-                                   your next clinic date 
-                             
-                                </Typography>
-                                <Typography variant="h6" gutterBottom>
-                                  
-                                    01/2/2024
-                                </Typography>
-                                {/* Your content goes here */}
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                </Grid>
+                <Pnav />
+                <Grid container spacing={2}>
+    {/* Grid for patient info */}
+    <Grid item xs={12} md={6}>
+        <Card style={{ borderRadius: 10 , marginTop:10}}>
+            <CardContent>
+                <Typography variant="h6" gutterBottom>
+                    Welcome Back {patient.name}...........
+                </Typography>
+                {/* Your content goes here */}
+            </CardContent>
+        </Card>
+        
+        <Card style={{ borderRadius: 10, marginTop: 10 }}>
+            <CardContent>
+                <Typography variant="h6" gutterBottom>
+                   Next clinic date
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                    01/02/2024
+                </Typography>
+                
+            </CardContent>
+        </Card>
+
+        <Homediv1/>
+        <BloodSugarChart nic={patient.nic} />
+        
+    </Grid>
+    
+    {/* Grid for image */}
+    <Grid item xs={12} md={6} >
+      <Pdiv2/>
+        
+    </Grid>
+    {/* Add more Grid items as needed */}
+    
+</Grid>
+
             </Layout>
         </div>
     );
