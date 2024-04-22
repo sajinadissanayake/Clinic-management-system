@@ -57,24 +57,24 @@ function PatientHome() {
         
         <Card style={{ borderRadius: 10, marginTop: 10 }}>
             <CardContent>
-                <Typography variant="h6" gutterBottom>
-                   Next clinic date
-                </Typography>
                 <Typography variant="body1" gutterBottom>
-                    01/02/2024
+                   Next clinic date : 01/02/2024
                 </Typography>
+                
                 
             </CardContent>
         </Card>
 
-        <Homediv1/>
-        <BloodSugarChart nic={patient.nic} />
+        <Pdiv2/>
         
     </Grid>
     
     {/* Grid for image */}
     <Grid item xs={12} md={6} >
-      <Pdiv2/>
+      
+      <Homediv1/>
+
+        <BloodSugarChart nic={patient.nic} />
         
     </Grid>
     {/* Add more Grid items as needed */}
