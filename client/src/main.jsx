@@ -52,6 +52,11 @@ import LMselect from '../pages/LabPages/LMselect.jsx';
 import Lipid from '../pages/LabPages/Lipid.jsx';
 import LipidAdd from '../pages/LabPages/LipidAdd.jsx';
 import PatientHome from '../pages/Patient/PatientHome.jsx';
+import PatientPresc from '../pages/Patient/PatientPresc.jsx';
+import PatientRepo from '../pages/Patient/PatientRepo.jsx';
+import PatientCheckups from '../pages/Patient/PatientChekups.jsx';
+import PatientBs from '../pages/Patient/PatientBs.jsx';
+import PatientBp from '../pages/Patient/PatientBp.jsx';
 
 
 
@@ -241,6 +246,28 @@ const router = createBrowserRouter([
     path: "/patienthome", 
     element: <PatientHome/>, 
   },
+  {
+    path: "/patientpresc", 
+    element: <PatientPresc/>, 
+  },
+  {
+    path: "/patientrepo", 
+    element: <PatientRepo/>, 
+  },
+  {
+    path: "/patientcheckups", 
+    element: <PatientCheckups/>, 
+  },
+  {
+    path: "/patientbs", 
+    element: <PatientBs/>, 
+  },
+  {
+    path: "/patientbp", 
+    element: <PatientBp/>, 
+  },
+
+
 
 
 

@@ -12,16 +12,14 @@ function Pdiv2() {
   return (
     <div>
       <Container>
-          <Typography variant="h6" gutterBottom>
-            Menu
-          </Typography>
+          <br/>
 
           <Grid container spacing={2}>
 
           <Grid item xs={6} sm={4}>
             <Card sx={{ borderRadius: 6 }}>
               <CardContent>
-                <Button component={Link} to="/prescriptions">
+                <Button component={Link} to="/patientpresc">
                   <Grid container direction="column" alignItems="center" spacing={1}>
                     <Grid item>
                       <DescriptionIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
@@ -38,7 +36,7 @@ function Pdiv2() {
             <Grid item xs={6} sm={4}>
             <Card sx={{ borderRadius: 6 }}>
                 <CardContent>
-                  <Button component={Link} to="/pselect">
+                  <Button component={Link} to="/patientrepo">
                     <Grid container direction="column" alignItems="center" spacing={1}>
                       <Grid item>
                       <TextSnippetIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
@@ -57,7 +55,7 @@ function Pdiv2() {
             <Grid item xs={6} sm={4}>
             <Card sx={{ borderRadius: 6 }}>
                 <CardContent>
-                  <Button component={Link} to="/pselect">
+                  <Button component={Link} to="/patientcheckups">
                     <Grid container direction="column" alignItems="center" spacing={1}>
                       <Grid item>
                       <MonitorHeartIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
@@ -74,7 +72,7 @@ function Pdiv2() {
             <Grid item xs={6} sm={4}>
             <Card sx={{ borderRadius: 6 }}>
                 <CardContent>
-                  <Button component={Link} to="/pselect">
+                  <Button component={Link} to="/patientbs">
                     <Grid container direction="column" alignItems="center" spacing={1}>
                       <Grid item>
                         <WaterDropIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
@@ -92,7 +90,7 @@ function Pdiv2() {
             <Grid item xs={6} sm={4}>
             <Card sx={{ borderRadius: 6 }}>
                 <CardContent>
-                  <Button component={Link} to="/pselect">
+                  <Button component={Link} to="/patientbp">
                     <Grid container direction="column" alignItems="center" spacing={1}>
                       <Grid item>
                         <WaterDropIcon sx={{ fontSize: 40, color: 'background.bg2' }} />

@@ -8,6 +8,8 @@ import Lottie from 'lottie-react'; // Import Lottie
 import Homediv1 from './Homediv1';
 import BloodSugarChart from '../../components/BloodSugarChart';
 import Pdiv2 from './Pdiv2';
+import wave from '../images/wave.json';
+
 
 
 
@@ -48,10 +50,15 @@ function PatientHome() {
     <Grid item xs={12} md={6}>
         <Card style={{ borderRadius: 10 , marginTop:10}}>
             <CardContent>
-                <Typography variant="h6" gutterBottom>
-                    Welcome Back {patient.name}...........
-                </Typography>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+    <Typography variant="h6" gutterBottom style={{ marginRight: '10px' }}>
+        Welcome Back {patient.name}...........
+    </Typography>
+    <Lottie animationData={wave} style={{ width: 50, height: 50 }} />
+</div>
+
                 {/* Your content goes here */}
+               
             </CardContent>
         </Card>
         
@@ -64,17 +71,20 @@ function PatientHome() {
                 
             </CardContent>
         </Card>
+        <Homediv1/>
+        <BloodSugarChart nic={patient.nic} />
 
-        <Pdiv2/>
+      
         
     </Grid>
     
     {/* Grid for image */}
     <Grid item xs={12} md={6} >
       
-      <Homediv1/>
+      
 
-        <BloodSugarChart nic={patient.nic} />
+        
+        <Pdiv2/>
         
     </Grid>
     {/* Add more Grid items as needed */}
