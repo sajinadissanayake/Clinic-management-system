@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,13 +12,20 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-
+import maleAvatar from '../images/male.png';
+import femaleAvatar from '../images/female.png';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile'];
+const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+const nic = loggedInUser.nic;
+
 
 function Pnav() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [patient, setPatient] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -35,6 +42,19 @@ function Pnav() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  useEffect(() => {
+
+    axios.get(`http://localhost:3001/getPatient/nic/${nic}`)
+      .then(response => {
+        setPatient(response.data);
+      })
+      .catch(error => {
+        setError(error);
+      });
+
+  }, [nic]);
+
 
   return (
     <AppBar position="static">
@@ -110,10 +130,11 @@ function Pnav() {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} style={{backgroundColor:'#FFFFFF'}}>
+                {patient && <Avatar alt={patient.name} src={patient.gender === 'male' ? maleAvatar : femaleAvatar} />}
               </IconButton>
             </Tooltip>
+
             <Menu
               sx={{ mt: '45px' }}
               id="menu-user"

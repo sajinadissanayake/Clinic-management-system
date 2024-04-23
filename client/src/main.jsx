@@ -57,6 +57,7 @@ import PatientRepo from '../pages/Patient/PatientRepo.jsx';
 import PatientCheckups from '../pages/Patient/PatientChekups.jsx';
 import PatientBs from '../pages/Patient/PatientBs.jsx';
 import PatientBp from '../pages/Patient/PatientBp.jsx';
+import PatientLp from '../pages/Patient/PatientLp.jsx';
 
 
 
@@ -265,6 +266,10 @@ const router = createBrowserRouter([
   {
     path: "/patientbp", 
     element: <PatientBp/>, 
+  },
+  {
+    path: "/patientLp", 
+    element: <PatientLp/>, 
   },
 
 
