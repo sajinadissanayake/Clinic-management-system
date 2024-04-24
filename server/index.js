@@ -706,6 +706,26 @@ app.get('/getLp/:nic', (req, res) => {
         .then(data => res.json(data))
         .catch(err => res.status(500).json({ error: err.message }));
 });  
+app.delete('/deletelp/:id', async (req, res) => {
+    try {
+        
+        const { id } = req.params;
+
+        
+        const deletedRecord = await lpModel.findByIdAndDelete(id);
+
+        if (!deletedRecord) {
+            
+            return res.status(404).json({ message: 'Record not found' });
+        }
+        
+        res.json({ message: 'Record deleted successfully' });
+    } catch (error) {
+       
+        console.error('Error deleting record:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
 
 app.listen(3001, () => {
     console.log("server is running");
