@@ -27,7 +27,7 @@ function Layout(props) {
             zIndex: -1, // Ensure the image is behind the glassmorphism effect
             backgroundImage: `url(${staff})`,
             backgroundSize: 'cover',
-            filter: 'blur(30px)', // Apply blur to the background image
+            filter: 'blur(70px)', // Apply blur to the background image
           }}
         />
         {props.children}

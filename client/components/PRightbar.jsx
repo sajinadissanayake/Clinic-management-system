@@ -3,7 +3,9 @@ import { Box, Button, Card, CardActions, CardContent, Typography } from '@mui/ma
 import axios from 'axios';
 import MEDialog from './Dialogs/MEDialog';
 import BSchartdialog from './Dialogs/BSchartdialog';
-import GradientGaugeChart from './bloodmeter/GradientGaugeChart';
+
+import RandomGauge from './bloodmeter/RandomGuage';
+import FastingBloodSugarGauge from './bloodmeter/FastingBloodSugarGauge';
 
 function PRightbar({ patientNIC }) {
   const [latestMedicalExamination, setLatestMedicalExamination] = useState(null);
@@ -66,7 +68,8 @@ function PRightbar({ patientNIC }) {
               <div><Typography variant="body2" color="text.secondary">
               Fasting Blood Sugar: {bloodSugarLevels.fasting.rbs}
             </Typography>
-            <GradientGaugeChart value={bloodSugarLevels.fasting.rbs}/>
+           
+            <FastingBloodSugarGauge value={bloodSugarLevels.fasting.rbs}/>
             </div>
               
               
@@ -80,7 +83,8 @@ function PRightbar({ patientNIC }) {
                <Typography variant="body2" color="text.secondary">
                  Random Blood Sugar: {bloodSugarLevels.random.rbs}
                </Typography>
-               <GradientGaugeChart value={bloodSugarLevels.random.rbs}/>
+              
+               <RandomGauge value={bloodSugarLevels.random.rbs}/>
 
              </div>
             )}

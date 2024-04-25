@@ -2,9 +2,9 @@ import React from 'react';
 import GaugeChart from 'react-gauge-chart';
 import { useParams } from 'react-router-dom';
 
-const GradientGaugeChart = (props) => {
+const RandomGauge = (props) => {
   const g = parseFloat(props.value); // Convert to number
-  const gaugeData = g / 100;
+  const gaugeData = g / 300; // Assuming max value for gauge is 300 mg/dL
 
   // Define gradient colors based on blood sugar levels
   let gradientColors;
@@ -23,7 +23,7 @@ const GradientGaugeChart = (props) => {
   }
 
   const formatTextValue = () => {
-    return `${g}`;
+    return `${g} mg/dL`; // Format blood sugar value
   };
 
   return (
@@ -35,8 +35,8 @@ const GradientGaugeChart = (props) => {
         arcWidth={0.3}
         percent={gaugeData}
         textColor="#000"
-        needleColor="transparent" // Set needle color to transparent
-        needleBaseColor="transparent" // Set needle base color to transparent
+        needleColor="#000"
+        needleBaseColor="#000"
         animate={true}
         hideText={false}
         formatTextValue={formatTextValue}
@@ -45,4 +45,4 @@ const GradientGaugeChart = (props) => {
   );
 };
 
-export default GradientGaugeChart;
+export default RandomGauge;

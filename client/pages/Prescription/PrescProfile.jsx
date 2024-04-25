@@ -38,6 +38,7 @@ import RequestRecordDialog from '../../components/RequestRecordDialog';
 import maleAvatar from '../images/male.png';
 import femaleAvatar from '../images/female.png';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import Layout from '../../components/Layout';
 
 function PrescProfile() {
     const [patient, setPatient] = useState(null);
@@ -121,7 +122,7 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
     return (
         <div>
             <Navbar pageTitle="Patient Profile" />
-            <Box bgcolor={'background.bg3'}>
+           <Layout>
             <Stack direction="row" spacing={2} justifyContent="space-between">
             <PrescLeftbar patientNIC={patient.nic} />
            
@@ -399,7 +400,7 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                     </Container>
                 </PageBody>
                 <PRightbar patientNIC={patient.nic} />
-            </Stack></Box>
+            </Stack></Layout>
         </div>
     )
 }

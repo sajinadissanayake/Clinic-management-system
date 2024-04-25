@@ -54,7 +54,7 @@ function Homediv1() {
 
     <div>
         <Grid container spacing={2}>
-            <Grid item xs={6} md={4}>
+            <Grid item xs={12} md={12}>
                 <Card style={{ borderRadius: 10, marginTop: 10 }}>
                     <CardContent>
                     <Typography gutterBottom variant="h6" component="div">

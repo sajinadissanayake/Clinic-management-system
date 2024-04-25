@@ -71,9 +71,8 @@ function PatientHome() {
                 
             </CardContent>
         </Card>
-        <Homediv1/>
-        <BloodSugarChart nic={patient.nic} />
-
+       
+        <Pdiv2/>
       
         
     </Grid>
@@ -81,10 +80,11 @@ function PatientHome() {
     {/* Grid for image */}
     <Grid item xs={12} md={6} >
       
-      
+    <Homediv1/>
+        <BloodSugarChart nic={patient.nic} />
 
         
-        <Pdiv2/>
+   
         
     </Grid>
     {/* Add more Grid items as needed */}
