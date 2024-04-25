@@ -6,13 +6,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import UpdatePrescriptionDialog from './UpdatePrescriptionDialog';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from 'react-router-dom';
-
+import { useTheme } from '@mui/material/styles';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
 function PrescLeftbar({ patientNIC }) {
+    const theme = useTheme();
     const [open, setOpen] = useState(false);
     const [prescriptions, setPrescriptions] = useState([]);
     const [lastPrescription, setLastPrescription] = useState(null);
@@ -106,17 +107,16 @@ function PrescLeftbar({ patientNIC }) {
     return (
         <div>
             <Link to="/pselect" style={{ textDecoration: 'none' }}>
-                <Card sx={{ marginBottom: 2, marginTop: 3, borderRadius: 6 }}>
-                    <CardContent sx={{ display: 'flex' }}>
-                        <Button startIcon={<ArrowBackIcon />}>
-                            Back
-                        </Button>
-                    </CardContent>
-                </Card>
+                
+            <ArrowBackIcon  sx={{ marginBottom: 2, marginTop: 3, 
+                borderRadius: 100,backgroundColor: theme.palette.background.bgw,
+                color:theme.palette.background.bg2,fontSize: 40  }} />
+                         
+                
             </Link>
 
             {lastPrescription && (
-                <Card sx={{ marginBottom: 2, borderRadius: 6 }}>
+                <Card sx={{ marginBottom: 2, borderRadius: '0 20px 20px 0' }}>
                     <CardContent>
                         <Typography variant="h6" marginBottom={2}>Last Prescription</Typography>
                         {lastPrescription.prescription.split('\n').map((line, index) => (
@@ -129,7 +129,7 @@ function PrescLeftbar({ patientNIC }) {
             )}
 
             {pendingReportRequests.length > 0 && (
-                <Card sx={{ marginBottom: 2, borderRadius: 6 }}>
+                <Card sx={{ marginBottom: 2, borderRadius: '0 20px 20px 0'}}>
                     <CardContent>
                         <Typography variant="h6" marginBottom={2}>Pending Report Requests</Typography>
                         <TableContainer component={Paper}>
@@ -164,7 +164,7 @@ function PrescLeftbar({ patientNIC }) {
             )}
 
             {pendingRecordRequests.length > 0 && (
-                <Card sx={{ marginBottom: 2, borderRadius: 6 }}>
+                <Card sx={{ marginBottom: 2, borderRadius: '0 20px 20px 0' }}>
                     <CardContent>
                         <Typography variant="h6" marginBottom={2}>Pending Record Requests</Typography>
                         <TableContainer component={Paper}>

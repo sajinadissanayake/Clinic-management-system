@@ -10,6 +10,7 @@ import maleAvatar from '../images/male.png';
 import femaleAvatar from '../images/female.png';
 import DoctorSidebar from '../../components/DoctorSidebar';
 import Footer from  '../../components/Footer';
+import Layout from '../../components/Layout';
 
 function PatientSelect() {
     const [users, setUsers] = useState([]);
@@ -33,7 +34,7 @@ function PatientSelect() {
     return (
         <div>
             <Navbar pageTitle="Select The Patient" />
-            <Box bgcolor={'background.bg3'}>
+           <Layout>
             <Stack direction="row" spacing={2} justifyContent="space-between">
                 <DoctorSidebar />
                 <PageBody>
@@ -73,7 +74,7 @@ function PatientSelect() {
                 <Announcements />
             </Stack>
 
-            </Box>
+            </Layout>
             <Footer/>
            
         </div>

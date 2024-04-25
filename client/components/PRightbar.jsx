@@ -57,10 +57,10 @@ function PRightbar({ patientNIC }) {
       <Box bgcolor="" borderRadius={4} marginTop={1} flex={2} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
       <Card sx={{ maxWidth: 345, borderRadius:6}}  p={3}>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography gutterBottom variant="body1" component="div">
               Blood Sugar Levels 
             </Typography>
-            <Typography gutterBottom variant="h6" component="div">
+            <Typography gutterBottom variant="body2" component="div">
              Latest Records
             </Typography>
             {/* Display fasting blood sugar record */}
@@ -100,16 +100,14 @@ function PRightbar({ patientNIC }) {
         
       </Box>
       {/* Display blood sugar levels */}
-      <Box bgcolor="" borderRadius={4}  flex={2} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
+      <Box bgcolor="" borderRadius={4}  flex={2}  sx={{ display: { xs: "none", sm: "block" } }}>
 
          
       <Card sx={{ maxWidth: 345, borderRadius:6 }}>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Medical Examinations
-            </Typography>
-            <Typography gutterBottom variant="h6" component="div">
-              Latest Record
+         
+            <Typography gutterBottom variant="body1" component="div">
+              Latest Checkup
             </Typography>
           
             {latestMedicalExamination && (

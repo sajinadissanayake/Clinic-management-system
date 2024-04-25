@@ -126,7 +126,7 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
             <Stack direction="row" spacing={2} justifyContent="space-between">
             <PrescLeftbar patientNIC={patient.nic} />
            
-                <PageBody>
+            <Box  flex={4} p={2} marginTop={3}  borderRadius={3} minWidth={1000}>
                     <Container maxWidth="md" sx={{ marginTop: 4 }}>
                         <Grid container spacing={2}>
                                 <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
@@ -398,7 +398,7 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                             
                         </Grid>
                     </Container>
-                </PageBody>
+                </Box>
                 <PRightbar patientNIC={patient.nic} />
             </Stack></Layout>
         </div>
