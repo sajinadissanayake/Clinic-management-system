@@ -37,6 +37,8 @@ import DriveFileMoveIcon from '@mui/icons-material/DriveFileMove';
 import RequestRecordDialog from '../../components/RequestRecordDialog';
 import maleAvatar from '../images/male.png';
 import femaleAvatar from '../images/female.png';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
+
 function PrescProfile() {
     const [patient, setPatient] = useState(null);
     const [openPersonalDialog, setOpenPersonalDialog] = useState(false);
@@ -137,32 +139,32 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                                     
                                 </Grid>
 
-                            <Grid item xs={6} md={3} >
+                            <Grid item xs={6} md={2} >
                             <CardActionArea sx={{ display: 'flex', justifyContent: 'center' }}>
                                 <Card onClick={handlePersonalDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:8 }}>
                                 <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                    <Typography variant="body1">Personal Details</Typography>
-                                    <PersonIcon color='primary' sx={{ fontSize: 100 }} />
+                                    <Typography variant="body1">Personal </Typography>
+                                    <PersonIcon color='primary' sx={{ fontSize: 40 }} />
                                 </CardContent>
 
                                 </Card></CardActionArea>
                             </Grid>
-                            <Grid item xs={6} md={3}>
+                            <Grid item xs={6} md={2}>
                             <CardActionArea > <Card onClick={handleHealthDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:6 }}>
                             <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                        <Typography variant="body1">Health Details</Typography>
-                                        <LocalHospitalIcon color='primary' sx={{ fontSize: 100 }} />
+                                        <Typography variant="body1">Health </Typography>
+                                        <LocalHospitalIcon color='primary' sx={{ fontSize: 40}} />
                                     </CardContent>
                                 </Card></CardActionArea>
                             </Grid>
 
 
-                            <Grid item xs={6} md={3}>
+                            <Grid item xs={6} md={2}>
                                 <CardActionArea>
                                     <Card onClick={handleSurgicalDialogOpen} sx={{ width: '100%', cursor: 'pointer', borderRadius: 6 }}>
                                         <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                            <Typography variant="body1">Surgical History</Typography>
-                                            <MedicalServicesIcon color='primary' sx={{ fontSize: 100 }} />
+                                            <Typography variant="body1">Surgical </Typography>
+                                            <MedicalServicesIcon color='primary' sx={{ fontSize: 40 }} />
                                         </CardContent>
                                     </Card>
                                 </CardActionArea>
@@ -182,36 +184,26 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                                 </DialogActions>
                             </Dialog>
 
-                            <Grid item xs={6} md={3}>
+                            <Grid item xs={6} md={2}>
                                 <CardActionArea>
                                     <Card onClick={handleReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:6 }}>
                                         <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                             <Typography variant="body1">Reports</Typography>
-                                            <TextSnippetIcon color='primary' sx={{ fontSize: 100 }}/>
+                                            <TextSnippetIcon color='primary' sx={{ fontSize: 40 }}/>
                                         </CardContent>
                                     </Card>
                                 </CardActionArea>
                             </Grid>
-                            <Grid item xs={6} md={3}>
-                                <CardActionArea>
-                                <Link style={{ textDecoration: 'none' }} to={`/addpresc/${patient._id}`}>
-                                    <Card onClick={handleReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:6 }}>
-                                        <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                            <Typography variant="body1">Add Prescription</Typography>
-                                            <TextSnippetIcon color='primary' sx={{ fontSize: 100 }}/>
-                                        </CardContent>
-                                    </Card></Link>
-                                </CardActionArea>
-                            </Grid>
+                            
                             <RequestReportsDialog patientNIC={patient.nic}  open={openRequestReportsDialog} onClose={handleRequestReportsDialogClose} />
 
                            
-                            <Grid item xs={6} md={3}>
+                            <Grid item xs={6} md={2}>
                                 <CardActionArea>
                                     <Card onClick={handleRequestReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer', borderRadius: 6 }}>
                                         <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                             <Typography variant="body1">Request Reports</Typography>
-                                            <DriveFileMoveIcon color='primary' sx={{ fontSize: 100 }}/>
+                                            <DriveFileMoveIcon color='primary' sx={{ fontSize: 40 }}/>
                                         </CardContent>
                                     </Card>
                                 </CardActionArea>
@@ -222,16 +214,43 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                                 patientNIC={patient.nic} // Pass patient's NIC as prop
                             />
                                                         
-                            <Grid item xs={6} md={3}>
+                            <Grid item xs={6} md={2}>
                                 <CardActionArea>
                               
                                 <Card onClick={handleRequestRecordDialogOpen} sx={{ width: '100%', cursor: 'pointer', borderRadius: 6 }}>
                                     <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                         <Typography variant="body1">Request Record</Typography>
-                                        <DriveFileMoveIcon color='primary' sx={{ fontSize: 100 }} />
+                                        <DriveFileMoveIcon color='primary' sx={{ fontSize: 40 }} />
                                     </CardContent>
                                 </Card>
 
+                                </CardActionArea>
+                            </Grid>
+
+                            
+
+                            <Grid item xs={6} md={2}>
+                                
+                                <CardActionArea>
+                                <Link style={{ textDecoration: 'none' }} to={`/addpresc/${patient._id}`}>
+                                    <Card onClick={handleReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:6 }}>
+                                        <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                            <Typography variant="body1">Create </Typography>
+                                            <NoteAddIcon color='primary' sx={{ fontSize: 40 }}/>
+                                        </CardContent>
+                                    </Card></Link>
+                                </CardActionArea>
+                            </Grid>
+
+                            <Grid item xs={6} md={2}>
+                                <CardActionArea>
+                                <Link style={{ textDecoration: 'none' }} to={`/addpresc/${patient._id}`}>
+                                    <Card onClick={handleReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:6 }}>
+                                        <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                            <Typography variant="body1">prescriptions </Typography>
+                                            <TextSnippetIcon color='primary' sx={{ fontSize: 40 }}/>
+                                        </CardContent>
+                                    </Card></Link>
                                 </CardActionArea>
                             </Grid>
                            

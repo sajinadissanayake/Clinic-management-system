@@ -8,6 +8,7 @@ import PageBody from '../components/PageBody';
 import PRightbar from '../components/PRightbar';
 import { TextareaAutosize } from '@mui/material'; 
 import PrescLeftbar from '../components/PrescLeftbar';
+import Layout from '../components/Layout';
 
 function Prescriptionadd() {
   const [patient, setPatient] = useState(null);
@@ -40,7 +41,8 @@ function Prescriptionadd() {
 
   return (
     <div>
-      <Navbar />
+       <Navbar pageTitle=" Create Prescription" />
+       <Layout>
       <Stack direction="row" spacing={2} justifyContent="space-between">
         <PrescLeftbar patientNIC={patient.nic} />
         <PageBody>
@@ -68,7 +70,7 @@ function Prescriptionadd() {
           </Container>
         </PageBody>
         <PRightbar patientNIC={patient.nic} />
-      </Stack>
+      </Stack></Layout>
     </div>
   );
 }

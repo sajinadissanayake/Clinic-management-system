@@ -7,6 +7,7 @@ import Lottie from 'react-lottie';
 import Swal from 'sweetalert2';
 import PageBody from '../components/PageBody';
 import calender from './images/calender.json';
+import Layout from '../components/Layout';
 
 function AppointmentAdd() {
   const [nic, setNic] = useState('');
@@ -46,7 +47,7 @@ function AppointmentAdd() {
           showConfirmButton: false,
           timer: 1500
         });
-        navigate('/clinicdates');
+        navigate('/pselect');
       })
       .catch(err => console.log(err));
   }
@@ -66,9 +67,10 @@ function AppointmentAdd() {
 
   return (
     <div>
-      <Navbar />
-      <PageBody>
-        <Typography variant='h4' align='center'>Next Clinic Date</Typography>
+      <Navbar pageTitle="Next clinic date " />
+      <Layout>
+      
+        <Typography variant='h6' align='center'>Select date</Typography>
 
         <Card variant="outlined" style={{ width: '80%', margin: '0 auto', height: '600px', display: 'flex', alignItems: 'center', borderRadius: '8px' }}>
           <Grid container>
@@ -108,7 +110,7 @@ function AppointmentAdd() {
 
           </Grid>
         </Card>
-      </PageBody>
+      </Layout>
     </div>
   );
 }
