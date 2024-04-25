@@ -727,6 +727,23 @@ app.delete('/deletelp/:id', async (req, res) => {
     }
 });
 
+
+///////////////////////////////
+
+const AnnoucementModel = require( './models/annouce' )
+app.post("/AddAnnoucement", (req, res) =>{
+    AnnoucementModel.create(req.body)
+    .then(records => res.json(records))
+    .catch(err => res.json(err))
+});
+
+app.get('/getAnnouncement', (req, res) => {
+    AnnoucementModel.find({})
+      .then(records => res.json(records))
+      .catch(err => res.status(500).json({ error: err.message }));
+  });
+  
+ 
 app.listen(3001, () => {
     console.log("server is running");
 });

@@ -148,6 +148,31 @@ function PDash() {
         </Card>
       </Grid>
       <Grid item xs={12} sm={6}>
+        <Card sx={{ borderRadius: 5 }}>
+          <CardContent>
+            <Typography variant="h5" component="div">
+              Pending Prescriptions
+            </Typography>
+            <Typography variant="h4" color={'background.bg2'}>{pendingPrescriptionsCount}</Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+     
+
+      <Grid item xs={12} sm={6}>
+        <Card sx={{ borderRadius: 5, textAlign: 'center' }}>
+          <CardContent style={{ alignItems: 'center' }}>
+            <Typography variant="h6" component="div">
+              Today's Patients
+            </Typography>
+            <Typography variant="h4" color={'background.bg2'}>
+              {todayAppointmentCount}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid item xs={12} sm={6}>
   <Card sx={{ borderRadius: 5, textAlign: 'center' }}>
     <CardContent style={{ alignItems: 'center' }}>
       <Typography variant="h6" component="div">
@@ -165,29 +190,7 @@ function PDash() {
     </CardContent>
   </Card>
 </Grid>
-
-      <Grid item xs={12} sm={6}>
-        <Card sx={{ borderRadius: 5, textAlign: 'center' }}>
-          <CardContent style={{ alignItems: 'center' }}>
-            <Typography variant="h6" component="div">
-              Today's Patients
-            </Typography>
-            <Typography variant="h4" color={'background.bg2'}>
-              {todayAppointmentCount}
-            </Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item xs={12} sm={3}>
-        <Card sx={{ borderRadius: 5 }}>
-          <CardContent>
-            <Typography variant="h5" component="div">
-              Pending Prescriptions
-            </Typography>
-            <Typography variant="h4" color={'background.bg2'}>{pendingPrescriptionsCount}</Typography>
-          </CardContent>
-        </Card>
-      </Grid>
+      
     </Grid>
   );
 }

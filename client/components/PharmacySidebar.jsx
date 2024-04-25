@@ -17,7 +17,7 @@ import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 const PharmacySidebar = () => {
   return (
     <div>
-     <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" height="100%">
+     <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" >
       <Card sx={{ marginTop:5,borderTopRightRadius:30, borderBottomRightRadius: 30, backgroundColor: "background.bgw", flexGrow: 1, width: '100%' }}>
       <List>
       <ListItem disablePadding>

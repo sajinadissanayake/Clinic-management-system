@@ -58,6 +58,8 @@ import PatientCheckups from '../pages/Patient/PatientChekups.jsx';
 import PatientBs from '../pages/Patient/PatientBs.jsx';
 import PatientBp from '../pages/Patient/PatientBp.jsx';
 import PatientLp from '../pages/Patient/PatientLp.jsx';
+import AnnouncementAdd from '../pages/Prescription/Annoucementadd.jsx';
+import Announcements from '../pages/Prescription/Annoucements.jsx';
 
 
 
@@ -271,6 +273,15 @@ const router = createBrowserRouter([
     path: "/patientLp", 
     element: <PatientLp/>, 
   },
+  {
+    path: "/addannoucement", 
+    element: <AnnouncementAdd/>, 
+  },
+  {
+    path: "/annoucements", 
+    element: <Announcements/>, 
+  },
+
 
 
 

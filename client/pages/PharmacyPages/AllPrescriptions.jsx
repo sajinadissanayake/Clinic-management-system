@@ -9,6 +9,7 @@ import PharmacySidebar from '../../components/PharmacySidebar';
 import { Announcement } from '@mui/icons-material';
 import Announcements from '../../components/Announcements';
 import Layout from '../../components/Layout';
+import PageBody from '../../components/PageBody';
 
 function AllPrescriptions() {
     const [users, setUsers] = useState([]);
@@ -46,8 +47,8 @@ function AllPrescriptions() {
             <Layout>
             <Stack direction="row" spacing={2} justifyContent="space-between">
                 <PharmacySidebar/>
-            <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 64px)' }}>
-                <Card sx={{ borderRadius: 6, width: '100%', maxWidth: 600 }}>
+                <PageBody>
+           
                     <CardContent>
                         
                         <TextField
@@ -94,8 +95,7 @@ function AllPrescriptions() {
                             </Table>
                         </div>
                     </CardContent>
-                </Card>
-            </Container>
+            </PageBody>
             <Announcements/>
             </Stack></Layout>
         </div>
