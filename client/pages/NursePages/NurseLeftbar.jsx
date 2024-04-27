@@ -16,7 +16,7 @@ function NurseLeftbar() {
   return (
     <div>
      <Box display="flex" flexDirection="column" justifyContent="flex-start" alignItems="flex-start" height="100%">
-      <Card sx={{ marginTop:5,borderTopRightRadius:30, borderBottomRightRadius: 30, backgroundColor: "background.bgw", flexGrow: 1, width: '100%' }}>
+      <Card sx={{ marginTop:5,borderTopRightRadius:30, borderBottomRightRadius: 30, backgroundColor: "background.bgw", flexGrow: 1 }}>
       <List>
             <ListItem disablePadding>
               <ListItemButton component={Link} to="/Nursedash">
@@ -73,7 +73,7 @@ function NurseLeftbar() {
                     <PostAddIcon sx={{ fontSize: 40 , color: 'background.bg2'}} />
                   </Grid>
                   <Grid item>
-                    <ListItemText primary="Medical examinations" />
+                    <ListItemText primary="Records" />
                   </Grid>
                 </Grid>
               </ListItemButton>

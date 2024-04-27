@@ -11,6 +11,7 @@ import PRightbar from '../components/PRightbar';
 import PatientReports from '../components/PatientReports';
 import NurseLeftbar from '../pages/NursePages/NurseLeftbar';
 import Announcements from '../components/Announcements';
+import Layout from '../components/Layout';
 
 function OnePatient() {
   const [patient, setPatient] = useState(null);
@@ -40,6 +41,7 @@ function OnePatient() {
   return (
     <div>
       <Navbar />
+      <Layout>
       <Stack direction="row" spacing={2} justifyContent="space-between">
        <NurseLeftbar/>
         <PageBody>
@@ -147,7 +149,7 @@ function OnePatient() {
         </PageBody>
         <Announcements/>
 
-      </Stack>
+      </Stack></Layout>
     </div>
   );
 }

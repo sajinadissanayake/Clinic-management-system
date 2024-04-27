@@ -16,7 +16,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 const DoctorSidebar = () => {
   return (
     <Box display="flex" flexDirection="column" justifyContent="flex-start" alignItems="flex-start" height="100%">
-      <Card sx={{ marginTop:5,borderTopRightRadius:30, borderBottomRightRadius: 30, backgroundColor: "background.bgw", flexGrow: 1, width: '100%' }}>
+      <Card sx={{ marginTop:5,borderTopRightRadius:30, borderBottomRightRadius: 30, backgroundColor: "background.bgw", flexGrow: 1}}>
         <List>
           <ListItem disablePadding>
             <ListItemButton component={Link} to="/doctordash">
@@ -67,7 +67,7 @@ const DoctorSidebar = () => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="#">
+            <ListItemButton component={Link} to="/dclinic">
               <Grid container direction="column" alignItems="center" spacing={1}>
                 <Grid item>
                   <CalendarMonthIcon sx={{ fontSize: 40, color: 'background.bg2' }} />

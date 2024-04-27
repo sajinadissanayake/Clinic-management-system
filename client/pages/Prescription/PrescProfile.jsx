@@ -144,8 +144,9 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                             <CardActionArea sx={{ display: 'flex', justifyContent: 'center' }}>
                                 <Card onClick={handlePersonalDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:8 }}>
                                 <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                    <Typography variant="body1">Personal </Typography>
+                                    
                                     <PersonIcon color='primary' sx={{ fontSize: 40 }} />
+                                    <Typography variant="body1">Personal </Typography>
                                 </CardContent>
 
                                 </Card></CardActionArea>
@@ -153,8 +154,9 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                             <Grid item xs={6} md={2}>
                             <CardActionArea > <Card onClick={handleHealthDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:6 }}>
                             <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                        <Typography variant="body1">Health </Typography>
+                                      
                                         <LocalHospitalIcon color='primary' sx={{ fontSize: 40}} />
+                                        <Typography variant="body1">Health </Typography>
                                     </CardContent>
                                 </Card></CardActionArea>
                             </Grid>
@@ -164,8 +166,9 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                                 <CardActionArea>
                                     <Card onClick={handleSurgicalDialogOpen} sx={{ width: '100%', cursor: 'pointer', borderRadius: 6 }}>
                                         <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                            <Typography variant="body1">Surgical </Typography>
+                                            
                                             <MedicalServicesIcon color='primary' sx={{ fontSize: 40 }} />
+                                            <Typography variant="body1">Surgical </Typography>
                                         </CardContent>
                                     </Card>
                                 </CardActionArea>
@@ -189,8 +192,9 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                                 <CardActionArea>
                                     <Card onClick={handleReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:6 }}>
                                         <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                            <Typography variant="body1">Reports</Typography>
+                                            
                                             <TextSnippetIcon color='primary' sx={{ fontSize: 40 }}/>
+                                            <Typography variant="body1">Reports</Typography>
                                         </CardContent>
                                     </Card>
                                 </CardActionArea>
@@ -203,8 +207,9 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                                 <CardActionArea>
                                     <Card onClick={handleRequestReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer', borderRadius: 6 }}>
                                         <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                            <Typography variant="body1">Request Reports</Typography>
+                                           
                                             <DriveFileMoveIcon color='primary' sx={{ fontSize: 40 }}/>
+                                            <Typography variant="body1">Request Reports</Typography>
                                         </CardContent>
                                     </Card>
                                 </CardActionArea>
@@ -220,8 +225,9 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                               
                                 <Card onClick={handleRequestRecordDialogOpen} sx={{ width: '100%', cursor: 'pointer', borderRadius: 6 }}>
                                     <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                        <Typography variant="body1">Request Record</Typography>
+                                      
                                         <DriveFileMoveIcon color='primary' sx={{ fontSize: 40 }} />
+                                        <Typography variant="body1">Request Record</Typography>
                                     </CardContent>
                                 </Card>
 
@@ -236,8 +242,9 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                                 <Link style={{ textDecoration: 'none' }} to={`/addpresc/${patient._id}`}>
                                     <Card onClick={handleReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:6 }}>
                                         <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                            <Typography variant="body1">Create </Typography>
+                                           
                                             <NoteAddIcon color='primary' sx={{ fontSize: 40 }}/>
+                                            <Typography variant="body1">Create </Typography>
                                         </CardContent>
                                     </Card></Link>
                                 </CardActionArea>
@@ -248,8 +255,9 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                                 <Link style={{ textDecoration: 'none' }} to={`/addpresc/${patient._id}`}>
                                     <Card onClick={handleReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:6 }}>
                                         <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                            <Typography variant="body1">prescriptions </Typography>
+                                            
                                             <TextSnippetIcon color='primary' sx={{ fontSize: 40 }}/>
+                                            <Typography variant="body1">prescriptions </Typography>
                                         </CardContent>
                                     </Card></Link>
                                 </CardActionArea>

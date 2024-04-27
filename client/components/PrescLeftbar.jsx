@@ -72,33 +72,85 @@ function PrescLeftbar({ patientNIC }) {
     };
 
     const handleCancelReportRequest = (requestId) => {
-        axios.delete(`http://localhost:3001/deleteReportRequest/${requestId}`)
-            .then(response => {
-                console.log('Report request deleted successfully');
-                // Refresh pending report requests
-                axios.get(`http://localhost:3001/getReportRequests/${patientNIC}`)
+        // Display SweetAlert confirmation dialog
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You are about to delete this report request.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // User confirmed, proceed with deletion
+                axios.delete(`http://localhost:3001/deleteReportRequest/${requestId}`)
                     .then(response => {
-                        setPendingReportRequests(response.data.filter(request => request.status === "pending"));
+                        console.log('Report request deleted successfully');
+                        // Display SweetAlert indicating successful deletion
+                        Swal.fire({
+                            title: 'Deleted!',
+                            text: 'The report request has been successfully deleted.',
+                            icon: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        });
+                        // Refresh pending report requests
+                        axios.get(`http://localhost:3001/getReportRequests/${patientNIC}`)
+                            .then(response => {
+                                setPendingReportRequests(response.data.filter(request => request.status === "pending"));
+                            })
+                            .catch(error => console.error('Error fetching pending report requests:', error));
                     })
-                    .catch(error => console.error('Error fetching pending report requests:', error));
-            })
-            .catch(error => console.error('Error deleting report request:', error));
+                    .catch(error => console.error('Error deleting report request:', error));
+            }
+        });
     };
+    
 
     const handleCancelRecordRequest = (requestId) => {
-        axios.delete(`http://localhost:3001/deleteRecordRequest/${requestId}`)
-            .then(response => {
-                console.log('Record request deleted successfully');
-                // Refresh pending record requests
-                axios.get(`http://localhost:3001/getRecordRequests/${patientNIC}`)
+        // Display SweetAlert confirmation dialog
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You are about to cancel this record request.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, cancel it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // User confirmed, proceed with deletion
+                axios.delete(`http://localhost:3001/deleteRecordRequest/${requestId}`)
                     .then(response => {
-                        setPendingRecordRequests(response.data.filter(request => request.status === "pending"));
+                        console.log('Record request deleted successfully');
+                        // Display success message with SweetAlert
+                        Swal.fire({
+                            title: 'Cancelled!',
+                            text: 'Record request cancelled successfully.',
+                            icon: 'success'
+                        });
+    
+                        // Refresh pending record requests
+                        axios.get(`http://localhost:3001/getRecordRequests/${patientNIC}`)
+                            .then(response => {
+                                setPendingRecordRequests(response.data.filter(request => request.status === "pending"));
+                            })
+                            .catch(error => console.error('Error fetching pending record requests:', error));
                     })
-                    .catch(error => console.error('Error fetching pending record requests:', error));
-            })
-            .catch(error => console.error('Error deleting record request:', error));
+                    .catch(error => {
+                        console.error('Error deleting record request:', error);
+                        // Display error message with SweetAlert
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Failed to cancel record request. Please try again later.',
+                            icon: 'error'
+                        });
+                    });
+            }
+        });
     };
-
+    
     const formatDate = (dateString) => {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         return new Date(dateString).toLocaleDateString(undefined, options);

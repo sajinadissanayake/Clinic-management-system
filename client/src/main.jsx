@@ -60,6 +60,8 @@ import PatientBp from '../pages/Patient/PatientBp.jsx';
 import PatientLp from '../pages/Patient/PatientLp.jsx';
 import AnnouncementAdd from '../pages/Prescription/Annoucementadd.jsx';
 import Announcements from '../pages/Prescription/Annoucements.jsx';
+import Dclinic from '../pages/Prescription/Dclinic.jsx';
+
 
 
 
@@ -280,6 +282,10 @@ const router = createBrowserRouter([
   {
     path: "/annoucements", 
     element: <Announcements/>, 
+  },
+  {
+    path: "/dclinic", 
+    element: <Dclinic/>, 
   },
 
 

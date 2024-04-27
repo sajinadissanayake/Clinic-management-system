@@ -3,13 +3,14 @@ import axios from 'axios';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import Navbar from '../components/Navbar';
+
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { IconButton, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import Layout from '../components/Layout';
+import Layout from '../../components/Layout';
 
-function ClinicDates() {
+
+function Dclinic() {
   const localizer = momentLocalizer(moment);
   const [appointments, setAppointments] = useState([]);
 
@@ -37,7 +38,7 @@ function ClinicDates() {
 
     <div>
       <Layout>
-   <Link to="/nursedash" style={{ textDecoration: 'none' }}>
+   <Link to="/doctordash" style={{ textDecoration: 'none' }}>
       <IconButton aria-label="dashboard" color="primary">
         <ArrowBackIcon fontSize="large" />
       </IconButton></Link>
@@ -59,4 +60,4 @@ function ClinicDates() {
   );
 }
 
-export default ClinicDates;
+export default Dclinic;

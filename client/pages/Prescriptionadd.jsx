@@ -26,15 +26,30 @@ function Prescriptionadd() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3001/AddPrescription", { prescription, nic: patient.nic,email:patient.email, status })
+    axios.post("http://localhost:3001/AddPrescription", { prescription, nic: patient.nic, email: patient.email, status })
       .then(result => {
         console.log(result);
-        navigate(`/appointmentAdd?nic=${patient.nic}&email=${patient.email}`);
-         // Pass email as query parameter
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Prescription added successfully!',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          navigate(`/appointmentAdd?nic=${patient.nic}&email=${patient.email}`);
+          // Pass email as query parameter
+        });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to add prescription. Please try again.',
+          confirmButtonText: 'OK'
+        });
+      });
   };
-
+  
   if (!patient) {
     return <div>Loading...</div>;
   }

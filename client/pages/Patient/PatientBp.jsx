@@ -86,7 +86,7 @@ function PatientBp() {
                             </CardContent>
                         </Card>
                             
-                            <div style={{ maxHeight: '400px', overflowY: 'auto',marginTop:'2%' }}> {/* Adjust the maxHeight to your preference */}
+                            <div style={{ maxHeight: '800px', overflowY: 'auto',marginTop:'2%' }}> {/* Adjust the maxHeight to your preference */}
 
                                 <TableContainer component={Paper}>
                                     <Table>

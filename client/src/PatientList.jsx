@@ -11,6 +11,7 @@ import Announcements from '../components/Announcements';
 import NurseLeftbar from '../pages/NursePages/NurseLeftbar';
 // Import AddCircleIcon
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Layout from '../components/Layout';
 
 function PatientList() {
     const [patients, setPatients] = useState([]);
@@ -34,6 +35,7 @@ function PatientList() {
     return (
         <div>
             <Navbar />
+            <Layout>
             <Stack direction="row" spacing={2} justifyContent="space-between">
                 <NurseLeftbar/>
                 <PageBody>
@@ -82,7 +84,7 @@ function PatientList() {
                     </div>
                 </PageBody>
                 <Announcements />
-            </Stack>
+            </Stack></Layout>
         </div>
     );
 }
