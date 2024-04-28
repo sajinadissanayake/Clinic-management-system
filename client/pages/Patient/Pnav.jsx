@@ -16,16 +16,19 @@ import maleAvatar from '../images/male.png';
 import femaleAvatar from '../images/female.png';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Home', 'Profile', 'reports'];
 const settings = ['Profile'];
 const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
 const nic = loggedInUser.nic;
 
+import { useTheme } from '@mui/material/styles';
 
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 function Pnav() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [patient, setPatient] = useState(null);
+  const theme = useTheme();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -60,7 +63,8 @@ function Pnav() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+        <LocalHospitalIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: theme.customPalette.customColor1, fontSize: 40 }} />
+
           <Typography
             variant="h6"
             noWrap
@@ -76,7 +80,7 @@ function Pnav() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Healthy LifeStyle Center
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

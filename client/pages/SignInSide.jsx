@@ -47,7 +47,6 @@ function SignInSide() {
     e.preventDefault();
     if (pwd === confirmPwd) {
       // Passwords match, proceed with registration
-      //console.log("Passwords match. Proceed with registration...");
       const url = "http://localhost:3001/api/users";
       const data = {
         nic: nic,
@@ -55,15 +54,25 @@ function SignInSide() {
         password: pwd,
         utype: utype,
       };
-			const { data: res } = await axios.post(url, data);
-			console.log(res.message);
-      navigate('/login');
+      try {
+        const { data: res } = await axios.post(url, data);
+        console.log(res.message);
+        navigate('/login');
+      } catch (error) {
+        // Display error message using SweetAlert
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.response.data.message,
+        });
+      }
     } else {
       // Passwords don't match, show error
       setPasswordMatch(false);
       console.log("Passwords do not match.");
     }
   };
+  
 
   const handleConfirmPwdChange = (e) => {
     setConfirmPwd(e.target.value);
