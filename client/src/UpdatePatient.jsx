@@ -89,7 +89,7 @@ function UpdatePatient() {
 
 
 
-    <Navbar/>
+    <Navbar pageTitle="Update Patient" />
        <Stack direction="row" spacing={2} justifyContent="space-between">
             <Sidebar/>
             <PageBody>

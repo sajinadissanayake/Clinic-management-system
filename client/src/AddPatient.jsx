@@ -15,6 +15,7 @@ import Body from "../components/PageBody";
 import PageBody from "../components/PageBody";
 import Rightbar from "../components/Rightbar";
 import NurseLeftbar from "../pages/NursePages/NurseLeftbar";
+import Layout from "../components/Layout";
 
 
 
@@ -117,7 +118,8 @@ function AddPatient() {
 
     return (
         <div>
-            <Navbar/>
+            <Navbar pageTitle="Add Patient" />
+            <Layout>
             <Stack direction="row" spacing={2} justifyContent="space-between">
            <NurseLeftbar/>
             <PageBody>
@@ -251,7 +253,7 @@ function AddPatient() {
 
 
 
-
+            </Layout>
           
         </div>
     );
