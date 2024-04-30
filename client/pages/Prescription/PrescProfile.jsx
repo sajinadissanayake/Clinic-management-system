@@ -2,21 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import {
-    Container,
-    Typography,
-    Grid,
-    Avatar,
-    Stack,
-    Card,
-    CardContent,
-    Button,
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogActions,
-    CardActionArea,
-    Box,
-    
+    Container, Typography, Grid,Avatar,Stack,Card,CardContent,Button,Dialog,DialogTitle,DialogContent,DialogActions,CardActionArea,Box,  
 } from '@mui/material';
 import { TableContainer, Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@mui/material';
 import Navbar from '../../components/Navbar';
@@ -202,40 +188,6 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                             
                             <RequestReportsDialog patientNIC={patient.nic}  open={openRequestReportsDialog} onClose={handleRequestReportsDialogClose} />
 
-                           
-                            <Grid item xs={6} md={2}>
-                                <CardActionArea>
-                                    <Card onClick={handleRequestReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer', borderRadius: 6 }}>
-                                        <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                           
-                                            <DriveFileMoveIcon color='primary' sx={{ fontSize: 40 }}/>
-                                            <Typography variant="body1">Request Reports</Typography>
-                                        </CardContent>
-                                    </Card>
-                                </CardActionArea>
-                            </Grid>
-                            <RequestRecordDialog
-                                open={openRequestRecordDialog}
-                                onClose={handleRequestRecordDialogClose}
-                                patientNIC={patient.nic} // Pass patient's NIC as prop
-                            />
-                                                        
-                            <Grid item xs={6} md={2}>
-                                <CardActionArea>
-                              
-                                <Card onClick={handleRequestRecordDialogOpen} sx={{ width: '100%', cursor: 'pointer', borderRadius: 6 }}>
-                                    <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                      
-                                        <DriveFileMoveIcon color='primary' sx={{ fontSize: 40 }} />
-                                        <Typography variant="body1">Request Record</Typography>
-                                    </CardContent>
-                                </Card>
-
-                                </CardActionArea>
-                            </Grid>
-
-                            
-
                             <Grid item xs={6} md={2}>
                                 
                                 <CardActionArea>
@@ -262,6 +214,33 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                                     </Card></Link>
                                 </CardActionArea>
                             </Grid>
+                            
+                            <Grid item xs={6} md={3}>
+                              
+                            <Button variant='outlined' style={{ backgroundColor: '#07A0C3', color: 'white' }} onClick={handleRequestReportsDialogOpen}>Request Report</Button>
+
+
+                          
+                            </Grid>
+                            <RequestRecordDialog
+                                open={openRequestRecordDialog}
+                                onClose={handleRequestRecordDialogClose}
+                                patientNIC={patient.nic} // Pass patient's NIC as prop
+                            />
+                                                        
+                            <Grid item xs={6} md={3}>
+                          
+                              
+                             
+                                    <Button variant='outlined' style={{ backgroundColor: '#07A0C3', color: 'white' }} onClick={handleRequestRecordDialogOpen}>Request Record</Button>
+                          
+
+                              
+                            </Grid>
+
+                            
+
+                            
                            
                             <Grid item xs={12}>
                                 <Card sx={{ width: '100%',borderRadius:6 }}>

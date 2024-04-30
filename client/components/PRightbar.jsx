@@ -57,11 +57,9 @@ function PRightbar({ patientNIC }) {
       <Box bgcolor="" borderRadius={4} marginTop={1} flex={2} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
       <Card sx={{ maxWidth: 345, borderRadius:6}}  p={3}>
           <CardContent>
-            <Typography gutterBottom variant="body1" component="div">
-              Blood Sugar Levels 
-            </Typography>
+           
             <Typography gutterBottom variant="body2" component="div">
-             Latest Records
+            Blood Sugar Latest Records
             </Typography>
             {/* Display fasting blood sugar record */}
             {bloodSugarLevels.fasting && (

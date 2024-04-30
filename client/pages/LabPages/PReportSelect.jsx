@@ -68,9 +68,9 @@ function PReportSelect() {
                                         <TableCell>{patient.name}</TableCell>
                                         <TableCell>
                                             <Stack direction="row" spacing={1} justifyContent="flex-end">
-                                                <Button variant='outlined' style={{ marginRight: '10px' }}>
-                                                    <Link style={{ textDecoration: 'none' }} to={`/reports/${patient.nic}`}>View</Link>
-                                                </Button>
+                                            <Link style={{ textDecoration: 'none' }} to={`/reports/${patient.nic}`}> <Button variant='outlined' style={{ marginRight: '10px' }}>
+                                                    View
+                                                </Button></Link>
                                             </Stack>
                                         </TableCell>
                                     </TableRow>

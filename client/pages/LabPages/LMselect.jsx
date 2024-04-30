@@ -90,13 +90,13 @@ function LMselect() {
                                     <TableCell>{patient.name}</TableCell>
                                     <TableCell>
                                   
-                                                <Button variant='outlined' style={{ marginRight: '10px' }}>
-                                                    <Link style={{ textDecoration: 'none' }} to={`/bstable/${patient.nic}`}>Blood Sugar</Link>
-                                                </Button>
+                                    <Link style={{ textDecoration: 'none' }} to={`/bstable/${patient.nic}`}> <Button variant='outlined' style={{ marginRight: '10px' }}>
+                                                  Blood Sugar
+                                                </Button></Link>
 
-                                                <Button variant='outlined' style={{ marginRight: '10px' }}>
-                                                    <Link style={{ textDecoration: 'none' }} to={`/lipid/${patient.nic}`}>Lipid Profile</Link>
-                                                </Button>
+                                                <Link style={{ textDecoration: 'none' }} to={`/lipid/${patient.nic}`}> <Button variant='outlined' style={{ marginRight: '10px' }}>
+                                                    Lipid Profile
+                                                </Button></Link>
                                         <IconButton onClick={() => handleOpenRequestsDialog(patient.nic)}>
                                             <Badge badgeContent={recordRequestsCounts[patient.nic]} color="primary">
                                                 <AddChartIcon />

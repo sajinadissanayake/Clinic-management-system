@@ -61,6 +61,8 @@ import PatientLp from '../pages/Patient/PatientLp.jsx';
 import AnnouncementAdd from '../pages/Prescription/Annoucementadd.jsx';
 import Announcements from '../pages/Prescription/Annoucements.jsx';
 import Dclinic from '../pages/Prescription/Dclinic.jsx';
+import Bot from '../components/bot/Bot.jsx';
+
 
 
 
@@ -284,7 +286,12 @@ const router = createBrowserRouter([
     path: "/dclinic", 
     element: <Dclinic/>, 
   },
-
+  {
+    path: "/bot", 
+    element: <Bot/>, 
+  },
+  
+  
 
 
 

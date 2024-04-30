@@ -18,8 +18,8 @@ import PostAddIcon from '@mui/icons-material/PostAdd';
 const LabSidebar = () => {
   return (
     <div>
-     <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" height="100%">
-      <Card sx={{ marginTop:5,borderTopRightRadius:30, borderBottomRightRadius: 30, backgroundColor: "background.bgw", flexGrow: 1, width: '100%' }}>
+     <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" >
+      <Card sx={{ marginTop:5,borderTopRightRadius:30, borderBottomRightRadius: 30, backgroundColor: "background.bgw", flexGrow: 1, }}>
       <List>
             <ListItem disablePadding>
               <ListItemButton component={Link} to="/Labdash">

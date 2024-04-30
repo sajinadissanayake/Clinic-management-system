@@ -183,12 +183,12 @@ function PrescLeftbar({ patientNIC }) {
             {pendingReportRequests.length > 0 && (
                 <Card sx={{ marginBottom: 2, borderRadius: '0 20px 20px 0'}}>
                     <CardContent>
-                        <Typography variant="h6" marginBottom={2}>Pending Report Requests</Typography>
+                        <Typography variant="body1" marginBottom={2}>Pending Report Requests</Typography>
                         <TableContainer component={Paper}>
                             <Table>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Report Type</TableCell>
+                                        <TableCell> Type</TableCell>
                                         <TableCell>Action</TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -218,12 +218,12 @@ function PrescLeftbar({ patientNIC }) {
             {pendingRecordRequests.length > 0 && (
                 <Card sx={{ marginBottom: 2, borderRadius: '0 20px 20px 0' }}>
                     <CardContent>
-                        <Typography variant="h6" marginBottom={2}>Pending Record Requests</Typography>
+                        <Typography variant="body1" marginBottom={2}>Pending Record Requests</Typography>
                         <TableContainer component={Paper}>
                             <Table>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Record Type</TableCell>
+                                        <TableCell> Type</TableCell>
                                         <TableCell>Action</TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -270,6 +270,7 @@ function PrescLeftbar({ patientNIC }) {
                                 <TableRow>
                                     <TableCell>Prescription</TableCell>
                                     <TableCell>Date</TableCell>
+                                    <TableCell>doctorid</TableCell>
                                     <TableCell>Actions</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -282,6 +283,7 @@ function PrescLeftbar({ patientNIC }) {
                                             ))}
                                         </TableCell>
                                         <TableCell>{formatDate(prescription.PostedDate)}</TableCell>
+                                        <TableCell>{prescription.doctor}</TableCell>
                                         <TableCell>
                                             <Button
                                                 variant='outlined'
