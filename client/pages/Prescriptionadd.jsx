@@ -18,6 +18,8 @@ function Prescriptionadd() {
   const { id } = useParams();
   const status = "pending";
   const navigate = useNavigate();
+  const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+  const doctor= loggedInUser.nic;
 
   useEffect(() => {
     axios.get(`http://localhost:3001/getPatient/${id}`)
@@ -35,7 +37,9 @@ function Prescriptionadd() {
         prescription,
         nic: patient.nic,
         email: patient.email,
-        status
+        status,
+        doctor
+        
       });
       console.log(result);
       Swal.fire({

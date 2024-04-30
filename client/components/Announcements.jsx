@@ -25,6 +25,12 @@ function Announcements() {
     setOpenDialog(false);
   };
 
+  // Function to format date
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString(); // Adjust this according to your date format preference
+  };
+
   return (
     <div>
       <Box bgcolor="" flex={2} onClick={handleOpenDialog} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
@@ -43,16 +49,19 @@ function Announcements() {
         <DialogTitle>All Announcements</DialogTitle>
         <DialogContent>
           {announcements.map((announcement, index) => (
-            <Card key={index} sx={{ marginBottom: 2 }}>
+            <Card key={index} sx={{ marginBottom: 2 ,minWidth:'500px'}}>
               <CardContent>
-                <Typography variant="h5" component="div">
+                <Typography variant="h5" component="div" color={'error'}>
                   {announcement.title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Date: {announcement.date}
+                <Typography variant="body1" color="text.secondary">
+                  {announcement.announcement}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {announcement.announcement}
+                  Date: {formatDate(announcement.Date)}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Doctor: {announcement.doctor}
                 </Typography>
               </CardContent>
             </Card>
