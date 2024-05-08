@@ -11,7 +11,7 @@ function Announcements() {
   useEffect(() => {
     axios.get('http://localhost:3001/getAnnouncement')
       .then(response => {
-        console.log(response.data); // Log the fetched data to check its structure
+        console.log(response.data); 
         setAnnouncements(response.data);
       })
       .catch(err => console.log(err));
@@ -28,7 +28,7 @@ function Announcements() {
   // Function to format date
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString(); // Adjust this according to your date format preference
+    return date.toLocaleDateString(); 
   };
 
   return (

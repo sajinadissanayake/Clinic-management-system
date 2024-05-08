@@ -48,7 +48,7 @@ app.get('/getPatient/:id', (req, res) => {
 app.get('/getPatient/nic/:nic', (req, res) => {
     console.log
     const nic = req.params.nic;
-    patientModel.findOne({ nic: nic }) // Use findOne instead of findByNIC
+    patientModel.findOne({ nic: nic }) 
         .then(patient => {
             if (!patient) {
                 res.status(404).json({ error: 'Patient not found' });
@@ -116,10 +116,10 @@ app.delete('/deleteUser/:id', (req, res) => {
 // Configure Multer for image upload
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'patientImages/'); // Set the destination folder for uploaded images
+        cb(null, 'patientImages/'); 
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname); // Set the file name
+        cb(null, Date.now() + '-' + file.originalname); 
     },
 });
 
@@ -577,12 +577,12 @@ app.get('/getRecordRequests/:nic', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-// Add a route to delete record request
+//  route to delete record request
 app.delete('/deleteRecordRequest/:id', async (req, res) => {
     try {
         const { id } = req.params;
         
-        // Find the record request by ID and delete it
+        //  record request by ID and delete 
         await RecordRequestModel.findByIdAndDelete(id);
 
         res.status(200).send('Record request deleted successfully');
@@ -610,21 +610,21 @@ app.get('/getBloodpressure/:nic', (req, res) => {
 
 app.delete('/deleteBloodpressure/:id', async (req, res) => {
     try {
-        // Extract the ID from the request parameters
+       
         const { id } = req.params;
 
-        // Find the blood pressure record by ID and delete it
+        
         const deletedRecord = await BpModel.findByIdAndDelete(id);
 
         if (!deletedRecord) {
-            // If the record with the specified ID doesn't exist, return a 404 Not Found status
+            
             return res.status(404).json({ message: 'Record not found' });
         }
 
-        // If the record is successfully deleted, return a success message
+       
         res.json({ message: 'Record deleted successfully' });
     } catch (error) {
-        // If an error occurs, return a 500 Internal Server Error status
+        
         console.error('Error deleting record:', error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
@@ -633,15 +633,13 @@ app.delete('/deleteBloodpressure/:id', async (req, res) => {
 
 
 ///////////////////////////article sender
-// Update the route to send articles to all patients' emails
+
 app.post('/sendArticleToPatients', async (req, res) => {
     try {
         const { subject, text, image } = req.body;
 
-        // Fetch all patient emails from the database
         const patients = await patientModel.find({}, 'email');
 
-        // Prepare email sending tasks for each patient
         const emailTasks = patients.map(patient => {
             return new Promise((resolve, reject) => {
                 const transporter = nodemailer.createTransport({
@@ -653,14 +651,14 @@ app.post('/sendArticleToPatients', async (req, res) => {
                 });
 
                 const mailOptions = {
-                    from: 'clinichealthylifestyle@gmail.com', // Your Gmail email address
-                    to: patient.email, // Patient's email address
+                    from: 'clinichealthylifestyle@gmail.com', 
+                    to: patient.email, 
                     subject: subject,
                     text: text,
-                    html: `<p>${text}</p>` // Add the text as HTML content
+                    html: `<p>${text}</p>` 
                 };
 
-                // Attach image if available
+                
                 if (image) {
                     mailOptions.attachments = [{
                         filename: 'image.jpg',
@@ -743,6 +741,38 @@ app.get('/getAnnouncement', (req, res) => {
       .catch(err => res.status(500).json({ error: err.message }));
   });
   
+   /////////////////////////////////////////////////////////
+  const bodyParser = require('body-parser');
+
+  
+  // Replace with your actual API key from Anthropic
+  const OpenAI =require("openai");
+
+  const openai = new OpenAI({
+    apiKey:"sk-proj-VnLQk01tCBMv0WWEs4cfT3BlbkFJNeEDZQ6cAKmNtWB1RO5s"
+  });
+  app.use(bodyParser.json());
+  
+  app.post('/api/chat', async (req, res) => {
+    const { message } = req.body;
+  
+    try {
+      const response = await openai.chat.completions.create({
+        model: 'gpt-3.5-turbo',
+        prompt: message,
+        max_tokens: 30,
+      });
+
+      res.json({ message: response.data.choices[0].text });
+
+     
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred while processing your request.' });
+    }
+  });
+  
+/////////////////////////
  
 
 

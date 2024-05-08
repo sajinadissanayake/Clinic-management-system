@@ -69,9 +69,9 @@ function PatientList() {
                                         <TableCell>{patient.name}</TableCell>
                                         <TableCell>
                                             <Stack direction="row" spacing={1} justifyContent="flex-end">
-                                                <Button variant='outlined' style={{ marginRight: '10px' }}>
-                                                    <Link style={{ textDecoration: 'none' }} to={`/patient/${patient._id}`}>View</Link>
-                                                </Button>
+                                            <Link style={{ textDecoration: 'none' }} to={`/patient/${patient._id}`}> <Button variant='outlined' style={{ marginRight: '10px' }}>
+                                                    View
+                                                </Button></Link>
                                                 <Button variant='outlined' color='error' onClick={() => handleDelete(patient._id)}>
                                                     Delete
                                                 </Button>

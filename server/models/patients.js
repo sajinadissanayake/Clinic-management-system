@@ -35,7 +35,7 @@ const patientSchema = new mongoose.Schema({
    registrationDate: {
     type: Date,
     default: Date.now  },
-    Image: String,
+    imagePath: String,
    
 
    

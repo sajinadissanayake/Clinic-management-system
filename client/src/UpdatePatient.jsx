@@ -6,7 +6,10 @@ import Sidebar from "../components/Sidebar";
 import PageBody from "../components/PageBody";
 import Rightbar from "../components/Rightbar";
 import Navbar from "../components/Navbar";
-
+import NurseLeftbar from "../pages/NursePages/NurseLeftbar";
+import Layout from "../components/Layout";
+import Announcements from "../components/Announcements";
+import Swal from 'sweetalert2';
 function UpdatePatient() {
     const { id } = useParams();
     const [name, setName] = useState('');
@@ -34,6 +37,8 @@ function UpdatePatient() {
     const [diseases, setDiseases] = useState(''); 
     const [allergies, setAllergies] = useState(''); 
     const [blood, setBlood] = useState(''); 
+
+    const ID = id;
 
     const navigate = useNavigate();
 
@@ -73,11 +78,19 @@ function UpdatePatient() {
     const patientUpdate = (e) => {
         e.preventDefault();
         axios.put("http://localhost:3001/UpdatePatient/" + id, {
-            name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies,blood
+            name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies, blood
         })
         .then(result => {
             console.log(result);
-            navigate('/patientslist');
+            // Show SweetAlert
+            Swal.fire({
+                icon: 'success',
+                title: 'Patient Updated',
+                text: 'Patient information has been updated successfully!',
+            }).then(() => {
+                // Redirect or perform any other action after the user clicks OK
+                navigate(`/patient/${id}`);
+            });
         })
         .catch(err => console.log(err));
     };
@@ -90,9 +103,11 @@ function UpdatePatient() {
 
 
     <Navbar pageTitle="Update Patient" />
+<Layout>
        <Stack direction="row" spacing={2} justifyContent="space-between">
-            <Sidebar/>
+           <NurseLeftbar/>
             <PageBody>
+            <div style={{ maxHeight: '600px', overflowY: 'scroll' }}>
             <form onSubmit={patientUpdate}>
                 <h2>Update patient</h2>
                 
@@ -237,10 +252,11 @@ function UpdatePatient() {
                 
                 <Button type="submit" variant="contained" sx={{ width: '100%' }}>Update</Button>
             </form>
+            </div>
 
             </PageBody>
-            <Rightbar/>
-            </Stack>
+           <Announcements/>
+            </Stack></Layout>
         </div>
        
         

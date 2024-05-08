@@ -30,7 +30,7 @@ function PRightbar({ patientNIC }) {
         // Set the last fasting and random blood sugar records
         const lastFastingRecord = response.data.filter(record => record.type === 'fasting').pop();
         const lastRandomRecord = response.data.filter(record => record.type === 'random').pop();
-        // Set the blood sugar levels
+       
         setBloodSugarLevels({ fasting: lastFastingRecord, random: lastRandomRecord });
       })
       .catch(error => console.error('Error fetching blood sugar levels:', error));
