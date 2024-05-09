@@ -12,6 +12,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
+
+
 function PrescLeftbar({ patientNIC }) {
     const theme = useTheme();
     const [open, setOpen] = useState(false);
@@ -159,14 +161,14 @@ function PrescLeftbar({ patientNIC }) {
     return (
         <div>
             <Link to="/pselect" style={{ textDecoration: 'none' }}>
-                
+           
             <ArrowBackIcon  sx={{ marginBottom: 2, marginTop: 3, 
                 borderRadius: 100,backgroundColor: theme.palette.background.bgw,
                 color:theme.palette.background.bg2,fontSize: 40  }} />
                          
                 
             </Link>
-
+           
             {lastPrescription && (
                 <Card sx={{ marginBottom: 2, borderRadius: '0 20px 20px 0' }}>
                     <CardContent>
@@ -183,6 +185,7 @@ function PrescLeftbar({ patientNIC }) {
             {pendingReportRequests.length > 0 && (
                 <Card sx={{ marginBottom: 2, borderRadius: '0 20px 20px 0'}}>
                     <CardContent>
+                    <div style={{ height: '20vh', overflowY: 'auto' }}>    
                         <Typography variant="body1" marginBottom={2}>Pending Report Requests</Typography>
                         <TableContainer component={Paper}>
                             <Table>
@@ -210,7 +213,7 @@ function PrescLeftbar({ patientNIC }) {
                                     ))}
                                 </TableBody>
                             </Table>
-                        </TableContainer>
+                        </TableContainer></div>
                     </CardContent>
                 </Card>
             )}
@@ -218,6 +221,7 @@ function PrescLeftbar({ patientNIC }) {
             {pendingRecordRequests.length > 0 && (
                 <Card sx={{ marginBottom: 2, borderRadius: '0 20px 20px 0' }}>
                     <CardContent>
+                    <div style={{ height: '30vh', overflowY: 'auto' }}>     
                         <Typography variant="body1" marginBottom={2}>Pending Record Requests</Typography>
                         <TableContainer component={Paper}>
                             <Table>
@@ -244,11 +248,11 @@ function PrescLeftbar({ patientNIC }) {
                                     ))}
                                 </TableBody>
                             </Table>
-                        </TableContainer>
+                        </TableContainer></div>
                     </CardContent>
                 </Card>
             )}
-
+           
             <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
                 <AppBar sx={{ position: 'relative' }}>
                     <Toolbar>
@@ -315,7 +319,9 @@ function PrescLeftbar({ patientNIC }) {
                     handleClose={() => setSelectedPrescriptionId(null)}
                 />
             )}
+
         </div>
+        
     );
 }
 

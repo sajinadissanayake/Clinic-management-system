@@ -107,12 +107,15 @@ app.put('/updatePatient/:id', (req, res) => {
         .catch(err => res.json(err));
 });
 
-app.delete('/deleteUser/:id', (req, res) => {
+// working code
+app.delete('/deletePatient/:id', (req, res) => {
     const id = req.params.id;
     patientModel.findByIdAndDelete({ _id: id })
         .then(result => res.json(result))
         .catch(err => res.json(err));
 });
+
+
 // Configure Multer for image upload
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {

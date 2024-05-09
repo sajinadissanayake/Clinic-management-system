@@ -57,31 +57,8 @@ const PharmacySidebar = () => {
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding></ListItem>
-            <ListItem disablePadding>
-              <ListItemButton component={Link} to="#">
-                <Grid container direction="column" alignItems="center" spacing={1}>
-                  <Grid item>
-                    <EqualizerIcon sx={{ fontSize: 40,color: 'background.bg2' }} />
-                  </Grid>
-                  <Grid item>
-                    <Typography variant="body1">Clinic Status</Typography>
-                  </Grid>
-                </Grid>
-              </ListItemButton>
-            </ListItem>
-         
-            <ListItem disablePadding>
-              <ListItemButton component={Link} to="#">
-                <Grid container direction="column" alignItems="center" spacing={1}>
-                  <Grid item>
-                    <HealthAndSafetyIcon sx={{ fontSize: 40,color: 'background.bg2' }} />
-                  </Grid>
-                  <Grid item>
-                    <Typography variant="body1">Clinic</Typography>
-                  </Grid>
-                </Grid>
-              </ListItemButton>
-            </ListItem>
+       
+       
           </List>
 
 

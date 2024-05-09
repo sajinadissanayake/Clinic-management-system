@@ -64,7 +64,7 @@ import Dclinic from '../pages/Prescription/Dclinic.jsx';
 import Bot from '../components/bot/Bot.jsx';
 import LabBs from '../pages/LabPages/LabBs.jsx';
 import AllUsers from '../pages/Admin/AllUsers.jsx';
-import LRPatients from '../pages/LabPages/LRPatients.jsx';
+
 
 
 
@@ -299,6 +299,12 @@ const router = createBrowserRouter([
     element: <Dclinic/>, 
   },
   {
+    path: "/allusers", 
+    element: <AllUsers/>, 
+  },
+ 
+
+  {
     path: "/bot", 
     element: <Bot/>, 
   },
@@ -306,13 +312,7 @@ const router = createBrowserRouter([
     path: "/allusers", 
     element: <AllUsers/>, 
   },
-  {
-    path: "/lrpatients", 
-    element: <LRPatients/>, 
-  },
-  
-  
-  
+ 
 
 
 

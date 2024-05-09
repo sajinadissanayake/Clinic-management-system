@@ -147,7 +147,7 @@ function PDash() {
           </CardContent>
         </Card>
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} sm={4}>
         <Card sx={{ borderRadius: 5 }}>
           <CardContent>
             <Typography variant="h5" component="div">
@@ -159,7 +159,7 @@ function PDash() {
       </Grid>
      
 
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} sm={4}>
         <Card sx={{ borderRadius: 5, textAlign: 'center' }}>
           <CardContent style={{ alignItems: 'center' }}>
             <Typography variant="h6" component="div">
@@ -172,18 +172,18 @@ function PDash() {
         </Card>
       </Grid>
 
-      <Grid item xs={12} sm={6}>
-  <Card sx={{ borderRadius: 5, textAlign: 'center' }}>
+      <Grid item xs={12} sm={4}>
+  <Card sx={{ borderRadius: 5, textAlign: 'center', minHeight:'100px' }}>
     <CardContent style={{ alignItems: 'center' }}>
       <Typography variant="h6" component="div">
         Estimated Clinic Time
       </Typography>
       {appointmentsCount.message ? ( // Check if appointmentsCount contains a message
-        <Typography variant="h6" color={'background.bg2'}>
+        <Typography variant="body1" color={'background.bg2'}>
           {appointmentsCount.message} {/* Display the message */}
         </Typography>
       ) : (
-        <Typography variant="h4" color={'background.bg2'}>
+        <Typography variant="h6" color={'background.bg2'}>
           {`${appointmentsCount.startTime} - ${appointmentsCount.endTime}`} {/* Display the estimated clinic time */}
         </Typography>
       )}

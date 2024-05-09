@@ -34,6 +34,14 @@ function MedicalMenu({ pageName, nic }) {
           </Box>
         </Card></Link>
 
+        <Link style={{ textDecoration: 'none' }} to={`/Nlipid/${nic}`}>
+        <Card className={`medical-card ${isRelatedPage("Lipid") ? "highlighted" : ""}`} sx={{marginTop:4, borderRadius:'10%'}}>
+          <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column",padding:2 }}>
+            <ScienceIcon sx={{ fontSize: "40px" }} />
+            <Typography variant="body1">Lipid</Typography>
+          </Box>
+        </Card></Link>
+
 
         
 

@@ -75,7 +75,7 @@ function PatientSelect() {
             </Stack>
 
             </Layout>
-            <Footer/>
+          
            
         </div>
     );
