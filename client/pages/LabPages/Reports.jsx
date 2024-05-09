@@ -15,6 +15,7 @@ import ReportsUpdateDialog from './ReportsUpdateDialog'; // Import the dialog co
 import { useParams } from 'react-router-dom';
 import Layout from '../../components/Layout';
 import Swal from 'sweetalert2'
+import SideReq from './SideReq';
 
 function Reports() {
     const [reports, setReports] = useState([]);
@@ -180,7 +181,7 @@ function Reports() {
                             </CardContent>
                      
                     </PageBody>
-                    <Announcements />
+                    <SideReq nic={nic} />
                 </Stack>
             </Layout>
             <MAddReportDialog open={addDialogOpen} onClose={handleCloseAddDialog} nic={nic} />

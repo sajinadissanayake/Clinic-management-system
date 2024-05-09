@@ -45,10 +45,13 @@ function LMselect() {
         const counts = {};
         for (const patient of patients) {
             try {
-                const response = await axios.get(`http://localhost:3001/getRecordRequests/${patient.nic}`);
-                // Filter the record requests with status "pending"
-                const pendingRecordRequests = response.data.filter(record => record.status === "pending");
-                counts[patient.nic] = pendingRecordRequests.length;
+                const response = await axios.get(`http://localhost:3001/getRecordRequests/${patient.nic}`, {
+                    params: {
+                        status: "pending",
+                        type: ["blood sugar", "lipid profile"] // Filter types by blood sugar and lipid profile
+                    }
+                });
+                counts[patient.nic] = response.data.length;
             } catch (error) {
                 console.error(`Error fetching record requests count for ${patient.nic}:`, error);
                 counts[patient.nic] = 0;
@@ -56,7 +59,7 @@ function LMselect() {
         }
         setRecordRequestsCounts(counts);
     };
-
+    
     return (
         <div>
            <Navbar pageTitle="Select Patient" />

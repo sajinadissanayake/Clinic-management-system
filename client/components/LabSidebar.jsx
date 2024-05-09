@@ -33,18 +33,7 @@ const LabSidebar = () => {
                 </Grid>
               </ListItemButton>
             </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton component={Link} to="/LabRequestsPage">
-                <Grid container direction="column" alignItems="center" spacing={1}>
-                  <Grid item>
-                    <ArticleIcon sx={{ fontSize: 40,color: 'background.bg2' }} />
-                  </Grid>
-                  <Grid item>
-                    <Typography variant="body1">Lab Requests</Typography>
-                  </Grid>
-                </Grid>
-              </ListItemButton>
-            </ListItem>
+          
             <ListItem disablePadding>
               <ListItemButton component={Link} to="/PReportSelect">
                 <Grid container direction="column" alignItems="center" spacing={1}>

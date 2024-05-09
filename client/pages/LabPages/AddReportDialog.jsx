@@ -32,7 +32,7 @@ function AddReportDialog({ open, onClose, selectedRecord }) {
             // Update the status of the report request to "added"
             await axios.put(`http://localhost:3001/updateReportRequest/${selectedRecord._id}`, { status: 'added' });
 
-            navigate('/reports');
+            navigate(`/reports/${selectedRecord.nic}`);
         } catch (error) {
             console.error('Error uploading report:', error);
         }

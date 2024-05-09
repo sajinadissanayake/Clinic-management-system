@@ -63,6 +63,8 @@ import Announcements from '../pages/Prescription/Annoucements.jsx';
 import Dclinic from '../pages/Prescription/Dclinic.jsx';
 import Bot from '../components/bot/Bot.jsx';
 import LabBs from '../pages/LabPages/LabBs.jsx';
+import AllUsers from '../pages/Admin/AllUsers.jsx';
+import LRPatients from '../pages/LabPages/LRPatients.jsx';
 
 
 
@@ -193,7 +195,7 @@ const router = createBrowserRouter([
     element: <LabDash />, 
   },
   {
-    path: "/labrequestspage", 
+    path: "/labrequestspage/:nic", 
     element: <LabRequestsPage />, 
   },
   {
@@ -300,6 +302,15 @@ const router = createBrowserRouter([
     path: "/bot", 
     element: <Bot/>, 
   },
+  {
+    path: "/allusers", 
+    element: <AllUsers/>, 
+  },
+  {
+    path: "/lrpatients", 
+    element: <LRPatients/>, 
+  },
+  
   
   
 

@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
-import PharmacySidebar from '../../components/PharmacySidebar';
-import { Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography, Card, TextField, Grid, CircularProgress } from '@mui/material';
-import axios from 'axios';
-import AddReportDialog from './AddReportDialog';
-import Announcements from '../../components/Announcements';
 import LabSidebar from '../../components/LabSidebar';
 import Layout from '../../components/Layout';
 import PageBody from '../../components/PageBody';
+import { Stack, Typography, Card, Grid, TextField, CircularProgress, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
+import axios from 'axios';
+import AddReportDialog from './AddReportDialog';
+import Announcements from '../../components/Announcements';
+import { useParams } from 'react-router-dom';
 
 function LabRequestsPage() {
+    const { nic } = useParams();
     const [records, setRecords] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [openDialog, setOpenDialog] = useState(false);
@@ -18,24 +19,25 @@ function LabRequestsPage() {
     const [recordType, setRecordType] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const fetchRecords = () => {
-        setLoading(true);
-        axios.get('http://localhost:3001/getLabRequests')
-            .then(response => {
-                setRecords(response.data);
+    useEffect(() => {
+        const fetchRecords = async () => {
+            setLoading(true);
+            try {
+                const response = await axios.get(`http://localhost:3001/getLabRequests`);
+                setRecords(response.data.filter(record => record.nic === nic));
                 setLoading(false);
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error('Error fetching records:', error);
                 setLoading(false);
-            });
-    };
-
-    useEffect(() => {
+            }
+        };
         fetchRecords();
-    }, []);
+    }, [nic]);
 
-    const filteredRecords = records.filter(record => record.status === 'pending' && record.nic.includes(searchQuery));
+    const filteredRecords = records.filter(record => 
+        record.status === 'pending' && 
+        (record.nic.includes(searchQuery) || record.type.includes(searchQuery))
+    );
     const totalRequests = filteredRecords.length;
 
     const handleOpenDialog = (record) => {
@@ -58,7 +60,7 @@ function LabRequestsPage() {
             <Navbar pageTitle="Reports" />
             <Layout>
                 <Stack direction="row" spacing={2} justifyContent="space-between">
-                    <LabSidebar/>
+                    <LabSidebar />
                     <PageBody>
                         <Stack direction="column" alignItems="center" spacing={2}>
                             <Typography variant="h4" sx={{ marginTop: 8 }}>Lab Requests</Typography>
@@ -66,7 +68,7 @@ function LabRequestsPage() {
                                 <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
                                     <Grid item xs={9}>
                                         <TextField
-                                            label="Search by NIC"
+                                            label="Search by Type"
                                             variant="outlined"
                                             value={searchQuery}
                                             onChange={handleSearchChange}
@@ -91,7 +93,7 @@ function LabRequestsPage() {
                                     <Table>
                                         <TableHead>
                                             <TableRow>
-                                                <TableCell>NIC</TableCell>
+                                              
                                                 <TableCell>Type</TableCell>
                                                 <TableCell>Status</TableCell>
                                                 <TableCell>Requested Date</TableCell>
@@ -101,7 +103,7 @@ function LabRequestsPage() {
                                         <TableBody>
                                             {filteredRecords.map(record => (
                                                 <TableRow key={record._id}>
-                                                    <TableCell>{record.nic}</TableCell>
+                                                   
                                                     <TableCell>{record.type}</TableCell>
                                                     <TableCell>{record.status}</TableCell>
                                                     <TableCell>{record.requestedDate ? new Date(record.requestedDate).toLocaleDateString() : 'Invalid Date'}</TableCell>
