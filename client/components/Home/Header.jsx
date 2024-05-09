@@ -15,7 +15,7 @@ import styled from '@emotion/styled';
 import { useTheme } from '@mui/material/styles';
 
 // Array of pages for the navigation menu
-const pages = ['Concept', 'Blog', 'Contactus'];
+const pages = ['Concept', 'Blog', 'Contact us'];
 
 // Array of settings options for the user menu
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];

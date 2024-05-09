@@ -430,7 +430,68 @@ app.get('/getAppointments', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
-  
+
+app.get('/getNumAppointments', async (req, res) => {
+try {
+    const { date } = req.query;
+    const dateString = (new Date(date)).toDateString();
+    const appointments = await appoModel.find({});
+    res.json(appointments.filter((appointment) => appointment.date.toDateString() == dateString).length);
+} catch (error) {
+    console.error('Error fetching appointments:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+}
+});
+
+app.post('/updateAppointmentDates', async (req, res) => {
+    try {
+        let { oldDate, newDate } = req.body;
+        oldDate = new Date(oldDate);
+        const dateString = oldDate.toDateString();
+        newDate = new Date(newDate);
+        let appointments = await appoModel.find({});
+        appointments = appointments.filter((appointment) => appointment.date.toDateString() == dateString)
+
+// Create a Nodemailer transporter
+const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'clinichealthylifestyle@gmail.com', // Your Gmail email address
+        pass: 'idhz qmax uihy qhjq' // Your Gmail password
+    }
+});
+
+        for (let i = 0; i < appointments.length; i++) {
+            let date = new Date(appointments[i].date.toString());
+            date.setFullYear(newDate.getFullYear(), newDate.getMonth(), newDate.getDate())
+            console.log(date);
+            await appoModel.updateOne({ nic: appointments[i].nic, date: appointments[i].date }, { $set: { date: date } })
+
+// Email content
+const mailOptions = {
+    from: 'clinichealthylifestyle@gmail.com', // Your Gmail email address
+    to: (await patientModel.findOne({ nic: appointments[i].nic })).email, // Patient's email address
+    subject: 'Appointment Confirmation',
+    text: `Dear Patient,\n\nYour clinic date ${oldDate} was changed for ${newDate}.\n\nBest regards,\n Healthy Lifestyle Clinic`
+};
+
+// Send email
+transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+        console.error('Error sending email:', error);
+    } else {
+        console.log('Email sent:', info.response);
+    }
+});
+// console.log("Send mail", mailOptions);;
+        }
+
+        // res.json();
+    } catch (error) {
+        console.error('Error updating appointment dates:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
   
 ////Prescriptions////////////////////////////////////////////////////////////////////////////////////
 

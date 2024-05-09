@@ -36,7 +36,7 @@ function Reportgen() {
     // HTML template for the PDF
     const htmlTemplate = `
     <style>
-    body {
+    .main-content {
       font-size: 0.875rem;
       font-family: Arial, sans-serif;
       color: #000;
@@ -101,7 +101,7 @@ function Reportgen() {
     }
   </style>
   
-    <div>
+    <div class="main-content">
     <h1 style="text-align: center;">Patient Report</h1>
 
      
