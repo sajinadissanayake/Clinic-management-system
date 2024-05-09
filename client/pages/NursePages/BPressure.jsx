@@ -152,7 +152,8 @@ function BPressure() {
                         </Container>
 
                     </PageBody>
-                    <MedicalMenu/>
+                    <MedicalMenu pageName="Blood Pressure" nic={nic} />
+
                 </Stack>
             </Layout>
 

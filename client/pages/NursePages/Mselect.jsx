@@ -92,14 +92,10 @@ function Mselect() {
                                                    Checkups 
                                                 </Button></Link>
                                                 <Link style={{ textDecoration: 'none' }} to={`/bstable/${patient.nic}`}> <Button variant='outlined' style={{ marginRight: '10px' }}>
-                                                    Blood Sugar
+                                                   Records
                                                 </Button></Link>
-                                                <Link style={{ textDecoration: 'none' }} to={`/bpressure/${patient.nic}`}><Button variant='outlined' style={{ marginRight: '10px' }}>
-                                                    blood pressure
-                                                </Button></Link>
-                                                <Link style={{ textDecoration: 'none' }} to={`/bstable/${patient.nic}`}><Button variant='outlined' style={{ marginRight: '10px' }}>
-                                                   Lipid Profile
-                                                </Button></Link>
+                                               
+                                               
                                         <IconButton onClick={() => handleOpenRequestsDialog(patient.nic)}>
                                             <Badge badgeContent={recordRequestsCounts[patient.nic]} color="primary">
                                                 <AddChartIcon />

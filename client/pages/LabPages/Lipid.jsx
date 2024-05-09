@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import LabSidebar from '../../components/LabSidebar';
 import PageBody from '../../components/PageBody';
-import MedicalMenu from '../NursePages/MedicalMenu';
+
 import Layout from '../../components/Layout';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import maleAvatar from '../images/male.png';
@@ -13,6 +13,7 @@ import femaleAvatar from '../images/female.png';
 
 import Swal from 'sweetalert2';
 import DeleteIcon from '@mui/icons-material/Delete';
+import LMedicalMenu from './LMedicalMenu';
 
 function Lipid() {
     const { nic } = useParams();
@@ -168,7 +169,7 @@ function Lipid() {
                             </TableBody>
                         </Table>
                     </PageBody>
-                    <MedicalMenu />
+                    <LMedicalMenu pageName="Lipid" nic={nic} />
                 </Stack>
             </Layout>
 
@@ -176,16 +177,7 @@ function Lipid() {
                 <DialogTitle>Add New Lipid Profile Data</DialogTitle>
                 <DialogContent>
                 <form>
-        <TextField
-          id="nic"
-          label="NIC"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          value={nic}
-          onChange={(e) => setNic(e.target.value)}
-          
-        />
+       
         <TextField
           id="total"
           label="Total"

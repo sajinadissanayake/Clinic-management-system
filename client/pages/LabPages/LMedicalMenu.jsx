@@ -6,7 +6,7 @@ import '../NursePages/Nursecss.css/MedicalMenu.css'; // Import CSS file for styl
 import { Link } from 'react-router-dom';
 import ScienceIcon from '@mui/icons-material/Science';
 
-function MedicalMenu({ pageName, nic }) {
+function LMedicalMenu({ pageName, nic }) {
   // Function to determine if a card should be highlighted based on page name
   const isRelatedPage = (currentPage) => {
     return currentPage === pageName;
@@ -18,7 +18,7 @@ function MedicalMenu({ pageName, nic }) {
         <h4>Menu</h4>
 
         
-        <Link style={{ textDecoration: 'none' }} to={`/bstable/${nic}`}>
+        <Link style={{ textDecoration: 'none' }} to={`/LabBs/${nic}`}>
         <Card className={`medical-card ${isRelatedPage("Blood Sugar") ? "highlighted" : ""}`} sx={{marginTop:4, borderRadius:'10%'}}>
           <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column", mt: 2,padding:2 }}>
             <WaterDropIcon sx={{ fontSize: "40px" }} /> {/* Blood sugar icon */}
@@ -26,11 +26,11 @@ function MedicalMenu({ pageName, nic }) {
           </Box>
         </Card></Link>
 
-        <Link style={{ textDecoration: 'none' }} to={`/bpressure/${nic}`}>
-        <Card className={`medical-card ${isRelatedPage("Blood Pressure") ? "highlighted" : ""}`} sx={{marginTop:4, borderRadius:'10%'}}>
+        <Link style={{ textDecoration: 'none' }} to={`/lipid/${nic}`}>
+        <Card className={`medical-card ${isRelatedPage("Lipid") ? "highlighted" : ""}`} sx={{marginTop:4, borderRadius:'10%'}}>
           <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column",padding:2 }}>
-            <MonitorHeartIcon sx={{ fontSize: "40px" }} />
-            <Typography variant="body1">blood pressure</Typography>
+            <ScienceIcon sx={{ fontSize: "40px" }} />
+            <Typography variant="body1">Lipid</Typography>
           </Box>
         </Card></Link>
 
@@ -42,4 +42,4 @@ function MedicalMenu({ pageName, nic }) {
   );
 }
 
-export default MedicalMenu;
+export default LMedicalMenu;

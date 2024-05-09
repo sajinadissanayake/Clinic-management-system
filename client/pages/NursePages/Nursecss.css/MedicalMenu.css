@@ -1,0 +1,11 @@
+.medical-card {
+    transition: transform 0.3s ease;
+  }
+  
+  .medical-card:hover {
+    transform: scale(1.05);
+  }
+  .medical-card.highlighted {
+    background-color: lightblue; /* Change the background color to any desired color */
+  }
+    

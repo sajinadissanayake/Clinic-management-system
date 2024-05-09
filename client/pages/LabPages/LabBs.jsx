@@ -4,20 +4,24 @@ import { useParams } from 'react-router-dom';
 import Config from '../../config/config';
 import Navbar from '../../components/Navbar';
 import { Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, RadioGroup, Radio, FormControlLabel, Button, Toolbar, Typography, IconButton, Card, CardContent, Avatar } from '@mui/material';
-import NurseLeftbar from './NurseLeftbar';
+
 import PageBody from '../../components/PageBody';
 import Announcements from '../../components/Announcements';
 import Layout from '../../components/Layout';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import BsAddDialog from './BsAddDialog';
+
 import Swal from 'sweetalert2'; 
 import maleAvatar from '../images/male.png';
 import femaleAvatar from '../images/female.png';
 import DeleteIcon from '@mui/icons-material/Delete';
-import MedicalMenu from './MedicalMenu';
+
+import LabSidebar from '../../components/LabSidebar';
+import BsAddDialog from '../NursePages/BsAddDialog';
+import LMedicalMenu from './LMedicalMenu';
 
 
-function BsTable() {
+
+function LabBs() {
     const { nic } = useParams();
     const [bloodSugarData, setBloodSugarData] = useState([]);
     const [filterType, setFilterType] = useState('all');
@@ -80,7 +84,7 @@ function BsTable() {
             <Navbar pageTitle="Blood Sugar " />
             <Layout>
                 <Stack direction="row" spacing={2} justifyContent="space-between">
-                    <NurseLeftbar />
+                  <LabSidebar/>
                     <PageBody>
                         {patient && ( // Check if patient is defined
                             <Card sx={{ borderRadius: 5, backgroundColor: 'background.bg1' }}>
@@ -135,7 +139,7 @@ function BsTable() {
                             </TableContainer>
                         </div>
                     </PageBody>
-                    <MedicalMenu pageName="Blood Sugar" nic={nic} />
+                    <LMedicalMenu pageName="Blood Sugar" nic={nic} />
 
                     <BsAddDialog open={openDialog} onClose={() => setOpenDialog(false)} nic={nic} />
                 </Stack>
@@ -144,4 +148,4 @@ function BsTable() {
     );
 }
 
-export default BsTable;
+export default LabBs;

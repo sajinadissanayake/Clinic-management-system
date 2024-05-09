@@ -90,7 +90,7 @@ function LMselect() {
                                     <TableCell>{patient.name}</TableCell>
                                     <TableCell>
                                   
-                                    <Link style={{ textDecoration: 'none' }} to={`/bstable/${patient.nic}`}> <Button variant='outlined' style={{ marginRight: '10px' }}>
+                                    <Link style={{ textDecoration: 'none' }} to={`/Labbs/${patient.nic}`}> <Button variant='outlined' style={{ marginRight: '10px' }}>
                                                   Blood Sugar
                                                 </Button></Link>
 

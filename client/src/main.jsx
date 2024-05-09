@@ -62,6 +62,7 @@ import AnnouncementAdd from '../pages/Prescription/Annoucementadd.jsx';
 import Announcements from '../pages/Prescription/Annoucements.jsx';
 import Dclinic from '../pages/Prescription/Dclinic.jsx';
 import Bot from '../components/bot/Bot.jsx';
+import LabBs from '../pages/LabPages/LabBs.jsx';
 
 
 
@@ -270,6 +271,15 @@ const router = createBrowserRouter([
     path: "/patientbp", 
     element: <PatientBp/>, 
   },
+  {
+    path: "/bot", 
+    element: <Bot/>, 
+  },
+  {
+    path: "/Labbs/:nic", 
+    element: <LabBs/>, 
+  },
+  
   {
     path: "/patientLp", 
     element: <PatientLp/>, 
