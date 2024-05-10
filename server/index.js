@@ -432,6 +432,12 @@ app.get('/getAppointments', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
+  app.get('/getAppointments/:nic', (req, res) => {
+    const nic = req.params.nic; 
+    appoModel.find({ nic: nic }) 
+        .then(data => res.json(data))
+        .catch(err => res.status(500).json({ error: err.message }));
+});
 
 app.get('/getNumAppointments', async (req, res) => {
 try {

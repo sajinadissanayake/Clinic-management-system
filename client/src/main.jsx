@@ -66,6 +66,7 @@ import LabBs from '../pages/LabPages/LabBs.jsx';
 import AllUsers from '../pages/Admin/AllUsers.jsx';
 import Blog from '../pages/Admin/Blog.jsx';
 import Feedbacks from '../pages/Admin/Feedbacks.jsx';
+import ClinicHistory from '../pages/Patient/ClinicHistory.jsx';
 
 
 
@@ -322,6 +323,11 @@ const router = createBrowserRouter([
     path: "/feedbacks", 
     element: <Feedbacks/>, 
   },
+  {
+    path: "/Clinichistory", 
+    element: <ClinicHistory/>, 
+  },
+ 
  
  
 
