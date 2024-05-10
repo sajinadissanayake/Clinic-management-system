@@ -12,8 +12,10 @@ const BSModel = require('./models/bloodsugar');
 const blogModel = require('./models/blog');
 const appoModel = require('./models/appointments');
 const prescModel = require('./models/presciptions');
-const ReportRequestModel = require('./models/ReportRequests')
-const RecordRequestModel = require( './models/RecordRequests' )
+const ReportRequestModel = require('./models/ReportRequests');
+const RecordRequestModel = require( './models/RecordRequests' );
+const feedModel = require( './models/Feed' );
+
 
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
@@ -805,7 +807,13 @@ app.get('/getAnnouncement', (req, res) => {
       .catch(err => res.status(500).json({ error: err.message }));
   });
   
-   /////////////////////////////////////////////////////////
+   /////////////////////////////////////////////////////////feedbacks
+
+app.post("/Addfeed", (req, res) =>{
+    feedModel.create(req.body)
+    .then(records => res.json(records))
+    .catch(err => res.json(err))
+});
 
 
 

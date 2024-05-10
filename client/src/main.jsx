@@ -65,6 +65,7 @@ import Bot from '../components/bot/Bot.jsx';
 import LabBs from '../pages/LabPages/LabBs.jsx';
 import AllUsers from '../pages/Admin/AllUsers.jsx';
 import Blog from '../pages/Admin/Blog.jsx';
+import Feedbacks from '../pages/Admin/Feedbacks.jsx';
 
 
 
@@ -317,6 +318,11 @@ const router = createBrowserRouter([
     path: "/blog", 
     element: <Blog/>, 
   },
+  {
+    path: "/feedbacks", 
+    element: <Feedbacks/>, 
+  },
+ 
  
 
 

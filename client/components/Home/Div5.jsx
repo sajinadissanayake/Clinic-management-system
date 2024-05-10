@@ -5,6 +5,8 @@ import nutri from  './images/nutri.jpeg';
 import Diet from './images/diet.jpeg';
 import Smoke from  './images/smoke.jpg';
 import Mental from './images/mental.jpg';
+import axios from 'axios';
+import Swal from 'sweetalert2'; // Import SweetAlert library
 
 function Div4() {
     const whiteBoxStyle = {
@@ -12,7 +14,7 @@ function Div4() {
         backdropFilter: 'blur(10px)', // Blur effect
         height: '1020px',
         padding: '20px',
-        zIndex: 2, // Ensure the white box appears above the overlay
+        zIndex: 2, 
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center', // Center content vertically
@@ -30,7 +32,7 @@ function Div4() {
         marginRight: '20px', // Adjust spacing between form and contact details
         backgroundColor: 'rgba(255, 255, 255, 0.2)', // Transparent white background
         color: 'white', // White font color
-        borderRadius: '15px', // Adding border radius
+        borderRadius: '15px', 
     };
     
 
@@ -48,15 +50,33 @@ function Div4() {
  
     
    
+   
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3001/Addfeed", { name,email,comment})
+        axios.post("http://localhost:3001/Addfeed", { name, email, comment })
             .then(result => {
                 console.log(result);
-                
+                // Display SweetAlert
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Your Feedback submitted  Successfully',
+                    showConfirmButton: true,
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    // Refresh the page
+                    window.location.reload();
+                });
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log(err);
+                // Display error SweetAlert if necessary
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!'
+                });
+            });
     };
 
     return (
