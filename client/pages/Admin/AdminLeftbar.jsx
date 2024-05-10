@@ -14,10 +14,11 @@ import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PersonIcon from '@mui/icons-material/Person';
 import PeopleIcon from '@mui/icons-material/People';
+import FeedbackIcon from '@mui/icons-material/Feedback';
 
 const AdminLeftbar = () => {
   return (
-    <Box display="flex" flexDirection="column" justifyContent="flex-start" alignItems="flex-start" height="100%">
+    <Box display="flex" flexDirection="column" justifyContent="flex-start" alignItems="flex-start" >
       <Card sx={{ marginTop:5,borderTopRightRadius:30, borderBottomRightRadius: 30, backgroundColor: "background.bgw", flexGrow: 1, width: '100%' }}>
         <List>
           <ListItem disablePadding>
@@ -58,7 +59,7 @@ const AdminLeftbar = () => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="#">
+            <ListItemButton component={Link} to="/blog">
               <Grid container direction="column" alignItems="center" spacing={1}>
                 <Grid item>
                   <ArticleIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
@@ -74,7 +75,7 @@ const AdminLeftbar = () => {
             <ListItemButton component={Link} to="#">
               <Grid container direction="column" alignItems="center" spacing={1}>
                 <Grid item>
-                  <PeopleIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
+                  <FeedbackIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
                 </Grid>
                 <Grid item>
                   <Typography variant="body1">Patients</Typography>

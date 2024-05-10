@@ -10,6 +10,8 @@ import { Stack } from '@mui/material';
 import Sidebar from '../components/Sidebar';
 import PageBody from '../components/PageBody';
 import NurseLeftbar from './NursePages/NurseLeftbar';
+import Layout from '../components/Layout';
+import Announcements from '../components/Announcements';
 
 function MEform() {
     const { nic } = useParams();
@@ -41,6 +43,7 @@ function MEform() {
     return (
         <div>
             <Navbar />
+            <Layout>
             <Stack direction="row" spacing={2} justifyContent="space-between">
                 <NurseLeftbar />
                 <PageBody>
@@ -128,8 +131,8 @@ function MEform() {
                         </div>
                     </form>
                 </PageBody>
-                <Rightbar />
-            </Stack>
+                <Announcements/>
+            </Stack></Layout>
         </div>
     );
 }

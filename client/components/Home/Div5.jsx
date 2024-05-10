@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Typography, Card, CardContent, Button, Grid, TextField } from '@mui/material';
 import { Facebook, Twitter, Instagram, LinkedIn } from '@mui/icons-material'; // Import social media icons
 import nutri from  './images/nutri.jpeg';
@@ -41,12 +41,32 @@ function Div4() {
         borderRadius: '15px',
     };
 
+    
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [comment,setComment] = useState('');
+ 
+    
+   
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post("http://localhost:3001/Addfeed", { name,email,comment})
+            .then(result => {
+                console.log(result);
+                
+            })
+            .catch(err => console.log(err));
+    };
+
     return (
         <div style={whiteBoxStyle}>
             <Typography variant='h2' align='center'>Contact Us</Typography>
             <div style={cardContainerStyle}>
                 {/* Feedback Form */}
+                
                 <Card style={contactFormStyle}>
+                <form onSubmit={handleSubmit}>
                     <CardContent>
                         <Typography variant="h5" component="div" gutterBottom>
                             Feedback Form
@@ -56,25 +76,31 @@ function Div4() {
                             variant="outlined"
                             fullWidth
                             margin="normal"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                         />
                         <TextField
                             label="Email"
                             variant="outlined"
                             fullWidth
                             margin="normal"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                         <TextField
-                            label="Message"
+                            label="Comment"
                             variant="outlined"
                             fullWidth
                             multiline
                             rows={4}
                             margin="normal"
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
                         />
-                        <Button variant="contained" color="secondary" fullWidth>
+                        <Button type="submit" variant="contained" color="secondary" fullWidth>
                             Send
                         </Button>
-                    </CardContent>
+                    </CardContent></form>
                 </Card>
 
                 {/* Contact Details */}
@@ -84,13 +110,13 @@ function Div4() {
                             Contact Details
                         </Typography><br/>
                         <Typography variant="body1" gutterBottom>
-                            Phone: +123456789
+                            Phone: 011-2211199
                         </Typography><br/>
                         <Typography variant="body1" gutterBottom>
-                            Email: example@example.com
+                            Email: clinichealthylifestyle@gmail.com
                         </Typography><br/>
                         <Typography variant="body1" gutterBottom>
-                            Address: 123 Example St, City, Country
+                            Address: Main Street, Base hospital,Colombo 
                         </Typography><br/><br/><br/><br/>
                         {/* Social Media Icons */}
                         <Grid container spacing={2} justifyContent="center">

@@ -136,9 +136,9 @@ function Medicals() {
                         </TableRow>
                         <TableRow hover>
                           <TableCell>
-                            <Button variant='outlined' style={{ marginRight: '10px' }}>
-                              <Link style={{ textDecoration: 'none' }} to={`/medicalupdate/${exam._id}`}>Update</Link>
-                            </Button>
+                          <Link style={{ textDecoration: 'none' }} to={`/medicalupdate/${exam._id}`}><Button variant='outlined' style={{ marginRight: '10px' }}>
+                             Update
+                            </Button></Link>
                           </TableCell>
                           <TableCell>
                             <Button variant='outlined' color='error' onClick={() => handleDelete(exam._id)}>
