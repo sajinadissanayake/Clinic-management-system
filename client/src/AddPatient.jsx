@@ -48,6 +48,7 @@ function AddPatient() {
     const [sh, setSH] = useState('');
     const [image, setImage] = useState(null);
     const navigate = useNavigate();
+    const [nicError, setNicError] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -92,18 +93,29 @@ function AddPatient() {
         formData.append('allergies', allergies);
         formData.append('sh', sh);
         formData.append('blood', blood);
+        
     
         axios.post("http://localhost:3001/AddPatient", formData)
-            .then(response => {
-                console.log(response);
+        .then(response => {
+            console.log(response);
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Patient added successfully',
+            });
+            navigate('/patientslist');
+        })
+        .catch(error => {
+            if (error.response && error.response.data.error === 'Patient with this NIC already exists') {
+                // If NIC already exists in the database, set the NIC error state
+                setNicError('Patient with this NIC already exists');
+                // Display error message using SweetAlert
                 Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: 'Patient added successfully',
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Patient with this NIC already exists',
                 });
-                navigate('/patientslist');
-            })
-            .catch(error => {
+            } else {
                 console.log(error);
                 // Display error message using SweetAlerts if an error occurs during submission
                 Swal.fire({
@@ -111,10 +123,9 @@ function AddPatient() {
                     title: 'Oops...',
                     text: 'Something went wrong. Please try again later!',
                 });
-            });
-    };
-    
-    
+            }
+        });
+};
 
     return (
         <div>

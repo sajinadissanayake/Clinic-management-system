@@ -137,34 +137,44 @@ app.post("/AddPatient", upload.single('image'), (req, res) => {
     const { name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies, blood, sh } = req.body;
     const imagePath = req.file.path; // Path to the uploaded image
 
-    patientModel.create({ name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies, blood, sh, imagePath })
-        .then(patient => {
-            console.log("Patient created:", patient);
-            res.json(patient);
+    // Check if NIC already exists
+    patientModel.findOne({ nic: nic })
+        .then(existingPatient => {
+            if (existingPatient) {
+                // If patient with the same NIC exists, return an error
+                return res.status(400).json({ error: 'Patient with this NIC already exists' });
+            } else {
+                // Create new patient
+                return patientModel.create({ name, nic, email, age, dob, gender, address, maritial, pnumber, moh, phm, phi, gnd, dsd, neighbour, education, physical, tobacco, tobaccochew, alcohol, other, snacks, diseases, allergies, blood, sh, imagePath })
+                    .then(patient => {
+                        console.log("Patient created:", patient);
+                        res.json(patient);
 
-            // Sending email to the registered patient
-            const transporter = nodemailer.createTransport({
-                service: 'Gmail',
-                auth: {
-                    user: 'clinichealthylifestyle@gmail.com',
-                    pass: 'idhz qmax uihy qhjq'
-                }
-            });
+                        // Sending email to the registered patient
+                        const transporter = nodemailer.createTransport({
+                            service: 'Gmail',
+                            auth: {
+                                user: 'clinichealthylifestyle@gmail.com',
+                                pass: 'idhz qmax uihy qhjq'
+                            }
+                        });
 
-            const mailOptions = {
-                from: 'clinichealthylifestyle@gmail.com',
-                to: email, // Patient's email
-                subject: 'Thank you for registering',
-                text: `Dear ${name},\n\nThank you for registering with us.\n\nBest regards,\nYour Healthcare Team`
-            };
+                        const mailOptions = {
+                            from: 'clinichealthylifestyle@gmail.com',
+                            to: email, // Patient's email
+                            subject: 'Thank you for registering',
+                            text: `Dear ${name},\n\nThank you for registering with us.\n\nBest regards,\nYour Healthcare Team`
+                        };
 
-            transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                    console.error('Error sending email:', error);
-                } else {
-                    console.log('Email sent:', info.response);
-                }
-            });
+                        transporter.sendMail(mailOptions, (error, info) => {
+                            if (error) {
+                                console.error('Error sending email:', error);
+                            } else {
+                                console.log('Email sent:', info.response);
+                            }
+                        });
+                    });
+            }
         })
         .catch(err => {
             console.error("Error creating patient:", err);
