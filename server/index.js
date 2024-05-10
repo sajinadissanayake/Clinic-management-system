@@ -815,6 +815,11 @@ app.post("/Addfeed", (req, res) =>{
     .catch(err => res.json(err))
 });
 
+app.get('/getfeed', (req, res) => {
+    feedModel.find({})
+      .then(records => res.json(records))
+      .catch(err => res.status(500).json({ error: err.message }));
+  });
 
 
 

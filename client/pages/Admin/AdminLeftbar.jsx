@@ -72,13 +72,13 @@ const AdminLeftbar = () => {
           </ListItem>
           
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="#">
+            <ListItemButton component={Link} to="/feedbacks">
               <Grid container direction="column" alignItems="center" spacing={1}>
                 <Grid item>
                   <FeedbackIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
                 </Grid>
                 <Grid item>
-                  <Typography variant="body1">Patients</Typography>
+                  <Typography variant="body1">Feedbacks</Typography>
                 </Grid>
               </Grid>
             </ListItemButton>
