@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import staff from './images/staff.png';
+import home from './images/homep.jpg'
 import Button from '@mui/material/Button';
 import Header from './Header'; // Importing the Header component
 import Div2 from './Div2';
@@ -31,7 +32,7 @@ function Div1() {
   };
 
   const backgroundStyle = {
-    backgroundImage: `url(${staff})`,
+    backgroundImage: `url(${home})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     width: '100%',
@@ -39,14 +40,16 @@ function Div1() {
     position: 'fixed', // Keep the background image fixed
     zIndex: -1, // Ensure the background remains behind other content
   };
-
   const overlayStyle = {
     position: 'absolute',
     top: 0,
     left: 0,
     width: '100%',
     height: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adjust opacity (last value) to darken/lighten the image
+    backgroundColor: 'rgba(255, 255, 255, 0.05)', // Further reduced opacity white color
+    backdropFilter: 'blur(10px)', // Blur effect
+    borderRadius: '1px', // Optional: Add rounded corners for a nicer look
+    boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)', // Optional: Add shadow for depth
   };
 
   const textStyle = {
@@ -59,16 +62,29 @@ function Div1() {
     zIndex: 1,
     transition: 'opacity 1s ease', // Adding transition effect to opacity
     opacity: fadeIn ? 1 : 0, // Setting opacity based on fadeIn state
+    fontSize: '20px', // Adjust the font size here (for example, 3em)
   };
+
 
   const buttonStyle = {
-    marginTop: '20px', // Adjust spacing between text and button
-    fontSize: '20px', // Increase button size
-    borderRadius: '20px', // Increase border radius (rounded corners)
-    width: '200px', // Increase button width
+    marginTop: '20px', 
+    fontSize: '18px', 
+    borderRadius: '15px',
+    borderWidth: '2px', 
+    borderStyle: 'solid', 
+    borderColor: 'white', 
+    color: 'white',
+    width: '200px', 
+    transition: 'transform 0.3s', 
   };
 
-  
+ 
+  buttonStyle[':hover'] = {
+    transform: 'scale(1.1)', 
+  };
+
+
+
 
   return (
     <div>
@@ -77,18 +93,36 @@ function Div1() {
         <div style={backgroundStyle}></div> {/* Background image */}
         <div style={overlayStyle}></div>
         <div style={textStyle}>
-          <h1>"A healthy outside starts from the inside."</h1>
-          <p>Be Healthy And Active..........</p>
-          <Button variant="outlined" color="secondary" component={Link} to="/login" style={buttonStyle}>Login</Button>
+          <h1>"A Healthy Outside Starts From The Inside."</h1>
+          <p>Be Healthy And Active</p>
+          <Button
+  variant="outlined"
+  component={Link}
+  to="/login"
+  sx={{
+    ...buttonStyle,
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.3)', // New color on hover
+      borderColor: 'rgba(255, 255, 255, 0.3)', // New border color on hover
+    },
+  }}
+>
+  Login
+</Button>
+
+
         </div>
-       
+
       </div>
-      <Div2/>
-      <Div3/>
-      <Div4/>
-      <Div5/>
-      <Footer/>
-     
+      {/* concept */}
+      <Div2 />
+      <Div3 />
+      {/* blog */}
+      <Div4 />
+      {/* contact us  */}
+      <Div5 />
+      <Footer />
+
     </div>
   );
 }

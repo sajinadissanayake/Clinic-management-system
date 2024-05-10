@@ -30,12 +30,15 @@ function Div4() {
         marginRight: '20px', // Adjust spacing between form and contact details
         backgroundColor: 'rgba(255, 255, 255, 0.2)', // Transparent white background
         color: 'white', // White font color
+        borderRadius: '15px', // Adding border radius
     };
+    
 
     const contactDetailsStyle = {
         width: '40%',
         backgroundColor: 'rgba(255, 255, 255, 0.2)', // Transparent white background
         color: 'white', // White font color
+        borderRadius: '15px',
     };
 
     return (

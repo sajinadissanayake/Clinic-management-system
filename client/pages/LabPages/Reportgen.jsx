@@ -14,6 +14,7 @@ function Reportgen() {
   const [type, setType] = useState('');
   const [summary, setSummary] = useState('');
   const [testResults, setTestResults] = useState([]);
+  
 
   // Function to handle form submission
   const handleSubmit = async (e) => {
@@ -151,7 +152,7 @@ function Reportgen() {
     </div>
     <div class="signature">
       <p class="signature-label">Lab Technician:</p>
-      <input type="text" placeholder="Lab Technician's Signature" />
+      <input type="text" placeholder="Lab Technician's id:" />
     </div>
   </div>
 </div>
