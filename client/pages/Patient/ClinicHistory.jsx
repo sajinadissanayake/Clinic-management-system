@@ -55,7 +55,7 @@ function ClinicHistory() {
                                     </Stack>
                                 </CardContent>
                             </Card>
-                            <div style={{ maxHeight: '800px', overflowY: 'auto', marginTop: '2%' }}>
+                            <div style={{ maxHeight: '500px', overflowY: 'auto', marginTop: '2%' }}>
                                 <TableContainer component={Paper}>
                                     <Table>
                                         <TableHead>
@@ -65,10 +65,10 @@ function ClinicHistory() {
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {bloodPressureData.map((data) => (
+                                            {bloodPressureData.map((data, index) => (
                                                 <TableRow key={data._id}>
                                                     <TableCell>{data.title}</TableCell>
-                                                    <TableCell>{formatDate(data.date)}</TableCell>
+                                                    <TableCell style={{ color: index === 0 ? 'red' : 'inherit' }}>{formatDate(data.date)}</TableCell>
                                                 </TableRow>
                                             ))}
                                         </TableBody>

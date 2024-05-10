@@ -67,6 +67,8 @@ import AllUsers from '../pages/Admin/AllUsers.jsx';
 import Blog from '../pages/Admin/Blog.jsx';
 import Feedbacks from '../pages/Admin/Feedbacks.jsx';
 import ClinicHistory from '../pages/Patient/ClinicHistory.jsx';
+import PRecReq from '../pages/Patient/PRecReq.jsx';
+import PRepReq from '../pages/Patient/PRepReq.jsx';
 
 
 
@@ -327,6 +329,15 @@ const router = createBrowserRouter([
     path: "/Clinichistory", 
     element: <ClinicHistory/>, 
   },
+  {
+    path: "/precreq", 
+    element: <PRecReq/>, 
+  },
+  {
+    path: "/prepreq", 
+    element: <PRepReq/>, 
+  },
+ 
  
  
  

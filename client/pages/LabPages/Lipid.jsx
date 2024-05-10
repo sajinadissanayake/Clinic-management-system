@@ -152,10 +152,10 @@ function Lipid() {
                             <TableBody>
                                 {lpData && lpData.map(lp => (
                                     <TableRow key={lp._id}>
-                                        <TableCell>{lp.ldl}</TableCell>
-                                        <TableCell>{lp.hdl}</TableCell>
-                                        <TableCell>{lp.total}</TableCell>
-                                        <TableCell>{lp.tcd}</TableCell>
+                                        <TableCell>{lp.ldl}mg/dL</TableCell>
+                                        <TableCell>{lp.hdl}mg/dL</TableCell>
+                                        <TableCell>{lp.total}mg/dL</TableCell>
+                                        <TableCell>{lp.tcd}mg/dL</TableCell>
                                         <TableCell>{new Date(lp.Recorddate).toLocaleDateString()}</TableCell>
                                         <TableCell>
                                                 <IconButton color='error' onClick={() => deleteRecord(lp._id)}>

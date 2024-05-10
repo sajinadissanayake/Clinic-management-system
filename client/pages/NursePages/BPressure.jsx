@@ -132,8 +132,8 @@ function BPressure() {
                                         <TableBody>
                                             {bloodPressureData.map((data) => (
                                                 <TableRow key={data._id}>
-                                                    <TableCell>{data.systolic}</TableCell>
-                                                    <TableCell>{data.diastolic}</TableCell>
+                                                    <TableCell>{data.systolic}mmHg</TableCell>
+                                                    <TableCell>{data.diastolic}mmHg</TableCell>
                                                     <TableCell>{formatDate(data.Recorddate)}</TableCell>
                                                     <TableCell>
                                                         <IconButton

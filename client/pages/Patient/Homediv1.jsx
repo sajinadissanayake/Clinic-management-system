@@ -66,7 +66,7 @@ function Homediv1() {
             {/* Display fasting blood sugar record */}
             {bloodSugarLevels.fasting && (
               <div><Typography variant="body1" color="text.primary">
-              Fasting - {bloodSugarLevels.fasting.rbs}
+              Fasting - {bloodSugarLevels.fasting.rbs} mmol/L
             </Typography>
            
             </div>
@@ -80,7 +80,7 @@ function Homediv1() {
             {bloodSugarLevels.random && (
                <div>
                <Typography variant="body1 " color="text.primary">
-                 Random  -{bloodSugarLevels.random.rbs}
+                 Random  -{bloodSugarLevels.random.rbs} mmol/L
                </Typography>
               
 
@@ -89,7 +89,7 @@ function Homediv1() {
                     </CardContent>
                 </Card>
             </Grid>
-            <Grid item xs={6} md={4}>
+            <Grid item xs={6} md={6}>
            
                 <Card style={{ borderRadius: 10, marginTop: 10 }}>
                 {latestbp && (   <CardContent>
@@ -97,25 +97,25 @@ function Homediv1() {
             <Typography gutterBottom variant="h6" component="div">
               Blood Pressure
             </Typography>
-            <Typography gutterBottom variant="body1" component="div">
-              Systolic- Diastolic
+            
+            
+            
+            <Typography gutterBottom variant="h6" component="div">
+            {latestbp.systolic}-{latestbp.diastolic} mmHg
             </Typography>
-            
-            {latestbp.systolic}-{latestbp.diastolic}
-            
 
        
                     </CardContent> )}
                 </Card>
             </Grid>
-            <Grid item xs={6} md={4}>
+            <Grid item xs={6} md={6}>
                 <Card style={{ borderRadius: 10, marginTop: 10 }}>
                     <CardContent> 
                     <Typography gutterBottom variant="h6" component="div">
               Lipid Profile
             </Typography>
             <Typography gutterBottom variant="h6" component="div">
-              ------
+              44 mg/dL
             </Typography>
 
 
