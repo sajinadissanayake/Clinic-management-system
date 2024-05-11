@@ -70,7 +70,8 @@ import ClinicHistory from '../pages/Patient/ClinicHistory.jsx';
 import PRecReq from '../pages/Patient/PRecReq.jsx';
 import PRepReq from '../pages/Patient/PRepReq.jsx';
 import NLipid from '../pages/NursePages/NLipid.jsx';
-import AssistantBot from './AssistantBot.jsx';
+import Staff from '../pages/Admin/Staff.jsx';
+
 
 
 
@@ -344,9 +345,11 @@ const router = createBrowserRouter([
     element: <NLipid/>, 
   },
   {
-    path: "assistant", 
-    element: <AssistantBot/>, 
+    path: "/staff", 
+    element: <Staff/>, 
   },
+ 
+ 
  
  
  

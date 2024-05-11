@@ -7,10 +7,23 @@ import AdminLeftbar from './AdminLeftbar';
 import PageBody from '../../components/PageBody';
 import Announcements from '../../components/Announcements';
 import Layout from '../../components/Layout';
+import Rightbar from '../../components/Rightbar';
 
 
 
 function AllUsers() {
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/getStaff')
+        .then(result => {
+            setUsers(result.data);
+            setLoading(false); // Set loading to false when data is fetched
+        })
+        .catch(err => {
+            setError(err); // Set error state if request fails
+            setLoading(false); // Set loading to false on error
+        });
+}, []);
   
 
 
@@ -29,7 +42,7 @@ function AllUsers() {
 
        
         </PageBody>
-    <Announcements/>
+    <Rightbar/>
       </Stack></Layout>
     </div>
   );

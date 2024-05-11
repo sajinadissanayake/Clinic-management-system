@@ -15,6 +15,8 @@ const prescModel = require('./models/presciptions');
 const ReportRequestModel = require('./models/ReportRequests');
 const RecordRequestModel = require( './models/RecordRequests' );
 const feedModel = require( './models/Feed' );
+const StaffModel = require( './models/staff' );
+
 
 
 const userRoutes = require("./routes/users");
@@ -38,7 +40,7 @@ app.get('/', (req, res) => {
         .catch(err => res.json(err));
 });
 
-
+app.use('/patientImages', express.static('patientImages'))
 
 app.get('/getPatient/:id', (req, res) => {
     const id = req.params.id;
@@ -381,11 +383,11 @@ app.post("/Addappo", async (req, res) => {
 
         if (existingAppointments.length === 0) {
             // If no appointments exist for the given date, set the time slot to 7:30 AM
-            nextAppointmentTime = parsedDate.setHours(7, 30, 0, 0);
+            nextAppointmentTime = new Date(parsedDate.setHours(7, 30, 0, 0));
         } else {
             // Calculate the next available appointment time by adding 6 minutes to the last appointment time
             const lastAppointmentTime = existingAppointments[existingAppointments.length - 1].date;
-            nextAppointmentTime = new Date(lastAppointmentTime.getTime() + 6 * 60000).toISOString();
+            nextAppointmentTime = new Date(lastAppointmentTime.setMinutes(lastAppointmentTime.getMinutes() + 6));
         }
 
         // Ensure the next appointment time does not exceed 12:30 PM
@@ -398,7 +400,7 @@ app.post("/Addappo", async (req, res) => {
         const newAppointment = await appoModel.create({ nic, title, date: nextAppointmentTime });
 
         // Send email to the patient
-        sendAppointmentEmail(email, parsedDate);
+        sendAppointmentEmail(email, nextAppointmentTime.toString());
 
         res.json(newAppointment);
     } catch (error) {
@@ -435,6 +437,9 @@ const sendAppointmentEmail = (recipientEmail, appointmentDate) => {
         }
     });
 };
+
+
+
 
 
   // Define a route to fetch all appointments
@@ -717,13 +722,15 @@ app.delete('/deleteBloodpressure/:id', async (req, res) => {
     }
 });
 
+//////////////////////////////////////////////////////////////
 
 
-///////////////////////////article sender
+const upload2= multer({ dest: 'uploads/' }); // Set the destination folder for uploaded files
 
-app.post('/sendArticleToPatients', async (req, res) => {
+app.post('/sendArticleToPatients', upload2.single('pdf'), async (req, res) => {
     try {
-        const { subject, text, image } = req.body;
+        const { subject, text } = req.body;
+        const pdfPath = req.file.path; // Get the path of the uploaded PDF file
 
         const patients = await patientModel.find({}, 'email');
 
@@ -733,25 +740,23 @@ app.post('/sendArticleToPatients', async (req, res) => {
                     service: 'Gmail',
                     auth: {
                         user: 'clinichealthylifestyle@gmail.com',
-                    pass: 'idhz qmax uihy qhjq'
+                        pass: 'idhz qmax uihy qhjq'
                     }
                 });
 
                 const mailOptions = {
-                    from: 'clinichealthylifestyle@gmail.com', 
-                    to: patient.email, 
+                    from: 'clinichealthylifestyle@gmail.com',
+                    to: patient.email,
                     subject: subject,
                     text: text,
-                    html: `<p>${text}</p>` 
+                    html: `<p>${text}</p>`,
+                    attachments: [
+                        {
+                            filename: 'article.pdf',
+                            path: pdfPath // Attach the PDF file
+                        }
+                    ]
                 };
-
-                
-                if (image) {
-                    mailOptions.attachments = [{
-                        filename: 'image.jpg',
-                        path: image.path
-                    }];
-                }
 
                 // Send email
                 transporter.sendMail(mailOptions, (error, info) => {
@@ -775,7 +780,6 @@ app.post('/sendArticleToPatients', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Route to handle saving blood pressure data
@@ -842,7 +846,11 @@ app.get('/getfeed', (req, res) => {
       .catch(err => res.status(500).json({ error: err.message }));
   });
 
-
+  app.get('/getStaff', (req, res) => {
+    StaffModel.find({})
+      .then(reports => res.json(reports))
+      .catch(err => res.json(err));
+  });
 
 
 

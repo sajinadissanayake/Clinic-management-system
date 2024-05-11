@@ -120,7 +120,7 @@ function BsTable() {
                                             <TableRow hover key={index}>
                                                 <TableCell>{new Date(entry.Recorddate).toLocaleDateString()}</TableCell>
                                                 <TableCell>{entry.type}</TableCell>
-                                                <TableCell>{entry.rbs}</TableCell>
+                                                <TableCell>{entry.rbs} mmol/L</TableCell>
                                                 <TableCell>{entry.specialNotes}</TableCell>
                                                 <TableCell>
                                                 <IconButton color='error' onClick={() => deleteRecord(entry._id)}>

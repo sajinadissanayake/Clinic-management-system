@@ -103,23 +103,23 @@ function PatientCheckups() {
                                                     </TableRow>
                                                     <TableRow hover>
                                                         <TableCell>Weight</TableCell>
-                                                        <TableCell>{exam.weight}</TableCell>
+                                                        <TableCell>{exam.weight} kg</TableCell>
                                                     </TableRow>
                                                     <TableRow hover>
                                                         <TableCell>BMI</TableCell>
-                                                        <TableCell>{exam.bmi}</TableCell>
+                                                        <TableCell>{exam.bmi} kg/m2</TableCell>
                                                     </TableRow>
                                                     <TableRow hover>
                                                         <TableCell>Ideal Body Weight</TableCell>
-                                                        <TableCell>{exam.ibw}</TableCell>
+                                                        <TableCell>{exam.ibw} kg</TableCell>
                                                     </TableRow>
                                                     <TableRow hover>
                                                         <TableCell>Waist Circumference</TableCell>
-                                                        <TableCell>{exam.wc}</TableCell>
+                                                        <TableCell>{exam.wc} cm</TableCell>
                                                     </TableRow>
                                                     <TableRow hover>
                                                         <TableCell>Blood Pressure</TableCell>
-                                                        <TableCell>{exam.bpressure}</TableCell>
+                                                        <TableCell>{exam.bpressure} mmHg</TableCell>
                                                     </TableRow>
                                                     <TableRow hover>
                                                         <TableCell>Oral Examination</TableCell>
