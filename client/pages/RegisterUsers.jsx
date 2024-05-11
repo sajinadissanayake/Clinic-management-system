@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 import Navbar from '../components/Navbar';
 import { Stack, Select, MenuItem, Button, FormControl, InputLabel, Typography, TextField } from '@mui/material';
 import Sidebar from '../components/Sidebar';
@@ -23,7 +24,6 @@ function RegisterUsers() {
     e.preventDefault();
     if (pwd === confirmPwd) {
       // Passwords match, proceed with registration
-      //console.log("Passwords match. Proceed with registration...");
       const url = "http://localhost:3001/api/users";
       const data = {
         nic: nic,
@@ -31,13 +31,25 @@ function RegisterUsers() {
         password: pwd,
         utype: utype,
       };
-			const { data: res } = await axios.post(url, data);
-			console.log(res.message);
-      navigate('/login');
+      try {
+        const { data: res } = await axios.post(url, data);
+        Swal.fire({
+          icon: 'success',
+          title: 'Registration Successful',
+          text: res.message,
+        }).then(() => {
+          navigate('/staff');
+        });
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Registration Failed',
+          text: error.message,
+        });
+      }
     } else {
       // Passwords don't match, show error
       setPasswordMatch(false);
-      console.log("Passwords do not match.");
     }
   };
 
@@ -103,7 +115,6 @@ function RegisterUsers() {
                   <MenuItem value={'admin'}>Admin</MenuItem>
                   <MenuItem value={'lab'}>Lab</MenuItem>
                   <MenuItem value={'pharmacy'}>Pharmacy</MenuItem>
-                 
                 </Select>
               </FormControl>
               <Button 

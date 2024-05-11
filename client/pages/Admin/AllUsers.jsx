@@ -13,19 +13,6 @@ import Rightbar from '../../components/Rightbar';
 
 function AllUsers() {
 
-  useEffect(() => {
-    axios.get('http://localhost:3001/getStaff')
-        .then(result => {
-            setUsers(result.data);
-            setLoading(false); // Set loading to false when data is fetched
-        })
-        .catch(err => {
-            setError(err); // Set error state if request fails
-            setLoading(false); // Set loading to false on error
-        });
-}, []);
-  
-
 
   return (
     <div>
