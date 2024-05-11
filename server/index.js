@@ -669,12 +669,12 @@ app.get('/getRecordRequests/:nic', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
 //  route to delete record request
 app.delete('/deleteRecordRequest/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        
-        //  record request by ID and delete 
+
         await RecordRequestModel.findByIdAndDelete(id);
 
         res.status(200).send('Record request deleted successfully');
@@ -851,6 +851,25 @@ app.get('/getfeed', (req, res) => {
       .then(reports => res.json(reports))
       .catch(err => res.json(err));
   });
+
+///////////////////////////////////////////////////////
+
+
+app.delete('/deletestaffuser/:id', async (req, res) => {
+    try {
+
+        const { id } = req.params;
+        await StaffModel.findByIdAndDelete(id);
+        res.status(200).send('Record request deleted successfully');
+
+    } catch (error) {
+
+        console.error('Error deleting record request:', error);
+        res.status(500).send('Internal Server Error');
+        
+    }
+});
+
 
 
 
