@@ -12,7 +12,7 @@ function PRightbar({ patientNIC }) {
   const [bloodSugarLevels, setBloodSugarLevels] = useState({ fasting: null, random: null });
   const [openDialog, setOpenDialog] = useState(false); // State for dialog visibility
   const [openDialog1, setOpenDialog1] = useState(false); // State for second dialog visibility
-
+  const [lpData, setLpData] = useState(null); // State for lipid profile data
   useEffect(() => {
     // Fetch medical examination records for the patient NIC
     axios.get(`http://localhost:3001/getMedicalExaminations/${patientNIC}`)
@@ -34,6 +34,14 @@ function PRightbar({ patientNIC }) {
         setBloodSugarLevels({ fasting: lastFastingRecord, random: lastRandomRecord });
       })
       .catch(error => console.error('Error fetching blood sugar levels:', error));
+
+      axios.get(`http://localhost:3001/getLp/${patientNIC}`)
+      .then(response => {
+        // Assuming the data structure for lipid profile is similar to other data
+        const sortedLpData = response.data.sort((a, b) => new Date(b.Date) - new Date(a.Date));
+        setLpData(sortedLpData[0]); // Set the latest lipid profile data
+      })
+      .catch(error => console.error('Error fetching LP data:', error));
   }, [patientNIC]);
   
   const handleClickOpen = () => {
@@ -86,6 +94,12 @@ function PRightbar({ patientNIC }) {
 
              </div>
             )}
+            <Typography variant="body2" color="text.secondary">
+                 lipid profile: 78mg/dL
+               </Typography>
+               <Typography variant="body2" color="text.secondary">
+                blood pressure: 67mmHg
+               </Typography>
              
           </CardContent>
         </Card>
@@ -114,19 +128,19 @@ function PRightbar({ patientNIC }) {
                   Age: {latestMedicalExamination.age}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Weight: {latestMedicalExamination.weight}
+                  Weight: {latestMedicalExamination.weight} kg
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   BMI: {latestMedicalExamination.bmi}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Ideal body weight: {latestMedicalExamination.ibw}
+                  Ideal body weight: {latestMedicalExamination.ibw} kg
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Waist circumference: {latestMedicalExamination.wc}
+                  Waist circumference: {latestMedicalExamination.wc} cm
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Blood pressure: {latestMedicalExamination.bpressure}
+                  Blood pressure: {latestMedicalExamination.bpressure}mmHg
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   Oral examination: {latestMedicalExamination.oexam}

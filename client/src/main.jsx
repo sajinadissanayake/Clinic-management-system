@@ -69,6 +69,8 @@ import Feedbacks from '../pages/Admin/Feedbacks.jsx';
 import ClinicHistory from '../pages/Patient/ClinicHistory.jsx';
 import PRecReq from '../pages/Patient/PRecReq.jsx';
 import PRepReq from '../pages/Patient/PRepReq.jsx';
+import NLipid from '../pages/NursePages/NLipid.jsx';
+import AssistantBot from './AssistantBot.jsx';
 
 
 
@@ -336,6 +338,14 @@ const router = createBrowserRouter([
   {
     path: "/prepreq", 
     element: <PRepReq/>, 
+  },
+  {
+    path: "/Nlipid/:nic", 
+    element: <NLipid/>, 
+  },
+  {
+    path: "assistant", 
+    element: <AssistantBot/>, 
   },
  
  

@@ -301,7 +301,12 @@ app.put('/updateMedicalExamination/:id', (req, res) => {
         })
         .catch(err => res.status(500).json({ error: err.message }));
 });
-
+app.delete('/deletemedi/:id', (req, res) => {
+    const id = req.params.id;
+    mexamModel.findByIdAndDelete(id)
+        .then(result => res.json(result))
+        .catch(err => res.json(err));
+});
 /////////////////////////////////////////////////////////////////////blood sugar/////////////////////////////////
 
 

@@ -117,7 +117,7 @@ function RegisterUsers() {
             </Stack>
           </form>
         </PageBody>
-    <Announcements/>
+    <Rightbar/>
       </Stack></Layout>
     </div>
   );

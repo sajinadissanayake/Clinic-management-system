@@ -51,6 +51,49 @@ function Medicals() {
   // Calculate the number of columns each grid item should take
   const gridItemSize = filteredExaminations.length >= 3 ? 4 : 12 / filteredExaminations.length;
 
+
+    // Function to handle deletion of a medical examination record
+    const handleDelete = (id) => {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You are about to delete this medical examination record. This action cannot be undone.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // If user confirms, proceed with deletion
+          axios
+            .delete(`http://localhost:3001/deletemedi/${id}`)
+            .then((response) => {
+              Swal.fire(
+                'Deleted!',
+                'The medical examination record has been deleted.',
+                'success'
+              );
+              // After deletion, fetch updated medical examination records
+              axios
+                .get(`http://localhost:3001/getMedicalExaminations/${nic}`)
+                .then((response) => {
+                  setMedicalExaminations(response.data);
+                })
+                .catch((error) => console.error('Error fetching medical examinations:', error));
+            })
+            .catch((error) => {
+              console.error('Error deleting medical examination record:', error);
+              Swal.fire(
+                'Error!',
+                'An error occurred while deleting the medical examination record.',
+                'error'
+              );
+            });
+        }
+      });
+    };
+  
+
   return (
     <div>
       <Navbar pageTitle="Checkups " />
@@ -108,7 +151,7 @@ function Medicals() {
                         </TableRow>
                         <TableRow hover>
                           <TableCell>Weight</TableCell>
-                          <TableCell>{exam.weight}</TableCell>
+                          <TableCell>{exam.weight} kg</TableCell>
                         </TableRow>
                         <TableRow hover>
                           <TableCell>BMI</TableCell>
@@ -116,15 +159,15 @@ function Medicals() {
                         </TableRow>
                         <TableRow hover>
                           <TableCell>Ideal Body Weight</TableCell>
-                          <TableCell>{exam.ibw}</TableCell>
+                          <TableCell>{exam.ibw} kg</TableCell>
                         </TableRow>
                         <TableRow hover>
                           <TableCell>Waist Circumference</TableCell>
-                          <TableCell>{exam.wc}</TableCell>
+                          <TableCell>{exam.wc} cm</TableCell>
                         </TableRow>
                         <TableRow hover>
                           <TableCell>Blood Pressure</TableCell>
-                          <TableCell>{exam.bpressure}</TableCell>
+                          <TableCell>{exam.bpressure} mmHg</TableCell>
                         </TableRow>
                         <TableRow hover>
                           <TableCell>Oral Examination</TableCell>

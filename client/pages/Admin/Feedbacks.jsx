@@ -6,6 +6,7 @@ import PageBody from '../../components/PageBody';
 import Announcements from '../../components/Announcements';
 import Layout from '../../components/Layout';
 import axios from 'axios';
+import Rightbar from '../../components/Rightbar';
 
 function Feedbacks() {
     const [feedbacks, setFeedbacks] = useState([]);
@@ -83,7 +84,7 @@ function Feedbacks() {
                             </TableContainer>
                         </div>
                     </PageBody>
-                    <Announcements />
+                    <Rightbar/>
                 </Stack>
             </Layout>
         </div>

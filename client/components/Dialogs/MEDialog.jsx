@@ -70,11 +70,11 @@ function MEDialog({ open, handleClose, patientNIC }) {
                     {new Date(exam.ExaminationDate).toLocaleDateString()}
                   </TableCell>
                   <TableCell align="right">{exam.age}</TableCell>
-                  <TableCell align="right">{exam.weight}</TableCell>
+                  <TableCell align="right">{exam.weight} kg</TableCell>
                   <TableCell align="right">{exam.bmi}</TableCell>
-                  <TableCell align="right">{exam.ibw}</TableCell>
-                  <TableCell align="right">{exam.wc}</TableCell>
-                  <TableCell align="right">{exam.bpressure}</TableCell>
+                  <TableCell align="right">{exam.ibw} kg</TableCell>
+                  <TableCell align="right">{exam.wc} cm</TableCell>
+                  <TableCell align="right">{exam.bpressure} mmHg</TableCell>
                   <TableCell align="right">{exam.oexam}</TableCell>
                   <TableCell align="right">{exam.specialNotes}</TableCell>
                 </TableRow>
