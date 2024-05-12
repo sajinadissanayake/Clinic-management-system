@@ -34,7 +34,7 @@ const AdminLeftbar = () => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/register">
+            <ListItemButton component={Link} to="/staff">
               <Grid container direction="column" alignItems="center" spacing={1}>
                 <Grid item>
                   <PersonIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
@@ -47,13 +47,13 @@ const AdminLeftbar = () => {
           </ListItem>
          
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="#">
+            <ListItemButton component={Link} to="/clinicstatus">
               <Grid container direction="column" alignItems="center" spacing={1}>
                 <Grid item>
-                  <CampaignIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
+                  <EqualizerIcon sx={{ fontSize: 40, color: 'background.bg2' }} />
                 </Grid>
                 <Grid item>
-                  <Typography variant="body1">Announcement</Typography>
+                  <Typography variant="body1">Clinic status</Typography>
                 </Grid>
               </Grid>
             </ListItemButton>
