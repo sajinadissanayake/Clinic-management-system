@@ -9,6 +9,7 @@ import DoctorSidebar from '../../components/DoctorSidebar';
 import PageBody from '../../components/PageBody';
 import DoctorR from '../../components/DoctorR';
 import AnnouncementAdd from './Annoucementadd';
+import Rightbar from '../../components/Rightbar';
 
 function Announcements() {
     const [anns, setAnn] = useState([]);
@@ -88,7 +89,7 @@ function Announcements() {
                         </PageBody>
                     </Grid>
                     <Grid item>
-                        <DoctorR />
+                        <Rightbar/>
                     </Grid>
                 </Grid>
             </Layout>

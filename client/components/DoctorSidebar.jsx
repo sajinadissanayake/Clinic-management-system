@@ -43,7 +43,7 @@ const DoctorSidebar = () => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="#">
+            <ListItemButton component={Link} to="/dcstatus">
               <Grid container direction="column" alignItems="center" spacing={1}>
                 <Grid item>
                   <EqualizerIcon sx={{ fontSize: 40, color: 'background.bg2' }} />

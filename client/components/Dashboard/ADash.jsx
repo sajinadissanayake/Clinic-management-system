@@ -124,9 +124,9 @@ function ADash() {
         <Card sx={{ borderRadius: 5 }}>
           <CardContent>
             <Typography variant="h5" component="div">
-              Reports
+              Staff
             </Typography>
-            <Typography variant="h4" color={'background.bg2'}>{reportsCount}</Typography>
+            <Typography variant="h4" color={'background.bg2'}>10</Typography>
           </CardContent>
         </Card>
       </Grid>
@@ -134,9 +134,9 @@ function ADash() {
         <Card sx={{ borderRadius: 5 }}>
           <CardContent>
             <Typography variant="h5" component="div">
-              Medicals
+              Feedbacks
             </Typography>
-            <Typography variant="h4" color={'background.bg2'}>{medicalCount}</Typography>
+            <Typography variant="h4" color={'background.bg2'}>11</Typography>
           </CardContent>
         </Card>
       </Grid>
@@ -144,9 +144,9 @@ function ADash() {
         <Card sx={{ borderRadius: 5 }}>
           <CardContent>
             <Typography variant="h5" component="div">
-              Prescriptions
+             Blog posts
             </Typography>
-            <Typography variant="h4" color={'background.bg2'}>{prescriptionsCount}</Typography>
+            <Typography variant="h4" color={'background.bg2'}>4</Typography>
           </CardContent>
         </Card>
       </Grid>

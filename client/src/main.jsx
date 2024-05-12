@@ -72,6 +72,7 @@ import PRepReq from '../pages/Patient/PRepReq.jsx';
 import NLipid from '../pages/NursePages/NLipid.jsx';
 import Staff from '../pages/Admin/Staff.jsx';
 import ClinicStatus from '../pages/Admin/ClinicStatus.jsx';
+import DcStatus from '../pages/Prescription/DcStatus.jsx';
 
 
 
@@ -350,8 +351,13 @@ const router = createBrowserRouter([
     element: <Staff/>, 
   },
   {
+
     path: "/clinicstatus", 
     element: <ClinicStatus/>, 
+  },
+  {
+    path: "/dcstatus", 
+    element: <DcStatus/>, 
   },
  
  

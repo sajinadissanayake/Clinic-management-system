@@ -26,26 +26,28 @@ function PrescLeftbar({ patientNIC }) {
     useEffect(() => {
         axios.get(`http://localhost:3001/getPrescriptions/${patientNIC}`)
             .then(response => {
-                setPrescriptions(response.data);
-                if (response.data.length > 0) {
-                    setLastPrescription(response.data[response.data.length - 1]);
+                // Sort prescriptions based on their posted date in descending order
+                const sortedPrescriptions = response.data.sort((a, b) => new Date(b.PostedDate) - new Date(a.PostedDate));
+                setPrescriptions(sortedPrescriptions);
+                if (sortedPrescriptions.length > 0) {
+                    setLastPrescription(sortedPrescriptions[0]); // Set the last prescription
                 }
             })
             .catch(error => console.error('Error fetching prescriptions:', error));
-
+    
         axios.get(`http://localhost:3001/getReportRequests/${patientNIC}`)
             .then(response => {
                 setPendingReportRequests(response.data.filter(request => request.status === "pending"));
             })
             .catch(error => console.error('Error fetching pending report requests:', error));
-
+    
         axios.get(`http://localhost:3001/getRecordRequests/${patientNIC}`)
             .then(response => {
                 setPendingRecordRequests(response.data.filter(request => request.status === "pending"));
             })
             .catch(error => console.error('Error fetching pending Record requests:', error));
     }, [patientNIC]);
-
+    
     const handleClickOpen = () => {
         setOpen(true);
     };
