@@ -202,18 +202,7 @@ const [openRequestRecordDialog, setOpenRequestRecordDialog] = useState(false);
                                 </CardActionArea>
                             </Grid>
 
-                            <Grid item xs={6} md={2}>
-                                <CardActionArea>
-                                <Link style={{ textDecoration: 'none' }} to={`/addpresc/${patient._id}`}>
-                                    <Card onClick={handleReportsDialogOpen} sx={{ width: '100%', cursor: 'pointer',borderRadius:6 }}>
-                                        <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                            
-                                            <TextSnippetIcon color='primary' sx={{ fontSize: 40 }}/>
-                                            <Typography variant="body1">prescriptions </Typography>
-                                        </CardContent>
-                                    </Card></Link>
-                                </CardActionArea>
-                            </Grid>
+                           
                             
                             <Grid item xs={6} md={3}>
                               

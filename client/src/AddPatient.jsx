@@ -138,6 +138,7 @@ function AddPatient() {
               
             <form onSubmit={handleSubmit}>
                 <h2>Add patient</h2>
+                <h4>Personal Details</h4>
                 <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} fullWidth/><br/><br/>
                 <TextField label="NIC" value={nic} onChange={(e) => setNic(e.target.value)} fullWidth /><br/><br/>
                 <TextField label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} fullWidth /><br/><br/>
@@ -176,6 +177,8 @@ function AddPatient() {
                         <FormControlLabel value="degree" control={<Radio />} label="Degree" />
                     </RadioGroup>
                 </FormControl><br/>
+                <br/>
+                <h4>Characteristics</h4><br/>
                 <FormControl component="fieldset">
                     <FormLabel component="legend">Physical Activity</FormLabel>
                     <RadioGroup row value={physical} onChange={(e) => setPhysical(e.target.value)}>

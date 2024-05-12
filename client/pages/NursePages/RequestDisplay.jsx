@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom'; 
 import axios from 'axios';
 
 function RequestDisplay({ open, onClose, patientNIC }) {
@@ -16,27 +16,42 @@ function RequestDisplay({ open, onClose, patientNIC }) {
         }
     }, [open, patientNIC]);
 
-    // Function to handle clicking the "Add" button
-    const handleAddButtonClick = (requestType) => {
-        // Redirect based on the request type
-        // You can replace '/addPage' with your actual routes
+  
+    const handleAddButtonClick = (requestType, requestId) => {
+      
         switch (requestType) {
             case 'checkup':
-                window.location.href = `/medicals/${patientNIC}`; // Corrected template literal
+                window.location.href = `/medicals/${patientNIC}`; 
                 break;
             case 'blood sugar':
-                window.location.href = `/bstable/${patientNIC}`; // Example redirection
+                window.location.href = `/bstable/${patientNIC}`; 
                 break;
             case 'blood pressure':
-                    window.location.href = `/bpressure/${patientNIC}`; // Example redirection
-                    break;
+                window.location.href = `/bpressure/${patientNIC}`; 
+                break;
             case 'lipid profile':
-                        window.location.href = `/lipid/${patientNIC}`; // Example redirection
-                        break;
-            // Add more cases as needed
+                window.location.href = `/nlipid/${patientNIC}`;
+                break;
+          
             default:
                 console.log('Invalid request type');
         }
+
+        // After redirection, delete the record request
+        deleteRecordRequest(requestId);
+    };
+
+    // Function to delete the record request
+    const deleteRecordRequest = (requestId) => {
+        axios.delete(`http://localhost:3001/deleteRecordRequest/${requestId}`)
+            .then(response => {
+                console.log(response.data); // Log success message
+                // After successful deletion, update the requests state
+                setRequests(requests.filter(request => request._id !== requestId));
+            })
+            .catch(error => {
+                console.error('Error deleting record request:', error);
+            });
     };
 
     return (
@@ -63,7 +78,7 @@ function RequestDisplay({ open, onClose, patientNIC }) {
                                     <TableCell>{new Date(request.requestedDate).toLocaleString()}</TableCell>
                                     {/* Use a Link component for navigation */}
                                     <TableCell>
-                                        <Button variant='contained' onClick={() => handleAddButtonClick(request.type)}>Add</Button>
+                                        <Button variant='contained' onClick={() => handleAddButtonClick(request.type, request._id)}>Add</Button>
                                     </TableCell>
                                 </TableRow>
                             ))}

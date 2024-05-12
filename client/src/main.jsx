@@ -73,6 +73,7 @@ import NLipid from '../pages/NursePages/NLipid.jsx';
 import Staff from '../pages/Admin/Staff.jsx';
 import ClinicStatus from '../pages/Admin/ClinicStatus.jsx';
 import DcStatus from '../pages/Prescription/DcStatus.jsx';
+import ChatAssistant from '../components/Home/ChatAssistant.jsx';
 
 
 
@@ -359,6 +360,11 @@ const router = createBrowserRouter([
     path: "/dcstatus", 
     element: <DcStatus/>, 
   },
+  {
+    path: "/Assistant", 
+    element: <ChatAssistant/>, 
+  },
+ 
  
  
  
