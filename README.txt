@@ -60,7 +60,7 @@ Sweetalert
 
 
 ### Patient profile <br/>
-![Screenshot 2024-05-20 041600](https://github.com/sajinadissanayake/Clinic-management-system/assets/125750172/1e72d85e-f4aa-4c11-a777-f3e63acf2cd6)
+https://github.com/sajinadissanayake/Clinic-management-system/issues/1#issue-2339952613
 
 
 
