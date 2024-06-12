@@ -52,7 +52,7 @@ Sweetalert
 ## Application Screenshots
 
 ### home Page<br/>
-
+![Screenshot 2024-05-20 041600](https://github.com/sajinadissanayake/Clinic-management-system/assets/125750172/55583974-cbb9-4bf0-bc6a-4bc7e0416ef7)
 
 
 
